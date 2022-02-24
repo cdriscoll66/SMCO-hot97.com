@@ -1,0 +1,55 @@
+{
+  "name": "chainsaw-lumberjack",
+  "version": "1.0.0",
+  "author": "COLAB",
+  "homepage": "https://www.teamcolab.com/",
+  "private": true,
+  "repository": {
+    "type": "git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "browserslist": [
+    "last 2 version",
+    "IE 11"
+  ],
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "engines": {
+    "node": ">= 12.0.0"
+  },
+  "devDependencies": {
+    "@ayctor/laravel-mix-svg-sprite": "^0.1.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@fancyapps/fancybox": "^3.5.7",
+    "browser-sync": "^2.26.12",
+    "browser-sync-webpack-plugin": "2.0.1",
+    "copy-webpack-plugin": "^5.1.1",
+    "core-js": "^3.6.5",
+    "cross-env": "^5.2.0",
+    "favico.js": "^0.3.10",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "laravel-mix": "^5.0.5",
+    "laravel-mix-imagemin": "^1.0.3",
+    "normalize.scss": "^0.1.0",
+    "npm-run-all": "^4.1.5",
+    "postcss-svg": "^3.0.0",
+    "rimraf": "^3.0.0",
+    "sass": "^1.26.10",
+    "sass-loader": "7.*",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^18.3.0",
+    "svg-spritemap-webpack-plugin": "^3.5.7",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

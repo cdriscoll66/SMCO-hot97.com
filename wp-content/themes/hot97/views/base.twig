@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html {{ site.language_attributes }}>
+
+    {% include 'html-header.twig' %}
+
+    <body class="{{ body_class }}">
+
+        {% include "components/organisms/alert-bar.twig" %}
+
+        {% include "components/molecules/skip-navigation.twig" %}
+
+        {% include "components/organisms/header.twig" %}
+
+        {{ breadcrumbs }}
+
+        {% block content %}
+            <p>Sorry, no content</p>
+        {% endblock %}
+
+        {% include "components/molecules/prefooter.twig" %}
+
+        {% include "components/organisms/footer.twig" %}
+
+        {% include 'html-footer.twig' %}
+
+    </body>
+</html>

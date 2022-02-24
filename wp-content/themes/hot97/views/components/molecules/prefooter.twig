@@ -1,0 +1,19 @@
+{% if prefooter %}
+    <section class="m-prefooter">
+        {% if prefooter.heading or prefooter.content or prefooter.buttons %}
+            <div class="m-prefooter__text">
+                {% if prefooter.heading %}
+                    <h1 class="m-prefooter__heading a-heading a-heading--h2">
+                        {{ prefooter.heading }}
+                    </h1>
+                {% endif %}
+                {{ prefooter.content }}
+                {% if prefooter.buttons %}
+                    {% include "components/molecules/button-group.twig" with {
+                        buttons: prefooter.buttons
+                    } %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </section>
+{% endif %}

@@ -1,0 +1,17 @@
+{
+    "/dist/scripts/theme.js": "/dist/scripts/theme.js",
+    "/dist/styles/editor.css": "/dist/styles/editor.css",
+    "/dist/styles/theme.css": "/dist/styles/theme.css",
+    "/dist/styles/print.css": "/dist/styles/print.css",
+    "/dist/styles/login.css": "/dist/styles/login.css",
+    "/dist/styles/admin.css": "/dist/styles/admin.css",
+    "/dist/scripts/theme.js.map": "/dist/scripts/theme.js.map",
+    "/dist/styles/editor.css.map": "/dist/styles/editor.css.map",
+    "/dist/styles/theme.css.map": "/dist/styles/theme.css.map",
+    "/dist/styles/print.css.map": "/dist/styles/print.css.map",
+    "/dist/styles/login.css.map": "/dist/styles/login.css.map",
+    "/dist/styles/admin.css.map": "/dist/styles/admin.css.map",
+    "/spritemap.js": "/spritemap.js",
+    "/spritemap.js.map": "/spritemap.js.map",
+    "/sprites/icons-sprite.symbol.svg": "/sprites/icons-sprite.symbol.svg"
+}

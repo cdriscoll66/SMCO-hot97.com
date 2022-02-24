@@ -1,0 +1,9 @@
+<form role="search" class="m-search-form {{ classes }}" method="get" action="{{ home_url }}">
+    <label for="{{ id }}" class="m-search-form__label">
+        <span class="m-search-form__label-text screen-reader-text">
+            {{ _x('Search for:', 'label') }}
+        </span>
+    </label>
+    <input type="search" class="m-search-form__input" id="{{ id }}" name="s" value="{{ search_query }}" placeholder="{{ placeholder }}">
+    <input type="submit" class="m-search-form__submit" value="Search">
+</form>

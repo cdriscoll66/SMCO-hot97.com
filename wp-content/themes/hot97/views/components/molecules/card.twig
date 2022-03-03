@@ -1,4 +1,10 @@
 <article class="post">
     <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
+    {% if content_category %}
+        <p><a href="{{ content_category_link }}">{{ content_category }}</a></p>
+    {% endif %}
+    {% if category %}
+        <p><a href="{{ category_link }}">{{ category }}</a></p>
+    {% endif %}
     {{ post.footerCTA() }}
 </article>

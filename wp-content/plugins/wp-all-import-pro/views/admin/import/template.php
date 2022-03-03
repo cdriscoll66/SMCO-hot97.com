@@ -6,8 +6,7 @@
 		<div class="wpallimport-header">
 			<div class="wpallimport-logo"></div>
 			<div class="wpallimport-title">
-				<p><?php _e('WP All Import', 'wp_all_import_plugin'); ?></p>
-				<h2><?php _e('Import XML / CSV', 'wp_all_import_plugin'); ?></h2>					
+				<h2><?php _e('Drag & Drop', 'wp_all_import_plugin'); ?></h2>
 			</div>
 			<div class="wpallimport-links">
 				<a href="http://www.wpallimport.com/support/" target="_blank"><?php _e('Support', 'wp_all_import_plugin'); ?></a> | <a href="http://www.wpallimport.com/documentation/" target="_blank"><?php _e('Documentation', 'wp_all_import_plugin'); ?></a>
@@ -54,7 +53,7 @@
                                     <?php if ( !in_array($post_type, ['comments', 'woo_reviews']) ): ?>
 									<div id="titlediv" style="margin-bottom:20px;">
 										<div id="titlewrap">
-											<input id="wpallimport-title" class="widefat" type="text" name="title" value="<?php echo esc_attr($post['title']) ?>" placeholder="<?php _e('Drag & drop any element on the right to set the title.', 'wp_all_import_plugin'); ?>"/>
+											<input id="wpallimport-title" class="widefat" type="text" name="title" value="<?php echo esc_attr(wp_all_import_filter_html_kses($post['title'])) ?>" placeholder="<?php _e('Drag & drop any element on the right to set the title.', 'wp_all_import_plugin'); ?>"/>
 										</div>
 									</div>
                                     <?php endif; ?>
@@ -62,7 +61,7 @@
 									<div id="poststuff" style="margin-top:-25px;">
 										<div id="<?php echo user_can_richedit() ? 'postdivrich' : 'postdiv'; ?>" class="postarea">
 
-											<?php wp_editor($post['content'], 'content', array(
+											<?php wp_editor(wp_all_import_filter_html_kses($post['content']), 'content', array(
 													//'teeny' => true,	
 													'editor_class' => 'wpallimport-plugin-editor',
 													'media_buttons' => false,
@@ -187,7 +186,7 @@
                                                 <a href="#help" class="wpallimport-help" title="<?php printf(__("Add functions here for use during your import. You can access this file at %s", "wp_all_import_plugin"), preg_replace("%.*wp-content%", "wp-content", $functions));?>" style="top: 0;">?</a>
                                                 <div class="wp_all_import_functions_preloader"></div>
                                             </div>
-                                            <div class="input wp_all_import_saving_status" style="display:inline-block;"></div>
+                                            <div class="input wp_all_import_saving_status"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +195,7 @@
                     <?php endif;?>
 				<hr>
 
-                <div class="input wpallimport-section" style="padding-bottom: 8px; padding-left: 8px;">
+                <div class="input wpallimport-section load-template-container" style="padding-bottom: 8px; padding-left: 8px;">
 
 					<?php 
 						wp_all_import_template_notifications( $post, 'notice' );							
@@ -212,7 +211,7 @@
 					</div>				
 					<?php $templates = new PMXI_Template_List(); ?>
 					<div class="load-template">				
-						<select name="load_template" id="load_template" style="padding:2px; width: auto; height: 40px;">
+						<select name="load_template" id="load_template">
 							<option value=""><?php _e('Load Template...', 'wp_all_import_plugin') ?></option>
 							<?php foreach ($templates->getBy()->convertRecords() as $t): ?>
 								<option value="<?php echo $t->id ?>"><?php echo $t->name ?></option>
@@ -241,7 +240,6 @@
 					</div>
 
 				</div>
-
 				<a href="http://soflyy.com/" target="_blank" class="wpallimport-created-by"><?php _e('Created by', 'wp_all_import_plugin'); ?> <span></span></a>
 				
 			</td>

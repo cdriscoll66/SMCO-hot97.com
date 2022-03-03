@@ -2,9 +2,9 @@
 
 namespace App\PostTypes;
 
-use App\PostTypes\Post;
+use Rareloop\Lumberjack\Post as Post;
 
-class Resource extends Post
+class Show extends Post
 {
     /**
      * Return the key used to register the post type with WordPress
@@ -15,7 +15,7 @@ class Resource extends Post
      */
     public static function getPostType()
     {
-        return 'resource';
+        return 'show';
     }
 
     /**
@@ -28,13 +28,13 @@ class Resource extends Post
     protected static function getPostTypeConfig()
     {
         $args = [
-            'singular' => __('Resource'),
-            'plural' => __('Resources'),
+            'singular' => __('Show'),
+            'plural' => __('Shows'),
             'has_archive' => true,
-            'rewrite' => [
-                'slug' => 'resources',
-                'with_front' => false,
-            ],
+            // 'rewrite' => [
+            //     'slug' => 'shows',
+            //     'with_front' => false,
+            // ],
             // 'taxonomies' => [
             //     '',
             // ],

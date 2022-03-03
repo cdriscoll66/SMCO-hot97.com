@@ -6,6 +6,6 @@ return [
      * automatically register with WordPress as part of the bootstrap process.
      */
     'register' => [
-        // App\Taxonomies\ResourceCategory::class,
+        App\Taxonomies\ContentCategory::class,
     ],
 ];

@@ -6,6 +6,7 @@ return [
      * automatically register with WordPress as part of the bootstrap process.
      */
     'register' => [
-        // App\PostTypes\Resource::class
+        App\PostTypes\DJ::class,
+        App\PostTypes\Show::class,
     ],
 ];

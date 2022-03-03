@@ -31,8 +31,8 @@ return [
         // Application Providers
         App\Providers\AppServiceProvider::class,
         App\Providers\BlocksServiceProvider::class,
-        App\Providers\TaxonomiesServiceProvider::class,
         App\Providers\CustomPostTypesServiceProvider::class,
+        App\Providers\TaxonomiesServiceProvider::class,
     ],
 
     'aliases' => [

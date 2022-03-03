@@ -4,7 +4,7 @@ namespace App\Taxonomies;
 
 use Timber\Term;
 
-class ResourceCategory extends Term
+class ContentCategory extends Term
 {
     /**
      * Return the key used to register the taxonomy with WordPress
@@ -15,7 +15,7 @@ class ResourceCategory extends Term
      */
     public static function getTaxonomy()
     {
-        return 'resource-category';
+        return 'content-category';
     }
 
     /**
@@ -28,7 +28,7 @@ class ResourceCategory extends Term
     public static function getTaxonomyPostTypes()
     {
         return [
-            'resource',
+            'post'
         ];
     }
 
@@ -43,11 +43,11 @@ class ResourceCategory extends Term
     {
         $args = [
             // 'name' => self::getTaxonomy(),
-            'singular' => __('Resource Category', 'colab'),
-            'plural' => __('Resource Categories', 'colab'),
+            'singular' => __('Content Category', 'colab'),
+            'plural' => __('Content Categories', 'colab'),
             'args' => [
                 'rewrite' => [
-                    'slug' => 'help-and-support',
+                    'slug' => 'content',
                     'with_front' => false,
                 ],
             ],

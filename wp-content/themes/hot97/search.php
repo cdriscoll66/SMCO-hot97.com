@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Rareloop\Lumberjack\Post;
 use Rareloop\Lumberjack\QueryBuilder;
-use App\PostTypes\Resource;
+use App\PostTypes\DJ;
+use App\PostTypes\Show;
 use Timber\Timber;
 
 class SearchController extends Controller
@@ -30,7 +31,8 @@ class SearchController extends Controller
         $context['posts'] = (new QueryBuilder)
             ->wherePostType([
                 Post::getPostType(),
-                Resource::getPostType(),
+                DJ::getPostType(),
+                Show::getPostType(),
             ])
             ->search($searchQuery)
             ->limit($context['posts_per_page'])

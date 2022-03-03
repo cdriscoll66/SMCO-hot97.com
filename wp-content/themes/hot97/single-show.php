@@ -8,15 +8,15 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use App\PostTypes\Resource;
+use App\PostTypes\Show;
 use Timber\Timber;
 
-class SingleResourceController extends Controller
+class SingleShowController extends Controller
 {
     public function handle()
     {
         $context = Timber::get_context();
-        $post = new Resource();
+        $post = new Show();
 
         $context['post'] = $post;
         $context['title'] = $post->title;

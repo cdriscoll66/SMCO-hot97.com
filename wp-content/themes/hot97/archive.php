@@ -15,7 +15,8 @@ use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Rareloop\Lumberjack\Post;
 use Rareloop\Lumberjack\QueryBuilder;
-use App\PostTypes\Resource;
+use App\PostTypes\DJ;
+use App\PostTypes\Show;
 use Timber\Timber;
 
 class ArchiveController extends Controller
@@ -54,7 +55,15 @@ class ArchiveController extends Controller
         } elseif (!empty($context['taxonomy'])) {
             $context['posts'] = (new QueryBuilder)
                 ->wherePostType([
-                    Resource::class,
+                    DJ::class,
+                ])
+                ->limit($context['posts_per_page'])
+                ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
+                ->get();
+        } elseif (!empty($context['taxonomy'])) {
+            $context['posts'] = (new QueryBuilder)
+                ->wherePostType([
+                    Show::class,
                 ])
                 ->limit($context['posts_per_page'])
                 ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))

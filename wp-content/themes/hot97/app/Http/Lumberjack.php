@@ -32,32 +32,12 @@ class Lumberjack extends LumberjackCore
         $context['site_title'] = get_bloginfo('name');
         $context['search_query'] = get_search_query();
 
-        // Get alerts and set ID for each
-        $alerts = [];
-        if ($all_alerts = get_field('alerts', 'options')) {
-            foreach ($all_alerts as $alert) {
-                $alert['id'] = md5( $alert['text'] . $alert['link'] );
-                array_push($alerts, $alert);
-            }
-        }
-        $context['alerts'] = $alerts;
-
         // Setup Yoast breadcrumbs
         if ( function_exists('yoast_breadcrumb') ) {
             ob_start();
             yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
             $context['breadcrumbs'] = ob_get_contents();
             ob_end_clean();
-        }
-
-        // Setup Prefooter
-        if (get_field('prefooter_enable')) {
-
-            if (get_field('prefooter_preset') === 'global') {
-                $context['prefooter'] = get_field('prefooter_global', 'options');
-            } else {
-                $context['prefooter'] = get_field('prefooter_custom');
-            }
         }
 
         return $context;

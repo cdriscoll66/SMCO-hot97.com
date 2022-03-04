@@ -3,14 +3,17 @@
 {% block content %}
     <main id="main">
         <h1>{{ title }}</h1>
-        {% if byline %}
-            <p>{{ byline }}</p>
+        {% if post.is_hot %}
+            <p>hot</p>
         {% endif %}
-        {% if content_category %}
-            <p><a href="{{ content_category_link }}">{{ content_category }}</a></p>
+        {% if post.byline %}
+            <p>{{ post.byline }}</p>
         {% endif %}
-        {% if category %}
-            <p><a href="{{ category_link }}">{{ category }}</a></p>
+        {% if post.hasPrimaryTerm('content-category') %}
+            <p><a href="{{ post.getPrimaryTermLink('content-category') }}">{{ post.getPrimaryTermName('content-category') }}</a></p>
+        {% endif %}
+        {% if post.hasPrimaryTerm %}
+            <p><a href="{{ post.getPrimaryTermLink }}">{{ post.getPrimaryTermName }}</a></p>
         {% endif %}
         {{ content|raw }}
     </main>

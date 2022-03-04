@@ -21,11 +21,10 @@ class SinglePostController extends Controller
         $context['post'] = $post;
         $context['title'] = $post->title;
         $context['content'] = $post->content;
-        $context['byline'] = get_field('byline');
-        $context['content_category'] = $post->getPrimaryTerm('content-category')->name;
-        $context['content_category_link'] = $post->getPrimaryTermLink('content-category');
-        $context['category'] = $post->getPrimaryTerm()->name;
-        $context["category_link"] = $post->getPrimaryTermLink();
+        // $context['content_category'] = $post->getPrimaryTerm('content-category')->name;
+        // $context['content_category_link'] = $post->getPrimaryTermLink('content-category');
+        // $context['category'] = $post->getPrimaryTerm()->name;
+        // $context['category_link'] = $post->getPrimaryTermLink();
 
         return new TimberResponse('templates/single-post.twig', $context);
     }

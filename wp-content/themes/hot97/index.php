@@ -12,7 +12,7 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Post;
+use App\PostTypes\Post;
 use Timber\Timber;
 
 class IndexController extends Controller

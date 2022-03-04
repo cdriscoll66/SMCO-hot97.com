@@ -9,7 +9,7 @@ return [
     /**
      * Is debug mode enabled?
      */
-    'debug' => WP_DEBUG ?? false,
+    'debug' => WP_DEBUG_DISPLAY ?? false,
 
     /**
      * List of providers to initialise during app boot

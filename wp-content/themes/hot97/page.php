@@ -13,7 +13,7 @@ namespace App;
 
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use Rareloop\Lumberjack\Page;
+use App\PostTypes\Page;
 use Timber\Timber;
 
 class PageController extends Controller

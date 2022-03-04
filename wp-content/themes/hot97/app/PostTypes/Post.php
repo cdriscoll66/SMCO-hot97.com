@@ -39,4 +39,19 @@ class Post extends LumberjackPost
 
         return $primary_term_link;
     }
+
+    public function foo()
+    {
+        return 'bar';
+    }
+
+    public function byline()
+    {
+        return get_field('byline', $this->id);
+    }
+
+    public function isHot()
+    {
+        return get_field('is_hot', $this->id);
+    }
 }

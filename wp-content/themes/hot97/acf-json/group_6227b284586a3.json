@@ -31,6 +31,7 @@
                 "class": "",
                 "id": ""
             },
+
             "layout": "block",
             "sub_fields": [
                 {
@@ -46,6 +47,7 @@
                         "class": "",
                         "id": ""
                     },
+
                     "collapsed": "",
                     "min": 1,
                     "max": 10,
@@ -65,6 +67,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "taxonomy": "category",
                             "field_type": "select",
                             "allow_null": 0,
@@ -87,6 +90,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "default_value": 1,
                             "placeholder": "",
                             "prepend": "",
@@ -110,6 +114,7 @@
                         "class": "",
                         "id": ""
                     },
+
                     "collapsed": "",
                     "min": 1,
                     "max": 5,
@@ -129,13 +134,14 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "post_type": [
                                 "post"
                             ],
                             "taxonomy": "",
                             "allow_null": 0,
                             "multiple": 0,
-                            "return_format": "",
+                            "return_format": "object",
                             "ui": 1
                         }
                     ]
@@ -171,6 +177,7 @@
                 "class": "",
                 "id": ""
             },
+
             "layout": "block",
             "sub_fields": [
                 {
@@ -186,6 +193,7 @@
                         "class": "",
                         "id": ""
                     },
+
                     "collapsed": "",
                     "min": 1,
                     "max": 10,
@@ -205,6 +213,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "taxonomy": "category",
                             "field_type": "select",
                             "allow_null": 0,
@@ -227,6 +236,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "default_value": 1,
                             "placeholder": "",
                             "prepend": "",
@@ -250,6 +260,7 @@
                         "class": "",
                         "id": ""
                     },
+
                     "collapsed": "",
                     "min": 1,
                     "max": 5,
@@ -269,6 +280,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "post_type": [
                                 "post"
                             ],
@@ -301,7 +313,7 @@
         {
             "key": "field_6227b7eef26f4",
             "label": "Video Page Fields",
-            "name": "Video_page_fields",
+            "name": "video_page_fields",
             "type": "group",
             "instructions": "",
             "required": 0,
@@ -326,6 +338,7 @@
                         "class": "",
                         "id": ""
                     },
+
                     "collapsed": "",
                     "min": 1,
                     "max": 10,
@@ -345,6 +358,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "taxonomy": "category",
                             "field_type": "select",
                             "allow_null": 0,
@@ -367,6 +381,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "default_value": 1,
                             "placeholder": "",
                             "prepend": "",
@@ -390,6 +405,7 @@
                         "class": "",
                         "id": ""
                     },
+
                     "collapsed": "",
                     "min": 1,
                     "max": 5,
@@ -409,6 +425,7 @@
                                 "class": "",
                                 "id": ""
                             },
+
                             "post_type": [
                                 "post"
                             ],
@@ -584,7 +601,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "acf-options-app-configuration"
+                "value": "app-config"
             }
         ]
     ],
@@ -597,5 +614,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1646775948
+    "modified": 1647448870
 }

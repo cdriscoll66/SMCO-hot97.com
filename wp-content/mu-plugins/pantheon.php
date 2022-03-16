@@ -9,8 +9,8 @@
  *
  * @package pantheon
  */
-
-if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) ) {
+error_log(getenv($_ENV['PANTHEON_ENVIRONMENT']));
+if ( isset( $_ENV['PANTHEON_ENVIRONMENT'] ) && $_ENV['PANTHEON_ENVIRONMENT'] != 'local' )  {
 
 	require_once 'pantheon/pantheon-page-cache.php';
 	if ( ! defined( 'DISABLE_PANTHEON_UPDATE_NOTICES' ) || ! DISABLE_PANTHEON_UPDATE_NOTICES ) {

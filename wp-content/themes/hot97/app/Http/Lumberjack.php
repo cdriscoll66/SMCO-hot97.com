@@ -32,14 +32,6 @@ class Lumberjack extends LumberjackCore
         $context['site_title'] = get_bloginfo('name');
         $context['search_query'] = get_search_query();
 
-        // Setup Yoast breadcrumbs
-        if ( function_exists('yoast_breadcrumb') ) {
-            ob_start();
-            yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-            $context['breadcrumbs'] = ob_get_contents();
-            ob_end_clean();
-        }
-
         return $context;
     }
 }

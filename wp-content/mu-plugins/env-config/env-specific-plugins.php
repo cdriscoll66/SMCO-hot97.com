@@ -6,7 +6,7 @@ require_once ABSPATH . 'wp-admin/includes/plugin.php';
 // );
 
 // // Live-specific configs.
-// if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], ['dev', 'test', 'live'] ) ) {
+// if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], ['develop', 'test', 'live'] ) ) {
 // 	// Activate Live Plugins.
 // 	require_once ABSPATH . 'wp-admin/includes/plugin.php';
 // 	foreach ( $plugins as $plugin ) {

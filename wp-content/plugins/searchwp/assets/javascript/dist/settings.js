@@ -11991,6 +11991,91 @@
 	var vSelect = unwrapExports(vueSelect);
 	vueSelect.VueSelect;
 
+	var _typeof_1 = createCommonjsModule(function (module) {
+	function _typeof(obj) {
+	  "@babel/helpers - typeof";
+
+	  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+	    module.exports = _typeof = function _typeof(obj) {
+	      return typeof obj;
+	    };
+
+	    module.exports["default"] = module.exports, module.exports.__esModule = true;
+	  } else {
+	    module.exports = _typeof = function _typeof(obj) {
+	      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+	    };
+
+	    module.exports["default"] = module.exports, module.exports.__esModule = true;
+	  }
+
+	  return _typeof(obj);
+	}
+
+	module.exports = _typeof;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
+	});
+
+	var _typeof$1 = unwrapExports(_typeof_1);
+
+	var defineProperty$2 = createCommonjsModule(function (module) {
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
+
+	  return obj;
+	}
+
+	module.exports = _defineProperty;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
+	});
+
+	var _defineProperty$2 = unwrapExports(defineProperty$2);
+
+	var classCallCheck$1 = createCommonjsModule(function (module) {
+	function _classCallCheck(instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	}
+
+	module.exports = _classCallCheck;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
+	});
+
+	var _classCallCheck = unwrapExports(classCallCheck$1);
+
+	var createClass$1 = createCommonjsModule(function (module) {
+	function _defineProperties(target, props) {
+	  for (var i = 0; i < props.length; i++) {
+	    var descriptor = props[i];
+	    descriptor.enumerable = descriptor.enumerable || false;
+	    descriptor.configurable = true;
+	    if ("value" in descriptor) descriptor.writable = true;
+	    Object.defineProperty(target, descriptor.key, descriptor);
+	  }
+	}
+
+	function _createClass(Constructor, protoProps, staticProps) {
+	  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+	  if (staticProps) _defineProperties(Constructor, staticProps);
+	  return Constructor;
+	}
+
+	module.exports = _createClass;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
+	});
+
+	var _createClass = unwrapExports(createClass$1);
+
 	/**!
 	 * @fileOverview Kickass library to create and place poppers near their reference elements.
 	 * @version 1.16.1
@@ -16831,10 +16916,9 @@
 	}
 
 	//
+	var isIE;
 
-	let isIE;
-
-	function initCompat () {
+	function initCompat() {
 	  if (!initCompat.init) {
 	    initCompat.init = true;
 	    isIE = getInternetExplorerVersion() !== -1;
@@ -16843,84 +16927,83 @@
 
 	var script$9 = {
 	  name: 'ResizeObserver',
-
 	  props: {
 	    emitOnMount: {
 	      type: Boolean,
-	      default: false,
+	      default: false
 	    },
-
 	    ignoreWidth: {
 	      type: Boolean,
-	      default: false,
+	      default: false
 	    },
-
 	    ignoreHeight: {
 	      type: Boolean,
-	      default: false,
-	    },
+	      default: false
+	    }
 	  },
+	  mounted: function mounted() {
+	    var _this = this;
 
-	  mounted () {
 	    initCompat();
-	    this.$nextTick(() => {
-	      this._w = this.$el.offsetWidth;
-	      this._h = this.$el.offsetHeight;
-	      if (this.emitOnMount) {
-	        this.emitSize();
+	    this.$nextTick(function () {
+	      _this._w = _this.$el.offsetWidth;
+	      _this._h = _this.$el.offsetHeight;
+
+	      if (_this.emitOnMount) {
+	        _this.emitSize();
 	      }
 	    });
-	    const object = document.createElement('object');
+	    var object = document.createElement('object');
 	    this._resizeObject = object;
 	    object.setAttribute('aria-hidden', 'true');
 	    object.setAttribute('tabindex', -1);
 	    object.onload = this.addResizeHandlers;
 	    object.type = 'text/html';
+
 	    if (isIE) {
 	      this.$el.appendChild(object);
 	    }
+
 	    object.data = 'about:blank';
+
 	    if (!isIE) {
 	      this.$el.appendChild(object);
 	    }
 	  },
-
-	  beforeDestroy () {
+	  beforeDestroy: function beforeDestroy() {
 	    this.removeResizeHandlers();
 	  },
-
 	  methods: {
-	    compareAndNotify () {
-	      if ((!this.ignoreWidth && this._w !== this.$el.offsetWidth) || (!this.ignoreHeight && this._h !== this.$el.offsetHeight)) {
+	    compareAndNotify: function compareAndNotify() {
+	      if (!this.ignoreWidth && this._w !== this.$el.offsetWidth || !this.ignoreHeight && this._h !== this.$el.offsetHeight) {
 	        this._w = this.$el.offsetWidth;
 	        this._h = this.$el.offsetHeight;
 	        this.emitSize();
 	      }
 	    },
-
-	    emitSize () {
+	    emitSize: function emitSize() {
 	      this.$emit('notify', {
 	        width: this._w,
-	        height: this._h,
+	        height: this._h
 	      });
 	    },
-
-	    addResizeHandlers () {
+	    addResizeHandlers: function addResizeHandlers() {
 	      this._resizeObject.contentDocument.defaultView.addEventListener('resize', this.compareAndNotify);
+
 	      this.compareAndNotify();
 	    },
-
-	    removeResizeHandlers () {
+	    removeResizeHandlers: function removeResizeHandlers() {
 	      if (this._resizeObject && this._resizeObject.onload) {
 	        if (!isIE && this._resizeObject.contentDocument) {
 	          this._resizeObject.contentDocument.defaultView.removeEventListener('resize', this.compareAndNotify);
 	        }
+
 	        this.$el.removeChild(this._resizeObject);
 	        this._resizeObject.onload = null;
 	        this._resizeObject = null;
 	      }
-	    },
-	  },
+	    }
+	  }
 	};
 
 	function normalizeComponent$2(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -17007,48 +17090,48 @@
 	}
 
 	/* script */
-	const __vue_script__$9 = script$9;
+	var __vue_script__$9 = script$9;
 	/* template */
-	var __vue_render__$9 = function() {
+
+	var __vue_render__$9 = function __vue_render__() {
 	  var _vm = this;
+
 	  var _h = _vm.$createElement;
+
 	  var _c = _vm._self._c || _h;
+
 	  return _c("div", {
 	    staticClass: "resize-observer",
-	    attrs: { tabindex: "-1" }
-	  })
+	    attrs: {
+	      tabindex: "-1"
+	    }
+	  });
 	};
+
 	var __vue_staticRenderFns__$9 = [];
 	__vue_render__$9._withStripped = true;
+	/* style */
 
-	  /* style */
-	  const __vue_inject_styles__$9 = undefined;
-	  /* scoped */
-	  const __vue_scope_id__$9 = "data-v-8859cc6c";
-	  /* module identifier */
-	  const __vue_module_identifier__$9 = undefined;
-	  /* functional template */
-	  const __vue_is_functional_template__$9 = false;
-	  /* style inject */
-	  
-	  /* style inject SSR */
-	  
-	  /* style inject shadow dom */
-	  
+	var __vue_inject_styles__$9 = undefined;
+	/* scoped */
 
-	  
-	  const __vue_component__$9 = /*#__PURE__*/normalizeComponent$2(
-	    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-	    __vue_inject_styles__$9,
-	    __vue_script__$9,
-	    __vue_scope_id__$9,
-	    __vue_is_functional_template__$9,
-	    __vue_module_identifier__$9,
-	    false,
-	    undefined,
-	    undefined,
-	    undefined
-	  );
+	var __vue_scope_id__$9 = "data-v-8859cc6c";
+	/* module identifier */
+
+	var __vue_module_identifier__$9 = undefined;
+	/* functional template */
+
+	var __vue_is_functional_template__$9 = false;
+	/* style inject */
+
+	/* style inject SSR */
+
+	/* style inject shadow dom */
+
+	var __vue_component__$9 = /*#__PURE__*/normalizeComponent$2({
+	  render: __vue_render__$9,
+	  staticRenderFns: __vue_staticRenderFns__$9
+	}, __vue_inject_styles__$9, __vue_script__$9, __vue_scope_id__$9, __vue_is_functional_template__$9, __vue_module_identifier__$9, false, undefined, undefined, undefined);
 
 	function install$1(Vue) {
 	  // eslint-disable-next-line vue/component-definition-name-casing
@@ -17058,7 +17141,7 @@
 
 	var plugin$1 = {
 	  // eslint-disable-next-line no-undef
-	  version: "1.0.0",
+	  version: "1.0.1",
 	  install: install$1
 	};
 
@@ -17082,7 +17165,7 @@
 	  } catch (e) {}
 	}());
 
-	var _defineProperty$2 = defineProperty;
+	var _defineProperty$1 = defineProperty;
 
 	/**
 	 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -17094,8 +17177,8 @@
 	 * @param {*} value The value to assign.
 	 */
 	function baseAssignValue(object, key, value) {
-	  if (key == '__proto__' && _defineProperty$2) {
-	    _defineProperty$2(object, key, {
+	  if (key == '__proto__' && _defineProperty$1) {
+	    _defineProperty$1(object, key, {
 	      'configurable': true,
 	      'enumerable': true,
 	      'value': value,
@@ -17817,8 +17900,8 @@
 	 * @param {Function} string The `toString` result.
 	 * @returns {Function} Returns `func`.
 	 */
-	var baseSetToString = !_defineProperty$2 ? identity_1 : function(func, string) {
-	  return _defineProperty$2(func, 'toString', {
+	var baseSetToString = !_defineProperty$1 ? identity_1 : function(func, string) {
+	  return _defineProperty$1(func, 'toString', {
 	    'configurable': true,
 	    'enumerable': false,
 	    'value': constant_1(string),
@@ -17990,93 +18073,6 @@
 
 	var merge_1 = merge;
 
-	function _typeof$1(obj) {
-	  "@babel/helpers - typeof";
-
-	  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-	    _typeof$1 = function (obj) {
-	      return typeof obj;
-	    };
-	  } else {
-	    _typeof$1 = function (obj) {
-	      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-	    };
-	  }
-
-	  return _typeof$1(obj);
-	}
-
-	function _classCallCheck(instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	}
-
-	function _defineProperties(target, props) {
-	  for (var i = 0; i < props.length; i++) {
-	    var descriptor = props[i];
-	    descriptor.enumerable = descriptor.enumerable || false;
-	    descriptor.configurable = true;
-	    if ("value" in descriptor) descriptor.writable = true;
-	    Object.defineProperty(target, descriptor.key, descriptor);
-	  }
-	}
-
-	function _createClass(Constructor, protoProps, staticProps) {
-	  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-	  if (staticProps) _defineProperties(Constructor, staticProps);
-	  return Constructor;
-	}
-
-	function _defineProperty$1(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
-	    });
-	  } else {
-	    obj[key] = value;
-	  }
-
-	  return obj;
-	}
-
-	function ownKeys(object, enumerableOnly) {
-	  var keys = Object.keys(object);
-
-	  if (Object.getOwnPropertySymbols) {
-	    var symbols = Object.getOwnPropertySymbols(object);
-	    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-	      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-	    });
-	    keys.push.apply(keys, symbols);
-	  }
-
-	  return keys;
-	}
-
-	function _objectSpread2(target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i] != null ? arguments[i] : {};
-
-	    if (i % 2) {
-	      ownKeys(Object(source), true).forEach(function (key) {
-	        _defineProperty$1(target, key, source[key]);
-	      });
-	    } else if (Object.getOwnPropertyDescriptors) {
-	      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-	    } else {
-	      ownKeys(Object(source)).forEach(function (key) {
-	        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-	      });
-	    }
-	  }
-
-	  return target;
-	}
-
 	var SVGAnimatedString = function SVGAnimatedString() {};
 
 	if (typeof window !== 'undefined') {
@@ -18167,6 +18163,9 @@
 	  } catch (e) {}
 	}
 
+	function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+	function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 	var DEFAULT_OPTIONS = {
 	  container: false,
 	  delay: 0,
@@ -18219,9 +18218,9 @@
 
 	    _classCallCheck(this, Tooltip);
 
-	    _defineProperty$1(this, "_events", []);
+	    _defineProperty$2(this, "_events", []);
 
-	    _defineProperty$1(this, "_setTooltipNodeEvent", function (evt, reference, delay, options) {
+	    _defineProperty$2(this, "_setTooltipNodeEvent", function (evt, reference, delay, options) {
 	      var relatedreference = evt.relatedreference || evt.toElement || evt.relatedTarget;
 
 	      var callback = function callback(evt2) {
@@ -18247,7 +18246,7 @@
 	    });
 
 	    // apply user options over default ones
-	    _options = _objectSpread2(_objectSpread2({}, DEFAULT_OPTIONS), _options);
+	    _options = _objectSpread$2(_objectSpread$2({}, DEFAULT_OPTIONS), _options);
 	    _reference.jquery && (_reference = _reference[0]);
 	    this.show = this.show.bind(this);
 	    this.hide = this.hide.bind(this); // cache reference and options
@@ -18563,11 +18562,11 @@
 
 	      this._append(tooltipNode, container);
 
-	      var popperOptions = _objectSpread2(_objectSpread2({}, options.popperOptions), {}, {
+	      var popperOptions = _objectSpread$2(_objectSpread$2({}, options.popperOptions), {}, {
 	        placement: options.placement
 	      });
 
-	      popperOptions.modifiers = _objectSpread2(_objectSpread2({}, popperOptions.modifiers), {}, {
+	      popperOptions.modifiers = _objectSpread$2(_objectSpread$2({}, popperOptions.modifiers), {}, {
 	        arrow: {
 	          element: this.options.arrowSelector
 	        }
@@ -18883,6 +18882,9 @@
 	 * @return {String} placement - The desired title.
 	 */
 
+	function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+	function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 	var state = {
 	  enabled: true
 	};
@@ -18967,7 +18969,7 @@
 	    hideOnTargetClick: typeof options.hideOnTargetClick !== 'undefined' ? options.hideOnTargetClick : directive.options.defaultHideOnTargetClick,
 	    loadingClass: typeof options.loadingClass !== 'undefined' ? options.loadingClass : directive.options.defaultLoadingClass,
 	    loadingContent: typeof options.loadingContent !== 'undefined' ? options.loadingContent : directive.options.defaultLoadingContent,
-	    popperOptions: _objectSpread2({}, typeof options.popperOptions !== 'undefined' ? options.popperOptions : directive.options.defaultPopperOptions)
+	    popperOptions: _objectSpread$1({}, typeof options.popperOptions !== 'undefined' ? options.popperOptions : directive.options.defaultPopperOptions)
 	  };
 
 	  if (result.offset) {
@@ -19023,9 +19025,9 @@
 	  var content = getContent(value);
 	  var classes = typeof value.classes !== 'undefined' ? value.classes : directive.options.defaultClass;
 
-	  var opts = _objectSpread2({
+	  var opts = _objectSpread$1({
 	    title: content
-	  }, getOptions(_objectSpread2(_objectSpread2({}, _typeof$1(value) === 'object' ? value : {}), {}, {
+	  }, getOptions(_objectSpread$1(_objectSpread$1({}, _typeof$1(value) === 'object' ? value : {}), {}, {
 	    placement: getPlacement(value, modifiers)
 	  })));
 
@@ -19067,7 +19069,7 @@
 
 	      tooltip.setContent(content); // Options
 
-	      tooltip.setOptions(_objectSpread2(_objectSpread2({}, value), {}, {
+	      tooltip.setOptions(_objectSpread$1(_objectSpread$1({}, value), {}, {
 	        placement: getPlacement(value, modifiers)
 	      }));
 	    } else {
@@ -19166,6 +19168,10 @@
 	    removeListeners(el);
 	  }
 	};
+
+	function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+	function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 	function getDefault(key) {
 	  var value = directive.options.popover[key];
@@ -19311,7 +19317,7 @@
 	  },
 	  computed: {
 	    cssClass: function cssClass() {
-	      return _defineProperty$1({}, this.openClass, this.isOpen);
+	      return _defineProperty$2({}, this.openClass, this.isOpen);
 	    },
 	    popoverId: function popoverId() {
 	      return "popover_".concat(this.ariaId != null ? this.ariaId : this.id);
@@ -19484,25 +19490,25 @@
 	      }
 
 	      if (!this.popperInstance) {
-	        var popperOptions = _objectSpread2(_objectSpread2({}, this.popperOptions), {}, {
+	        var popperOptions = _objectSpread$3(_objectSpread$3({}, this.popperOptions), {}, {
 	          placement: this.placement
 	        });
 
-	        popperOptions.modifiers = _objectSpread2(_objectSpread2({}, popperOptions.modifiers), {}, {
-	          arrow: _objectSpread2(_objectSpread2({}, popperOptions.modifiers && popperOptions.modifiers.arrow), {}, {
+	        popperOptions.modifiers = _objectSpread$3(_objectSpread$3({}, popperOptions.modifiers), {}, {
+	          arrow: _objectSpread$3(_objectSpread$3({}, popperOptions.modifiers && popperOptions.modifiers.arrow), {}, {
 	            element: this.$refs.arrow
 	          })
 	        });
 
 	        if (this.offset) {
 	          var offset = this.$_getOffset();
-	          popperOptions.modifiers.offset = _objectSpread2(_objectSpread2({}, popperOptions.modifiers && popperOptions.modifiers.offset), {}, {
+	          popperOptions.modifiers.offset = _objectSpread$3(_objectSpread$3({}, popperOptions.modifiers && popperOptions.modifiers.offset), {}, {
 	            offset: offset
 	          });
 	        }
 
 	        if (this.boundariesElement) {
-	          popperOptions.modifiers.preventOverflow = _objectSpread2(_objectSpread2({}, popperOptions.modifiers && popperOptions.modifiers.preventOverflow), {}, {
+	          popperOptions.modifiers.preventOverflow = _objectSpread$3(_objectSpread$3({}, popperOptions.modifiers && popperOptions.modifiers.preventOverflow), {}, {
 	            boundariesElement: this.boundariesElement
 	          });
 	        }

@@ -305,7 +305,7 @@ class Utf8
      */
     public static function strtolower($string)
     {
-        if (!\defined('UTF8_NOMBSTRING') && \function_exists('mb_strtolower')) {
+        if (!\defined('SearchWP\\Dependencies\\UTF8_NOMBSTRING') && \function_exists('mb_strtolower')) {
             return \mb_strtolower($string, 'utf-8');
         }
         //global $utf8_upper_to_lower;
@@ -313,7 +313,7 @@ class Utf8
         $uni = self::utf8_to_unicode($string);
         $cnt = \count($uni);
         for ($i = 0; $i < $cnt; $i++) {
-            if (isset($uni[$i]) && $utf8_upper_to_lower[$uni[$i]]) {
+            if ($utf8_upper_to_lower[$uni[$i]]) {
                 $uni[$i] = $utf8_upper_to_lower[$uni[$i]];
             }
         }
@@ -330,7 +330,7 @@ class Utf8
      */
     public static function strtoupper($string)
     {
-        if (!\defined('UTF8_NOMBSTRING') && \function_exists('mb_strtolower')) {
+        if (!\defined('SearchWP\\Dependencies\\UTF8_NOMBSTRING') && \function_exists('mb_strtolower')) {
             return \mb_strtoupper($string, 'utf-8');
         }
         //global $utf8_lower_to_upper;
@@ -393,7 +393,7 @@ class Utf8
      */
     public static function strpos($haystack, $needle, $offset = 0)
     {
-        if (!\defined('UTF8_NOMBSTRING') && \function_exists('mb_strpos')) {
+        if (!\defined('SearchWP\\Dependencies\\UTF8_NOMBSTRING') && \function_exists('mb_strpos')) {
             return \mb_strpos($haystack, $needle, $offset, 'utf-8');
         }
         if (!$offset) {
@@ -424,7 +424,7 @@ class Utf8
      */
     public static function strrpos($haystack, $needle, $offset = 0)
     {
-        if (!\defined('UTF8_NOMBSTRING') && \function_exists('mb_strrpos')) {
+        if (!\defined('SearchWP\\Dependencies\\UTF8_NOMBSTRING') && \function_exists('mb_strrpos')) {
             return \mb_strrpos($haystack, $needle, $offset, 'utf-8');
         }
         if (!$offset) {
@@ -467,7 +467,7 @@ class Utf8
                 // append all the regular characters we've passed
                 $c1 &= 31;
                 // remove the 3 bit two bytes prefix
-                $c2 = \ord($str[+$i]);
+                $c2 = \ord($str[++$i]);
                 // the next byte
                 $c2 &= 63;
                 // remove the 2 bit trailing byte prefix
@@ -549,8 +549,8 @@ class Utf8
      */
     public static function utf8_to_utf16be(&$str, $bom = \false)
     {
-        $out = $bom ? "��" : '';
-        if (!\defined('UTF8_NOMBSTRING') && \function_exists('mb_convert_encoding')) {
+        $out = $bom ? "\xfe\xff" : '';
+        if (!\defined('SearchWP\\Dependencies\\UTF8_NOMBSTRING') && \function_exists('mb_convert_encoding')) {
             return $out . \mb_convert_encoding($str, 'UTF-16BE', 'UTF-8');
         }
         $uni = self::utf8_to_unicode($str);

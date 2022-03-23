@@ -22,7 +22,7 @@ use SearchWP\Admin\NavTab;
  */
 class EnginesView {
 
-	private static $slug = 'default';
+	private static $slug = 'engines';
 
 	/**
 	 * EnginesView constructor.
@@ -30,13 +30,20 @@ class EnginesView {
 	 * @since 4.0
 	 */
 	function __construct() {
-		new NavTab([
-			'tab'   => self::$slug,
-			'label' => __( 'Engines', 'searchwp' ),
-		]);
 
-		add_action( 'searchwp\settings\view\\' . self::$slug,  [ $this, 'render' ] );
-		add_action( 'searchwp\settings\after\\' . self::$slug, [ $this, 'assets' ], 999 );
+		if ( Utils::is_swp_admin_page( 'settings' ) ) {
+			new NavTab( [
+				'page'       => 'settings',
+				'tab'        => self::$slug,
+				'label'      => __( 'Engines', 'searchwp' ),
+				'is_default' => true,
+			] );
+		}
+
+		if ( Utils::is_swp_admin_page( 'settings', 'default' ) ) {
+			add_action( 'searchwp\settings\view',  [ $this, 'render' ] );
+			add_action( 'searchwp\settings\after', [ $this, 'assets' ], 999 );
+		}
 
 		add_action( 'wp_ajax_' . SEARCHWP_PREFIX . 'engines_view',      [ __CLASS__, 'update_config' ] );
 		add_action( 'wp_ajax_' . SEARCHWP_PREFIX . 'engines_configs',   [ __CLASS__, 'update_engines' ] );

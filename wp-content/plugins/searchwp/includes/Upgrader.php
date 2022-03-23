@@ -52,9 +52,9 @@ class Upgrader {
 			\SearchWP\Settings::update( 'new_activation', false );
 
 			wp_redirect( add_query_arg( [
-					'page'    => 'searchwp',
+					'page'    => 'searchwp-settings',
 					'welcome' => '1',
-				], esc_url( admin_url( 'options-general.php' ) )
+				], esc_url( admin_url( 'admin.php' ) )
 			) );
 		}
 	}

@@ -334,10 +334,18 @@ final class Attachment extends Post {
 			return;
 		}
 
-		if ( 'attachment' === $args['source']->get_post_type() ) {
-			delete_post_meta( $args['post_id'], Document::$meta_key );
-			delete_post_meta( $args['post_id'], Document::$meta_key . '_skipped' );
+		if ( $args['source']->get_post_type() !== 'attachment' ) {
+            return;
 		}
+
+		$skipped  = get_post_meta( $args['post_id'], Document::$meta_key . '_skipped', true );
+
+        // If the stored content was not manually edited, remove it and flag the attachment for a new extraction.
+        if ( ! $skipped ) {
+	        delete_post_meta( $args['post_id'], Document::$meta_key );
+        }
+
+		delete_post_meta( $args['post_id'], Document::$meta_key . '_skipped' );
 	}
 
 	/**

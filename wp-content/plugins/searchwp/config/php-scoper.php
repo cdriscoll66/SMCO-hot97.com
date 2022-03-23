@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 /**
  * PHP SCOPER BASE CONFIGURATION
@@ -27,36 +27,71 @@ declare(strict_types=1);
 use Isolated\Symfony\Component\Finder\Finder;
 
 return [
-	'whitelist-global-classes' => false,
-	'finders' => [
+	'expose-global-classes' => false,
+	'finders'               => [
 		Finder::create()
-			->files()
-			->ignoreVCS(true)
-			->notName('/LICENSE|.*\\.md|.*\\.dist|psalm.xml|CHANGELOG\\.TXT|VERSION|Makefile|composer\\.json|composer\\.lock/')
-			->exclude([
-				'doc',
-				'bin',
-				'test',
-				'Test',
-				'test_old',
-				'tests',
-				'Tests',
-				'vendor-bin',
-				'node_modules',
-				'examples',
-				'fonts',
-				'tools',
-				'samples',
-				'Samples',
-			])
-			->in( [
-				__DIR__ . '/../vendor/dekor',
-				__DIR__ . '/../vendor/henck',
-				__DIR__ . '/../vendor/monolog',
-				__DIR__ . '/../vendor/smalot',
-				__DIR__ . '/../vendor/wamania',
-				__DIR__ . '/../vendor/psr',
-				__DIR__ . '/../vendor/symfony/polyfill-mbstring',
-			] ),
+		      ->files()
+		      ->ignoreVCS( true )
+		      ->notName( '/LICENSE|.*\\.md|.*\\.dist|psalm.xml|CHANGELOG\\.TXT|VERSION|Makefile|composer\\.json|composer\\.lock/' )
+		      ->exclude(
+			      [
+				      'doc',
+				      'bin',
+				      'test',
+				      'Test',
+				      'test_old',
+				      'tests',
+				      'Tests',
+				      'vendor-bin',
+				      'node_modules',
+				      'examples',
+				      'fonts',
+				      'tools',
+				      'samples',
+				      'Samples',
+			      ]
+		      )
+		      ->in(
+			      [
+				      __DIR__ . '/../vendor/dekor',
+				      __DIR__ . '/../vendor/henck',
+				      __DIR__ . '/../vendor/monolog',
+				      __DIR__ . '/../vendor/smalot',
+				      __DIR__ . '/../vendor/wamania',
+				      __DIR__ . '/../vendor/psr',
+				      __DIR__ . '/../vendor/symfony/polyfill-mbstring',
+			      ]
+		      ),
+	],
+	'patchers'              => [
+		/**
+		 * Prefix the dynamic class generation in Smalot PdfParser lib.
+		 *
+		 * @param string $file_path The path of the current file.
+		 * @param string $prefix The prefix to be used.
+		 * @param string $content The content of the specific file.
+		 *
+		 * @return string The modified content.
+		 */
+		static function ( $file_path, string $prefix, string $content ): string {
+
+			if ( strpos( $file_path, 'smalot/pdfparser/src/Smalot/PdfParser/PDFObject.php' ) !== false ) {
+				$content = str_replace(
+					'$classname = \'\\\\Smalot\\\\PdfParser\\\\Font\\\\Font\' . $subtype;',
+					'$classname = \'' . addslashes( $prefix ) . '\\\\Smalot\\\\PdfParser\\\\Font\\\\Font\' . $subtype;',
+					$content
+				);
+			}
+
+			if ( strpos( $file_path, 'smalot/pdfparser/src/Smalot/PdfParser/Encoding.php' ) !== false ) {
+				$content = str_replace(
+					'$className = \'\\\\Smalot\\\\PdfParser\\\\Encoding\\\\\' . $baseEncoding;',
+					'$className = \'' . addslashes( $prefix ) . '\\\\Smalot\\\\PdfParser\\\\Encoding\\\\\' . $baseEncoding;',
+					$content
+				);
+			}
+
+			return $content;
+		},
 	],
 ];

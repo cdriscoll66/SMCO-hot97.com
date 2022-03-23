@@ -1,5 +1,9 @@
+#wpcontent {
+	padding-left: 0 !important;
+}
+
 .searchwp-logo {
-	margin: 7px 20px 5px 0; /* 20px matches the gap with Admin Menu */
+	margin: 10px 25px;
 	width: 25px;
 	display: flex;
 	height: 100%;
@@ -23,7 +27,6 @@
 	border-width: 0 0 1px;
 
 	/* TODO: need responsive positioning */
-	margin: -10px 0 0 -20px;
 	padding-right: 20px;
 	padding-left: 20px;
 }
@@ -93,7 +96,7 @@
 }
 
 .searchwp-settings-view {
-	padding-top: 1em;
+	padding-top: 5px;
 }
 
 .searchwp-settings-nav-tab-extensions-wrapper {
@@ -146,6 +149,20 @@
 	display: block;
 	text-decoration: none;
 	padding: 0.1em 0;
+}
+
+.notice {
+	margin-top: 15px;
+}
+
+.wrap {
+	padding: 0 20px;
+	margin: 0;
+}
+
+/* This needs to be deleted once Metrics v1.4.2 is released */
+.searchwp-metrics.wrap {
+	padding-top: 10px;
 }
 
 .swp-tooltip {

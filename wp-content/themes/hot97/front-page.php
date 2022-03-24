@@ -21,6 +21,7 @@ use App\PostTypes\Page;
 use Timber\Term;
 use App\ViewModels\CardViewModel;
 use App\ViewModels\HeroViewModel;
+use App\ViewModels\DJCardViewModel;
 
 class FrontPageController extends Controller
 {
@@ -61,6 +62,17 @@ class FrontPageController extends Controller
 
                 $hero = $hero->map(function($item) {
                     return new HeroViewModel($item);
+                });
+            }
+
+            if ($dj_ids = $homepage_config['featured_djs']) {
+                $featured_djs = DJ::builder()
+                    ->whereIdIn($dj_ids)
+                    ->orderBy('menu_order')
+                    ->get();
+
+                $djs = $featured_djs->map(function($item) {
+                    return new DJCardViewModel($item);
                 });
             }
 

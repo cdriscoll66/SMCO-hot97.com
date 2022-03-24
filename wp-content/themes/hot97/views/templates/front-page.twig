@@ -29,6 +29,15 @@
         {% endif %}
 
         {# DJs #}
+        {% if djs %}
+            <ul class="posts">
+                {% for post in djs %}
+                    <li class="posts__item">
+                        {% include "components/molecules/card.twig" %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
         {# Marketing Content #}
         {{ content|raw }}

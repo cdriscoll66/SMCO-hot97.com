@@ -12,4 +12,7 @@
     {% if post.contentCategory %}
         <p><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></p>
     {% endif %}
+    {% if post.excerpt %}
+        <p>{{ post.excerpt }}</p>
+    {% endif %}
 </article>

@@ -2,14 +2,14 @@
 
 namespace App\ViewModels;
 
-use App\PostTypes\Post;
+use App\PostTypes\DJ;
 use Rareloop\Lumberjack\ViewModel;
 
-class CardViewModel extends ViewModel
+class DJCardViewModel extends ViewModel
 {
     protected $post;
 
-    public function __construct(Post $post)
+    public function __construct(DJ $post)
     {
         $this->post = $post;
     }
@@ -24,19 +24,9 @@ class CardViewModel extends ViewModel
         return $this->post->link;
     }
 
-    public function primaryCategory()
+    public function excerpt()
     {
-        return $this->post->getPrimaryTerm();
-    }
-
-    public function contentCategory()
-    {
-        return $this->post->getPrimaryTerm('content-category');
-    }
-
-    public function isHot()
-    {
-        return $this->post->isHot();
+        return $this->post->post_excerpt;
     }
 
     public function thumbnail()

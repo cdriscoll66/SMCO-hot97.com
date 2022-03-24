@@ -4,7 +4,6 @@ namespace App\ViewModels;
 
 use App\PostTypes\Post;
 use Rareloop\Lumberjack\ViewModel;
-use Timber\Term;
 
 class HeroViewModel extends ViewModel
 {

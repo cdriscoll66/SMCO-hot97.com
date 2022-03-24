@@ -150,6 +150,32 @@
                     ]
                 },
                 {
+                    "key": "field_623cd70dc47e6",
+                    "label": "Featured DJs",
+                    "name": "featured_djs",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "dj"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "taxonomy"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": "",
+                    "return_format": "id"
+                },
+                {
                     "key": "field_623b58afd1aea",
                     "label": "Other Categories",
                     "name": "other_categories",
@@ -649,5 +675,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1648152921
+    "modified": 1648154436
 }

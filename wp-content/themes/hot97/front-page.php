@@ -72,13 +72,18 @@ class FrontPageController extends Controller
                         ->get();
 
                     $collection = $featured_posts->concat($other_posts);
+                    $collection_IDs_as_array = $collection->map(function($item) {
+                        return $item->id;
+                    })->toArray();
 
                     $array = [
                         'term' => new Term($term),
-                        'posts' => $collection,
+                        'posts' => $collection->map(function($item) {
+                            return new CardViewModel($item);
+                        }),
                     ];
 
-                    $exclude = array_merge($exclude, $featured_posts_IDs);
+                    $exclude = array_merge($exclude, $collection_IDs_as_array);
                     array_push($featured, $array);
                 }
             }
@@ -96,7 +101,9 @@ class FrontPageController extends Controller
 
                     $array = [
                         'term' => new Term($term),
-                        'posts' => $posts,
+                        'posts' => $posts->map(function($item) {
+                            return new CardViewModel($item);
+                        }),
                     ];
 
                     array_push($other, $array);

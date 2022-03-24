@@ -1,12 +1,18 @@
 <article class="post">
+    {% if post.thumbnail %}
+        <img src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}">
+    {% endif %}
     <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
-    {% if post.is_hot %}
+    {% if post.isHot %}
         <p>hot</p>
     {% endif %}
-    {% if post.hasPrimaryTerm('content-category') %}
-        <p><a href="{{ post.getPrimaryTerm('content-category').path }}">{{ post.getPrimaryTerm('content-category').name }}</a></p>
+    {% if post.primaryCategory %}
+        <p><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></p>
     {% endif %}
-    {% if post.hasPrimaryTerm %}
-        <p><a href="{{ post.getPrimaryTerm.path }}">{{ post.getPrimaryTerm.name }}</a></p>
+    {% if post.contentCategory %}
+        <p><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></p>
+    {% endif %}
+    {% if post.excerpt %}
+        <p>{{ post.excerpt }}</p>
     {% endif %}
 </article>

@@ -11,7 +11,7 @@
             {% for group in featured %}
                 <h2>{{ group.term.name }}</h2>
 
-                {% if group.posts|length > 0 %}
+                {% if group.posts %}
                     <ul class="posts">
                         {% for post in group.posts %}
                             <li class="posts__item">
@@ -34,7 +34,7 @@
                 <h2>{{ group.term.name }}</h2>
                 <a href="{{ group.term.link }}">View All {{ group.term.name }}</a>
 
-                {% if group.posts|length > 0 %}
+                {% if group.posts %}
                     <ul class="posts">
                         {% for post in group.posts %}
                             <li class="posts__item">

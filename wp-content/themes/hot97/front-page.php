@@ -19,6 +19,7 @@ use App\PostTypes\Post;
 use App\PostTypes\DJ;
 use App\PostTypes\Page;
 use Timber\Term;
+use App\ViewModels\CardViewModel;
 
 class FrontPageController extends Controller
 {
@@ -69,11 +70,11 @@ class FrontPageController extends Controller
                     ->orderBy('date', 'desc')
                     ->get();
 
-                $new_collection = $featured_posts->concat($other_posts);
+                $collection = $featured_posts->concat($other_posts);
 
                 $array = [
                     'term' => new Term($term),
-                    'posts' => $new_collection,
+                    'posts' => $collection,
                 ];
 
                 $exclude = array_merge($exclude, $featured_posts_IDs);

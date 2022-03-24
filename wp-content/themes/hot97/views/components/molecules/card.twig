@@ -4,9 +4,9 @@
         <p>hot</p>
     {% endif %}
     {% if post.hasPrimaryTerm('content-category') %}
-        <p><a href="{{ post.getPrimaryTermLink('content-category') }}">{{ post.getPrimaryTermName('content-category') }}</a></p>
+        <p><a href="{{ post.getPrimaryTerm('content-category').path }}">{{ post.getPrimaryTerm('content-category').name }}</a></p>
     {% endif %}
     {% if post.hasPrimaryTerm %}
-        <p><a href="{{ post.getPrimaryTermLink }}">{{ post.getPrimaryTermName }}</a></p>
+        <p><a href="{{ post.getPrimaryTerm.path }}">{{ post.getPrimaryTerm.name }}</a></p>
     {% endif %}
 </article>

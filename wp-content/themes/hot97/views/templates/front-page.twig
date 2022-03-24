@@ -32,7 +32,7 @@
         {% if other %}
             {% for group in other %}
                 <h2>{{ group.term.name }}</h2>
-                <a href="{{ group.term.link }}">View All {{ group.term.name }}</a>
+                <a href="{{ group.term.path }}">View All {{ group.term.name }}</a>
 
                 {% if group.posts %}
                     <ul class="posts">

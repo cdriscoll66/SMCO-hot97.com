@@ -78,6 +78,24 @@ class FrontPageController extends Controller
             array_push($featured, $array);
         }
 
+        foreach ($homepage_config['other_categories'] as $group) {
+            $term = $group['category'];
+
+            $posts = Post::builder()
+            ->whereIdNotIn($exclude)
+            ->category($term->term_id)
+            ->limit(6)
+            ->orderBy('date', 'desc')
+            ->get();
+
+            $array = [
+                'term' => $term,
+                'posts' => $posts,
+            ];
+
+            array_push($other, $array);
+        }
+
         $context['hero'] = $hero;
         $context['featured'] = $featured;
         $context['djs'] = $djs;

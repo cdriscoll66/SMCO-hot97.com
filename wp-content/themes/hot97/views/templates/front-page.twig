@@ -29,6 +29,21 @@
         {{ content|raw }}
 
         {# Other Categories #}
+        {% if other|length > 0 %}
+            {% for category in other %}
+                <h2>{{ category.term.name }}</h2>
+
+                {% if category.posts|length > 0 %}
+                    <ul class="posts">
+                        {% for post in category.posts %}
+                            <li class="posts__item">
+                                {% include "components/molecules/card.twig" %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
     </main>
 {% endblock %}

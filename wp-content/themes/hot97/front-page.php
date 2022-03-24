@@ -23,13 +23,6 @@ class FrontPageController extends Controller
 {
     public function handle()
     {
-        $context = Timber::get_context();
-        $page = new Page();
-
-        $context['post'] = $page;
-        $context['title'] = $page->title;
-        $context['content'] = $page->content;
-
         QueryBuilder::macro('category', function (int $term_id) {
             $this->params['tax_query'] = [
                 [
@@ -42,8 +35,14 @@ class FrontPageController extends Controller
             return $this;
         });
 
-        $context['home_page_fields'] = get_field('home_page_fields', 'options');
-        $featured_category_groups = $context['home_page_fields']['featured_categories'];
+        $context = Timber::get_context();
+        $page = new Page();
+
+        $context['post'] = $page;
+        $context['title'] = $page->title;
+        $context['content'] = $page->content;
+
+        $homepage_config = get_field('home_page_fields', 'options');
 
         $exclude = [];
         $hero = [];
@@ -51,7 +50,7 @@ class FrontPageController extends Controller
         $djs = [];
         $other = [];
 
-        foreach ($featured_category_groups as $group) {
+        foreach ($homepage_config['featured_categories'] as $group) {
             $term_id = $group['category']->term_id;
             $featured_posts_IDs = $group['featured_posts'];
 
@@ -79,7 +78,10 @@ class FrontPageController extends Controller
         }
 
         $context['exclude'] = $exclude;
+        $context['hero'] = $hero;
         $context['featured'] = $featured;
+        $context['djs'] = $djs;
+        $context['other'] = $other;
 
         return new TimberResponse('templates/front-page.twig', $context);
     }

@@ -52,53 +52,55 @@ class FrontPageController extends Controller
         $djs = [];
         $other = [];
 
-        if ($homepage_config['featured_categories']) {
-            foreach ($homepage_config['featured_categories'] as $group) {
-                $term = $group['category'];
-                $post_count = $group['number_of_posts'];
-                $featured_posts_IDs = $group['featured_posts'];
+        if ($homepage_config) {
+            if ($homepage_config['featured_categories']) {
+                foreach ($homepage_config['featured_categories'] as $group) {
+                    $term = $group['category'];
+                    $post_count = $group['number_of_posts'];
+                    $featured_posts_IDs = $group['featured_posts'];
 
-                $featured_posts = Post::builder()
-                    ->whereIdIn($featured_posts_IDs)
-                    ->orderBy('menu_order')
-                    ->get();
+                    $featured_posts = Post::builder()
+                        ->whereIdIn($featured_posts_IDs)
+                        ->orderBy('menu_order')
+                        ->get();
 
-                $other_posts = Post::builder()
-                    ->whereIdNotIn($featured_posts_IDs)
-                    ->category($term->term_id)
-                    ->limit($post_count - count($featured_posts_IDs))
-                    ->orderBy('date', 'desc')
-                    ->get();
+                    $other_posts = Post::builder()
+                        ->whereIdNotIn($featured_posts_IDs)
+                        ->category($term->term_id)
+                        ->limit($post_count - count($featured_posts_IDs))
+                        ->orderBy('date', 'desc')
+                        ->get();
 
-                $collection = $featured_posts->concat($other_posts);
+                    $collection = $featured_posts->concat($other_posts);
 
-                $array = [
-                    'term' => new Term($term),
-                    'posts' => $collection,
-                ];
+                    $array = [
+                        'term' => new Term($term),
+                        'posts' => $collection,
+                    ];
 
-                $exclude = array_merge($exclude, $featured_posts_IDs);
-                array_push($featured, $array);
+                    $exclude = array_merge($exclude, $featured_posts_IDs);
+                    array_push($featured, $array);
+                }
             }
-        }
 
-        if ($homepage_config['other_categories']) {
-            foreach ($homepage_config['other_categories'] as $group) {
-                $term = $group['category'];
+            if ($homepage_config['other_categories']) {
+                foreach ($homepage_config['other_categories'] as $group) {
+                    $term = $group['category'];
 
-                $posts = Post::builder()
-                    ->whereIdNotIn($exclude)
-                    ->category($term->term_id)
-                    ->limit(6)
-                    ->orderBy('date', 'desc')
-                    ->get();
+                    $posts = Post::builder()
+                        ->whereIdNotIn($exclude)
+                        ->category($term->term_id)
+                        ->limit(6)
+                        ->orderBy('date', 'desc')
+                        ->get();
 
-                $array = [
-                    'term' => new Term($term),
-                    'posts' => $posts,
-                ];
+                    $array = [
+                        'term' => new Term($term),
+                        'posts' => $posts,
+                    ];
 
-                array_push($other, $array);
+                    array_push($other, $array);
+                }
             }
         }
 

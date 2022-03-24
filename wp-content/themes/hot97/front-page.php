@@ -30,12 +30,12 @@ class FrontPageController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
-        QueryBuilder::macro('category', function (object $term) {
+        QueryBuilder::macro('category', function (int $term_id) {
             $this->params['tax_query'] = [
                 [
                     'taxonomy' => 'category',
                     'field' => 'term_id',
-                    'terms' => $term->term_id,
+                    'terms' => $term_id,
                 ]
             ];
 
@@ -62,7 +62,7 @@ class FrontPageController extends Controller
 
             $other_posts = Post::builder()
                 ->whereIdNotIn($featured_posts_IDs)
-                ->category($group['category'])
+                ->category($term_id)
                 ->limit($group['number_of_posts'] - count($featured_posts_IDs))
                 ->orderBy('date', 'desc')
                 ->get();

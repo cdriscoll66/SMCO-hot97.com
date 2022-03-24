@@ -9,7 +9,7 @@
         {# Featured Categories #}
         {% if featured|length > 0 %}
             {% for category in featured %}
-                <h2>{{ category.name }}</h2>
+                <h2>{{ category.term.name }}</h2>
 
                 {% if category.posts|length > 0 %}
                     <ul class="posts">

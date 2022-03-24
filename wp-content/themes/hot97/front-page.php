@@ -51,7 +51,8 @@ class FrontPageController extends Controller
         $other = [];
 
         foreach ($homepage_config['featured_categories'] as $group) {
-            $term_id = $group['category']->term_id;
+            $term = $group['category'];
+            $post_count = $group['number_of_posts'];
             $featured_posts_IDs = $group['featured_posts'];
 
             $featured_posts = Post::builder()
@@ -61,16 +62,15 @@ class FrontPageController extends Controller
 
             $other_posts = Post::builder()
                 ->whereIdNotIn($featured_posts_IDs)
-                ->category($term_id)
-                ->limit($group['number_of_posts'] - count($featured_posts_IDs))
+                ->category($term->term_id)
+                ->limit($post_count - count($featured_posts_IDs))
                 ->orderBy('date', 'desc')
                 ->get();
 
             $new_collection = $featured_posts->concat($other_posts);
 
             $array = [
-                'term_id' => $term_id,
-                'name' => $group['category']->name,
+                'term' => $term,
                 'posts' => $new_collection,
             ];
 
@@ -82,11 +82,11 @@ class FrontPageController extends Controller
             $term = $group['category'];
 
             $posts = Post::builder()
-            ->whereIdNotIn($exclude)
-            ->category($term->term_id)
-            ->limit(6)
-            ->orderBy('date', 'desc')
-            ->get();
+                ->whereIdNotIn($exclude)
+                ->category($term->term_id)
+                ->limit(6)
+                ->orderBy('date', 'desc')
+                ->get();
 
             $array = [
                 'term' => $term,

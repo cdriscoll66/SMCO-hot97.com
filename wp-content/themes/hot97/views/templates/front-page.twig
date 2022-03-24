@@ -7,7 +7,7 @@
         {# Hero #}
 
         {# Featured Categories #}
-        {% if featured|length > 0 %}
+        {% if featured %}
             {% for group in featured %}
                 <h2>{{ group.term.name }}</h2>
 
@@ -29,7 +29,7 @@
         {{ content|raw }}
 
         {# Other Categories #}
-        {% if other|length > 0 %}
+        {% if other %}
             {% for group in other %}
                 <h2>{{ group.term.name }}</h2>
                 <a href="{{ group.term.link }}">View All {{ group.term.name }}</a>

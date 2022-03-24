@@ -70,6 +70,7 @@ class FrontPageController extends Controller
 
             $array = [
                 'term_id' => $term_id,
+                'name' => $group['category']->name,
                 'posts' => $new_collection,
             ];
 
@@ -77,7 +78,6 @@ class FrontPageController extends Controller
             array_push($featured, $array);
         }
 
-        $context['exclude'] = $exclude;
         $context['hero'] = $hero;
         $context['featured'] = $featured;
         $context['djs'] = $djs;

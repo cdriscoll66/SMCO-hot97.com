@@ -3,6 +3,32 @@
 {% block content %}
     <main id="main">
         <h1>{{ title }}</h1>
+
+        {# Hero #}
+
+        {# Featured Categories #}
+        {% if featured|length > 0 %}
+            {% for category in featured %}
+                <h2>{{ category.name }}</h2>
+
+                {% if category.posts|length > 0 %}
+                    <ul class="posts">
+                        {% for post in category.posts %}
+                            <li class="posts__item">
+                                {% include "components/molecules/card.twig" %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {# DJs #}
+
+        {# Marketing Content #}
         {{ content|raw }}
+
+        {# Other Categories #}
+
     </main>
 {% endblock %}

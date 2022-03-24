@@ -18,6 +18,7 @@ use Timber\Timber;
 use App\PostTypes\Post;
 use App\PostTypes\DJ;
 use App\PostTypes\Page;
+use Timber\Term;
 
 class FrontPageController extends Controller
 {
@@ -70,7 +71,7 @@ class FrontPageController extends Controller
             $new_collection = $featured_posts->concat($other_posts);
 
             $array = [
-                'term' => $term,
+                'term' => new Term($term),
                 'posts' => $new_collection,
             ];
 
@@ -89,7 +90,7 @@ class FrontPageController extends Controller
                 ->get();
 
             $array = [
-                'term' => $term,
+                'term' => new Term($term),
                 'posts' => $posts,
             ];
 

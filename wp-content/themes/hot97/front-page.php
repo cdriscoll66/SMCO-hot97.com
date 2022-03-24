@@ -20,6 +20,7 @@ use App\PostTypes\DJ;
 use App\PostTypes\Page;
 use Timber\Term;
 use App\ViewModels\CardViewModel;
+use App\ViewModels\HeroViewModel;
 
 class FrontPageController extends Controller
 {
@@ -53,6 +54,16 @@ class FrontPageController extends Controller
         $other = [];
 
         if ($homepage_config) {
+            if ($homepage_config['hero']) {
+                $hero = Post::builder()
+                    ->whereIdIn($homepage_config['hero'])
+                    ->get();
+
+                $hero = $hero->map(function($item) {
+                    return new HeroViewModel($item);
+                });
+            }
+
             if ($homepage_config['featured_categories']) {
                 foreach ($homepage_config['featured_categories'] as $group) {
                     $term = $group['category'];

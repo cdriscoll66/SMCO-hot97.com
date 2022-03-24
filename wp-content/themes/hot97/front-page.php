@@ -11,7 +11,6 @@
 
 namespace App;
 
-use AC\Collection;
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Rareloop\Lumberjack\QueryBuilder;
@@ -19,7 +18,6 @@ use Timber\Timber;
 use App\PostTypes\Post;
 use App\PostTypes\DJ;
 use App\PostTypes\Page;
-use Tightenco\Collect\Support\Collection as SupportCollection;
 
 class FrontPageController extends Controller
 {
@@ -32,7 +30,7 @@ class FrontPageController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
-        QueryBuilder::macro('category', function ($term) {
+        QueryBuilder::macro('category', function (object $term) {
             $this->params['tax_query'] = [
                 [
                     'taxonomy' => 'category',

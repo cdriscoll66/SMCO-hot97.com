@@ -46,7 +46,7 @@ class FrontPageController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
-        $homepage_config = get_field('home_page_fields', 'options');
+        $page_config = get_field('home_page_fields', 'options');
 
         $exclude = [];
         $hero = [];
@@ -54,10 +54,10 @@ class FrontPageController extends Controller
         $djs = [];
         $other = [];
 
-        if ($homepage_config) {
-            if ($homepage_config['hero']) {
+        if ($page_config) {
+            if ($page_config['hero']) {
                 $hero = Post::builder()
-                    ->whereIdIn($homepage_config['hero'])
+                    ->whereIdIn($page_config['hero'])
                     ->get();
 
                 $hero = $hero->map(function($item) {
@@ -65,7 +65,7 @@ class FrontPageController extends Controller
                 });
             }
 
-            if ($dj_ids = $homepage_config['featured_djs']) {
+            if ($dj_ids = $page_config['featured_djs']) {
                 $featured_djs = DJ::builder()
                     ->whereIdIn($dj_ids)
                     ->orderBy('menu_order')
@@ -76,8 +76,8 @@ class FrontPageController extends Controller
                 });
             }
 
-            if ($homepage_config['featured_categories']) {
-                foreach ($homepage_config['featured_categories'] as $group) {
+            if ($page_config['featured_categories']) {
+                foreach ($page_config['featured_categories'] as $group) {
                     $term = $group['category'];
                     $post_count = $group['number_of_posts'];
                     $featured_posts_IDs = $group['featured_posts'];
@@ -111,8 +111,8 @@ class FrontPageController extends Controller
                 }
             }
 
-            if ($homepage_config['other_categories']) {
-                foreach ($homepage_config['other_categories'] as $group) {
+            if ($page_config['other_categories']) {
+                foreach ($page_config['other_categories'] as $group) {
                     $term = $group['category'];
 
                     $posts = Post::builder()

@@ -99,6 +99,26 @@ class AppRestController {
     }
 
     /**
+     * Check permissions for the posts.
+     *
+     * @param WP_REST_Request $request Current request.
+     * @return bool|WP_Error
+     */
+    public function get_items_permissions_check( WP_REST_Request $request ) {
+    /*
+    // If this endpoint was secured, the following would check for user capabilities.
+    if ( ! user_can( wp_get_current_user(), 'read' ) ) {
+        return new WP_Error( 'rest_forbidden',
+            esc_html__( 'You cannot view the resource.' ),
+            [ 'status' => $this->authorization_status_code() ]
+        );
+    }
+    */
+
+        return TRUE;
+    }
+
+    /**
      * Sets up the proper HTTP status code for authorization.
      *
      * @return int

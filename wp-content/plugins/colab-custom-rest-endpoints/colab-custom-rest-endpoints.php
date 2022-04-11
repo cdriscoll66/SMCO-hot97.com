@@ -65,13 +65,6 @@ register_deactivation_hook( __FILE__, [ Plugin::class, 'register_deactivation_ho
  * Filter Hooks.
  ***********************************/
 
-// Add an additional configuration directory to autoload fields from.
-// add_filter( 'acf/settings/load_json', function ( $paths ) {
-// 	// append path
-// 	$paths[] = __DIR__ . '/json/acf';
-// 	return $paths;
-// }, 10 );
-
 
 /***********************************
  * Action Hooks.
@@ -81,7 +74,7 @@ register_deactivation_hook( __FILE__, [ Plugin::class, 'register_deactivation_ho
 add_action( 'rest_api_init', [ AppRestController::class, 'rest_api_init' ] );
 
 // Initialize the Settings Page once ACF is loaded.
-add_action('acf/init', [ Settings::class, 'acf_init' ], 20);
+add_action( 'acf/init', [ Settings::class, 'acf_init' ], 20 );
 
 
 /***********************************

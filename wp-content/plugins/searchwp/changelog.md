@@ -1,3 +1,14 @@
+### 4.2.1
+- **[Fix]** Edited document content is not preserved
+- **[Fix]** Broken URLs for the redirects to the legacy admin settings
+- **[Fix]** Class prefixing error in smalot/pdfparser lib
+- **[Fix]** PHP7 static code analyzer error in symfony/polyfill-mbstring lib
+
+### 4.2.0
+- **[Change]** Plugin settings moved to the top-level menu
+- **[Fix]** Undefined function error during the 'index' CLI command execution
+- **[Fix]** Merging words in some cases during HTML content tokenization
+
 ### 4.1.22
 - **[Fix]** Synonym application too broad in some cases
 - **[Fix]** Document content reindexing in some cases

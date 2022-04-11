@@ -3,7 +3,7 @@
 Plugin Name: SearchWP
 Plugin URI: https://searchwp.com/
 Description: The best WordPress search you can find
-Version: 4.1.22
+Version: 4.2.1
 Author: SearchWP
 Author URI: https://searchwp.com/
 Text Domain: searchwp
@@ -25,7 +25,7 @@ For more information please see <http://www.gnu.org/licenses/>.
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SEARCHWP_VERSION', '4.1.22' );
+define( 'SEARCHWP_VERSION', '4.2.1' );
 define( 'SEARCHWP_PREFIX', 'searchwp_' );
 define( 'SEARCHWP_SEPARATOR', '.' );
 define( 'SEARCHWP_PLUGIN_DIR', dirname( __FILE__ ) );
@@ -120,6 +120,5 @@ register_activation_hook( __FILE__, 'searchwp_plugin_activate' );
 // Kickoff!
 require_once SEARCHWP_PLUGIN_DIR . '/lib/vendor/scoper-autoload.php';
 require_once SEARCHWP_PLUGIN_DIR . '/includes/SearchWP.php';
-require_once SEARCHWP_PLUGIN_DIR . '/lib/class.swp-query.php';
 
 new SearchWP();

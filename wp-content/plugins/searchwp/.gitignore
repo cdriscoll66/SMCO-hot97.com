@@ -5,5 +5,5 @@ node_modules
 /vendor
 /vendor-bin
 wordpress/
-composer.phar
-php-scoper.phar
+.env.testing
+build

@@ -39,26 +39,6 @@ class AppRestController {
     }
 
     /**
-     * Check permissions for the posts.
-     *
-     * @param WP_REST_Request $request Current request.
-     * @return bool|WP_Error
-     */
-    public function get_items_permissions_check( WP_REST_Request $request ) {
-    	/*
-    	// If this endpoint was secured, the following would check for user capabilities.
-        if ( ! user_can( wp_get_current_user(), 'read' ) ) {
-            return new WP_Error( 'rest_forbidden',
-                esc_html__( 'You cannot view the resource.' ),
-                [ 'status' => $this->authorization_status_code() ]
-            );
-        }
-    	*/
-
-        return TRUE;
-    }
-
-    /**
      * Grabs the ACF options found on the App Configuration Options page
      *
      * @param WP_REST_Request $request Current request.
@@ -67,66 +47,20 @@ class AppRestController {
     public function config( WP_REST_Request $request ) {
         $data = [];
 
-        $data['home'] = get_field('field_6227b3b9bd041', 'option');
-        $data['news'] = get_field('field_6227b7123e38f', 'option');
-        $data['video'] = get_field('field_6227b7eef26f4', 'option');
-        $data['navigation'] = get_field('field_6227b91d25bef', 'option');
+        // home_page_fields group
+        $data['home'] = get_field( 'field_6227b3b9bd041', 'option' );
+
+        // new_page_fields group
+        $data['news'] = get_field( 'field_6227b7123e38f', 'option' );
+
+        // video_page_fields group
+        $data['video'] = get_field( 'field_6227b7eef26f4', 'option' );
+
+        // navigation group
+        $data['navigation'] = get_field( 'field_6227b91d25bef', 'option' );
 
         // Return all of our comment response data.
         return rest_ensure_response( $data );
-    }
-
-    /**
-     * Matches the post data to the schema we want.
-     *
-     * @param WP_Post $post The comment object whose response is being prepared.
-     * @param WP_REST_Request $request
-     * @return WP_Error|WP_HTTP_Response|WP_REST_Response
-     */
-    public function prepare_item_for_response( WP_Post $post, WP_REST_Request $request) {
-        $post_data = [];
-
-        $schema = $this->get_item_schema();
-
-        // We are also renaming the fields to more understandable names.
-        if ( isset( $schema['properties']['id'] ) ) {
-            $post_data['id'] = (int) $post->ID;
-        }
-
-        if ( isset( $schema['properties']['content'] ) ) {
-            $post_data['content'] = apply_filters( 'the_content', $post->post_content, $post );
-        }
-
-        return rest_ensure_response( $post_data );
-    }
-
-    /**
-     * Prepare a response for inserting into a collection of responses.
-     *     * This is copied from WP_REST_Controller class in the WP REST API v2 plugin.
-     *
-     * @param WP_REST_Response $response Response object.
-     * @return array|WP_REST_Response Response data, ready for insertion into collection data.
-     */
-    public function prepare_response_for_collection( WP_REST_Response $response ) {
-        if ( ! ( $response instanceof WP_REST_Response ) ) {
-            return $response;
-        }
-
-        $data = (array) $response->get_data();
-        $server = rest_get_server();
-
-        if ( method_exists( $server, 'get_compact_response_links' ) ) {
-            $links = call_user_func( [ $server, 'get_compact_response_links' ], $response );
-        }
-        else {
-            $links = call_user_func( [ $server, 'get_response_links' ], $response );
-        }
-
-        if ( ! empty( $links ) ) {
-            $data['_links'] = $links;
-        }
-
-        return $data;
     }
 
     /**

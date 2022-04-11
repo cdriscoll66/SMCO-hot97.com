@@ -290,6 +290,11 @@ class SearchWP {
 		// If we're in the Admin, implement our Options screen.
 		if ( is_admin() ) {
 			new \SearchWP\Admin\AdminBar();
+
+			// Legacy version of Metrics extension compatibility.
+			// This line has to be deleted once Metrics v1.4.2 is released.
+			\SearchWP\Admin\LegacyMetricsCompat::hooks();
+
 			new \SearchWP\Admin\OptionsView();
 
 			new \SearchWP\Admin\DashboardWidgets\StatisticsDashboardWidget();

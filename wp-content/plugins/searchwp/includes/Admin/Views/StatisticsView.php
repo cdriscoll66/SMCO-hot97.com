@@ -29,13 +29,23 @@ class StatisticsView {
 	 * @since 4.0
 	 */
 	function __construct() {
-		new NavTab([
-			'tab'   => self::$slug,
-			'label' => __( 'Statistics', 'searchwp' ),
-		]);
 
-		add_action( 'searchwp\settings\view\\' . self::$slug, [ __CLASS__, 'render' ] );
-		add_action( 'searchwp\settings\after\\' . self::$slug, [ __CLASS__, 'assets' ], 999 );
+		if ( Utils::is_swp_admin_page( 'statistics' ) ) {
+			new NavTab( [
+				'page'       => 'statistics',
+				'tab'        => self::$slug,
+				'label'      => __( 'Statistics', 'searchwp' ),
+				'is_default' => true,
+			] );
+		}
+
+		if (
+			Utils::is_swp_admin_page( 'statistics', 'default' ) ||
+			Utils::is_swp_admin_page( 'stats', 'default' )
+		) {
+			add_action( 'searchwp\settings\view', [ __CLASS__, 'render' ] );
+			add_action( 'searchwp\settings\after', [ __CLASS__, 'assets' ], 999 );
+		}
 
 		add_action( 'wp_ajax_' . SEARCHWP_PREFIX . 'get_statistics',         [ __CLASS__ , 'get_statistics' ] );
 		add_action( 'wp_ajax_' . SEARCHWP_PREFIX . 'ignore_query',           [ __CLASS__ , 'ignore_query' ] );

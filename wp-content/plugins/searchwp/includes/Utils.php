@@ -724,7 +724,7 @@ class Utils {
 				$html = preg_replace( '/(<(' . implode( '|', $invalid_nodes ) . ')\b[^>]*>).*?(<\/\2>)/is', ' ', $html );
 			}
 
-			return wp_strip_all_tags( $html );
+			return self::strip_all_tags_preserve_words( $html );
 		}
 
 		// Parse the HTML into something we can work with.
@@ -781,7 +781,26 @@ class Utils {
 			}
 		}
 
-		return wp_strip_all_tags( $html ) . ' ' . implode( ' ', $attribute_content );
+		return self::strip_all_tags_preserve_words( $html ) . ' ' . implode( ' ', $attribute_content );
+	}
+
+	/**
+	 * Strips all tags and preserves the words integrity.
+	 *
+	 * Using standard `wp_strip_all_tags()` might lead to words merging in some cases:
+	 * <li>First Item</li><li>Second Item</li> becomes "First ItemSecond Item".
+	 *
+	 * This method keeps the words separate while stripping all the tags.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param string $string The string to strip tags.
+	 *
+	 * @return string
+	 */
+	public static function strip_all_tags_preserve_words( $string ) {
+
+		return wp_strip_all_tags( wpautop( $string ), true );
 	}
 
 	/**
@@ -1872,5 +1891,52 @@ class Utils {
 		}
 
 		return $post_parent_ids;
+	}
+
+	/**
+	 * Helper function to determine if loading an SearchWP related admin page.
+	 *
+	 * Here we determine if the current administration page is owned/created by
+	 * SearchWP. This is done in compliance with WordPress best practices for
+	 * development, so that we only load required SearchWP CSS and JS files on pages
+	 * we create. As a result we do not load our assets admin wide, where they might
+	 * conflict with other plugins needlessly, also leading to a better, faster user
+	 * experience for our users.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param string $slug Slug identifier for a specific SearchWP admin page.
+	 * @param string $view Slug identifier for a specific SearchWP admin page view ("subpage").
+	 *
+	 * @return bool
+	 */
+	public static function is_swp_admin_page( $slug = '', $view = '' ) {
+
+		if ( ! is_admin() ) {
+			return false;
+		}
+
+		$page_prefix = 'searchwp-';
+
+		// Check against basic requirements.
+		if ( empty( $_REQUEST['page'] ) || strpos( $_REQUEST['page'], $page_prefix ) !== 0 ) {
+			return false;
+		}
+
+		// Check against page slug identifier.
+		if ( ! empty( $slug ) && $page_prefix . $slug !== $_REQUEST['page'] ) {
+			return false;
+		}
+
+		// Check against sub-level page view.
+		if ( $view === 'default' && ! empty( $_REQUEST['tab'] ) ) {
+			return false;
+		}
+
+		if ( ! empty( $view ) && $view !== 'default' && ( empty( $_REQUEST['tab'] ) || $view !== $_REQUEST['tab'] ) ) {
+			return false;
+		}
+
+		return true;
 	}
 }

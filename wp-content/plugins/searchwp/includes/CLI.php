@@ -55,15 +55,38 @@ class CLI {
 			'site'    => 'all',
 		] );
 
-		if ( false === strpos( $arguments['site'], ',' ) && is_numeric( $arguments['site'] ) ) {
+		$all_sites = function_exists( 'get_sites' ) ? get_sites( [ 'fields' => 'ids' ] ) : get_current_blog_id();
+
+		// Process the site id argument.
+		if ( is_numeric( $arguments['site'] ) ) {
+			// Single numeric site id.
 			$arguments['site'] = absint( $arguments['site'] );
-		} else if ( false !== strpos( $arguments['site'], ',' ) ) {
-			$arguments['site'] = array_filter( array_unique( array_map( function( $site ) {
+			$arguments['site'] = in_array( $arguments['site'], (array) $all_sites, true ) ? $arguments['site'] : false;
+		} elseif ( false !== strpos( $arguments['site'], ',' ) ) {
+			// Comma-separated list of site ids.
+			$arguments['site'] = array_filter( array_unique( array_map( function ( $site ) {
 				return is_numeric( $site ) ? absint( $site ) : false;
 			}, explode( ',', $arguments['site'] ) ) ) );
-		} else {
-			// Process every site.
-			$arguments['site'] = get_sites( [ 'fields' => 'ids' ] );
+			$arguments['site'] = array_intersect( $arguments['site'], (array) $all_sites );
+			$arguments['site'] = ! empty( $arguments['site'] ) ? $arguments['site'] : false;
+		} elseif ( $arguments['site'] !== 'all' ) {
+			// Unexpected input format.
+			$arguments['site'] = false;
+		}
+
+		// Bail if the sites with the provided ids don't exist.
+		if ( $arguments['site'] === false ) {
+			\WP_CLI::error( 'Incorrect site ID(s).' );
+		}
+
+		// Process all sites if 'all' or no site id is specified.
+		if ( $arguments['site'] === 'all' ) {
+			$arguments['site'] = $all_sites;
+		}
+
+		// Make sure we avoid unnecessary loops in the next block.
+		if ( is_array( $arguments['site'] ) && count( $arguments['site'] ) === 1 ) {
+			$arguments['site'] = reset( $arguments['site'] );
 		}
 
 		// If we're working with multiple sites, iterate over each with separate, individual site commands.
@@ -102,8 +125,6 @@ class CLI {
 				\WP_CLI::line( 'Dropping index for site ' . $arguments['site'] );
 				$index->drop_site( $arguments['site'] );
 			}
-
-			$entries = [];
 
 			$entries = self::setup_site_entries();
 

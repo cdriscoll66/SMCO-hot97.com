@@ -1,6 +1,6 @@
-<article class="card">
-    {% if post.thumbnail %}
-        <img src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}">
+<article class="hero">
+    {% if post.video %}
+        {{ post.video }}
     {% endif %}
     <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
     {% if post.isHot %}

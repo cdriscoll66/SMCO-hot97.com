@@ -99,4 +99,8 @@ class ContentCategory extends Term
             // 'sort' => '',                        // Default is "".
         ]);
     }
+
+    public function getLink() {
+        return 'https://example.com';
+    }
 }

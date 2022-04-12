@@ -44,46 +44,125 @@ class AppRestController {
      * @param WP_REST_Request $request Current request.
      * @return WP_Error|WP_HTTP_Response|WP_REST_Response
      */
-    public function config( WP_REST_Request $request ) {
+    public function config( WP_REST_Request $request )
+    {
         $data = [
             'home' => [
+                'hero' => [],
                 'featured_categories' => [],
-                'featured_articles' => [],
+                'featured_djs' => [],
             ],
             'news' => [
+                'hero' => [],
                 'featured_categories' => [],
-                'featured_articles' => [],
             ],
             'watch' => [
+                'hero' => [],
                 'featured_categories' => [],
-                'featured_articles' => [],
             ],
             'navigation' => [],
         ];
 
         // home_page_fields group
-        $home_page_fields = get_field( 'home_page_fields', 'option' );
-        $data['home']['featured_categories'][] = $home_page_fields['featured_categories'];
-        $data['home']['featured_articles'] = array_map(
-            [$this, 'simplify_post_access_keys_array_map'],
-            $home_page_fields['featured_articles']
+        $home_page_fields = get_field('home_page_fields', 'option');
+
+        // Sanitize and expand hero assignment.
+        $home_page_fields['hero'] = array_map(
+            [$this, 'fetch_posts_array_map'],
+            $home_page_fields['hero']
         );
+
+        // Sanitize and expand featured_categories assignment.
+        if (is_array($home_page_fields['featured_categories'])) {
+            foreach ($home_page_fields['featured_categories'] as $key => $featured_category_row) {
+                if ( is_array( $featured_category_row['featured_posts'] ) ) {
+                    $home_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                        [$this, 'fetch_posts_array_map'],
+                        $featured_category_row['featured_posts']
+                    );
+                }
+                else {
+                    $home_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                }
+            }
+        }
+
+        // Sanitize and expand home featured_djs
+        if ( is_array( $home_page_fields['featured_djs'] ) ) {
+            $home_page_fields['featured_djs'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $home_page_fields['featured_djs']
+            );
+        }
+
+        $data['home'] = $home_page_fields;
 
         // new_page_fields group
         $news_page_fields = get_field( 'news_page_fields', 'option' );
-        $data['news']['featured_categories'][] = $news_page_fields['featured_news_categories'];
-        $data['news']['featured_articles'] = array_map(
-            [$this, 'simplify_post_access_keys_array_map'],
-            $news_page_fields['featured_news_articles']
-        );
+
+        // Sanitize and expand hero assignment.
+        if ( is_array( $news_page_fields['hero'] ) ) {
+            $news_page_fields['hero'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $news_page_fields['hero']
+            );
+        }
+        else {
+            $news_page_fields['hero'] = [];
+        }
+
+        // Sanitize and expand featured_categories assignment.
+        if ( is_array( $news_page_fields['featured_categories'] ) ) {
+            foreach ($news_page_fields['featured_categories'] as $key => $featured_category_row) {
+                if ( is_array( $featured_category_row['featured_posts'] ) ) {
+                    $news_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                        [$this, 'fetch_posts_array_map'],
+                        $featured_category_row['featured_posts']
+                    );
+                }
+                else {
+                    $news_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                }
+            }
+        }
+        else {
+            $news_page_fields['featured_categories'] = [];
+        }
+        $data['news'] = $news_page_fields;
 
         // video_page_fields group
         $video_page_fields = get_field( 'video_page_fields', 'option' );
-        $data['watch']['featured_categories'][] = $video_page_fields['featured_video_categories'];
-        $data['watch']['featured_articles'] = array_map(
-            [$this, 'simplify_post_access_keys_array_map'],
-            $video_page_fields['featured_video_articles']
-        );
+
+        // Sanitize and expand hero assignment.
+        if ( is_array( $video_page_fields['hero'] ) ) {
+            $video_page_fields['hero'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $video_page_fields['hero']
+            );
+        }
+        else {
+            $video_page_fields['hero'] = [];
+        }
+
+        // Sanitize and expand featured_categories assignment.
+        if ( is_array( $video_page_fields['featured_categories'] ) ) {
+            foreach ($video_page_fields['featured_categories'] as $key => $featured_category_row) {
+                if ( is_array( $featured_category_row['featured_posts'] ) ) {
+                    $video_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                        [$this, 'fetch_posts_array_map'],
+                        $featured_category_row['featured_posts']
+                    );
+                }
+                else {
+                    $video_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                }
+            }
+        }
+        else {
+            $video_page_fields['featured_categories'] = [];
+        }
+
+        $data['watch'] = $video_page_fields;
 
         // navigation group
         $data['navigation'] = get_field( 'navigation', 'option' );
@@ -93,19 +172,13 @@ class AppRestController {
     }
 
     /**
-     * Array_map callback function to reduce redundant access key for more consistent access in the native app.
-     * 
-     * @param $post
+     * Array_map callback function to fetch posts for array of IDs.
+     *
+     * @param $post_id
      * @return WP_Post
      */
-    private function simplify_post_access_keys_array_map( $post ): WP_Post {
-        // The type label as an access key interferes with typing in the native app
-        // This simplifies ingestion.
-        $type_label = array_key_first( $post );
-        $simple_post = $post[$type_label];
-        $simple_post->type_label = $type_label;
-
-        return $simple_post;
+    private function fetch_posts_array_map( $id ): WP_Post {
+        return WP_Post::get_instance( $id );
     }
 
     /**

@@ -92,6 +92,12 @@ class AppRestController {
         return rest_ensure_response( $data );
     }
 
+    /**
+     * Array_map callback function to reduce redundant access key for more consistent access in the native app.
+     * 
+     * @param $post
+     * @return WP_Post
+     */
     private function simplify_post_access_keys_array_map( $post ): WP_Post {
         // The type label as an access key interferes with typing in the native app
         // This simplifies ingestion.

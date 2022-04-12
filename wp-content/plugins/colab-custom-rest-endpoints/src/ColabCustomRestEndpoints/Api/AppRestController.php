@@ -45,22 +45,61 @@ class AppRestController {
      * @return WP_Error|WP_HTTP_Response|WP_REST_Response
      */
     public function config( WP_REST_Request $request ) {
-        $data = [];
+        $data = [
+            'home' => [
+                'featured_categories' => [],
+                'featured_articles' => [],
+            ],
+            'news' => [
+                'featured_categories' => [],
+                'featured_articles' => [],
+            ],
+            'watch' => [
+                'featured_categories' => [],
+                'featured_articles' => [],
+            ],
+            'navigation' => [],
+        ];
 
         // home_page_fields group
-        $data['home'] = get_field( 'field_6227b3b9bd041', 'option' );
+        $home_page_fields = get_field( 'home_page_fields', 'option' );
+        $data['home']['featured_categories'][] = $home_page_fields['featured_categories'];
+        $data['home']['featured_articles'] = array_map(
+            [$this, 'simplify_post_access_keys_array_map'],
+            $home_page_fields['featured_articles']
+        );
 
         // new_page_fields group
-        $data['news'] = get_field( 'field_6227b7123e38f', 'option' );
+        $news_page_fields = get_field( 'news_page_fields', 'option' );
+        $data['news']['featured_categories'][] = $news_page_fields['featured_news_categories'];
+        $data['news']['featured_articles'] = array_map(
+            [$this, 'simplify_post_access_keys_array_map'],
+            $news_page_fields['featured_news_articles']
+        );
 
         // video_page_fields group
-        $data['video'] = get_field( 'field_6227b7eef26f4', 'option' );
+        $video_page_fields = get_field( 'video_page_fields', 'option' );
+        $data['watch']['featured_categories'][] = $video_page_fields['featured_video_categories'];
+        $data['watch']['featured_articles'] = array_map(
+            [$this, 'simplify_post_access_keys_array_map'],
+            $video_page_fields['featured_video_articles']
+        );
 
         // navigation group
-        $data['navigation'] = get_field( 'field_6227b91d25bef', 'option' );
+        $data['navigation'] = get_field( 'navigation', 'option' );
 
         // Return all of our comment response data.
         return rest_ensure_response( $data );
+    }
+
+    private function simplify_post_access_keys_array_map( $post ): WP_Post {
+        // The type label as an access key interferes with typing in the native app
+        // This simplifies ingestion.
+        $type_label = array_key_first( $post );
+        $simple_post = $post[$type_label];
+        $simple_post->type_label = $type_label;
+
+        return $simple_post;
     }
 
     /**
@@ -96,6 +135,15 @@ class AppRestController {
         ];
 
         return $this->schema;
+    }
+
+    /**
+     * Evaluates whether the requester has permission to access the resource
+     *
+     * @return bool
+     */
+    public function get_items_permissions_check(): bool {
+        return TRUE;
     }
 
     /**

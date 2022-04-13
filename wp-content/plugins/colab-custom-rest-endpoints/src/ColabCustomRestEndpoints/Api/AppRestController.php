@@ -44,23 +44,141 @@ class AppRestController {
      * @param WP_REST_Request $request Current request.
      * @return WP_Error|WP_HTTP_Response|WP_REST_Response
      */
-    public function config( WP_REST_Request $request ) {
-        $data = [];
+    public function config( WP_REST_Request $request )
+    {
+        $data = [
+            'home' => [
+                'hero' => [],
+                'featured_categories' => [],
+                'featured_djs' => [],
+            ],
+            'news' => [
+                'hero' => [],
+                'featured_categories' => [],
+            ],
+            'watch' => [
+                'hero' => [],
+                'featured_categories' => [],
+            ],
+            'navigation' => [],
+        ];
 
         // home_page_fields group
-        $data['home'] = get_field( 'field_6227b3b9bd041', 'option' );
+        $home_page_fields = get_field('home_page_fields', 'option');
+
+        // Sanitize and expand hero assignment.
+        $home_page_fields['hero'] = array_map(
+            [$this, 'fetch_posts_array_map'],
+            $home_page_fields['hero']
+        );
+
+        // Sanitize and expand featured_categories assignment.
+        if (is_array($home_page_fields['featured_categories'])) {
+            foreach ($home_page_fields['featured_categories'] as $key => $featured_category_row) {
+                if ( is_array( $featured_category_row['featured_posts'] ) ) {
+                    $home_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                        [$this, 'fetch_posts_array_map'],
+                        $featured_category_row['featured_posts']
+                    );
+                }
+                else {
+                    $home_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                }
+            }
+        }
+
+        // Sanitize and expand home featured_djs
+        if ( is_array( $home_page_fields['featured_djs'] ) ) {
+            $home_page_fields['featured_djs'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $home_page_fields['featured_djs']
+            );
+        }
+
+        $data['home'] = $home_page_fields;
 
         // new_page_fields group
-        $data['news'] = get_field( 'field_6227b7123e38f', 'option' );
+        $news_page_fields = get_field( 'news_page_fields', 'option' );
+
+        // Sanitize and expand hero assignment.
+        if ( is_array( $news_page_fields['hero'] ) ) {
+            $news_page_fields['hero'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $news_page_fields['hero']
+            );
+        }
+        else {
+            $news_page_fields['hero'] = [];
+        }
+
+        // Sanitize and expand featured_categories assignment.
+        if ( is_array( $news_page_fields['featured_categories'] ) ) {
+            foreach ($news_page_fields['featured_categories'] as $key => $featured_category_row) {
+                if ( is_array( $featured_category_row['featured_posts'] ) ) {
+                    $news_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                        [$this, 'fetch_posts_array_map'],
+                        $featured_category_row['featured_posts']
+                    );
+                }
+                else {
+                    $news_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                }
+            }
+        }
+        else {
+            $news_page_fields['featured_categories'] = [];
+        }
+        $data['news'] = $news_page_fields;
 
         // video_page_fields group
-        $data['video'] = get_field( 'field_6227b7eef26f4', 'option' );
+        $video_page_fields = get_field( 'video_page_fields', 'option' );
+
+        // Sanitize and expand hero assignment.
+        if ( is_array( $video_page_fields['hero'] ) ) {
+            $video_page_fields['hero'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $video_page_fields['hero']
+            );
+        }
+        else {
+            $video_page_fields['hero'] = [];
+        }
+
+        // Sanitize and expand featured_categories assignment.
+        if ( is_array( $video_page_fields['featured_categories'] ) ) {
+            foreach ($video_page_fields['featured_categories'] as $key => $featured_category_row) {
+                if ( is_array( $featured_category_row['featured_posts'] ) ) {
+                    $video_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                        [$this, 'fetch_posts_array_map'],
+                        $featured_category_row['featured_posts']
+                    );
+                }
+                else {
+                    $video_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                }
+            }
+        }
+        else {
+            $video_page_fields['featured_categories'] = [];
+        }
+
+        $data['watch'] = $video_page_fields;
 
         // navigation group
-        $data['navigation'] = get_field( 'field_6227b91d25bef', 'option' );
+        $data['navigation'] = get_field( 'navigation', 'option' );
 
         // Return all of our comment response data.
         return rest_ensure_response( $data );
+    }
+
+    /**
+     * Array_map callback function to fetch posts for array of IDs.
+     *
+     * @param $post_id
+     * @return WP_Post
+     */
+    private function fetch_posts_array_map( $id ): WP_Post {
+        return WP_Post::get_instance( $id );
     }
 
     /**
@@ -105,16 +223,15 @@ class AppRestController {
      * @return bool|WP_Error
      */
     public function get_items_permissions_check( WP_REST_Request $request ) {
-    /*
-    // If this endpoint was secured, the following would check for user capabilities.
-    if ( ! user_can( wp_get_current_user(), 'read' ) ) {
-        return new WP_Error( 'rest_forbidden',
-            esc_html__( 'You cannot view the resource.' ),
-            [ 'status' => $this->authorization_status_code() ]
-        );
-    }
-    */
-
+        /*
+        // If this endpoint was secured, the following would check for user capabilities.
+        if ( ! user_can( wp_get_current_user(), 'read' ) ) {
+            return new WP_Error( 'rest_forbidden',
+                esc_html__( 'You cannot view the resource.' ),
+                [ 'status' => $this->authorization_status_code() ]
+            );
+        }
+        */
         return TRUE;
     }
 

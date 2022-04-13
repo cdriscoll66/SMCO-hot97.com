@@ -67,13 +67,18 @@ class AppRestController {
         $home_page_fields = get_field('home_page_fields', 'option');
 
         // Sanitize and expand hero assignment.
-        $home_page_fields['hero'] = array_map(
-            [$this, 'fetch_posts_array_map'],
-            $home_page_fields['hero']
-        );
+        if ( is_array( $home_page_fields['hero'] ) ) {
+            $home_page_fields['hero'] = array_map(
+                [$this, 'fetch_posts_array_map'],
+                $home_page_fields['hero']
+            );
+        }
+        else {
+            $home_page_fields['hero'] = [];
+        }
 
         // Sanitize and expand featured_categories assignment.
-        if (is_array($home_page_fields['featured_categories'])) {
+        if ( is_array( $home_page_fields['featured_categories'] ) ) {
             foreach ($home_page_fields['featured_categories'] as $key => $featured_category_row) {
                 if ( is_array( $featured_category_row['featured_posts'] ) ) {
                     $home_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
@@ -86,6 +91,9 @@ class AppRestController {
                 }
             }
         }
+        else {
+            $home_page_fields['featured_categories'] = [];
+        }
 
         // Sanitize and expand home featured_djs
         if ( is_array( $home_page_fields['featured_djs'] ) ) {
@@ -93,6 +101,9 @@ class AppRestController {
                 [$this, 'fetch_posts_array_map'],
                 $home_page_fields['featured_djs']
             );
+        }
+        else {
+            $home_page_fields['featured_djs'] = [];
         }
 
         $data['home'] = $home_page_fields;
@@ -128,6 +139,7 @@ class AppRestController {
         else {
             $news_page_fields['featured_categories'] = [];
         }
+
         $data['news'] = $news_page_fields;
 
         // video_page_fields group

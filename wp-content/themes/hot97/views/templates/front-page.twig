@@ -1,0 +1,64 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <main id="main">
+        <h1>{{ title }}</h1>
+
+        {# Hero #}
+        {% if hero %}
+            {% for post in hero %}
+                {% include "components/molecules/hero.twig" %}
+            {% endfor %}
+        {% endif %}
+
+        {# Featured Categories #}
+        {% if featured %}
+            {% for group in featured %}
+                <h2>{{ group.term.name }}</h2>
+
+                {% if group.posts %}
+                    <ul class="posts">
+                        {% for post in group.posts %}
+                            <li class="posts__item">
+                                {% include "components/molecules/card.twig" %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {# DJs #}
+        {% if djs %}
+            <ul class="posts">
+                {% for post in djs %}
+                    <li class="posts__item">
+                        {% include "components/molecules/card.twig" %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {# Marketing Content #}
+        {{ content|raw }}
+
+        {# Other Categories #}
+        {% if other %}
+            {% for group in other %}
+                <h2>{{ group.term.name }}</h2>
+                <a href="{{ group.term.path }}">View All {{ group.term.name }}</a>
+
+                {% if group.posts %}
+                    <ul class="posts">
+                        {% for post in group.posts %}
+                            <li class="posts__item">
+                                {% include "components/molecules/card.twig" %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    </main>
+{% endblock %}

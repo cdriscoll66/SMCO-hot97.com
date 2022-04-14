@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_6227b2b4daa17",
-            "label": "Home page",
+            "label": "Home Page",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -31,9 +31,34 @@
                 "class": "",
                 "id": ""
             },
-
             "layout": "block",
             "sub_fields": [
+                {
+                    "key": "field_623cce0ce7532",
+                    "label": "Hero",
+                    "name": "hero",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "post"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "taxonomy"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": 1,
+                    "return_format": "id"
+                },
                 {
                     "key": "field_6227b3fbbd043",
                     "label": "Featured Categories",
@@ -47,11 +72,10 @@
                         "class": "",
                         "id": ""
                     },
-
                     "collapsed": "",
-                    "min": 1,
-                    "max": 10,
-                    "layout": "table",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
                     "button_label": "Add Category",
                     "sub_fields": [
                         {
@@ -67,11 +91,10 @@
                                 "class": "",
                                 "id": ""
                             },
-
                             "taxonomy": "category",
                             "field_type": "select",
                             "allow_null": 0,
-                            "add_term": 1,
+                            "add_term": 0,
                             "save_terms": 0,
                             "load_terms": 0,
                             "return_format": "object",
@@ -79,7 +102,7 @@
                         },
                         {
                             "key": "field_6227b4a7bd045",
-                            "label": "Number of posts",
+                            "label": "Number of Posts",
                             "name": "number_of_posts",
                             "type": "number",
                             "instructions": "",
@@ -90,21 +113,72 @@
                                 "class": "",
                                 "id": ""
                             },
-
-                            "default_value": 1,
+                            "default_value": 9,
                             "placeholder": "",
                             "prepend": "",
                             "append": "",
-                            "min": 1,
-                            "max": 10,
+                            "min": -1,
+                            "max": "",
                             "step": ""
+                        },
+                        {
+                            "key": "field_623b4fe7cf244",
+                            "label": "Featured Posts",
+                            "name": "featured_posts",
+                            "type": "relationship",
+                            "instructions": "These posts will be shown at the beginning of the list.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "post"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search",
+                                "taxonomy"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": "",
+                            "return_format": "id"
                         }
                     ]
                 },
                 {
-                    "key": "field_6227b6270b584",
-                    "label": "Featured Articles",
-                    "name": "featured_articles",
+                    "key": "field_623cd70dc47e6",
+                    "label": "Featured DJs",
+                    "name": "featured_djs",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "dj"
+                    ],
+                    "taxonomy": "",
+                    "filters": [
+                        "search",
+                        "taxonomy"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": "",
+                    "return_format": "id"
+                },
+                {
+                    "key": "field_623b58afd1aea",
+                    "label": "Other Categories",
+                    "name": "other_categories",
                     "type": "repeater",
                     "instructions": "",
                     "required": 0,
@@ -114,35 +188,33 @@
                         "class": "",
                         "id": ""
                     },
-
                     "collapsed": "",
-                    "min": 1,
-                    "max": 5,
+                    "min": 0,
+                    "max": 0,
                     "layout": "table",
-                    "button_label": "Add article",
+                    "button_label": "Add Category",
                     "sub_fields": [
                         {
-                            "key": "field_6227b6270b585",
-                            "label": "Article",
-                            "name": "article",
-                            "type": "post_object",
+                            "key": "field_623b58f6d1aeb",
+                            "label": "Category",
+                            "name": "category",
+                            "type": "taxonomy",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "100",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
-                            "post_type": [
-                                "post"
-                            ],
-                            "taxonomy": "",
+                            "taxonomy": "category",
+                            "field_type": "select",
                             "allow_null": 0,
-                            "multiple": 0,
+                            "add_term": 0,
+                            "save_terms": 0,
+                            "load_terms": 0,
                             "return_format": "object",
-                            "ui": 1
+                            "multiple": 0
                         }
                     ]
                 }
@@ -177,13 +249,39 @@
                 "class": "",
                 "id": ""
             },
-
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_6227b7123e390",
-                    "label": "Featured News Categories",
-                    "name": "featured_news_categories",
+                    "key": "field_6244c5b36f9c4",
+                    "label": "Hero",
+                    "name": "hero",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "post"
+                    ],
+                    "taxonomy": [
+                        "content-category:read"
+                    ],
+                    "filters": [
+                        "search"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": "",
+                    "return_format": "id"
+                },
+                {
+                    "key": "field_6244c7e71b7ab",
+                    "label": "Featured Categories",
+                    "name": "featured_categories",
                     "type": "repeater",
                     "instructions": "",
                     "required": 0,
@@ -193,15 +291,14 @@
                         "class": "",
                         "id": ""
                     },
-
                     "collapsed": "",
-                    "min": 1,
-                    "max": 10,
-                    "layout": "table",
-                    "button_label": "Add News Category",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Category",
                     "sub_fields": [
                         {
-                            "key": "field_6227b7123e391",
+                            "key": "field_6244c8b350fcd",
                             "label": "Category",
                             "name": "category",
                             "type": "taxonomy",
@@ -209,86 +306,66 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "85",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
                             "taxonomy": "category",
-                            "field_type": "select",
-                            "allow_null": 0,
-                            "add_term": 1,
+                            "field_type": "checkbox",
+                            "add_term": 0,
                             "save_terms": 0,
                             "load_terms": 0,
                             "return_format": "object",
-                            "multiple": 0
+                            "multiple": 0,
+                            "allow_null": 0
                         },
                         {
-                            "key": "field_6227b7123e392",
-                            "label": "Number of News Articles",
-                            "name": "number_of_news",
+                            "key": "field_6244c8d250fce",
+                            "label": "Number of Posts",
+                            "name": "number_of_posts",
                             "type": "number",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "15",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
-                            "default_value": 1,
+                            "default_value": 9,
                             "placeholder": "",
                             "prepend": "",
                             "append": "",
-                            "min": 1,
-                            "max": 10,
+                            "min": -1,
+                            "max": "",
                             "step": ""
-                        }
-                    ]
-                },
-                {
-                    "key": "field_6227b7123e393",
-                    "label": "Featured News Articles",
-                    "name": "featured_news_articles",
-                    "type": "repeater",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-
-                    "collapsed": "",
-                    "min": 1,
-                    "max": 5,
-                    "layout": "table",
-                    "button_label": "Add article",
-                    "sub_fields": [
+                        },
                         {
-                            "key": "field_6227b7123e394",
-                            "label": "News Article",
-                            "name": "news_article",
-                            "type": "post_object",
-                            "instructions": "",
+                            "key": "field_6244c91150fcf",
+                            "label": "Featured Posts",
+                            "name": "featured_posts",
+                            "type": "relationship",
+                            "instructions": "These posts will be shown at the beginning of the list.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "100",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
                             "post_type": [
                                 "post"
                             ],
-                            "taxonomy": "",
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "return_format": "object",
-                            "ui": 1
+                            "taxonomy": [
+                                "content-category:read"
+                            ],
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": "",
+                            "return_format": "id"
                         }
                     ]
                 }
@@ -326,9 +403,36 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_6227b7eef26f5",
-                    "label": "Featured Video Categories",
-                    "name": "featured_video_categories",
+                    "key": "field_6244c738c8b83",
+                    "label": "Hero",
+                    "name": "hero",
+                    "type": "relationship",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "post"
+                    ],
+                    "taxonomy": [
+                        "content-category:watch"
+                    ],
+                    "filters": [
+                        "search"
+                    ],
+                    "elements": "",
+                    "min": "",
+                    "max": "",
+                    "return_format": "id"
+                },
+                {
+                    "key": "field_6244ca236ca79",
+                    "label": "Featured Categories",
+                    "name": "featured_categories",
                     "type": "repeater",
                     "instructions": "",
                     "required": 0,
@@ -338,102 +442,81 @@
                         "class": "",
                         "id": ""
                     },
-
                     "collapsed": "",
-                    "min": 1,
-                    "max": 10,
-                    "layout": "table",
-                    "button_label": "Add News Category",
+                    "min": 0,
+                    "max": 0,
+                    "layout": "block",
+                    "button_label": "Add Category",
                     "sub_fields": [
                         {
-                            "key": "field_6227b7eef26f6",
-                            "label": "Video Category",
-                            "name": "video_category",
+                            "key": "field_6244ca6f6ca7a",
+                            "label": "Category",
+                            "name": "category",
                             "type": "taxonomy",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "85",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
                             "taxonomy": "category",
-                            "field_type": "select",
-                            "allow_null": 0,
-                            "add_term": 1,
+                            "field_type": "checkbox",
+                            "add_term": 0,
                             "save_terms": 0,
                             "load_terms": 0,
                             "return_format": "object",
-                            "multiple": 0
+                            "multiple": 0,
+                            "allow_null": 0
                         },
                         {
-                            "key": "field_6227b7eef26f7",
-                            "label": "Number of videos",
-                            "name": "number_of_videos",
+                            "key": "field_6244ca886ca7b",
+                            "label": "Number of Posts",
+                            "name": "number_of_posts",
                             "type": "number",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "15",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
-                            "default_value": 1,
+                            "default_value": 9,
                             "placeholder": "",
                             "prepend": "",
                             "append": "",
-                            "min": 1,
-                            "max": 10,
+                            "min": -1,
+                            "max": "",
                             "step": ""
-                        }
-                    ]
-                },
-                {
-                    "key": "field_6227b7eef26f8",
-                    "label": "Featured Video Articles",
-                    "name": "featured_video_articles",
-                    "type": "repeater",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-
-                    "collapsed": "",
-                    "min": 1,
-                    "max": 5,
-                    "layout": "table",
-                    "button_label": "Add article",
-                    "sub_fields": [
+                        },
                         {
-                            "key": "field_6227b7eef26f9",
-                            "label": "Video",
-                            "name": "video",
-                            "type": "post_object",
-                            "instructions": "",
+                            "key": "field_6244cab16ca7c",
+                            "label": "Featured Posts",
+                            "name": "featured_posts",
+                            "type": "relationship",
+                            "instructions": "These posts will be shown at the beginning of the list.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "100",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
-
                             "post_type": [
                                 "post"
                             ],
-                            "taxonomy": "",
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "return_format": "object",
-                            "ui": 1
+                            "taxonomy": [
+                                "content-category:watch"
+                            ],
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": "",
+                            "min": "",
+                            "max": "",
+                            "return_format": "id"
                         }
                     ]
                 }
@@ -614,5 +697,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1647448870
+    "modified": 1648675536
 }

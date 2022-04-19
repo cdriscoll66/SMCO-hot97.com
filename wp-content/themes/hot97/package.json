@@ -51,5 +51,8 @@
     "stylelint-config-standard": "^18.3.0",
     "svg-spritemap-webpack-plugin": "^3.5.7",
     "vue-template-compiler": "^2.6.11"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }

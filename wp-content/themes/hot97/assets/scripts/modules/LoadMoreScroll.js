@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { debounce } from "lodash/debounce"
 
 function init() {
   console.log("Conor, your JS is scripting");

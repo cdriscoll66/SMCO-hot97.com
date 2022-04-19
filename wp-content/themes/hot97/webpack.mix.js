@@ -1,5 +1,5 @@
 const config = {
-  host: 'chainsaw.lndo.site',
+  host: 'hot97.lndo.site',
   sourcePath: 'assets',
   publicPath: 'dist',
 };
@@ -43,6 +43,7 @@ mix.sass(sourcePath('styles/print.scss'), publicPath('styles'));
 mix.sass(sourcePath('styles/theme.scss'), publicPath('styles'));
 
 /** Scripts */
+mix.js(sourcePath('scripts/blocks.js'), publicPath('scripts'));
 mix.js(sourcePath('scripts/theme.js'), publicPath('scripts'));
 
 /** Images */

@@ -7,4 +7,4 @@ use Rareloop\Lumberjack\Facades\Router;
 //     return new HtmlResponse('<h1>Hello World!</h1>');
 // });
 
-Router::post('posts-scroll', '\App\Http\Controllers\PostFeed@getPostFeed');
+Router::get('post-feed', '\App\Http\Controllers\PostFeed@handle');

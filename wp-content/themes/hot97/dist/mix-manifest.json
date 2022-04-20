@@ -1,15 +1,17 @@
 {
-    "/scripts/theme.js": "/scripts/theme.js?id=56d2b61cf106d0a0cea4",
+    "/scripts/blocks.js": "/scripts/blocks.js?id=0c6372be1985feff110b",
     "/styles/admin.css": "/styles/admin.css?id=dcfd1b6b90b3a64e265a",
     "/styles/editor.css": "/styles/editor.css?id=451d4fdb93ef503f8dbd",
     "/styles/login.css": "/styles/login.css?id=d6f23bde8e88ce1c3720",
     "/styles/print.css": "/styles/print.css?id=642d9698f968445f7102",
     "/styles/theme.css": "/styles/theme.css?id=07fcd3ff193eb15839e9",
-    "/scripts/theme.js.map": "/scripts/theme.js.map?id=7fb6ba852b57af091385",
+    "/scripts/blocks.js.map": "/scripts/blocks.js.map?id=89460a7df3e879ab18fb",
     "/styles/admin.css.map": "/styles/admin.css.map?id=595ff464179f1aec655c",
     "/styles/editor.css.map": "/styles/editor.css.map?id=d13e0983e315e1cbf39e",
     "/styles/login.css.map": "/styles/login.css.map?id=57d4a8a68f92a2c1901e",
     "/styles/print.css.map": "/styles/print.css.map?id=56f1e88eb28988ac38f6",
     "/styles/theme.css.map": "/styles/theme.css.map?id=2d1c3c02815bcf2b184a",
+    "/scripts/theme.js": "/scripts/theme.js?id=03b1f06bbeb74cd3565b",
+    "/scripts/theme.js.map": "/scripts/theme.js.map?id=e029a770a57d47612098",
     "/images/spritemap/icon-search-regular.svg": "/images/spritemap/icon-search-regular.svg?id=1f91fec66fef7c5a2110"
 }

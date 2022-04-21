@@ -6,5 +6,6 @@ use Rareloop\Lumberjack\Facades\Router;
 // Router::get('hello-world', function () {
 //     return new HtmlResponse('<h1>Hello World!</h1>');
 // });
+include( __DIR__ . '/home.php' );
 
-Router::get('post-feed', '\App\Http\Controllers\PostFeed@handle');
+Router::get('home-load-more', '\App\HomeController@loadMore');

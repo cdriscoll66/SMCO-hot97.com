@@ -21,6 +21,7 @@ class FV_Player_Db {
 
   private
     $edit_lock_timeout_seconds = 120,
+    $valid_order_by = array('id', 'player_name', 'date_created', 'author', 'subtitles_count', 'chapters_count', 'transcript_count'),
     $videos_cache = array(),
     $video_atts_cache = array(),
     $video_meta_cache = array(),
@@ -181,7 +182,7 @@ class FV_Player_Db {
   
   public function cache_players_and_videos_do( $player_ids ) {
     // load all players at once
-    new FV_Player_Db_Player( $player_ids, array(), $this );
+    $this->query_players( array( 'ids' => $player_ids ) );
 
     // load all player meta
     new FV_Player_Db_Player_Meta( null, array( 'id_player' => $player_ids ), $this );
@@ -211,12 +212,12 @@ class FV_Player_Db {
    * @return array     Returns an array of all list page results to be displayed.
    * @throws Exception When the underlying FV_Player_Db_Video class generates an error.
    */
-  public static function getListPageData($order_by, $order, $offset, $per_page, $single_id = null, $search = null) {
+  public function getListPageData($order_by, $order, $offset, $per_page, $single_id = null, $search = null) {
     global $player_ids_when_searching, $FV_Player_Db; // this is an instance of this same class, but since we're in static context, we need to access this globally like that... sorry :P
 
     // sanitize variables
     $order = (in_array($order, array('asc', 'desc')) ? $order : 'asc');
-    $order_by = (in_array($order_by, array('id', 'player_name', 'date_created', 'author', 'subtitles_count', 'chapters_count', 'transcript_count')) ? $order_by : 'id');
+    $order_by = (in_array($order_by, $this->valid_order_by) ? $order_by : 'id');
     $author_id = get_current_user_id();
     $cannot_edit_other_posts = !current_user_can('edit_others_posts');
 
@@ -224,6 +225,16 @@ class FV_Player_Db {
     if ($single_id) {
       new FV_Player_Db_Player( $single_id, array(), $FV_Player_Db );
     } else if ($search) {
+
+      $direct_hit_cache = false;
+
+      // Try to load the player which ID matches the search query it it's a number
+      if( is_numeric($search) ) {
+        new FV_Player_Db_Player( $search, array(), $FV_Player_Db );
+
+        $direct_hit_cache = $this->getPlayersCache();
+      }
+
       // search for videos that are consistent with the search text
       // and load their players only
       $vids = FV_Player_Db_Video::search(array('src', 'src1', 'src2', 'caption', 'splash', 'splash_text'), $search, true, 'OR', 'id');
@@ -252,10 +263,14 @@ class FV_Player_Db {
           $db_options['author_id'] = $author_id;
         }
 
-        new FV_Player_Db_Player( null, array(
-          'db_options' => $db_options
-        ), $FV_Player_Db );
+        $this->query_players( $db_options );
       }
+
+      if( is_array($direct_hit_cache) ) {
+        $cache = $this->getPlayersCache();
+        $this->setPlayersCache( array_merge( $direct_hit_cache, $cache ) );
+      }
+
     } else {
       // load all players, which will put them into the cache automatically
 
@@ -271,15 +286,13 @@ class FV_Player_Db {
         $db_options['author_id'] = $author_id;
       }
 
-      new FV_Player_Db_Player( null, array(
-        'db_options' => $db_options
-      ), $FV_Player_Db );
+      $this->query_players( $db_options );
     }
     
     global $fv_fp;
     $stats_enabled = $fv_fp->_get_option('video_stats_enable');
 
-    $players = $FV_Player_Db->getPlayersCache();
+    $players = $this->getPlayersCache();
 
     // get all video IDs used in all players
     if ($players && count($players)) {
@@ -293,11 +306,8 @@ class FV_Player_Db {
 
       // load all videos data at once
       if (count($videos)) {
-        $vids_data = new FV_Player_Db_Video( $videos, array(
-          'db_options' => array(
-            'select_fields' => 'caption, src, splash'
-          )
-        ), $FV_Player_Db );
+        // TODO: This class should not provide search
+        $vids_data = new FV_Player_Db_Video( $videos, array(), $FV_Player_Db );
 
         // reset $videos variable and index all of our video data,
         // so they are easily accessible when building the resulting
@@ -305,8 +315,8 @@ class FV_Player_Db {
         if ($vids_data) {
           /* @var FV_Player_Db_Video[] $videos */
           $videos = array();
-          if (count($FV_Player_Db->getVideosCache())) {
-            foreach ( $FV_Player_Db->getVideosCache() as $video_object ) {
+          if (count($this->getVideosCache())) {
+            foreach ( $this->getVideosCache() as $video_object ) {
               $videos[ $video_object->getId() ] = $video_object;
             }
           }
@@ -792,6 +802,60 @@ class FV_Player_Db {
     return $atts;
   }
 
+  public function db_load_player_data( $id ) {
+    global $fv_fp;
+
+    $this->getPlayerAttsFromDb( array( 'id' => $id ) );
+
+    // fill the $out variable with player data
+    $out = $fv_fp->current_player()->getAllDataValues();
+
+    // load player meta data
+    $meta = $fv_fp->current_player()->getMetaData();
+    foreach ($meta as $meta_object) {
+      if (!isset($out['meta'])) {
+        $out['meta'] = array();
+      }
+
+      $out['meta'][] = $meta_object->getAllDataValues();
+    }
+
+    unset($out['video_objects'], $out['videos']);
+
+    // fill the $out variable with video data
+    $out['videos'] = array();
+    foreach ($fv_fp->current_player()->getVideos() as $video) {
+      // load video values
+      $vid = $video->getAllDataValues();
+      $vid['meta'] = array();
+
+      // load all meta data
+      $meta = $video->getMetaData();
+
+      foreach ($meta as $meta_object) {
+        $vid['meta'][] = $meta_object->getAllDataValues();
+      }
+
+      $out['videos'][] = $vid;
+    }
+
+    // load posts where this player is embedded
+    $embeds_html = '';
+    if( $posts = $fv_fp->current_player()->getMetaValue('post_id') ) {
+      foreach( $posts AS $post_id ) {
+        $embeds_html .= '<li><a href="'.get_permalink($post_id).'" target="_blank">'.get_the_title($post_id).'</a></li>';
+      }
+    }
+    if( $embeds_html ) {
+      $out['embeds'] = '<ol>'.$embeds_html.'</ol>';
+    }
+
+    $preview_data = $fv_fp->build_min_player( false, array( 'id' => $fv_fp->current_player()->getId() ) );
+    $out['html'] = $preview_data['html'];
+
+    return $out;
+  }
+
 
   /**
    * Stored player data in a database from the POST data sent via AJAX
@@ -1027,20 +1091,7 @@ class FV_Player_Db {
         $id = $player->save($player_meta);
 
         if ($id) {
-          $output = array( 'id' => $id );
-          $videos = array();
-          foreach( $player->getVideos() AS $video ) {
-            $videos[] = $video->getId();
-          }
-
-          do_action('fv_player_db_save', $id);
-
-          $output = array( 'id' => $id, 'videos' => $videos );
-          
-          $preview_data = $fv_fp->build_min_player( false, array( 'id' => $id ) );
-          $output['html'] = $preview_data['html'];
-          
-          echo wp_json_encode( $output );
+          echo wp_json_encode( $this->db_load_player_data( $id ) );
         } else {
           echo -1;
         }
@@ -1067,8 +1118,7 @@ class FV_Player_Db {
     global $fv_fp;
 
     if (isset($_POST['playerID']) && is_numeric($_POST['playerID']) && intval($_POST['playerID']) == $_POST['playerID']) {
-      $out = array();
-      
+
       if( defined('DOING_AJAX') && DOING_AJAX &&
         ( empty($_POST['nonce']) || !wp_verify_nonce( $_POST['nonce'],"fv-player-db-load-".get_current_user_id() ) )
       ) {
@@ -1146,61 +1196,140 @@ class FV_Player_Db {
         }
       }
 
-      // fill the $out variable with player data
-      $out = array_merge($out, $fv_fp->current_player()->getAllDataValues());
+      $out = $this->db_load_player_data( $_POST['playerID'] );
 
-      // load player meta data
-      $meta = $fv_fp->current_player()->getMetaData();
-      foreach ($meta as $meta_object) {
-        if (!isset($out['meta'])) {
-          $out['meta'] = array();
-        }
-
-        $out['meta'][] = $meta_object->getAllDataValues();
-      }
-
-      unset($out['video_objects'], $out['videos']);
-
-      // fill the $out variable with video data
-      $out['videos'] = array();
-      foreach ($fv_fp->current_player()->getVideos() as $video) {
-        // load video values
-        $vid = $video->getAllDataValues();
-        $vid['meta'] = array();
-
-        // load all meta data
-        $meta = $video->getMetaData();
-
-        foreach ($meta as $meta_object) {
-          $vid['meta'][] = $meta_object->getAllDataValues();
-        }
-
-        $out['videos'][] = $vid;
-      }
-
-      // load posts where this player is embedded
-      $embeds_html = '';
-      if( $posts = $fv_fp->current_player()->getMetaValue('post_id') ) {
-        foreach( $posts AS $post_id ) {
-          $embeds_html .= '<li><a href="'.get_permalink($post_id).'" target="_blank">'.get_the_title($post_id).'</a></li>';
-        }
-      }
-      if( $embeds_html ) {
-        $out['embeds'] = '<ol>'.$embeds_html.'</ol>';
-      }
-
-      $preview_data = $fv_fp->build_min_player( false, array( 'id' => $fv_fp->current_player()->getId() ) );
-      $out['html'] = $preview_data['html'];
-
-      header('Content-Type: application/json');      
+      header('Content-Type: application/json');
       if (version_compare(phpversion(), '5.3', '<')) {
         echo json_encode($out);
-      } else {        
+      } else {
         echo json_encode($out, true);
       }
     }
 
     wp_die();
+  }
+
+  public function query_players( $args ) {
+    $args = wp_parse_args( $args, array(
+      'author_id' => false,
+      'ids' => false,
+      'offset' => false,
+      'order' => false,
+      'order_by' => false,
+      'per_page' => false,
+      'search_by_video_ids' => false,
+      'select_fields' => false
+    ) );
+
+    $ids = array();
+    if( is_array($args['ids']) ) {
+      $ids = $args['ids'];
+    } else if( $args['ids'] ) {
+      $ids = explode( ',', $args['ids'] );
+    }
+
+    $query_ids = array();
+    foreach ( $ids as $id_key => $id_value ) {
+      // check if this player is not cached yet
+      if (!$this->isPlayerCached($id_value)) {
+        $query_ids[ $id_key ] = (int) $id_value;
+      }
+    }
+
+    // load multiple players via their IDs but a single query and return their values
+    $select = 'p.*';
+    if( !empty($args['select_fields']) ) {
+      $select = 'p.id,'.esc_sql($args['select_fields']);
+    }
+
+    $where = '';
+    if( count($query_ids) ) {
+      $where = ' WHERE p.id IN('. implode(',', $query_ids).') ';
+
+    // if we have multiple video IDs to load players for, let's prepare a like statement here
+    } else if( is_array($args['search_by_video_ids']) ) {
+      $where_like_part = array();
+      foreach ($args['search_by_video_ids'] as $player_video_id) {
+        $player_video_id = intval($player_video_id);
+
+        // TODO: What's the problem with FIND_IN_SET() ?
+        $where_like_part[] = "(videos = \"$player_video_id\" OR videos LIKE \"%,$player_video_id\" OR videos LIKE \"$player_video_id,%\")";
+      }
+
+      $where = ' WHERE '.implode(' OR ', $where_like_part);
+
+    } else if( !empty( $args['author_id']) ) {
+      $where = ' WHERE author ='.intval($args['author_id']);
+    }
+
+    $order = '';
+    if( !empty($args['order_by']) ) {
+
+      // Verify that each order by is valid
+      $order_by_items = explode( ',', $args['order_by'] );
+      $order_by_items = array_map( 'trim', $order_by_items );
+
+      foreach( $order_by_items AS $k => $v ) {
+        if( !in_array($v, $this->valid_order_by ) ) {
+          unset($order_by_items[$k]);
+        }
+      }
+
+      if( count($order_by_items) > 0 ) {
+        $order = ' ORDER BY '.implode( ', ', array_map( 'esc_sql', $order_by_items ) );
+        if( !empty($args['order']) ) {
+          if( in_array($args['order'], array( 'asc', 'desc' ) ) ) {
+            $order .= ' '.esc_sql($args['order']);
+          }
+        }
+      }
+    }
+
+    $limit = '';
+    if( $args['offset'] !== false && $args['per_page'] !== false ) {
+      $limit = ' LIMIT '.intval($args['offset']).', '.intval($args['per_page']);
+    }
+
+    $meta_counts_select = '';
+    $meta_counts_join = '';
+      if( is_admin() ) {
+        $meta_table = FV_Player_Db_Video_Meta::get_db_table_name();
+
+        $meta_counts_select = ',
+count(subtitles.id) as subtitles_count,
+count(cues.id) as cues_count,
+count(chapters.id) as chapters_count,
+count(transcript.id) as transcript_count';
+        $meta_counts_join = 'JOIN `'.FV_Player_Db_Video::get_db_table_name().'` AS v on FIND_IN_SET(v.id, p.videos)
+LEFT JOIN `'.$meta_table.'` AS subtitles ON v.id = subtitles.id_video AND subtitles.meta_key like "subtitles%"
+LEFT JOIN `'.$meta_table.'` AS cues ON v.id = cues.id_video AND cues.meta_key like "cues%"
+LEFT JOIN `'.$meta_table.'` AS chapters ON v.id = chapters.id_video AND chapters.meta_key = "chapters"
+LEFT JOIN `'.$meta_table.'` AS transcript ON v.id = transcript.id_video AND transcript.meta_key = "transcript"
+';
+      }
+
+    global $wpdb;
+    $player_data = $wpdb->get_results('SELECT
+'.$select.$meta_counts_select.'
+FROM `'.FV_Player_Db_Player::get_db_table_name().'` AS p
+'.$meta_counts_join.$where.'
+GROUP BY p.id
+'.$order.$limit);
+
+    foreach( $player_data AS $db_record ) {
+      // create a new video object and populate it with DB values
+      $record_id = $db_record->id;
+      // if we don't unset this, we'll get warnings
+      unset($db_record->id);
+
+      $player_object = new FV_Player_Db_Player( null, get_object_vars( $db_record ), $this );
+      $player_object->link2db( $record_id );
+
+      // cache this player in DB object
+      $cache[$record_id] = $player_object;
+    }
+
+    $this->setPlayersCache($cache);
   }
 
   /**
@@ -1454,16 +1583,10 @@ class FV_Player_Db {
         $player->setVideos(implode(',', $player_video_ids));
 
         // save player
-        $id_player = $player->save();
-
-        // create player meta, if any
-        if (isset($data['meta'])) {
-          foreach ($data['meta'] as $meta_data) {
-            $meta_object = new FV_Player_Db_Player_Meta(null, $meta_data, $FV_Player_Db);
-            $meta_object->link2db($id_player, true);
-            $meta_object->save();
-          }
-        }
+        $id_player = $player->save(
+          isset($data['meta']) ? $data['meta'] : array(),
+          true
+        );
 
       } catch (Exception $e) {
         if (WP_DEBUG) {
@@ -1608,7 +1731,7 @@ class FV_Player_Db {
    * into a dropdown in the front-end.
    */
   public function retrieve_all_players_for_dropdown() {
-    $players = $this->getListPageData('date_created', 'desc', null, null);
+    $players = $this->getListPageData('date_created', 'desc', false, false);
     $json_data = array();
 
     foreach ($players as $player) {

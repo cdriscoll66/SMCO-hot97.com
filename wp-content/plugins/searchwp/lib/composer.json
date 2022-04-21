@@ -4,7 +4,10 @@
       "psr-4": {
         "SearchWP\\": "./../includes",
         "SearchWP\\Dependencies\\": "./"
-      }
+      },
+      "classmap": [
+        "./"
+      ]
     },
     "require": {
         "php": ">=7.0"

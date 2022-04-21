@@ -1,0 +1,32 @@
+{
+    "name": "teamcolab/colab-custom-rest-endpoints",
+    "description": "A plugin for exposing custom ACF endpoints to REST",
+    "type": "wordpress-plugin",
+    "license": "GPL2",
+    "authors": [
+        {
+            "name": "Dustin Ginther",
+            "email": "dustin.ginther@teamcolab.com"
+        }
+    ],
+    "require": {
+        "wpackagist-plugin/advanced-custom-fields": "5.12",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*"
+            ]
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "vendor/wpackagist-plugin/{$name}/": [
+                "type:wordpress-plugin"
+            ]
+        }
+    }
+}

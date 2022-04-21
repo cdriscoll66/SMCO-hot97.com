@@ -40,10 +40,12 @@ export default ['engines', 'settings', 'advanced', 'statistics', 'support'].map(
 	return [
 		// Development version.
 		getConfig(bundle, bundle, replace({
+			preventAssignment: true,
 			'process.env.NODE_ENV': JSON.stringify('development')
 		}), null),
 		// Production version.
 		getConfig(bundle, bundle + '.min', replace({
+			preventAssignment: true,
 			'process.env.NODE_ENV': JSON.stringify('production')
 		}), terser())
 	];

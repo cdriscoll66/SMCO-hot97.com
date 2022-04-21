@@ -1,13 +1,18 @@
-<article class="post">
+<article class="card">
+    {% if post.thumbnail %}
+        <img src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}">
+    {% endif %}
     <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
-    {% if post.is_hot %}
+    {% if post.isHot %}
         <p>hot</p>
     {% endif %}
-    {% if post.hasPrimaryTerm('content-category') %}
-        <p><a href="{{ post.getPrimaryTermLink('content-category') }}">{{ post.getPrimaryTermName('content-category') }}</a></p>
+    {% if post.primaryCategory %}
+        <p><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></p>
     {% endif %}
-    {% if post.hasPrimaryTerm %}
-        <p><a href="{{ post.getPrimaryTermLink }}">{{ post.getPrimaryTermName }}</a></p>
+    {% if post.contentCategory %}
+        <p><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></p>
     {% endif %}
-    {{ post.footerCTA() }}
+    {% if post.excerpt %}
+        <p>{{ post.excerpt }}</p>
+    {% endif %}
 </article>

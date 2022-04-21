@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83
+class ComposerStaticInit7b485ffaadd10213c7163f221c8968f9
 {
     public static $prefixLengthsPsr4 = array (
         'S' => 
@@ -26,12 +26,15 @@ class ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'SWP_Query' => __DIR__ . '/../..' . '/class.swp-query.php',
         'SearchWP\\Admin\\AdminBar' => __DIR__ . '/../..' . '/../includes/Admin/AdminBar.php',
         'SearchWP\\Admin\\AdminNotice' => __DIR__ . '/../..' . '/../includes/Admin/AdminNotice.php',
         'SearchWP\\Admin\\AdminNotices\\DirtyInstallAdminNotice' => __DIR__ . '/../..' . '/../includes/Admin/AdminNotices/DirtyInstallAdminNotice.php',
         'SearchWP\\Admin\\AdminNotices\\MissingEngineSourceAdminNotice' => __DIR__ . '/../..' . '/../includes/Admin/AdminNotices/MissingEngineSourceAdminNotice.php',
         'SearchWP\\Admin\\AdminNotices\\MissingIntegrationAdminNotice' => __DIR__ . '/../..' . '/../includes/Admin/AdminNotices/MissingIntegrationAdminNotice.php',
         'SearchWP\\Admin\\DashboardWidgets\\StatisticsDashboardWidget' => __DIR__ . '/../..' . '/../includes/Admin/DashboardWidgets/StatisticsDashboardWidget.php',
+        'SearchWP\\Admin\\LegacyMetricsCompat' => __DIR__ . '/../..' . '/../includes/Admin/LegacyMetricsCompat.php',
         'SearchWP\\Admin\\NavTab' => __DIR__ . '/../..' . '/../includes/Admin/NavTab.php',
         'SearchWP\\Admin\\OptionsView' => __DIR__ . '/../..' . '/../includes/Admin/OptionsView.php',
         'SearchWP\\Admin\\Views\\AdvancedView' => __DIR__ . '/../..' . '/../includes/Admin/Views/AdvancedView.php',
@@ -159,16 +162,18 @@ class ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83
         'SearchWP\\Dependencies\\Psr\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/psr/event-dispatcher/src/EventDispatcherInterface.php',
         'SearchWP\\Dependencies\\Psr\\EventDispatcher\\ListenerProviderInterface' => __DIR__ . '/..' . '/psr/event-dispatcher/src/ListenerProviderInterface.php',
         'SearchWP\\Dependencies\\Psr\\EventDispatcher\\StoppableEventInterface' => __DIR__ . '/..' . '/psr/event-dispatcher/src/StoppableEventInterface.php',
-        'SearchWP\\Dependencies\\Psr\\Http\\Client\\ClientExceptionInterface' => __DIR__ . '/..' . '/psr/http-client/src/ClientExceptionInterface.php',
-        'SearchWP\\Dependencies\\Psr\\Http\\Client\\ClientInterface' => __DIR__ . '/..' . '/psr/http-client/src/ClientInterface.php',
-        'SearchWP\\Dependencies\\Psr\\Http\\Client\\NetworkExceptionInterface' => __DIR__ . '/..' . '/psr/http-client/src/NetworkExceptionInterface.php',
-        'SearchWP\\Dependencies\\Psr\\Http\\Client\\RequestExceptionInterface' => __DIR__ . '/..' . '/psr/http-client/src/RequestExceptionInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\MessageInterface' => __DIR__ . '/..' . '/psr/http-message/src/MessageInterface.php',
+        'SearchWP\\Dependencies\\Psr\\Http\\Message\\RequestFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/RequestFactoryInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\RequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/RequestInterface.php',
+        'SearchWP\\Dependencies\\Psr\\Http\\Message\\ResponseFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/ResponseFactoryInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\ResponseInterface' => __DIR__ . '/..' . '/psr/http-message/src/ResponseInterface.php',
+        'SearchWP\\Dependencies\\Psr\\Http\\Message\\ServerRequestFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/ServerRequestFactoryInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\ServerRequestInterface' => __DIR__ . '/..' . '/psr/http-message/src/ServerRequestInterface.php',
+        'SearchWP\\Dependencies\\Psr\\Http\\Message\\StreamFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/StreamFactoryInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\StreamInterface' => __DIR__ . '/..' . '/psr/http-message/src/StreamInterface.php',
+        'SearchWP\\Dependencies\\Psr\\Http\\Message\\UploadedFileFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UploadedFileFactoryInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\UploadedFileInterface' => __DIR__ . '/..' . '/psr/http-message/src/UploadedFileInterface.php',
+        'SearchWP\\Dependencies\\Psr\\Http\\Message\\UriFactoryInterface' => __DIR__ . '/..' . '/psr/http-factory/src/UriFactoryInterface.php',
         'SearchWP\\Dependencies\\Psr\\Http\\Message\\UriInterface' => __DIR__ . '/..' . '/psr/http-message/src/UriInterface.php',
         'SearchWP\\Dependencies\\Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'SearchWP\\Dependencies\\Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
@@ -296,9 +301,9 @@ class ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4d98ed2ad4e9c725971133a6ea85dc83::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7b485ffaadd10213c7163f221c8968f9::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7b485ffaadd10213c7163f221c8968f9::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7b485ffaadd10213c7163f221c8968f9::$classMap;
 
         }, null, ClassLoader::class);
     }

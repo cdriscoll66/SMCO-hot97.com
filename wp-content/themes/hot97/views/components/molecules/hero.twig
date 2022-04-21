@@ -1,0 +1,18 @@
+<article class="hero">
+    {% if post.video %}
+        {{ post.video }}
+    {% endif %}
+    <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
+    {% if post.isHot %}
+        <p>hot</p>
+    {% endif %}
+    {% if post.primaryCategory %}
+        <p><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></p>
+    {% endif %}
+    {% if post.contentCategory %}
+        <p><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></p>
+    {% endif %}
+    {% if post.excerpt %}
+        <p>{{ post.excerpt }}</p>
+    {% endif %}
+</article>

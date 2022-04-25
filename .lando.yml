@@ -36,11 +36,11 @@ tooling:
   prod:
     service: node
     description: '-- Runs production build of assets'
-    cmd: cd $LANDO_MOUNT/wp-content/themes/lumberbones21/ && npm install && npm run production
+    cmd: cd $LANDO_MOUNT/wp-content/themes/hot97/ && npm install && npm run production
   watch:
     service: node
     description: '-- Runs development build of assets and watches file changes'
-    cmd: cd $LANDO_MOUNT/wp-content/themes/lumberbones21/ && npm install && npm run watch
+    cmd: cd $LANDO_MOUNT/wp-content/themes/hot97/ && npm install && npm run watch
   xdebug-on:
     service: appserver
     description: '-- Enable Xdebug for NGINX'

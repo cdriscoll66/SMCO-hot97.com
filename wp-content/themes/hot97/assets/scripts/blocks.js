@@ -53,22 +53,21 @@
    *
    * @TODO Repair blacklist exclusion for ACF blocks
    */
-  (function () {
-    let whitelist = blocksAllowed && blocksAllowed.whitelist ? blocksAllowed.whitelist : null;
-    let blacklist = blocksAllowed && blocksAllowed.blacklist ? blocksAllowed.blacklist : null;
+  // (function () {
+  //   let whitelist = blocksAllowed && blocksAllowed.whitelist ? blocksAllowed.whitelist : null;
+  //   let blacklist = blocksAllowed && blocksAllowed.blacklist ? blocksAllowed.blacklist : null;
 
-    if (whitelist.length || blacklist.length) {
-      wp.blocks.getBlockTypes().forEach(block => {
+  //   if (whitelist.length || blacklist.length) {
+  //     wp.blocks.getBlockTypes().forEach(block => {
 
-        if (whitelist.indexOf(block.name) === -1) {
-          wp.blocks.unregisterBlockType(block.name);
-        }
+  //       if (whitelist.indexOf(block.name) === -1) {
+  //         wp.blocks.unregisterBlockType(block.name);
+  //       }
 
-        if (blacklist.indexOf(block.name) !== -1) {
-          wp.blocks.unregisterBlockType(block.name);
-        }
-      });
-    }
-  })();
-
+  //       if (blacklist.indexOf(block.name) !== -1) {
+  //         wp.blocks.unregisterBlockType(block.name);
+  //       }
+  //     });
+  //   }
+  // })();
 });

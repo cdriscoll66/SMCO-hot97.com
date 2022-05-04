@@ -8,10 +8,10 @@ use Rareloop\Lumberjack\Facades\Router;
 // });
 
 
-//Router::get('home-load-more', function () {
-//    // Manually include the file
-//    include __DIR__ . '/home.php';
-//
-//    // Manually call the controller method that you want to use
-//    (new \App\HomeController)->loadMore();
-//});
+Router::get('home-load-more', function () {
+    // Manually include the file
+    include __DIR__ . '/home.php';
+
+    // Manually call the controller method that you want to use
+    (new \App\HomeController)->loadMore();
+});

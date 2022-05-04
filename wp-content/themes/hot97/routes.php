@@ -6,17 +6,17 @@ use Rareloop\Lumberjack\Facades\Router;
 // Router::get('hello-world', function () {
 //     return new HtmlResponse('<h1>Hello World!</h1>');
 // });
-//if ( !class_exists( 'HomeController' ) ) {
-//    include(__DIR__ . '/home.php');
-//}
+if ( !class_exists( 'HomeController' ) ) {
+    include(__DIR__ . '/home.php');
+}
+
+Router::get('home-load-more', '\App\HomeController@loadMore');
+
+
+//Router::get('home-load-more', function () {
+//    // Manually include the file
+//    include __DIR__ . '/home.php';
 //
-//Router::get('home-load-more', '\App\HomeController@loadMore');
-
-
-Router::get('home-load-more', function () {
-    // Manually include the file
-    include __DIR__ . '/home.php';
-
-    // Manually call the controller method that you want to use
-    (new \App\HomeController)->loadMore();
-});
+//    // Manually call the controller method that you want to use
+//    (new \App\HomeController)->loadMore();
+//});

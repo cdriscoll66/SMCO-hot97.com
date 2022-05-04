@@ -5,6 +5,9 @@ $baseline-unit: 10px;
 
 :root {
 
+  --font-headings: 'JudgeTrial', sans-serif;
+  --font-base: 'Oskari', sans-serif;
+
 	/* Font Family */
 	--global--font-primary: var(--font-headings, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
 	--global--font-secondary: var(--font-base, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif);
@@ -50,7 +53,7 @@ $baseline-unit: 10px;
 	--heading--line-height-h2: var(--global--line-height-heading);
 	--heading--line-height-h1: var(--global--line-height-page-title);
 
-	--heading--font-weight: normal;
+	--heading--font-weight: bold;
 	--heading--font-weight-page-title: 300;
 	--heading--font-weight-strong: 600;
 
@@ -64,24 +67,11 @@ $baseline-unit: 10px;
 	--definition-term--font-family: var(--global--font-primary);
 
 	/* Colors */
-	--global--color-black: #000;
-	--global--color-dark-gray: #28303d;
-	--global--color-gray: #39414d;
-	--global--color-light-gray: #f0f0f0;
-	--global--color-green: #d1e4dd;
-	--global--color-blue: #d1dfe4;
-	--global--color-purple: #d1d1e4;
-	--global--color-red: #e4d1d1;
-	--global--color-orange: #e4dad1;
-	--global--color-yellow: #eeeadd;
-	--global--color-white: #fff;
-	--global--color-white-50: rgba(255, 255, 255, 0.5); // Used for disabled buttons
-	--global--color-white-90: rgba(255, 255, 255, 0.9); // Used in form fields.
 
-	--global--color-primary: var(--global--color-dark-gray); /* Body text color, site title, footer text color. */
-	--global--color-secondary: var(--global--color-gray); /* Headings */
+	--global--color-primary: var(--global--color-hot-yellow-900); /* Body text color, site title, footer text color. */
+	--global--color-secondary: var(--global--color-black); /* Headings */
 	--global--color-primary-hover: var(--global--color-primary);
-	--global--color-background: var(--global--color-green); /* Mint, default body background */
+	--global--color-background: var(--global--color-white);
 	--global--color-border: var(--global--color-primary); /* Used for borders (separators) */
 
 	/* Spacing */

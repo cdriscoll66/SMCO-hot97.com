@@ -7,7 +7,7 @@ use Rareloop\Lumberjack\Facades\Router;
 //     return new HtmlResponse('<h1>Hello World!</h1>');
 // });
 if ( !class_exists( 'HomeController' ) ) {
-    include(__DIR__ . '/home.php');
+    require_once(__DIR__ . '/home.php');
 }
 
 Router::get('home-load-more', '\App\HomeController@loadMore');

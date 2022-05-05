@@ -1,0 +1,34 @@
+.o-header {
+  background-color: var(--global--color-black);
+  color: var(--global--color-white);
+  display: flex;
+  justify-content: center;
+  a {
+    color: var(--global--color-white);
+  }
+}
+
+.o-header__inner {
+  display: flex;
+  max-width: $breakpoint_xxl;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px;
+  @include media(desktop) {
+    padding: 10px 50px 10px 50px;
+  }
+}
+
+.o-header__logo-link {
+  background-image: url(../images/logo.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 1000%;
+  text-decoration: none;
+  width: 95px;
+  padding-bottom: 80.5px;
+  height: 0;
+}

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html {{ site.language_attributes }}>
+  {% include 'html-header.twig' %}
 
-    {% include 'html-header.twig' %}
+  <body class="{{ body_class }}">
+    {% include 'components/molecules/skip-navigation.twig' %}
+    {% include 'components/organisms/preheader.twig' %}
+    {% include 'components/organisms/header.twig' %}
 
-    <body class="{{ body_class }}">
+    {% block content %}
+      <p>
+        Sorry, no content
+      </p>
+    {% endblock %}
 
-        {% include "components/molecules/skip-navigation.twig" %}
+    {% include 'components/organisms/footer.twig' %}
 
-        {% include "components/organisms/header.twig" %}
+    {% include 'html-footer.twig' %}
 
-        {% block content %}
-            <p>Sorry, no content</p>
-        {% endblock %}
+    {% include 'components/organisms/header-search.twig' %}
 
-        {% include "components/organisms/footer.twig" %}
 
-        {% include 'html-footer.twig' %}
-
-    </body>
+  </body>
 </html>

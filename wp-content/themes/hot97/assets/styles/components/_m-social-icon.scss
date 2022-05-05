@@ -1,0 +1,21 @@
+.o-header {
+  a.m-social-icon {
+    font-size: rem(16px);
+    height: rem(20px);
+    padding: 0 5px;
+    color: var(--global--color-hot-yellow-100);
+    &:hover {
+      color: var(--global--color-white);
+    }
+  }
+
+  .m-social-icon__wrapper {
+    display: flex;
+    align-items: flex-end;
+    margin-right: 30px;
+    display: none;
+    @include media(desktop) {
+      display: flex;
+    }
+  }
+}

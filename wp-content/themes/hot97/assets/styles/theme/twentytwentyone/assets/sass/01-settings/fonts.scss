@@ -1,1 +1,38 @@
-// Do we need to serve a font? Add the @font-face styles here.
+
+@font-face {
+  font-family: "Oskari";
+  src: url("../fonts/Oskari-G2-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Oskari";
+  src: url("../fonts/Oskari-G2-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "monospace";
+  src: url("../fonts/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JudgeTrial";
+  src: url("../fonts/F37JudgeTrial-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JudgeTrial";
+  src: url("../fonts/F37JudgeTrial-BoldCompressed.otf") format("opentype");
+  font-weight: bold;
+  font-display: swap;
+}
+
+$judgetrial: 'JudgeTrial', sans-serif;
+$oskari: 'Oskari', sans-serif;

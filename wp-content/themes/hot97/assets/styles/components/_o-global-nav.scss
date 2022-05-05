@@ -1,0 +1,58 @@
+.o-global-nav {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+}
+
+.o-global-nav__secondary {
+  width: unset;
+  display: none;
+  @include media(laptop) {
+    display: flex;
+  }
+}
+
+.o-global-nav__mobile-button {
+  display: flex;
+  @include media(laptop) {
+    display: none;
+  }
+}
+
+
+// not sure if button styles will help - so putting here for now. cd
+
+.o-header {
+  a.o-global-nav__search {
+    font-size: rem(16px);
+    color: var(--global--color-hot-yellow-100);
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--global--color-white);
+    }
+    & > i {
+      margin: 8px;
+    }
+  }
+
+  .o-global-nav__button {
+    font-family: monospace;
+    font-size: rem(14px);
+    line-height: 1.43;
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--global--color-hot-yellow-100);
+    border-radius: 100px;
+    padding: 10px 24px;
+  }
+
+  .o-global-nav__divider {
+    margin: 0 15px;
+    height: 24px;
+    width: 1px;
+    background: var(--global--color-hot-yellow-500);
+  }
+}

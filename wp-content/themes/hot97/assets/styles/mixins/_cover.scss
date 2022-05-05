@@ -1,0 +1,24 @@
+/**
+ * Cover
+ *
+ * Absolute position the current element completely over its ancestor element.
+ *
+ * @usage
+ * @extend %cover;
+ * @include cover;
+ *
+ * @package Baseline
+ * @subpackage Styles
+ * @since 2.0.0
+ */
+ %cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin cover {
+  @extend %cover;
+}

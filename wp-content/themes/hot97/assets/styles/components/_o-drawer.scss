@@ -1,0 +1,51 @@
+//not sure where this should live - putting her for now
+body.show-menu {
+  overflow: hidden;
+}
+
+.o-drawer__overlay {
+  @include cover;
+  z-index: 10;
+  background-color: var(--global--color-hot-yellow-100);
+  opacity: .8;
+  display: none;
+  .show-menu & {
+      display: block;
+  }
+}
+
+.o-drawer {
+  overflow-y: scroll;
+  position: fixed;
+  top: 0;
+  right: -90vw;
+  width: 90vw;
+  z-index: 100;
+  background-color: var(--global--color-black);
+  height: 100%;
+  padding: 30px 60px 60px;
+  transition: right .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  visibility: hidden;
+  .show-menu & {
+      transition: right .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      right: 0;
+  }
+  .visible__menu & {
+      visibility: visible;
+  }
+}
+
+.o-drawer__button--container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.o-drawer__close-button {
+  overflow: visible;
+  text-align: center;
+  display:flex;
+  span {
+      width: 14px;
+  }
+}

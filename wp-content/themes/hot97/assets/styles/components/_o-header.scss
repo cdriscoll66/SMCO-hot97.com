@@ -13,8 +13,10 @@
   max-width: $breakpoint_xxl;
   width: 100%;
   justify-content: space-between;
-  padding: 10px 50px 10px 50px;
-  justify-content: space-between;
+  padding: 10px;
+  @include media(desktop) {
+    padding: 10px 50px 10px 50px;
+  }
 }
 
 .o-header__logo-link {

@@ -54,7 +54,7 @@ $baseline-unit: 10px;
 	--heading--line-height-h1: var(--global--line-height-page-title);
 
 	--heading--font-weight: bold;
-	--heading--font-weight-page-title: 300;
+	--heading--font-weight-page-title: 600;
 	--heading--font-weight-strong: 600;
 
 	/* Block: Latest posts */
@@ -148,7 +148,7 @@ $baseline-unit: 10px;
 	// --branding--logo--max-height-mobile: 96px;
 
 	/* Main navigation */
-	// --primary-nav--font-family: var(--global--font-secondary);
+	--primary-nav--font-family: var(--global--font-primary);
 	// --primary-nav--font-family-mobile: var(--global--font-primary);
 	// --primary-nav--font-size: var(--global--font-size-md);
 	// --primary-nav--font-size-sub-menu: var(--global--font-size-xs);
@@ -159,8 +159,8 @@ $baseline-unit: 10px;
 	// --primary-nav--font-style-sub-menu-mobile: normal;
 	// --primary-nav--font-weight: normal;
 	// --primary-nav--font-weight-button: 500;
-	// --primary-nav--color-link: var(--global--color-primary);
-	// --primary-nav--color-link-hover: var(--global--color-primary-hover);
+	--primary-nav--color-link: var(--global--color-white);
+	--primary-nav--color-link-hover: var(--global--color-hot-yellow-100);
 	// --primary-nav--color-text: var(--global--color-primary);
 	// --primary-nav--padding: calc(0.66 * var(--global--spacing-unit));
 	// --primary-nav--border-color: var(--global--color-primary);

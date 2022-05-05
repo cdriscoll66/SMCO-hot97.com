@@ -4,11 +4,15 @@
         <a class="o-header__logo-link" href="{{ home_url }}">{{ site_title }}</a>
     </h1>
 
-    {% include "components/organisms/primary-navigation.twig" %}
-    {% include "components/organisms/utility-navigation.twig" %}
-
-    {% include "components/organisms/mobile-menu-drawer.twig" %}
-
+    {% include "components/organisms/global-navigation.twig" %}
+    <div class="o-global-nav__mobile-button">
+        <button aria-label="open mobile menu"
+          class="o-header__mobile-button has-background has-transparent-background-color js-toggle">
+            <i class="fal fa-grip-lines"></i>
+        </button>
+      </div>
 
     </div>
+        {% include "components/organisms/mobile-menu-drawer.twig" %}
+
 </header>

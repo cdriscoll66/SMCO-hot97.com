@@ -1,0 +1,30 @@
+<nav aria-label="Main" class="o-menu o-menu--main">
+  <h2 class="o-menu__heading">
+    Main Navigation
+  </h2>
+  <ul>
+    {% for item in main_menu.items %}
+      <li class="{{ item.classes|join(' ') }}">
+        <a href="{{ item.link }}">{{ item.title }}</a>
+        {% if item.children %}
+          <ul>
+            {% for child in item.children %}
+              <li class="{{ child.classes|join(' ') }}">
+                <a href="{{ child.link }}">{{ child.title }}</a>
+                {% if child.children %}
+                  <ul>
+                    {% for child in child.children %}
+                      <li class="{{ child.classes|join(' ') }}">
+                        <a href="{{ child.link }}">{{ child.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</nav>

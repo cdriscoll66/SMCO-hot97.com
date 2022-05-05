@@ -70,7 +70,7 @@ $baseline-unit: 10px;
 
 	--global--color-primary: var(--global--color-hot-yellow-900); /* Body text color, site title, footer text color. */
 	--global--color-secondary: var(--global--color-black); /* Headings */
-	--global--color-primary-hover: var(--global--color-primary);
+	--global--color-primary-hover: var(--global--color-hot-yellow-100);
 	--global--color-background: var(--global--color-white);
 	--global--color-border: var(--global--color-primary); /* Used for borders (separators) */
 
@@ -120,50 +120,50 @@ $baseline-unit: 10px;
 	--button--padding-horizontal: calc(2 * var(--button--padding-vertical));
 
 	/* entry */
-	--entry-header--color: var(--global--color-primary);
-	--entry-header--color-link: currentColor;
-	--entry-header--color-hover: var(--global--color-primary-hover);
-	--entry-header--color-focus: var(--global--color-secondary);
-	--entry-header--font-size: var(--heading--font-size-h2);
-	--entry-content--font-family: var(--global--font-secondary);
-	--entry-author-bio--font-family: var(--heading--font-family);
-	--entry-author-bio--font-size: var(--heading--font-size-h4);
+	// --entry-header--color: var(--global--color-primary);
+	// --entry-header--color-link: currentColor;
+	// --entry-header--color-hover: var(--global--color-primary-hover);
+	// --entry-header--color-focus: var(--global--color-secondary);
+	// --entry-header--font-size: var(--heading--font-size-h2);
+	// --entry-content--font-family: var(--global--font-secondary);
+	// --entry-author-bio--font-family: var(--heading--font-family);
+	// --entry-author-bio--font-size: var(--heading--font-size-h4);
 
 	/* Header */
-	--branding--color-text: var(--global--color-primary);
-	--branding--color-link: var(--global--color-primary);
-	--branding--color-link-hover: var(--global--color-secondary);
-	--branding--title--font-family: var(--global--font-primary);
-	--branding--title--font-size: var(--global--font-size-lg);
-	--branding--title--font-size-mobile: var(--heading--font-size-h4);
-	--branding--title--font-weight: normal;
-	--branding--title--text-transform: uppercase;
-	--branding--description--font-family: var(--global--font-secondary);
-	--branding--description--font-size: var(--global--font-size-sm);
-	--branding--description--font-family: var(--global--font-secondary);
+	// --branding--color-text: var(--global--color-primary);
+	// --branding--color-link: var(--global--color-primary);
+	// --branding--color-link-hover: var(--global--color-secondary);
+	// --branding--title--font-family: var(--global--font-primary);
+	// --branding--title--font-size: var(--global--font-size-lg);
+	// --branding--title--font-size-mobile: var(--heading--font-size-h4);
+	// --branding--title--font-weight: normal;
+	// --branding--title--text-transform: uppercase;
+	// --branding--description--font-family: var(--global--font-secondary);
+	// --branding--description--font-size: var(--global--font-size-sm);
+	// --branding--description--font-family: var(--global--font-secondary);
 
-	--branding--logo--max-width: 300px;
-	--branding--logo--max-height: 100px;
-	--branding--logo--max-width-mobile: 96px;
-	--branding--logo--max-height-mobile: 96px;
+	// --branding--logo--max-width: 300px;
+	// --branding--logo--max-height: 100px;
+	// --branding--logo--max-width-mobile: 96px;
+	// --branding--logo--max-height-mobile: 96px;
 
 	/* Main navigation */
-	--primary-nav--font-family: var(--global--font-secondary);
-	--primary-nav--font-family-mobile: var(--global--font-primary);
-	--primary-nav--font-size: var(--global--font-size-md);
-	--primary-nav--font-size-sub-menu: var(--global--font-size-xs);
-	--primary-nav--font-size-mobile: var(--global--font-size-sm);
-	--primary-nav--font-size-sub-menu-mobile: var(--global--font-size-sm);
-	--primary-nav--font-size-button: var(--global--font-size-xs);
-	--primary-nav--font-style: normal;
-	--primary-nav--font-style-sub-menu-mobile: normal;
-	--primary-nav--font-weight: normal;
-	--primary-nav--font-weight-button: 500;
-	--primary-nav--color-link: var(--global--color-primary);
-	--primary-nav--color-link-hover: var(--global--color-primary-hover);
-	--primary-nav--color-text: var(--global--color-primary);
-	--primary-nav--padding: calc(0.66 * var(--global--spacing-unit));
-	--primary-nav--border-color: var(--global--color-primary);
+	// --primary-nav--font-family: var(--global--font-secondary);
+	// --primary-nav--font-family-mobile: var(--global--font-primary);
+	// --primary-nav--font-size: var(--global--font-size-md);
+	// --primary-nav--font-size-sub-menu: var(--global--font-size-xs);
+	// --primary-nav--font-size-mobile: var(--global--font-size-sm);
+	// --primary-nav--font-size-sub-menu-mobile: var(--global--font-size-sm);
+	// --primary-nav--font-size-button: var(--global--font-size-xs);
+	// --primary-nav--font-style: normal;
+	// --primary-nav--font-style-sub-menu-mobile: normal;
+	// --primary-nav--font-weight: normal;
+	// --primary-nav--font-weight-button: 500;
+	// --primary-nav--color-link: var(--global--color-primary);
+	// --primary-nav--color-link-hover: var(--global--color-primary-hover);
+	// --primary-nav--color-text: var(--global--color-primary);
+	// --primary-nav--padding: calc(0.66 * var(--global--spacing-unit));
+	// --primary-nav--border-color: var(--global--color-primary);
 
 	/* Pagination */
 	--pagination--color-text: var(--global--color-primary);

@@ -1,0 +1,23 @@
+.m-adspace {
+  background-color: var(--global--color-light-gray);
+  color: var(--global--color-hot-yellow-500);
+  margin-bottom: 1rem;
+  position: relative;
+}
+.m-adspace:after {
+  content: "advertisement";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-family: monospace;
+  font-size: rem(10px);
+  line-height: 1.6;
+  text-transform: uppercase;
+  bottom: -1rem;
+
+}
+
+.m-adspace--preheader {
+  height: 90px;
+  width: 728px;
+}

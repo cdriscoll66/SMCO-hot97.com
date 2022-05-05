@@ -1,9 +1,20 @@
 /** Node Modules */
 @import '~normalize.scss/normalize';
 
+/** Functions */
+@import 'functions/functions';
+
 /** Config */
 @import 'config/colors';
 @import 'config/variables';
 
 /** Import Twenty Twenty-One styles */
 @import 'theme/twentytwentyone/assets/sass/style.colab';
+
+/** Components */
+
+@import 'components/m-skip-navigation';
+@import 'components/m-adspace';
+
+@import 'components/o-header';
+@import 'components/o-preheader';

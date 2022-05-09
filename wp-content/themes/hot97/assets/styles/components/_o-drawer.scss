@@ -23,7 +23,7 @@ body.show-menu {
   z-index: 100;
   background-color: var(--global--color-black);
   height: 100%;
-  padding: 30px 60px 60px;
+  padding: 10px 20px;
   transition: right .5s cubic-bezier(0.075, 0.82, 0.165, 1);
   visibility: hidden;
   .show-menu & {
@@ -48,4 +48,8 @@ body.show-menu {
   span {
       width: 14px;
   }
+}
+
+.o-drawer__content {
+  text-align: center;
 }

@@ -1,0 +1,23 @@
+.m-search-form {
+  display: flex;
+}
+
+input.m-search-form__input {
+  background: var(--global--color-transparent);
+  border: none;
+  border-bottom: 3px solid black;
+  color: var(--global--color-black);
+  width: 75vw;
+  font-size: var(--global--font-size-xxl);
+  line-height: 1.2;
+  padding-bottom: 0;
+  vertical-align: bottom;
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: var(--global--color-black);
+    opacity: 1; /* Firefox */
+    line-height: 1.5;
+  }
+  &:focus {
+    outline-width: 0;
+  }
+}

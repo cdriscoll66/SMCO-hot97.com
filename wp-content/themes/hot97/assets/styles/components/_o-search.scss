@@ -3,7 +3,7 @@
   position: fixed;
   // background-color: var(--global--color-hot-yellow-100);
   background: $gradient-hot-yellow-100-to-hot-yellow-500;
-  z-index: 1;
+  z-index: 101;
   justify-content: center;
   align-items: center;
   transition: right .5s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -19,3 +19,8 @@
   }
 }
 
+.o-search__exit {
+  position: absolute;
+  top: 100px;
+  right: 12.5vw;
+}

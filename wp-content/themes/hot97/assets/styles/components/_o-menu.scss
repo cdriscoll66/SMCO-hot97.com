@@ -49,3 +49,19 @@
     }
   }
 }
+
+
+.o-menu--mobile {
+  ul {
+    flex-flow: column nowrap;
+    & li > a {
+      font-family: var(--primary-nav--font-family);
+      font-size: rem(44.8px);
+      line-height: 1.3333;
+      text-transform: uppercase;
+      margin-right: 30px;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+  }
+}

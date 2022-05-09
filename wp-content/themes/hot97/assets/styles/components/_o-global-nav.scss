@@ -25,6 +25,7 @@
 
 .o-header {
   a.o-global-nav__search {
+    font-family: monospace;
     font-size: rem(16px);
     color: var(--global--color-hot-yellow-100);
     white-space: nowrap;
@@ -50,9 +51,15 @@
   }
 
   .o-global-nav__divider {
-    margin: 0 15px;
-    height: 24px;
-    width: 1px;
+    display: flex;
+    margin: 15px auto;
+    height: 1px;
+    // width: 24px;
     background: var(--global--color-hot-yellow-500);
+    @include media(laptop) {
+      margin: 0 15px;
+      height: 24px;
+      width: 1px;
+      }
   }
 }

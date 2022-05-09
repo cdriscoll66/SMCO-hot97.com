@@ -1,13 +1,21 @@
 <div class="o-drawer__overlay"></div>
 <aside id="drawer" class="o-drawer">
   <div class="o-drawer__button--container">
-    <button aria-label="close mobile menu"
+    <button aria-label="close mobile menu has-white-color"
       id="closedrawer"
-      class="o-drawer__close-button has-background has-transparent-background-color js-close">
-      <span class="icon close-icon"></span>
+      class="o-drawer__close-button has-background has-transparent-background-color has-white-color js-close">
+      <i class="fal fa-times fa-2x"></i>
     </button>
   </div>
   <div class="o-drawer__content">
-{% include "components/organisms/mobile-navigation.twig" %}
+    {% include 'components/organisms/mobile-navigation.twig' %}
+    <span class="o-global-nav__divider"></span>
+    <a class="o-global-nav__search js-search-toggle__mob">
+      <i class="fas fa-search"></i>Search
+    </a>
+    {% include 'components/organisms/icon-menu.twig' %}
+    <a class="o-global-nav__button" href="{{ flexible_cta.url }}">
+      {{ flexible_cta.title }}
+    </a>
   </div>
 </aside>

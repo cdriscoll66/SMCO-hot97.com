@@ -9,6 +9,7 @@ return [
         'utility-nav' => __('Utility Navigation'),
         'mobile-nav' => __('Mobile Navigation'),
         'footer-nav' => __('Footer Navigation'),
+        'footer-secondary-nav' => __('Footer Secondary Navigation'),
         'footer-utility-nav' => __('Footer Utility Navigation'),
     ],
 ];

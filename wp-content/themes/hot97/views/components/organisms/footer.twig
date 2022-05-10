@@ -1,41 +1,69 @@
-<footer>
-
-    <nav aria-label="Footer" class="o-menu o-menu--footer">
-        <h2 class="o-menu__heading">Footer Navigation</h2>
-            {% for item in footer_menu.items %}
-                <li class="{{ item.classes|join(' ') }}">
-                    <a href="{{ item.link }}">{{ item.title }}</a>
-                    {% if item.children %}
-                        <ul>
-                            {% for child in item.children %}
-                                <li>
-                                    <a href="{{ child.link }}">{{ child.title }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
-            {% endfor %}
+<footer class="o-footer">
+  <div class="o-footer__inner">
+    <div class="o-footer__col-2">
+      <div class="o-footer__logo">
+        {{ site_title }}
+      </div>
+      {% include 'components/organisms/icon-menu.twig' %}
+    </div>
+    <div class="o-footer__col-8">
+      <h2 class="o-footer__tagline">
+        #1 for Hip-Hop
+      </h2>
+    </div>
+    <div class="o-footer__col-2 o-footer__menu-col">
+      <nav aria-label="Footer" class="o-menu o-menu--footer__primary">
+        <ul>
+          {% for item in footer_menu.items %}
+            <li class="{{ item.classes|join(' ') }}">
+              <a href="{{ item.link }}">{{ item.title }}</a>
+              {% if item.children %}
+                <ul>
+                  {% for child in item.children %}
+                    <li><a href="{{ child.link }}">{{ child.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
         </ul>
-    </nav>
+      </nav>
 
-    <nav aria-label="Footer Utility" class="o-menu o-menu--footer-utility">
-        <h2 class="o-menu__heading">Footer Utility Navigation</h2>
-            {% for item in footer_utility_menu.items %}
-                <li class="{{ item.classes|join(' ') }}">
-                    <a href="{{ item.link }}">{{ item.title }}</a>
-                    {% if item.children %}
-                        <ul>
-                            {% for child in item.children %}
-                                <li>
-                                    <a href="{{ child.link }}">{{ child.title }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                </li>
-            {% endfor %}
+      <nav aria-label="Footer Secondary"
+        class="o-menu o-menu--footer__secondary">
+        <ul>
+          {% for item in footer_secondary_menu.items %}
+            <li class="{{ item.classes|join(' ') }}">
+              <a href="{{ item.link }}">{{ item.title }}</a>
+              {% if item.children %}
+                <ul>
+                  {% for child in item.children %}
+                    <li><a href="{{ child.link }}">{{ child.title }}</a></li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
         </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="o-footer__subfooter">
+    <nav aria-label="Footer Utility" class="o-menu o-menu--footer__utility">
+      <ul>
+        {% for item in footer_utility_menu.items %}
+          <li class="{{ item.classes|join(' ') }}">
+            <a href="{{ item.link }}">{{ item.title }}</a>
+            {% if item.children %}
+              <ul>
+                {% for child in item.children %}
+                  <li><a href="{{ child.link }}">{{ child.title }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
     </nav>
-
+  </div>
 </footer>

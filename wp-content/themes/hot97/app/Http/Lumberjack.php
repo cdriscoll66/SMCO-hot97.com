@@ -27,6 +27,7 @@ class Lumberjack extends LumberjackCore
         $context['utility_menu'] = new Menu('utility-nav');
         $context['mobile_menu'] = new Menu('mobile-nav');
         $context['footer_menu'] = new Menu('footer-nav');
+        $context['footer_secondary_menu'] = new Menu('footer-secondary-nav');
         $context['footer_utility_menu'] = new Menu('footer-utility-nav');
         $context['home_url'] = home_url();
         $context['site_title'] = get_bloginfo('name');

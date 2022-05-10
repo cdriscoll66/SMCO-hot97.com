@@ -13,15 +13,23 @@
 
 .o-footer__inner {
   display: flex;
+  flex-flow: column nowrap;
   max-width: $breakpoint_xxl;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
   margin: 0 auto;
+  @include media(laptop) {
+    flex-flow: row nowrap;
+  }
   @include media(desktop) {
     padding: 10px 50px 10px 50px;
   }
+}
+
+.o-footer__col {
+  margin-bottom: 54px;
 }
 
 .o-footer__menu-col {
@@ -35,31 +43,69 @@
   }
 }
 
-.o-menu--footer__primary {
-  height: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
+.o-menu.o-menu--footer__primary {
   margin-right: 50px;
-  li > a {
-    font-family: var(--global--font-primary);
-    text-transform: uppercase;
-    font-size: rem(18px);
-    line-height: 1.25;
-    margin-bottom: 40px;
+  display: flex;
+  ul {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 8px;
+    li > a {
+      font-family: var(--global--font-primary);
+      text-transform: uppercase;
+      font-size: rem(18px);
+      line-height: 1.25;
+      margin-bottom: 40px;
+    }
   }
 }
 
-.o-menu--footer__secondary {
+.o-menu.o-menu--footer__secondary {
   height: 100%;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-between;
-  margin-right: 50px;
-  li > a {
-    font-family: monospace;
-    font-size: rem(14px);
-    line-height: 1.148;
+  align-items: center;
+  ul {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    li > a {
+      font-family: monospace;
+      font-size: rem(14px);
+      line-height: 1.148;
+    }
+  }
+}
+
+.o-menu.o-menu--footer__utility {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 30px 50px;
+  ul {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: column nowrap;
+    @include media(laptop) {
+      flex-flow: row wrap;
+    }
+    li {
+      width: 100%;
+      text-align: center;
+      @include media(laptop) {
+        width: unset;
+        margin-right: 82.5px;
+      }
+      & > a {
+        font-family: monospace;
+        font-size: rem(12px);
+        line-height: 1.3333;
+        margin-bottom: 7px;
+      }
+    }
   }
 }
 
@@ -82,4 +128,16 @@
   text-align: center;
   font-size: rem(120px);
   line-height: 1;
+}
+
+.o-footer__line {
+  width: 100%;
+  display: block;
+  border-top: 1px solid var(--global--color-hot-yellow-500);
+}
+
+.o-footer__subfooter {
+  margin: 0 auto;
+  max-width: $breakpoint_xxl;
+  padding-bottom: 30px;
 }

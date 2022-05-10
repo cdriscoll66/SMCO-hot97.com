@@ -1,17 +1,17 @@
 <footer class="o-footer">
   <div class="o-footer__inner">
-    <div class="o-footer__col-2">
+    <div class="o-footer__col o-footer__col-2">
       <div class="o-footer__logo">
         {{ site_title }}
       </div>
       {% include 'components/organisms/icon-menu.twig' %}
     </div>
-    <div class="o-footer__col-8">
+    <div class="o-footer__col o-footer__col-8">
       <h2 class="o-footer__tagline">
         #1 for Hip-Hop
       </h2>
     </div>
-    <div class="o-footer__col-2 o-footer__menu-col">
+    <div class="o-footer__col o-footer__col-2 o-footer__menu-col">
       <nav aria-label="Footer" class="o-menu o-menu--footer__primary">
         <ul>
           {% for item in footer_menu.items %}
@@ -48,6 +48,7 @@
       </nav>
     </div>
   </div>
+  <span class="o-footer__line"></span>
   <div class="o-footer__subfooter">
     <nav aria-label="Footer Utility" class="o-menu o-menu--footer__utility">
       <ul>

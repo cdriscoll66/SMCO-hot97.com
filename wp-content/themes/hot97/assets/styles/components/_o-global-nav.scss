@@ -24,12 +24,13 @@
 // not sure if button styles will help - so putting here for now. cd
 
 .o-header {
-  a.o-global-nav__search {
+  button.o-global-nav__search {
     font-family: monospace;
     font-size: rem(16px);
     color: var(--global--color-hot-yellow-100);
+    background-color: var(--global--color-transparent);
     white-space: nowrap;
-
+    padding: unset;
     &:hover {
       color: var(--global--color-white);
     }
@@ -48,6 +49,12 @@
     border: 1px solid var(--global--color-hot-yellow-100);
     border-radius: 100px;
     padding: 10px 24px;
+    background-color: var(--global--color-hot-yellow-100);
+    color: var(--global--color-black);
+    &:hover {
+      background-color: var(--global--color-transparent);
+      color: var(--global--color-white);
+    }
   }
 
   .o-global-nav__divider {

@@ -1,6 +1,8 @@
 .o-menu {
   ul {
-    display: flex;
+    .o-global-nav & {
+      display: flex;
+    }
     list-style: none;
     padding: none;
     align-items: center;
@@ -49,7 +51,6 @@
     }
   }
 }
-
 
 .o-menu--mobile {
   ul {

@@ -6,6 +6,7 @@
 
 /** Mixins */
 @import 'mixins/cover';
+@import 'mixins/paper-tear';
 
 
 /** Config */
@@ -23,6 +24,7 @@
 @import 'components/m-search-form';
 
 @import 'components/o-header';
+@import 'components/o-footer';
 @import 'components/o-preheader';
 @import 'components/o-drawer';
 @import 'components/o-global-nav';

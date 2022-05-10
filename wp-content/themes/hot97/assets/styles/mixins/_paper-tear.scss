@@ -1,0 +1,14 @@
+@mixin paper-tear {
+  margin-top: 13%;
+  &:before {
+    position:absolute;
+    content: '';
+    width: 100%;
+    padding-top: 13%;
+    bottom: calc(100% - 1px);
+    background-image: url('../images/paper-tear.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+  }
+}

@@ -3,7 +3,4 @@
   display: flex;
   padding: 10px;
   justify-content: center;
-  @include media(tablet) {
-    background: var(--global--color-hot-yellow-100);
-  }
 }

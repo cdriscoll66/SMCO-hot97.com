@@ -31,6 +31,10 @@
   }
 }
 
+.o-tiled__tile:last-child {
+  background-position: bottom;
+}
+
 
 
 .o-tiled__tile::before, .o-tiled__tile::after {

@@ -1,0 +1,51 @@
+.o-tiled {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  overflow: hidden;
+  pointer-events: none;
+  height: 510px;
+
+}
+
+
+.o-tiled__tile {
+  width: 100%;
+  height: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include media(laptop) {
+    display: block;
+    background-size:110% auto;
+    background-repeat: repeat-y;
+    width: 33.3%;
+  }
+}
+
+.o-tiled__tile:nth-child(odd) {
+  background-position: center;
+  background-size:100% auto;
+  display:none;
+  @include media(laptop) {
+    display: block;
+  }
+}
+
+
+
+.o-tiled__tile::before, .o-tiled__tile::after {
+  content: '';
+  width: inherit;
+  height: inherit;
+  position: absolute;
+}
+
+.o-tiled__tile::before {
+  background-color: var(--global--color-hot-yellow-100);
+  mix-blend-mode: multiply;
+}
+
+.o-tiled__tile::after {
+  background-color: var(--global--color-hot-yellow-100);
+  mix-blend-mode: color;
+}

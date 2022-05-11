@@ -8,7 +8,6 @@
       color: var(--footer--color-link-hover);
     }
   }
-  @include paper-tear;
 }
 
 .o-footer__inner {
@@ -98,6 +97,10 @@
       @include media(laptop) {
         width: unset;
         margin-right: 82.5px;
+        &:last-child {
+          width: unset;
+          margin-left: -29px;
+        }
       }
       & > a {
         font-family: monospace;

@@ -1,12 +1,63 @@
-@mixin paper-tear {
+@mixin paper-tear-top-outer {
+  position: relative;
   margin-top: 13%;
   &:before {
-    position:absolute;
-    content: '';
+    position: absolute;
+    display: block;
+    content: "";
     width: 100%;
     padding-top: 13%;
     bottom: calc(100% - 1px);
-    background-image: url('../images/paper-tear.svg');
+    background-image: url("../images/paper-tear.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom center;
+  }
+}
+
+@mixin paper-tear-top-inner {
+  position: relative;
+  &:before {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    padding-bottom: 13%;
+    top: 0;
+    background-image: url("../images/paper-tear-down.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+}
+
+@mixin paper-tear-bottom-outer {
+  margin-bottom: 13%;
+  position: relative;
+  &:after {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    padding-bottom: 13%;
+    top: calc(100% - 1px);
+    background-image: url("../images/paper-tear-down.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+  }
+}
+
+@mixin paper-tear-bottom-inner {
+  position: relative;
+  &:after {
+    position: absolute;
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: 13%;
+    bottom: -1px;
+    background-image: url("../images/paper-tear.svg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom center;

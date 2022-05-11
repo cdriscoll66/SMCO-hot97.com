@@ -162,7 +162,11 @@ class FrontPageController extends Controller
         $context['other'] = $other;
 
         $context['prefooter_cta'] = get_field('home_prefooter');
+        $context['front_page_options'] = get_field('front_page_options');
+
+
 
         return new TimberResponse('templates/front-page.twig', $context);
     }
+
 }

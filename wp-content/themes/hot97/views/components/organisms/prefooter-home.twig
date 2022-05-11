@@ -1,11 +1,15 @@
 
 
 <div class="o-subfooter__home">
+
+        {% if prefooter_cta.styled_image %}
 <div class="o-tiled">
     <div class="o-tiled__tile" style="background-image:url({{ prefooter_cta.styled_image['url'] }})"></div>
     <div class="o-tiled__tile" style="background-image:url({{ prefooter_cta.styled_image['url'] }})"></div>
     <div class="o-tiled__tile" style="background-image:url({{ prefooter_cta.styled_image['url'] }})"></div>
 </div>
+        {% endif %}
+
     <div class="o-subfooter__inner">
         <div class="o-subfooter__image">
         {% if prefooter_cta.displayed_image %}

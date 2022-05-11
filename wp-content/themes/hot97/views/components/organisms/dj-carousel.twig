@@ -1,0 +1,24 @@
+
+<div class="o-dj-carousel alignfull has-background-color has-hot-yellow-100-background-color">
+        {% if front_page_options.dj_tiled_image %}
+        <div class="o-tiled">
+            <div class="o-tiled__tile" style="background-image:url({{ front_page_options.dj_tiled_image['url'] }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ front_page_options.dj_tiled_image['url'] }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ front_page_options.dj_tiled_image['url'] }})"></div>
+        </div>
+        {% endif %}
+
+        <div class="o-dj-carousel__inner">
+        <h2>HOT DJS</h2>
+        {% if djs %}
+            <ul class="posts">
+                {% for post in djs %}
+                    <li class="posts__item">
+                        {% include "components/molecules/card.twig" %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
+
+</div>

@@ -16,11 +16,9 @@ function init() {
 
   /* only load on page with observer */
   if (!loadMoreObs.length) {
-    console.log("noload");
     return;
   }
 
-  console.log("load");
 
   /* call Intersection api - to listen - and fire callback */
   const observer = new IntersectionObserver(entries => {
@@ -39,16 +37,15 @@ function init() {
 
   const handleLoadMorePosts = () => {
     pagednumber += 1;
-    let query = "/post-feed/" + pagednumber;
+
+    let query = "/home-load-more?paged=" + pagednumber;
     fetch(query)
       .then(response => response.text())
       .then(data => addPosts(data));
   };
 
   const addPosts = posts => {
-    postContainer.append(posts);
-    console.log(postContainer);
-    console.log(posts);
+    postContainer.insertAdjacentHTML( 'beforeend', posts );
   };
 }
 

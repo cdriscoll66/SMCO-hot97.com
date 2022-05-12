@@ -51,6 +51,7 @@ else {
 
 // Includes.
 use ColabCustomRestEndpoints\Api\AppRestController;
+use ColabCustomRestEndpoints\Api\CorePostRestAdditions;
 
 /***********************************
  * Initialize plugin.
@@ -72,6 +73,7 @@ register_deactivation_hook( __FILE__, [ Plugin::class, 'register_deactivation_ho
 
 // Register Rest Routes
 add_action( 'rest_api_init', [ AppRestController::class, 'rest_api_init' ] );
+add_action( 'rest_api_init', [ CorePostRestAdditions::class, 'rest_api_init' ] );
 
 // Initialize the Settings Page once ACF is loaded.
 add_action( 'acf/init', [ Settings::class, 'acf_init' ], 20 );

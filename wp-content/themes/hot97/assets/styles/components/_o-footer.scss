@@ -28,6 +28,12 @@
 }
 
 .o-footer__col {
+  @include media(laptop) {
+  margin-bottom: 54px;
+  }
+}
+
+.o-footer__col-8 {
   margin-bottom: 54px;
 }
 

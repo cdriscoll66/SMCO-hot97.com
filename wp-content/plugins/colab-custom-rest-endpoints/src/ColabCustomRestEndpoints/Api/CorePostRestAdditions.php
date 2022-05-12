@@ -46,7 +46,22 @@ class CorePostRestAdditions
      * @return array
      */
     public static function get_jwplayer_fields( $object, $field_name, $request ) {
-        $videos = jwpp_get_post_videos( $object["id"] );
+        $videos = [];
+        $post_id = $object['id'];
+
+        if ( function_exists( 'jwppp_videos_string' ) && !empty( jwppp_videos_string( $post_id ) ) ) {
+            $video_ids = explode( ',', jwppp_videos_string( $post_id ) );
+            if ( count( $video_ids ) > 0 ) {
+                foreach ($video_ids as $number) {
+                    $videos[] = [
+                        'order' => $number,
+                        'video_url' => get_post_meta($post_id, '_jwppp-video-url-' . $number, TRUE),
+                        'video_title' => get_post_meta($post_id, '_jwppp-video-title-' . $number, TRUE),
+                    ];
+                }
+            }
+        }
+
         return $videos;
     }
 
@@ -60,6 +75,12 @@ class CorePostRestAdditions
      * @return string
      */
     public static function get_author_name( $object, $field_name, $request ) {
-        return "author";
+        $author_name = '';
+
+        if ( function_exists( 'get_field' ) ) {
+            $author_name = get_field( 'public_author_name', $object['id'] );
+        }
+
+        return $author_name;
     }
 }

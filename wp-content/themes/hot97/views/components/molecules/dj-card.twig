@@ -1,0 +1,18 @@
+<article class="m-dj-card">
+    {% if post.thumbnail %}
+        <a class="m-dj-card__image-link" href="{{ post.link }}" aria-label="{{ post.title }}">
+            {{ post.thumbnail }}
+        </a>
+    {% endif %}
+    <h1 class="m-dj-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h1>
+    {% if post.shows %}
+        <ul class="m-dj-card__shows">
+        {% for show in post.shows %}
+            <li class="m-dj-card__show">
+                <span class="m-dj-card__show-name">{{ show.show_name }}</span><br>
+                <span class="m-dj-card__show-time">{{ show.show_time }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</article>

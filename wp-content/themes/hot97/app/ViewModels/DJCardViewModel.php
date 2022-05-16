@@ -24,13 +24,17 @@ class DJCardViewModel extends ViewModel
         return $this->post->link;
     }
 
-    public function excerpt()
+    public function shows()
     {
-        return $this->post->post_excerpt;
+        $shows = get_field('shows', $this->post);
+
+        return $shows;
     }
 
     public function thumbnail()
     {
-        return $this->post->thumbnail();
+        $image = get_the_post_thumbnail($this->post, 'dj-image');
+
+        return $image;
     }
 }

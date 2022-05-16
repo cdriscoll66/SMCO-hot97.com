@@ -1,0 +1,75 @@
+.m-dj-card__image-link {
+  display: inline-block;
+  border: 1px solid $color-hot-yellow-900;
+
+  img {
+    display: inline-block;
+    margin: 4px;
+    max-width: 200px;
+  }
+
+  li:nth-child(odd) & {
+    transform: rotate(-2deg);
+  }
+
+  li:nth-child(even) & {
+    transform: rotate(2deg);
+  }
+}
+
+.m-dj-card__title {
+  font-family: $judgetrial;
+  font-weight: 500;
+  font-size: rem(18px);
+  text-transform: uppercase;
+  margin-top: 20px;
+
+  a {
+    text-decoration: none;
+    display: inline-block;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      background-image: url(../images/arrow.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      width: 18px;
+      height: 20px;
+      margin-left: 10px;
+      position: relative;
+      top: 3px;
+      left: 0;
+      transition: .2s;
+    }
+
+    &:hover {
+      &:after {
+        left: 8px;
+      }
+    }
+  }
+}
+
+.m-dj-card__shows {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.m-dj-card__show {
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.m-dj-card__show-name {
+  font-size: rem(16px);
+}
+
+.m-dj-card__show-time {
+  font-size: rem(12px);
+  font-family: $mono;
+}

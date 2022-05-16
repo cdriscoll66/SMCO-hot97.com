@@ -9,12 +9,12 @@
         {% endif %}
 
         <div class="o-dj-carousel__inner">
-        <h2>HOT DJS</h2>
+        <h2 class="o-dj-carousel__title">HOT DJS</h2>
         {% if djs %}
-            <ul class="posts">
+            <ul class="o-dj-carousel__list">
                 {% for post in djs %}
-                    <li class="posts__item">
-                        {% include "components/molecules/card.twig" %}
+                    <li class="o-dj-carousel__item">
+                        {% include "components/molecules/dj-card.twig" %}
                     </li>
                 {% endfor %}
             </ul>

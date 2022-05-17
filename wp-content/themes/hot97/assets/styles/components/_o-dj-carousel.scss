@@ -26,7 +26,7 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  padding: 20px 0 100px 27px;
+  padding: 20px 0 100px;
 
   @include media (laptop) {
     // margin right is based on width of wide aligned blocks. this may need changed - didn't get a sense of width rules from comps
@@ -38,6 +38,7 @@
 .o-dj-carousel__header {
   display: flex;
   align-items: center;
+  margin-left: 27px;
 }
 
 .o-dj-carousel__title {
@@ -49,10 +50,18 @@
   list-style: none;
   margin-top: 10px;
   padding-left: 0;
+
+  .flickity-prev-next-button {
+    top: 170px;
+  }
 }
 
 .o-dj-carousel__item {
   margin-right: 30px;
+
+  &:first-of-type {
+    padding-left: 27px;
+  }
 
   &:last-of-type {
     padding-right: 80px;

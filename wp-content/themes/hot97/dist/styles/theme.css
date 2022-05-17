@@ -4971,7 +4971,7 @@ body.show-menu {
   bottom: 0;
   right: 0;
   width: 100%;
-  padding: 20px 0 100px 27px;
+  padding: 20px 0 100px;
 }
 @media only screen and (min-width: 768px) {
   .o-dj-carousel__inner {
@@ -4987,6 +4987,7 @@ body.show-menu {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-left: 27px;
 }
 
 .o-dj-carousel__title {
@@ -4999,9 +5000,15 @@ body.show-menu {
   margin-top: 10px;
   padding-left: 0;
 }
+.o-dj-carousel__list .flickity-prev-next-button {
+  top: 170px;
+}
 
 .o-dj-carousel__item {
   margin-right: 30px;
+}
+.o-dj-carousel__item:first-of-type {
+  padding-left: 27px;
 }
 .o-dj-carousel__item:last-of-type {
   padding-right: 80px;

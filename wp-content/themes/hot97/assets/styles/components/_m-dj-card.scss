@@ -1,0 +1,50 @@
+.m-dj-card {
+  padding: 6px;
+  max-width: 222px;
+}
+
+.m-dj-card__image-link {
+  display: inline-block;
+  border: 1px solid $color-hot-yellow-900;
+
+  img {
+    display: inline-block;
+    margin: 4px;
+    max-width: 200px;
+  }
+
+  li:nth-child(odd) & {
+    transform: rotate(-2deg);
+  }
+
+  li:nth-child(even) & {
+    transform: rotate(2deg);
+  }
+}
+
+.m-dj-card__title {
+  margin-top: 25px;
+  font-size: rem(18px);
+}
+
+.m-dj-card__shows {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.m-dj-card__show {
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.m-dj-card__show-name {
+  font-size: rem(16px);
+}
+
+.m-dj-card__show-time {
+  font-size: rem(12px);
+  font-family: $mono;
+}

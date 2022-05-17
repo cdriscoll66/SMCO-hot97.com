@@ -1,0 +1,30 @@
+.a-arrow-link {
+  font-family: $judgetrial;
+  font-weight: 500;
+  font-size: rem(18px);
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    background-image: url(../images/arrow.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 18px;
+    height: 20px;
+    margin-left: 10px;
+    position: relative;
+    top: 3px;
+    left: 0;
+    transition: .2s;
+  }
+
+  &:hover {
+    &:after {
+      left: 8px;
+    }
+  }
+}

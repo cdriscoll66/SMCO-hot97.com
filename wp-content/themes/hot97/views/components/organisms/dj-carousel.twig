@@ -9,16 +9,19 @@
         {% endif %}
 
         <div class="o-dj-carousel__inner">
-        <h2>HOT DJS</h2>
-        {% if djs %}
-            <ul class="posts">
-                {% for post in djs %}
-                    <li class="posts__item">
-                        {% include "components/molecules/card.twig" %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            <div class="o-dj-carousel__header">
+                <h2 class="o-dj-carousel__title">HOT DJS</h2>
+                <a class="o-dj-carousel__view-all a-arrow-link" href="/talent">View All DJs</a>
+            </div>
+            {% if djs %}
+                <ul class="o-dj-carousel__list js-dj-carousel">
+                    {% for post in djs %}
+                        <li class="o-dj-carousel__item">
+                            {% include "components/molecules/dj-card.twig" %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
 
 </div>

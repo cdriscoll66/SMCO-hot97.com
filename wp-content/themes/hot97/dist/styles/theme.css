@@ -3999,6 +3999,13 @@ footer {
   left: 8px;
 }
 
+.a-arrow-link--yellow {
+  color: #ffba04;
+}
+.a-arrow-link--yellow:after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='18' height='12' viewBox='0 0 18 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11.4547 2.44458L11.4076 5.49109L0.62767 5.32441C0.354266 5.32019 0.155354 5.55151 0.151731 5.78586L0.145692 6.17644C0.141465 6.44984 0.333734 6.64815 0.607138 6.65238L11.3871 6.81905L11.3394 9.90461C11.3219 11.0373 12.6414 11.6046 13.4346 10.8356L17.2421 7.14398C17.7571 6.68314 17.7698 5.86292 17.2693 5.38638L13.5777 1.57886C12.8086 0.785628 11.4722 1.3119 11.4547 2.44458ZM16.3967 6.23236L12.5892 9.92394L12.7052 2.42485L16.3967 6.23236Z' fill='%23FFBA04'/%3E%3C/svg%3E");
+}
+
 .m-skip-navigation {
   position: absolute;
   left: 0;
@@ -4055,6 +4062,74 @@ footer {
   width: 468px;
 }
 
+.m-card {
+  background-color: black;
+  color: #fff;
+  padding: 40px;
+  border: 1px solid #6a4d00;
+}
+.m-card a {
+  color: inherit;
+}
+
+.m-card__content-category {
+  text-transform: uppercase;
+  font-size: 1rem;
+  margin-right: 18px;
+}
+.m-card__content-category a {
+  text-decoration: none;
+}
+.m-card__content-category a:hover {
+  text-decoration: underline;
+}
+
+.m-card__category {
+  color: #ffba04;
+  font-family: "monospace", serif;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+}
+.m-card__category a {
+  text-decoration: none;
+}
+.m-card__category a:hover {
+  text-decoration: underline;
+}
+
+.m-card__is-hot {
+  margin-left: 8px;
+}
+.m-card__is-hot i {
+  color: #ffba04;
+  font-size: 0.75rem;
+}
+
+.m-card__title {
+  font-family: "JudgeTrial", sans-serif;
+  font-weight: 500;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.1666;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.m-card__title a {
+  text-decoration: none;
+}
+
+.m-card__image-link {
+  display: block;
+  width: 253px;
+  height: 253px;
+  -webkit-clip-path: circle(50%);
+          clip-path: circle(50%);
+}
+.m-card__image-link img {
+  width: 100%;
+  height: 100%;
+}
+
 .m-dj-card {
   padding: 6px;
   max-width: 222px;
@@ -4103,6 +4178,32 @@ li:nth-child(even) .m-dj-card__image-link {
 .m-dj-card__show-time {
   font-size: 0.75rem;
   font-family: "monospace", serif;
+}
+
+.a-section-heading {
+  font-family: "JudgeTrial", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.m-section-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.m-section-header__heading {
+  font-family: "JudgeTrial", sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 30px;
 }
 
 a.m-social-icon {
@@ -5025,4 +5126,12 @@ body.show-menu {
 }
 .flickity-prev-next-button[disabled] {
   opacity: 0;
+}
+
+.o-featured-carousel {
+  background-color: black;
+}
+
+.o-featured-carousel__list {
+  list-style: none;
 }

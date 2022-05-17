@@ -28,3 +28,11 @@
     }
   }
 }
+
+.a-arrow-link--yellow {
+  color: $color-hot-yellow-100;
+
+  &:after {
+    background-image: url(../images/arrow--yellow.svg);
+  }
+}

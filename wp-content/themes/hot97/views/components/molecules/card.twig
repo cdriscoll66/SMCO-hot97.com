@@ -1,18 +1,21 @@
-<article class="card">
-    {% if post.thumbnail %}
-        <img src="{{ post.thumbnail.src }}" alt="{{ post.thumbnail.alt }}">
-    {% endif %}
-    <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
-    {% if post.isHot %}
-        <p>hot</p>
-    {% endif %}
-    {% if post.primaryCategory %}
-        <p><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></p>
-    {% endif %}
+<article class="m-card">
     {% if post.contentCategory %}
-        <p><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></p>
+        <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
     {% endif %}
-    {% if post.excerpt %}
-        <p>{{ post.excerpt }}</p>
+
+    {% if post.primaryCategory %}
+        <span class="m-card__category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
+    {% endif %}
+
+    {% if post.isHot %}
+        <span class="m-card__is-hot"><i class="fa-solid fa-fire-flame-curved"></i></span>
+    {% endif %}
+
+    <h1 class="m-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h1>
+
+    {% if post.thumbnail %}
+        <a class="m-card__image-link" href="{{ post.link }}">
+            {{ post.thumbnail }}
+        </a>
     {% endif %}
 </article>

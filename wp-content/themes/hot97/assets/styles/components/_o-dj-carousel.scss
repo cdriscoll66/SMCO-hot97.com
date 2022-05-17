@@ -27,7 +27,7 @@
   right: 0;
   width: 100%;
   height: 645px;
-  padding: 20px 20px 100px;
+  padding: 20px 0 100px 27px;
 
   @include media (laptop) {
     // margin right is based on width of wide aligned blocks. this may need changed - didn't get a sense of width rules from comps
@@ -36,7 +36,18 @@
   }
 }
 
+.o-dj-carousel__header {
+  display: flex;
+  align-items: center;
+}
+
+.o-dj-carousel__title {
+  font-weight: 500;
+  margin-right: 30px;
+}
+
 .o-dj-carousel__list {
   list-style: none;
+  margin-top: 10px;
   padding-left: 0;
 }

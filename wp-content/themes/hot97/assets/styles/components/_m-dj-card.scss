@@ -18,38 +18,8 @@
 }
 
 .m-dj-card__title {
-  font-family: $judgetrial;
-  font-weight: 500;
+  margin-top: 25px;
   font-size: rem(18px);
-  text-transform: uppercase;
-  margin-top: 20px;
-
-  a {
-    text-decoration: none;
-    display: inline-block;
-
-    &:after {
-      content: '';
-      display: inline-block;
-      background-image: url(../images/arrow.svg);
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      width: 18px;
-      height: 20px;
-      margin-left: 10px;
-      position: relative;
-      top: 3px;
-      left: 0;
-      transition: .2s;
-    }
-
-    &:hover {
-      &:after {
-        left: 8px;
-      }
-    }
-  }
 }
 
 .m-dj-card__shows {

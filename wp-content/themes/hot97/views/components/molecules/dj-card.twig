@@ -4,7 +4,7 @@
             {{ post.thumbnail }}
         </a>
     {% endif %}
-    <h1 class="m-dj-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h1>
+    <h1 class="m-dj-card__title"><a class="a-arrow-link" href="{{ post.link }}">{{ post.title }}</a></h1>
     {% if post.shows %}
         <ul class="m-dj-card__shows">
         {% for show in post.shows %}

@@ -14,7 +14,7 @@
                 <a class="o-dj-carousel__view-all a-arrow-link" href="/talent">View All DJs</a>
             </div>
             {% if djs %}
-                <ul class="o-dj-carousel__list">
+                <ul class="o-dj-carousel__list js-dj-carousel">
                     {% for post in djs %}
                         <li class="o-dj-carousel__item">
                             {% include "components/molecules/dj-card.twig" %}

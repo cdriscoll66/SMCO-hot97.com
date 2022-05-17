@@ -74,7 +74,7 @@ class FrontPageController extends Controller
                 // Get DJs, ordered by menu order
                 $featured_djs = DJ::builder()
                     ->whereIdIn($dj_ids)
-                    ->orderBy('menu_order')
+                    ->orderBy('post__in')
                     ->get();
 
                 // Map over collection and instantiate as DJCardViewModel

@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new Flickity( carousel, {
       freeScroll: true,
       contain: true,
+      groupCells: true,
       pageDots: false,
       cellAlign: 'left',
       arrowShape: {
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new Flickity( carousel, {
       freeScroll: true,
       contain: true,
+      groupCells: true,
       pageDots: false,
       cellAlign: 'left',
       arrowShape: {

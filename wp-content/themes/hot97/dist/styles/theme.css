@@ -4197,6 +4197,7 @@ li:nth-child(even) .m-dj-card__image-link {
   font-family: "JudgeTrial", sans-serif;
   font-weight: 500;
   font-size: 3rem;
+  line-height: 1;
   color: #fff;
   text-transform: uppercase;
 }
@@ -5143,7 +5144,26 @@ body.show-menu {
 
 .o-featured-carousel {
   background-color: black;
-  padding: 40px 0 0 100px;
+  padding: 40px 0 10px;
+}
+.o-featured-carousel .m-section-header {
+  padding: 0 20px;
+}
+@media only screen and (min-width: 768px) {
+  .o-featured-carousel {
+    padding: 40px 0 10px 0;
+  }
+  .o-featured-carousel .m-section-header {
+    padding-left: 50px;
+  }
+}
+@media only screen and (min-width: 1128px) {
+  .o-featured-carousel {
+    padding: 40px 0 10px 100px;
+  }
+  .o-featured-carousel .m-section-header {
+    padding-left: 0;
+  }
 }
 
 .o-featured-carousel__list {
@@ -5154,6 +5174,27 @@ body.show-menu {
 
 .o-featured-carousel__item {
   margin-right: -1px;
+}
+.o-featured-carousel__item:first-of-type .m-card {
+  margin-left: 20px;
+}
+@media only screen and (min-width: 768px) {
+  .o-featured-carousel__item:first-of-type .m-card {
+    margin-left: 50px;
+  }
+}
+@media only screen and (min-width: 1128px) {
+  .o-featured-carousel__item:first-of-type .m-card {
+    margin-left: 0;
+  }
+}
+.o-featured-carousel__item:last-of-type .m-card {
+  margin-right: 20px;
+}
+@media only screen and (min-width: 768px) {
+  .o-featured-carousel__item:last-of-type .m-card {
+    margin-right: 0;
+  }
 }
 .o-featured-carousel__item .m-card {
   width: 312px;

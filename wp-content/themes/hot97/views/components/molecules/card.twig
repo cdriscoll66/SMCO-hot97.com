@@ -1,17 +1,21 @@
 <article class="m-card">
-    {% if post.contentCategory %}
-        <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
-    {% endif %}
+    <div class="m-card__text">
+        {% if post.contentCategory %}
+            <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
+        {% endif %}
 
-    {% if post.primaryCategory %}
-        <span class="m-card__category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
-    {% endif %}
+        {% if post.primaryCategory %}
+            <span class="m-card__category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
+        {% endif %}
 
-    {% if post.isHot %}
-        <span class="m-card__is-hot"><i class="fa-solid fa-fire-flame-curved"></i></span>
-    {% endif %}
+        {% if post.isHot %}
+            <span class="m-card__is-hot">
+                <i class="fas fa-fire"></i>
+            </span>
+        {% endif %}
 
-    <h1 class="m-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h1>
+        <h1 class="m-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h1>
+    </div>
 
     {% if post.thumbnail %}
         <a class="m-card__image-link" href="{{ post.link }}">

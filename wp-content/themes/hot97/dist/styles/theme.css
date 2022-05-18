@@ -4065,8 +4065,18 @@ footer {
 .m-card {
   background-color: black;
   color: #fff;
-  padding: 30px;
+  padding: 20px 30px 30px;
   border: 1px solid #6a4d00;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .m-card a {
   color: inherit;

@@ -1,7 +1,7 @@
 .m-card {
   background-color: black;
   color: #fff;
-  padding: 40px;
+  padding: 30px;
   border: 1px solid darken($color-hot-yellow-100, 30%);
 
   a {
@@ -58,6 +58,10 @@
 
   a {
     text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

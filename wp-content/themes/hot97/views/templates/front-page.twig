@@ -1,7 +1,7 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main id="main" class="entry-content">
+    <main id="main">
         <h1>{{ title }}</h1>
 
         {# Hero #}
@@ -13,24 +13,24 @@
 
         {# Featured Categories #}
         {% if featured %}
-            <section class="o-featured-carousel">
-                {% for group in featured %}
+            {% for group in featured %}
+                <section class="o-featured-carousel">
                     <div class="m-section-header">
                         <h2 class="m-section-header__heading">{{ group.term.name }}</h2>
                         <a class="a-arrow-link a-arrow-link--yellow m-section-header__view-all" href="{{ group.term.link }}">View All {{ group.term.name }}</a>
                     </div>
 
                     {% if group.posts %}
-                        <ul class="o-featured-carousel__list">
+                        <ul class="o-featured-carousel__list js-featured-carousel">
                             {% for post in group.posts %}
-                                <li class="o-featured-carousel__item">
+                                <li class="o-featured-carousel__item js-featured-carousel-slide">
                                     {% include "components/molecules/card.twig" %}
                                 </li>
                             {% endfor %}
                         </ul>
                     {% endif %}
-                {% endfor %}
-            </section>
+                </section>
+            {% endfor %}
         {% endif %}
 
         {# DJs #}

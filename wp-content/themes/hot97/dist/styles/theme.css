@@ -4065,7 +4065,7 @@ footer {
 .m-card {
   background-color: black;
   color: #fff;
-  padding: 40px;
+  padding: 30px;
   border: 1px solid #6a4d00;
 }
 .m-card a {
@@ -4116,6 +4116,9 @@ footer {
 }
 .m-card__title a {
   text-decoration: none;
+}
+.m-card__title a:hover {
+  text-decoration: underline;
 }
 
 .m-card__image-link {
@@ -5130,8 +5133,19 @@ body.show-menu {
 
 .o-featured-carousel {
   background-color: black;
+  padding: 40px 0 0 100px;
 }
 
 .o-featured-carousel__list {
   list-style: none;
+  margin-top: 10px;
+  padding-left: 0;
+}
+
+.o-featured-carousel__item {
+  margin-right: -1px;
+}
+.o-featured-carousel__item .m-card {
+  width: 312px;
+  height: 100%;
 }

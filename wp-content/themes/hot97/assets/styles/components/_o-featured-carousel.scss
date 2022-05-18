@@ -1,0 +1,63 @@
+.o-featured-carousel {
+  background-color: black;
+  padding: 40px 0 10px;
+
+  .m-section-header {
+    padding: 0 20px;
+  }
+
+  @include media(laptop) {
+    padding: 40px 0 10px 0;
+
+    .m-section-header {
+      padding-left: 50px;
+    }
+  }
+
+  @include media(desktop) {
+    padding: 40px 0 10px 100px;
+
+    .m-section-header {
+      padding-left: 0;
+    }
+  }
+}
+
+.o-featured-carousel__list {
+  list-style: none;
+  margin-top: 20px;
+  padding-left: 0;
+}
+
+.o-featured-carousel__item {
+  margin-right: -1px;
+
+  &:first-of-type {
+    .m-card {
+      margin-left: 20px;
+
+      @include media(laptop) {
+        margin-left: 50px;
+      }
+
+      @include media(desktop) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &:last-of-type {
+    .m-card {
+      margin-right: 20px;
+
+      @include media(laptop) {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .m-card {
+    width: 312px;
+    height: 100%;
+  }
+}

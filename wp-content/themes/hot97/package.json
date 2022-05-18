@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "flickity": "^3.0.0",
+    "jquery-match-height": "^0.7.2",
     "lodash": "^4.17.21"
   }
 }

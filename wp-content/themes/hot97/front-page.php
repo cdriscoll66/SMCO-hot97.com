@@ -70,6 +70,11 @@ class FrontPageController extends Controller
                 });
             }
 
+            if ($page_config['marquee']) {
+                $context['marquee']['title'] = $page_config['marquee']['marquee_title'];
+                $context['marquee']['tile'] = $page_config['marquee']['marquee_image'];
+            }
+
             if ($dj_ids = $page_config['featured_djs']) {
                 // Get DJs, ordered by menu order
                 $featured_djs = DJ::builder()
@@ -163,8 +168,6 @@ class FrontPageController extends Controller
 
         $context['prefooter_cta'] = get_field('home_prefooter');
         $context['front_page_options'] = get_field('front_page_options');
-
-
 
         return new TimberResponse('templates/front-page.twig', $context);
     }

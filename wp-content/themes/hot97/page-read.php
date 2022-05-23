@@ -21,7 +21,7 @@ use Timber\Term;
 use App\ViewModels\CardViewModel;
 use App\ViewModels\HeroViewModel;
 
-class PageVideosController extends Controller
+class PageReadController extends Controller
 {
     public function handle()
     {
@@ -44,7 +44,7 @@ class PageVideosController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
-        $page_config = get_field('video_page_fields', 'options');
+        $page_config = get_field('news_page_fields', 'options');
 
         $hero = [];
         $featured = [];
@@ -68,7 +68,7 @@ class PageVideosController extends Controller
 
                     $featured_posts = Post::builder()
                         ->whereIdIn($featured_posts_IDs)
-                        ->orderBy('menu_order')
+                        ->orderBy('post__in')
                         ->get();
 
                     $other_posts = Post::builder()
@@ -99,6 +99,6 @@ class PageVideosController extends Controller
         $context['hero'] = $hero;
         $context['featured'] = $featured;
 
-        return new TimberResponse('templates/front-page.twig', $context);
+        return new TimberResponse('templates/content-category.twig', $context);
     }
 }

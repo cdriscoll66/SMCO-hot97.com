@@ -45,12 +45,7 @@ class ContentCategory extends Term
             // 'name' => self::getTaxonomy(),
             'singular' => __('Content Category', 'colab'),
             'plural' => __('Content Categories', 'colab'),
-            'args' => [
-                'rewrite' => [
-                    'slug' => 'content',
-                    'with_front' => false,
-                ],
-            ],
+            'args' => [],
         ];
 
         return wp_parse_args($args['args'], [
@@ -84,7 +79,7 @@ class ContentCategory extends Term
             'show_ui'           => true,         // Default is 'public' value.
             'show_admin_column' => true,         // Default is "false".
             // 'public' => true,                    // Default is "true".
-            // 'publicly_queryable' => true,        // Default is 'public' value.
+            'publicly_queryable' => false,        // Default is 'public' value.
             // 'show_in_menu' => true,              // Default is 'show_ui' value.
             // 'show_in_nav_menus' => true,         // Default is 'public' value.
             'show_in_rest' => true,              // Default is "false".

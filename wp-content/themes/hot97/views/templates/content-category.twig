@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <main id="main">
+        <h1>{{ title }}</h1>
+
+        {# Hero #}
+        {% if hero %}
+            {% for post in hero %}
+                {% include "components/molecules/hero.twig" %}
+            {% endfor %}
+        {% endif %}
+
+        {# Featured Posts #}
+        {% if featured_posts %}
+            {% include "components/organisms/featured-carousel.twig" %}
+        {% endif %}
+
+        {# Ad goes here #}
+
+        {# Featured Categories #}
+        {% if featured %}
+            {% include "components/organisms/featured-carousel.twig" %}
+        {% endif %}
+
+        {# Latest Posts #}
+
+        {# Pre-footer CTA #}
+
+    </main>
+{% endblock %}

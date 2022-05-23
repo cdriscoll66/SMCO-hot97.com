@@ -93,7 +93,7 @@ class FrontPageController extends Controller
                     // Get the featured posts
                     $featured_posts = Post::builder()
                         ->whereIdIn($featured_posts_IDs)
-                        ->orderBy('menu_order')
+                        ->orderBy('post__in')
                         ->get();
 
                     // Get posts in the same category, excluding the featured posts

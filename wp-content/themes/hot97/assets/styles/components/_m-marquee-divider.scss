@@ -33,22 +33,24 @@
   width: 102vw;
   z-index: 2;
 
+  .m-marquee-divider__marquee__inner {
+    display: flex;
+    flex-wrap: none;
+  }
+
   span {
     font-family: var(--heading--font-family);
     font-weight: var(--heading--font-weight);
-    font-size: 6vw;
+    font-size: 120px;
     line-height: 1;
     text-transform: uppercase;
     display: inline-block;
     white-space: nowrap;
     color: white;
-    width: 26vw;
-    text-shadow:  26vw 0 white,
-                  calc(26vw * 2) 0 white,
-                  calc(26vw * 3) 0 white,
-                  calc(26vw * 4) 0 white;
+    width: auto;
+    padding: 0 30px;
     will-change: transform;
-    animation: marquee 2.5s linear infinite;
+    animation: marquee 10s linear infinite;
   }
 }
 

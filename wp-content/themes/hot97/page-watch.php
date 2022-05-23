@@ -37,6 +37,18 @@ class PageWatchController extends Controller
             return $this;
         });
 
+        QueryBuilder::macro('contentCategory', function (int $term_id) {
+            $this->params['tax_query'] = [
+                [
+                    'taxonomy' => 'content-category',
+                    'field' => 'term_id',
+                    'terms' => $term_id,
+                ]
+            ];
+
+            return $this;
+        });
+
         $context = Timber::get_context();
         $page = new Page();
 
@@ -53,11 +65,17 @@ class PageWatchController extends Controller
 
         if ($page_config) {
             if ($page_config['hero']) {
-                $hero = Post::builder()
+                $collection = Post::builder()
                     ->whereIdIn($page_config['hero'])
                     ->get();
 
-                $hero = $hero->map(function($item) {
+                $collection_IDs_as_array = $collection->map(function($item) {
+                    return $item->id;
+                })->toArray();
+
+                $exclude = array_merge($exclude, $collection_IDs_as_array);
+
+                $hero = $collection->map(function($item) {
                     return new HeroViewModel($item);
                 });
             }
@@ -133,9 +151,18 @@ class PageWatchController extends Controller
             }
         }
 
+        // Latest Posts
+        $latest_posts = Post::builder()
+            ->whereIdNotIn($exclude)
+            ->contentCategory(8)
+            ->orderBy('date', 'desc')
+            ->limit(15)
+            ->get();
+
         $context['hero'] = $hero;
         $context['featured_posts'] = $featured_posts;
         $context['featured'] = $featured;
+        $context['latest_posts'] = $latest_posts;
 
         return new TimberResponse('templates/content-category.twig', $context);
     }

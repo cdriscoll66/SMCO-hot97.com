@@ -125,9 +125,17 @@ class ContentCategoryAbstractController extends Controller
                             ->orderBy('post__in')
                             ->get();
 
+                        // Get the IDs of this new collection, to add into the $exclude array
+                        $featured_posts_as_array = $featured_posts->map(function($item) {
+                            return $item->id;
+                        })->toArray();
+
+                        // Add to exclude array
+                        $exclude = array_merge($exclude, $featured_posts_as_array);
+
                         // Get posts in the same category, excluding the featured posts
                         $other_posts = Post::builder()
-                            ->whereIdNotIn($featured_posts_IDs)
+                            ->whereIdNotIn($exclude)
                             ->category($term->term_id)
                             ->limit($post_count - count($featured_posts_IDs))
                             ->orderBy('date', 'desc')
@@ -136,10 +144,13 @@ class ContentCategoryAbstractController extends Controller
                         // Add the other posts collection to the featured posts collection
                         $collection = $featured_posts->concat($other_posts);
 
-                        // Get the IDs of this new collection, to later add into the $exclude array
+                        // Get the IDs of this new collection, to add into the $exclude array
                         $collection_IDs_as_array = $collection->map(function($item) {
                             return $item->id;
                         })->toArray();
+
+                        // Add to exclude array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
 
                         $array = [
                             'term' => new Term($term),
@@ -148,8 +159,7 @@ class ContentCategoryAbstractController extends Controller
                             }),
                         ];
 
-                        // Add to exclude array and featured array
-                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        // Add to featured array
                         array_push($featured, $array);
 
                     } else {

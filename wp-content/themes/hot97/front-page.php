@@ -59,13 +59,20 @@ class FrontPageController extends Controller
 
         if ($page_config) {
             if ($page_config['hero']) {
-                // Get hero post
-                $hero = Post::builder()
+                // Get hero post as a collection
+                $collection = Post::builder()
                     ->whereIdIn($page_config['hero'])
                     ->get();
 
-                // Instantiate hero post as HeroViewModel using the map method
-                $hero = $hero->map(function($item) {
+                $collection_IDs_as_array = $collection->map(function($item) {
+                    return $item->id;
+                })->toArray();
+
+                // Add hero post to exclude array
+                $exclude = array_merge($exclude, $collection_IDs_as_array);
+
+                // Map over collection to instantiate as HeroViewModel
+                $hero = $collection->map(function($item) {
                     return new HeroViewModel($item);
                 });
             }
@@ -83,48 +90,83 @@ class FrontPageController extends Controller
                 });
             }
 
+            // Featured categories
             if ($page_config['featured_categories']) {
                 // Loop over each featured category
                 foreach ($page_config['featured_categories'] as $group) {
                     $term = $group['category'];
                     $post_count = $group['number_of_posts'];
-                    $featured_posts_IDs = $group['featured_posts'];
+                    $collection = [];
 
-                    // Get the featured posts
-                    $featured_posts = Post::builder()
-                        ->whereIdIn($featured_posts_IDs)
-                        ->orderBy('post__in')
-                        ->get();
+                    if ($featured_posts_IDs = $group['featured_posts']) {
+                        // Get the featured posts
+                        $featured_posts = Post::builder()
+                            ->whereIdIn($featured_posts_IDs)
+                            ->orderBy('post__in')
+                            ->get();
 
-                    // Get posts in the same category, excluding the featured posts
-                    $other_posts = Post::builder()
-                        ->whereIdNotIn($featured_posts_IDs)
-                        ->category($term->term_id)
-                        ->limit($post_count - count($featured_posts_IDs))
-                        ->orderBy('date', 'desc')
-                        ->get();
+                        // Get the IDs of this new collection, to add into the $exclude array
+                        $featured_posts_as_array = $featured_posts->map(function($item) {
+                            return $item->id;
+                        })->toArray();
 
-                    // Add the other posts collection to the featured posts collection
-                    $collection = $featured_posts->concat($other_posts);
+                        // Add to exclude array
+                        $exclude = array_merge($exclude, $featured_posts_as_array);
 
-                    // Get the IDs of this new collection, to later add into the $exclude array
-                    $collection_IDs_as_array = $collection->map(function($item) {
-                        return $item->id;
-                    })->toArray();
+                        // Get posts in the same category, excluding the featured posts
+                        $other_posts = Post::builder()
+                            ->whereIdNotIn($exclude)
+                            ->category($term->term_id)
+                            ->limit($post_count - count($featured_posts_IDs))
+                            ->orderBy('date', 'desc')
+                            ->get();
 
-                    // Format data
-                    $array = [
-                        'term' => new Term($term),
-                        'posts' => $collection->map(function($item) {
-                            return new CardViewModel($item);
-                        }),
-                    ];
+                        // Add the other posts collection to the featured posts collection
+                        $collection = $featured_posts->concat($other_posts);
 
-                    // Add IDs into $exclude array
-                    $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        // Get the IDs of this new collection, to add into the $exclude array
+                        $collection_IDs_as_array = $collection->map(function($item) {
+                            return $item->id;
+                        })->toArray();
 
-                    // Push data into $featured array
-                    array_push($featured, $array);
+                        // Add to exclude array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+
+                        $array = [
+                            'term' => new Term($term),
+                            'posts' => $collection->map(function($item) {
+                                return new CardViewModel($item);
+                            }),
+                        ];
+
+                        // Add to featured array
+                        array_push($featured, $array);
+
+                    } else {
+                        // Get posts in this category
+                        $collection = Post::builder()
+                            ->whereIdNotIn($exclude)
+                            ->category($term->term_id)
+                            ->limit($post_count)
+                            ->orderBy('date', 'desc')
+                            ->get();
+
+                        // Get the IDs of this new collection, to later add into the $exclude array
+                        $collection_IDs_as_array = $collection->map(function($item) {
+                            return $item->id;
+                        })->toArray();
+
+                        $array = [
+                            'term' => new Term($term),
+                            'posts' => $collection->map(function($item) {
+                                return new CardViewModel($item);
+                            }),
+                        ];
+
+                        // Add to exclude array and featured array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        array_push($featured, $array);
+                    }
                 }
             }
 

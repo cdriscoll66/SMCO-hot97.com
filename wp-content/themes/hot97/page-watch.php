@@ -60,11 +60,13 @@ class PageWatchController extends Controller
 
         $exclude = [];
         $hero = [];
-        $featured_posts = [];
+        $page_featured_posts = [];
         $featured = [];
 
         if ($page_config) {
+            // Hero
             if ($page_config['hero']) {
+                // Get hero post as a collection
                 $collection = Post::builder()
                     ->whereIdIn($page_config['hero'])
                     ->get();
@@ -73,46 +75,55 @@ class PageWatchController extends Controller
                     return $item->id;
                 })->toArray();
 
+                // Add hero post to exclude array
                 $exclude = array_merge($exclude, $collection_IDs_as_array);
 
+                // Map over collection to instantiate as HeroViewModel
                 $hero = $collection->map(function($item) {
                     return new HeroViewModel($item);
                 });
             }
 
+            // Featured posts (posts directly below the hero)
             if ($post_ids = $page_config['featured_posts']) {
                 // Get featured posts, ordered by menu order
-                $posts = Post::builder()
+                $collection = Post::builder()
                     ->whereIdIn($post_ids)
                     ->orderBy('post__in')
                     ->get();
 
-                    $collection_IDs_as_array = $posts->map(function($item) {
+                    $collection_IDs_as_array = $collection->map(function($item) {
                         return $item->id;
                     })->toArray();
 
                 // Map over collection and instantiate as CardViewModel
-                $featured_posts = [
-                    'posts' => $posts->map(function($item) {
+                $array = [
+                    'term' => 'nope',
+                    'posts' => $collection->map(function($item) {
                         return new CardViewModel($item);
                     }),
                 ];
 
                 $exclude = array_merge($exclude, $collection_IDs_as_array);
+                $page_featured_posts = $array;
             }
 
+            // Featured categories
             if ($page_config['featured_categories']) {
+                // Loop over each featured category
                 foreach ($page_config['featured_categories'] as $group) {
                     $term = $group['category'];
                     $post_count = $group['number_of_posts'];
                     $collection = [];
 
                     if ($featured_posts_IDs = $group['featured_posts']) {
+                        // Get the featured posts
                         $featured_posts = Post::builder()
                             ->whereIdIn($featured_posts_IDs)
                             ->orderBy('post__in')
                             ->get();
 
+                        // Get posts in the same category, excluding the featured posts
                         $other_posts = Post::builder()
                             ->whereIdNotIn($featured_posts_IDs)
                             ->category($term->term_id)
@@ -120,33 +131,50 @@ class PageWatchController extends Controller
                             ->orderBy('date', 'desc')
                             ->get();
 
+                        // Add the other posts collection to the featured posts collection
                         $collection = $featured_posts->concat($other_posts);
+
+                        // Get the IDs of this new collection, to later add into the $exclude array
                         $collection_IDs_as_array = $collection->map(function($item) {
                             return $item->id;
                         })->toArray();
+
+                        $array = [
+                            'term' => new Term($term),
+                            'posts' => $collection->map(function($item) {
+                                return new CardViewModel($item);
+                            }),
+                        ];
+
+                        // Add to exclude array and featured array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        array_push($featured, $array);
+
                     } else {
-                        $other_posts = Post::builder()
+                        // Get posts in this category
+                        $collection = Post::builder()
                             ->whereIdNotIn($exclude)
                             ->category($term->term_id)
                             ->limit($post_count)
                             ->orderBy('date', 'desc')
                             ->get();
 
-                        $collection = $other_posts;
+                        // Get the IDs of this new collection, to later add into the $exclude array
                         $collection_IDs_as_array = $collection->map(function($item) {
                             return $item->id;
                         })->toArray();
+
+                        $array = [
+                            'term' => new Term($term),
+                            'posts' => $collection->map(function($item) {
+                                return new CardViewModel($item);
+                            }),
+                        ];
+
+                        // Add to exclude array and featured array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        array_push($featured, $array);
                     }
-
-                    $array = [
-                        'term' => new Term($term),
-                        'posts' => $collection->map(function($item) {
-                            return new CardViewModel($item);
-                        }),
-                    ];
-
-                    $exclude = array_merge($exclude, $collection_IDs_as_array);
-                    array_push($featured, $array);
                 }
             }
         }
@@ -157,10 +185,13 @@ class PageWatchController extends Controller
             ->contentCategory(8)
             ->orderBy('date', 'desc')
             ->limit(15)
+            // pagination needs to go here for load more functionality
             ->get();
 
+        // TODO: Pre-footer CTA
+
         $context['hero'] = $hero;
-        $context['featured_posts'] = $featured_posts;
+        $context['featured_posts'] = $page_featured_posts;
         $context['featured'] = $featured;
         $context['latest_posts'] = $latest_posts;
 

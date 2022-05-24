@@ -13,14 +13,28 @@
 
         {# Featured Posts #}
         {% if featured_posts %}
-            {% include "components/organisms/featured-carousel.twig" %}
+            <section class="o-featured-carousel">
+                <div class="m-section-header">
+                    <h2 class="m-section-header__heading a-section-heading">Featured</h2>
+                </div>
+
+                <ul class="o-featured-carousel__list js-featured-carousel">
+                    {% for post in featured_posts.posts %}
+                        <li class="o-featured-carousel__item js-featured-carousel-slide">
+                            {% include "components/molecules/card.twig" %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
         {% endif %}
 
         {# Ad goes here #}
 
         {# Featured Categories #}
         {% if featured %}
-            {% include "components/organisms/featured-carousel.twig" %}
+            {% for group in featured %}
+                {% include "components/organisms/featured-carousel.twig" %}
+            {% endfor %}
         {% endif %}
 
         {# Latest Posts #}

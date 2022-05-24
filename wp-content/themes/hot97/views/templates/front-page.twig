@@ -11,6 +11,11 @@
             {% endfor %}
         {% endif %}
 
+        {# Marquee #}
+        {% if marquee %}
+            {% include "components/molecules/marquee-divider.twig" %}
+        {% endif %}
+
         {# Featured Categories #}
         {% if featured %}
             {% for group in featured %}

@@ -1,0 +1,21 @@
+<div class="m-marquee-divider">
+    {% if marquee.title %}
+        <div class="m-marquee-divider__marquee">
+            <div class="m-marquee-divider__marquee__inner">
+                <span>{{ marquee.title }}</span>
+                <span>{{ marquee.title }}</span>
+                <span>{{ marquee.title }}</span>
+                <span>{{ marquee.title }}</span>
+                <span>{{ marquee.title }}</span>
+                <span>{{ marquee.title }}</span>
+            </div>
+        </div>
+    {% endif %}
+    {% if marquee.tile %}
+        <div class="o-tiled">
+            <div class="o-tiled__tile" style="background-image:url({{ marquee.tile['url'] }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ marquee.tile['url'] }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ marquee.tile['url'] }})"></div>
+        </div>
+    {% endif %}
+</div>

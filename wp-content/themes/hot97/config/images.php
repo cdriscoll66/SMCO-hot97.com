@@ -17,5 +17,11 @@ return [
             'height' => 600,
             'crop' => true,
         ],
+        [
+            'name' => 'prefooter_image',
+            'width' => 1044,
+            'height' => 630,
+            'crop' => true,
+        ],
     ],
 ];

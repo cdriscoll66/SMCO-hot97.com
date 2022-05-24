@@ -22,7 +22,8 @@
   }
 }
 
-.m-marquee-divider__marquee {
+.m-marquee-divider__marquee,
+.m-marquee-title {
   position: absolute;
   top: -3rem;
   left: -1vw;
@@ -32,11 +33,13 @@
   width: 102vw;
   z-index: 2;
 
-  .m-marquee-divider__marquee__inner {
+  .m-marquee-divider__marquee__inner,
+  .m-marquee-title__inner {
     display: flex;
     flex-wrap: none;
   }
 
+  h1,
   span {
     font-family: var(--heading--font-family);
     font-weight: var(--heading--font-weight);
@@ -56,6 +59,25 @@
       font-size: 120px;
       padding: 0 30px;
     }
+  }
+}
+
+.m-marquee-title {
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: rotate(0deg);
+  width: 100vw;
+
+  h1,
+  span {
+    will-change: none;
+    animation: none;
+    transform: translateX(-3rem);
+  }
+
+  span {
+    pointer-events: none;
   }
 }
 

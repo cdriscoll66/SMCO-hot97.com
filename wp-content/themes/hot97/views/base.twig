@@ -7,11 +7,25 @@
     {% include 'components/organisms/preheader.twig' %}
     {% include 'components/organisms/header.twig' %}
 
-    {% block content %}
-      <p>
-        Sorry, no content
-      </p>
+    {% block banner %}
     {% endblock %}
+
+    <main id="main" class="o-main {{main_class}}">
+        <div class="o-content">
+            {% block content %}
+            <p>
+                Sorry, no content
+            </p>
+            {% endblock %}
+        </div>
+
+        {% if sidebar %}
+        <div class="o-sidebar">
+            {% block sidebar %}
+            {% endblock %}
+        </div>
+        {% endif %}
+    </main>
 
     {% include 'components/organisms/prefooter.twig' %}
 

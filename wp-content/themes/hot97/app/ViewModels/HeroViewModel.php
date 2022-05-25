@@ -39,6 +39,11 @@ class HeroViewModel extends ViewModel
         return $this->post->isHot();
     }
 
+    public function publishDate()
+    {
+        return $this->post->post_date();
+    }
+
     public function excerpt()
     {
         return $this->post->getExcerpt() ?: wp_trim_words($this->post->content, 20);
@@ -46,6 +51,19 @@ class HeroViewModel extends ViewModel
 
     public function video()
     {
-        return 'video embed goes here';
+        $videourl = get_post_meta( $this->post->ID, '_jwppp-video-url-1' );
+        return $videourl[0];
+    }
+
+    public function videoTitle()
+    {
+        $videotitle = get_post_meta( $this->post->ID, '_jwppp-video-title-1' );
+        return $videotitle[0];
+    }
+
+    public function videoDescription()
+    {
+        $videodesc = get_post_meta( $this->post->ID, '_jwppp-video-description-1' );
+        return $videodesc[0];
     }
 }

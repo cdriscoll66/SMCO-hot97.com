@@ -1,5 +1,5 @@
 .o-prefooter {
-  background-color: black;
+  background-color: $color-black;
   padding: 4rem 0 8rem;
 }
 
@@ -57,7 +57,7 @@
   .o-prefooter__subhead {
     text-transform: uppercase;
     font-family: monospace;
-    color: black;
+    color: $color-black;
     font-size: .875rem;
     padding: 0;
   }
@@ -120,7 +120,7 @@
       }
 
       &:hover {
-        background-color: black!important;
+        background-color: $color-black!important;
         color: white!important;
       }
 

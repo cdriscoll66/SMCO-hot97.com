@@ -8,6 +8,7 @@
 /** Mixins */
 @import 'mixins/cover';
 @import 'mixins/paper-tear';
+@import 'mixins/lock';
 
 
 /** Config */
@@ -44,3 +45,4 @@
 @import 'components/o-tiled';
 @import 'components/o-dj-carousel';
 @import 'components/o-featured-carousel';
+@import 'components/o-hero';

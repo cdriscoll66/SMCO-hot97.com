@@ -1,7 +1,6 @@
 .m-marquee-divider {
   position: relative;
-  background-color: var(--global--color-hot-yellow-100);
-  height: 500px;
+  background-color: var(--global--color-hot-yellow-900);
 
   @include media (laptop) {
     @include paper-tear-bottom-inner;
@@ -22,10 +21,11 @@
   }
 }
 
+
 .m-marquee-divider__marquee,
 .m-marquee-title {
-  position: absolute;
-  top: -3rem;
+  position: relative;
+  top: 0;
   left: -1vw;
   padding: 2rem 0;
   background-color: $color-black;
@@ -42,6 +42,7 @@
     display: flex;
     flex-wrap: none;
   }
+  
 
   h1,
   span {
@@ -66,8 +67,6 @@
 }
 
 .m-marquee-title {
-  position: relative;
-  top: 0;
   left: 0;
   transform: rotate(0deg);
   width: 100vw;

@@ -1,7 +1,6 @@
 <article class="hero">
-    {% if post.video %}
-        {{ post.video }}
-    {% endif %}
+
+    <div>
     <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
     {% if post.isHot %}
         <p>hot</p>
@@ -15,4 +14,12 @@
     {% if post.excerpt %}
         <p>{{ post.excerpt }}</p>
     {% endif %}
+    </div>
+
+        {% if post.video %}
+    <div>
+        {% include "components/molecules/hero-video.twig" %}
+    </div>
+    {% endif %}
+
 </article>

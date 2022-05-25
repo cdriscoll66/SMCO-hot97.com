@@ -1,13 +1,13 @@
 .o-featured-carousel {
-  background-color: black;
-  padding: 40px 0 10px;
+  background-color: $color-black;
+  padding: 10px 0 40px;
 
   .m-section-header {
     padding: 0 20px;
   }
 
   @include media(laptop) {
-    padding: 40px 0 10px 0;
+    padding: 10 0 40px 0;
 
     .m-section-header {
       padding-left: 50px;
@@ -15,7 +15,7 @@
   }
 
   @include media(desktop) {
-    padding: 40px 0 10px 100px;
+    padding: 10px 0 30px 50px;
 
     .m-section-header {
       padding-left: 0;

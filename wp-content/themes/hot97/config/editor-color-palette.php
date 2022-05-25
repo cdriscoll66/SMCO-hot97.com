@@ -63,7 +63,7 @@ add_theme_support('editor-color-palette', [
     [
         'name' => esc_attr__('Black', 'colab'),
         'slug' => 'black',
-        'color' => '#000',
+        'color' => '#0e0900',
     ],
     [
         'name' => esc_attr__('White', 'colab'),

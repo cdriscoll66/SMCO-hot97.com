@@ -46,7 +46,9 @@ class HeroViewModel extends ViewModel
 
     public function excerpt()
     {
-        return $this->post->getExcerpt() ?: wp_trim_words($this->post->content, 20);
+        $excerpt = $this->post->preview->read_more('') ?: wp_trim_words($this->post->content, 10);
+
+        return $excerpt;
     }
 
     public function video()

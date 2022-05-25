@@ -206,6 +206,7 @@ class FrontPageController extends Controller
         $context['hero'] = $hero;
         $context['featured'] = $featured;
         $context['djs'] = $djs;
+        $context['home_ctas'] = $page_config['home-ctas'];
         $context['other'] = $other;
 
         $context['prefooter_cta'] = get_field('home_prefooter');

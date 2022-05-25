@@ -1,7 +1,6 @@
 .m-marquee-divider {
   position: relative;
-  background-color: var(--global--color-hot-yellow-100);
-  height: 500px;
+  background-color: var(--global--color-hot-yellow-900);
 
   @include media (laptop) {
     @include paper-tear-bottom-inner;
@@ -23,8 +22,8 @@
 }
 
 .m-marquee-divider__marquee {
-  position: absolute;
-  top: -3rem;
+  position: relative;
+  top: 0;
   left: -1vw;
   padding: 2rem 0;
   background-color: black;

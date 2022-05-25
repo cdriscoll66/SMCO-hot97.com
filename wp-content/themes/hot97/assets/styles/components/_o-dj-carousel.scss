@@ -4,7 +4,7 @@
   .o-tiled {
     height: 300px;
     @include media(laptop){
-      height: 994px;
+      height: 885px;
     }
     .o-tiled__tile {
       background-repeat: repeat-x;
@@ -17,7 +17,6 @@
   }
   @include media (laptop) {
     @include paper-tear-bottom-inner;
-    @include paper-tear-top-inner;
   }
 }
 // CD - just adding this as an example - I've add a height because of lack of content. should be adjusted once everything is set.
@@ -30,7 +29,7 @@
 
   @include media (laptop) {
     // margin right is based on width of wide aligned blocks. this may need changed - didn't get a sense of width rules from comps
-    width: calc(100vw - ((100vw - var(--responsive--alignwide-width)) / 2 ));
+    width: calc(100vw - 50px);
     position: absolute;
   }
 }

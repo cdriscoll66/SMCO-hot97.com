@@ -9,29 +9,40 @@
  * different template.
  */
 
-namespace App;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Rareloop\Lumberjack\QueryBuilder;
 use Timber\Timber;
 use App\PostTypes\Post;
-use App\PostTypes\DJ;
 use App\PostTypes\Page;
 use Timber\Term;
 use App\ViewModels\CardViewModel;
 use App\ViewModels\HeroViewModel;
-use App\ViewModels\DJCardViewModel;
 
-class FrontPageController extends Controller
+class ContentCategoryAbstractController extends Controller
 {
+    public $term_id = NULL;
+    public $page_config_field_name = NULL;
+
     public function handle()
     {
-        // Create macro for category query method
         QueryBuilder::macro('category', function (int $term_id) {
             $this->params['tax_query'] = [
                 [
                     'taxonomy' => 'category',
+                    'field' => 'term_id',
+                    'terms' => $term_id,
+                ]
+            ];
+
+            return $this;
+        });
+
+        QueryBuilder::macro('contentCategory', function (int $term_id) {
+            $this->params['tax_query'] = [
+                [
+                    'taxonomy' => 'content-category',
                     'field' => 'term_id',
                     'terms' => $term_id,
                 ]
@@ -47,17 +58,15 @@ class FrontPageController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
-        // Get config fields
-        $page_config = get_field('home_page_fields', 'options');
+        $page_config = get_field($this->page_config_field_name, 'options');
 
-        // Setup arrays
         $exclude = [];
         $hero = [];
+        $page_featured_posts = [];
         $featured = [];
-        $djs = [];
-        $other = [];
 
         if ($page_config) {
+            // Hero
             if ($page_config['hero']) {
                 // Get hero post as a collection
                 $collection = Post::builder()
@@ -77,22 +86,28 @@ class FrontPageController extends Controller
                 });
             }
 
-            if ($page_config['marquee']) {
-                $context['marquee']['title'] = $page_config['marquee']['marquee_title'];
-                $context['marquee']['tile'] = $page_config['marquee']['marquee_image'];
-            }
-
-            if ($dj_ids = $page_config['featured_djs']) {
-                // Get DJs, ordered by menu order
-                $featured_djs = DJ::builder()
-                    ->whereIdIn($dj_ids)
+            // Featured posts (posts directly below the hero)
+            if ($post_ids = $page_config['featured_posts']) {
+                // Get featured posts, ordered by menu order
+                $collection = Post::builder()
+                    ->whereIdIn($post_ids)
                     ->orderBy('post__in')
                     ->get();
 
-                // Map over collection and instantiate as DJCardViewModel
-                $djs = $featured_djs->map(function($item) {
-                    return new DJCardViewModel($item);
-                });
+                    $collection_IDs_as_array = $collection->map(function($item) {
+                        return $item->id;
+                    })->toArray();
+
+                // Map over collection and instantiate as CardViewModel
+                $array = [
+                    'term' => 'nope',
+                    'posts' => $collection->map(function($item) {
+                        return new CardViewModel($item);
+                    }),
+                ];
+
+                $exclude = array_merge($exclude, $collection_IDs_as_array);
+                $page_featured_posts = $array;
             }
 
             // Featured categories
@@ -174,45 +189,24 @@ class FrontPageController extends Controller
                     }
                 }
             }
-
-            if ($page_config['other_categories']) {
-                // Loop over the other categories
-                foreach ($page_config['other_categories'] as $group) {
-                    $term = $group['category'];
-
-                    // Get posts in this category, excluding all posts from above
-                    $posts = Post::builder()
-                        ->whereIdNotIn($exclude)
-                        ->category($term->term_id)
-                        ->limit(6)
-                        ->orderBy('date', 'desc')
-                        ->get();
-
-                    // Format data
-                    $array = [
-                        'term' => new Term($term),
-                        'posts' => $posts->map(function($item) {
-                            return new CardViewModel($item);
-                        }),
-                    ];
-
-                    // Push to $other array
-                    array_push($other, $array);
-                }
-            }
         }
 
-        // Pass arrays into context variables
+        // Latest Posts
+        $latest_posts = Post::builder()
+            ->whereIdNotIn($exclude)
+            ->contentCategory($this->term_id)
+            ->orderBy('date', 'desc')
+            ->limit(15)
+            // pagination needs to go here for load more functionality
+            ->get();
+
+        // TODO: Pre-footer CTA
+
         $context['hero'] = $hero;
+        $context['featured_posts'] = $page_featured_posts;
         $context['featured'] = $featured;
-        $context['djs'] = $djs;
-        $context['home_ctas'] = $page_config['home-ctas'];
-        $context['other'] = $other;
+        $context['latest_posts'] = $latest_posts;
 
-        $context['prefooter_cta'] = get_field('home_prefooter');
-        $context['front_page_options'] = get_field('front_page_options');
-
-        return new TimberResponse('templates/front-page.twig', $context);
+        return new TimberResponse('templates/content-category.twig', $context);
     }
-
 }

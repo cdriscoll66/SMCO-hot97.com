@@ -1,0 +1,45 @@
+{% extends "base.twig" %}
+
+{% block content %}
+    <main id="main">
+        <h1>{{ title }}</h1>
+
+        {# Hero #}
+        {% if hero %}
+            {% for post in hero %}
+                {% include "components/molecules/hero.twig" %}
+            {% endfor %}
+        {% endif %}
+
+        {# Featured Posts #}
+        {% if featured_posts %}
+            <section class="o-featured-carousel">
+                <div class="m-section-header">
+                    <h2 class="m-section-header__heading a-section-heading">Featured</h2>
+                </div>
+
+                <ul class="o-featured-carousel__list js-featured-carousel">
+                    {% for post in featured_posts.posts %}
+                        <li class="o-featured-carousel__item js-featured-carousel-slide">
+                            {% include "components/molecules/card.twig" %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
+        {% endif %}
+
+        {# Ad goes here #}
+
+        {# Featured Categories #}
+        {% if featured %}
+            {% for group in featured %}
+                {% include "components/organisms/featured-carousel.twig" %}
+            {% endfor %}
+        {% endif %}
+
+        {# Latest Posts #}
+
+        {# Pre-footer CTA #}
+
+    </main>
+{% endblock %}

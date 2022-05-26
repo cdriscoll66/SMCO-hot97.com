@@ -1,0 +1,40 @@
+{% extends "base.twig" %}
+
+{% block banner %}
+<div class="m-marquee-title">
+    <div class="m-marquee-title__inner">
+        <h1>{{ title }}</h1>
+        <span>{{ title }}</span>
+        <span>{{ title }}</span>
+        <span>{{ title }}</span>
+        <span>{{ title }}</span>
+        <span>{{ title }}</span>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+    <div class="typography">
+        {{ content|raw }}
+    </div>
+
+    {% if posts|length > 0 %}
+        <ul class="posts o-post-feed">
+            {% include "templates/partials/post-feed.twig" %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    <span class="load-more-observer">load</span>
+
+{% endblock %}
+
+{% block sidebar %}
+    TEST sidebar
+{% endblock %}
+
+
+
+

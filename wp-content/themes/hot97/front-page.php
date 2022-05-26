@@ -83,8 +83,6 @@ class FrontPageController extends Controller
                 $context['marquee']['tile'] = $page_config['marquee']['marquee_image'];
             }
 
-            $context['dj_bg_image'] = $page_config['dj_background_image']['url'];
-
             if ($dj_ids = $page_config['featured_djs']) {
                 // Get DJs, ordered by menu order
                 $featured_djs = DJ::builder()
@@ -208,6 +206,8 @@ class FrontPageController extends Controller
                 }
             }
         }
+
+        $context['dj_bg_image'] = $page_config['dj_background_image'] ? $page_config['dj_background_image']['url'] : NULL;
 
         // Pass arrays into context variables
         $context['hero'] = $hero;

@@ -20,6 +20,7 @@ use App\PostTypes\DJ;
 use App\PostTypes\Page;
 use Timber\Term;
 use App\ViewModels\CardViewModel;
+use App\ViewModels\FeatureCardViewModel;
 use App\ViewModels\HeroViewModel;
 use App\ViewModels\DJCardViewModel;
 
@@ -64,7 +65,7 @@ class FrontPageController extends Controller
                     ->whereIdIn($page_config['hero'])
                     ->get();
 
-                $collection_IDs_as_array = $collection->map(function($item) {
+                $collection_IDs_as_array = $collection->map(function ($item) {
                     return $item->id;
                 })->toArray();
 
@@ -72,7 +73,7 @@ class FrontPageController extends Controller
                 $exclude = array_merge($exclude, $collection_IDs_as_array);
 
                 // Map over collection to instantiate as HeroViewModel
-                $hero = $collection->map(function($item) {
+                $hero = $collection->map(function ($item) {
                     return new HeroViewModel($item);
                 });
             }
@@ -90,7 +91,7 @@ class FrontPageController extends Controller
                     ->get();
 
                 // Map over collection and instantiate as DJCardViewModel
-                $djs = $featured_djs->map(function($item) {
+                $djs = $featured_djs->map(function ($item) {
                     return new DJCardViewModel($item);
                 });
             }
@@ -111,7 +112,7 @@ class FrontPageController extends Controller
                             ->get();
 
                         // Get the IDs of this new collection, to add into the $exclude array
-                        $featured_posts_as_array = $featured_posts->map(function($item) {
+                        $featured_posts_as_array = $featured_posts->map(function ($item) {
                             return $item->id;
                         })->toArray();
 
@@ -130,7 +131,7 @@ class FrontPageController extends Controller
                         $collection = $featured_posts->concat($other_posts);
 
                         // Get the IDs of this new collection, to add into the $exclude array
-                        $collection_IDs_as_array = $collection->map(function($item) {
+                        $collection_IDs_as_array = $collection->map(function ($item) {
                             return $item->id;
                         })->toArray();
 
@@ -139,14 +140,13 @@ class FrontPageController extends Controller
 
                         $array = [
                             'term' => new Term($term),
-                            'posts' => $collection->map(function($item) {
+                            'posts' => $collection->map(function ($item) {
                                 return new CardViewModel($item);
                             }),
                         ];
 
                         // Add to featured array
                         array_push($featured, $array);
-
                     } else {
                         // Get posts in this category
                         $collection = Post::builder()
@@ -157,13 +157,13 @@ class FrontPageController extends Controller
                             ->get();
 
                         // Get the IDs of this new collection, to later add into the $exclude array
-                        $collection_IDs_as_array = $collection->map(function($item) {
+                        $collection_IDs_as_array = $collection->map(function ($item) {
                             return $item->id;
                         })->toArray();
 
                         $array = [
                             'term' => new Term($term),
-                            'posts' => $collection->map(function($item) {
+                            'posts' => $collection->map(function ($item) {
                                 return new CardViewModel($item);
                             }),
                         ];
@@ -184,15 +184,20 @@ class FrontPageController extends Controller
                     $posts = Post::builder()
                         ->whereIdNotIn($exclude)
                         ->category($term->term_id)
-                        ->limit(6)
+                        ->limit(7)
                         ->orderBy('date', 'desc')
                         ->get();
+
 
                     // Format data
                     $array = [
                         'term' => new Term($term),
-                        'posts' => $posts->map(function($item) {
-                            return new CardViewModel($item);
+                        'posts' => $posts->map(function ($item, $key) {
+                            if ($key === 0) {
+                                return new FeatureCardViewModel($item);
+                            } else {
+                                return new CardViewModel($item);
+                            }
                         }),
                     ];
 
@@ -214,5 +219,4 @@ class FrontPageController extends Controller
 
         return new TimberResponse('templates/front-page.twig', $context);
     }
-
 }

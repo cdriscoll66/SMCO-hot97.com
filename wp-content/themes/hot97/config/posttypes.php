@@ -7,6 +7,5 @@ return [
      */
     'register' => [
         App\PostTypes\DJ::class,
-        // App\PostTypes\Show::class,
     ],
 ];

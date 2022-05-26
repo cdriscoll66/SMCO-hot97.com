@@ -70,8 +70,8 @@
 
 .m-card__image-link {
   display: block;
-  width: 253px;
-  height: 253px;
+  width: 100%; //CD changed to make responsive
+  height: auto;
   clip-path: circle(50%);
 
   img {

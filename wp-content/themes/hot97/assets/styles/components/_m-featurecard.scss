@@ -1,0 +1,14 @@
+
+// m-featurecard is sharing some styles with o-hero - CD
+.m-featuredcard__media {
+}
+
+.m-featurecard__image-link {
+  @include lock(min-height, 260px, 600px, $breakpoint_md, $breakpoint_xxl);
+  width: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @include paper-tear-bottom-inner;
+
+}

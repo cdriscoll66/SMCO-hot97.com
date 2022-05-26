@@ -1,22 +1,22 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main id="main">
-        <h1>{{ title }}</h1>
 
-        <div class="typography">
-            {{ content|raw }}
-        </div>
+    <h1>{{ title }}</h1>
 
-        {% if posts|length > 0 %}
-            <ul class="posts">
-                {% include "templates/partials/post-feed.twig" %}
-            </ul>
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
+    <div class="typography">
+        {{ content|raw }}
+    </div>
 
-        {# {{ paginate_links }} #}
-        <span class="load-more-observer">load</span>
-    </main>
+    {% if posts|length > 0 %}
+        <ul class="posts">
+            {% include "templates/partials/post-feed.twig" %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    {# {{ paginate_links }} #}
+    <span class="load-more-observer">load</span>
+
 {% endblock %}

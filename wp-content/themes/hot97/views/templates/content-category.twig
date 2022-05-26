@@ -1,45 +1,44 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main id="main">
-        <h1>{{ title }}</h1>
 
-        {# Hero #}
-        {% if hero %}
-            {% for post in hero %}
-                {% include "components/molecules/hero.twig" %}
-            {% endfor %}
-        {% endif %}
+    <h1>{{ title }}</h1>
 
-        {# Featured Posts #}
-        {% if featured_posts %}
-            <section class="o-featured-carousel">
-                <div class="m-section-header">
-                    <h2 class="m-section-header__heading a-section-heading">Featured</h2>
-                </div>
+    {# Hero #}
+    {% if hero %}
+        {% for post in hero %}
+            {% include "components/molecules/hero.twig" %}
+        {% endfor %}
+    {% endif %}
 
-                <ul class="o-featured-carousel__list js-featured-carousel">
-                    {% for post in featured_posts.posts %}
-                        <li class="o-featured-carousel__item js-featured-carousel-slide">
-                            {% include "components/molecules/card.twig" %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            </section>
-        {% endif %}
+    {# Featured Posts #}
+    {% if featured_posts %}
+        <section class="o-featured-carousel">
+            <div class="m-section-header">
+                <h2 class="m-section-header__heading a-section-heading">Featured</h2>
+            </div>
 
-        {# Ad goes here #}
+            <ul class="o-featured-carousel__list js-featured-carousel">
+                {% for post in featured_posts.posts %}
+                    <li class="o-featured-carousel__item js-featured-carousel-slide">
+                        {% include "components/molecules/card.twig" %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
 
-        {# Featured Categories #}
-        {% if featured %}
-            {% for group in featured %}
-                {% include "components/organisms/featured-carousel.twig" %}
-            {% endfor %}
-        {% endif %}
+    {# Ad goes here #}
 
-        {# Latest Posts #}
+    {# Featured Categories #}
+    {% if featured %}
+        {% for group in featured %}
+            {% include "components/organisms/featured-carousel.twig" %}
+        {% endfor %}
+    {% endif %}
 
-        {# Pre-footer CTA #}
+    {# Latest Posts #}
 
-    </main>
+    {# Pre-footer CTA #}
+
 {% endblock %}

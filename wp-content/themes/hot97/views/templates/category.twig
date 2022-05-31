@@ -4,11 +4,9 @@
 <div class="m-marquee-title">
     <div class="m-marquee-title__inner">
         <h1>{{ title }}</h1>
-        <span>{{ title }}</span>
-        <span>{{ title }}</span>
-        <span>{{ title }}</span>
-        <span>{{ title }}</span>
-        <span>{{ title }}</span>
+            {% for i in 0..5 %}
+                <span>{{ title }}</span>
+            {% endfor %}
     </div>
 </div>
 {% endblock %}

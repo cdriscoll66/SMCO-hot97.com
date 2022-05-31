@@ -2,12 +2,10 @@
 <div class="o-home-ctas">
     <div class="m-marquee-title">
         <div class="m-marquee-title__inner">
-            <h2>Where Hip-Hop Lives</h2>
-            <span>Where Hip-Hop Lives</span>
-            <span>Where Hip-Hop Lives</span>
-            <span>Where Hip-Hop Lives</span>
-            <span>Where Hip-Hop Lives</span>
-            <span>Where Hip-Hop Lives</span>
+            <h1>Where Hip-Hop Lives</h1>
+                {% for i in 0..5 %}
+                    <span>Where Hip-Hop Lives</span>
+                {% endfor %}
         </div>
     </div>
     {% for home_cta in home_ctas %}

@@ -22,6 +22,9 @@
 
 .o-subfooter__image {
   flex-basis: 54%;
+  img {
+    width: 100%;
+  }
 }
 
 .o-subfooter__content {

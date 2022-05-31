@@ -23,11 +23,11 @@
 
         {# DJs #}
         <section class="o-dj-carousel alignfull has-background-color has-hot-yellow-100-background-color">
-            {% if front_page_options.dj_tiled_image %}
+            {% if dj_bg_image %}
             <div class="o-tiled">
-                <div class="o-tiled__tile" style="background-image:url({{ front_page_options.dj_tiled_image['url'] }})"></div>
-                <div class="o-tiled__tile" style="background-image:url({{ front_page_options.dj_tiled_image['url'] }})"></div>
-                <div class="o-tiled__tile" style="background-image:url({{ front_page_options.dj_tiled_image['url'] }})"></div>
+                <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+                <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+                <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
             </div>
             {% endif %}
 
@@ -54,18 +54,7 @@
         {# Other Categories #}
         {% if other %}
             {% for group in other %}
-                <h2>{{ group.term.name }}</h2>
-                <a href="{{ group.term.path }}">View All {{ group.term.name }}</a>
-
-                {% if group.posts %}
-                    <ul class="posts">
-                        {% for post in group.posts %}
-                            <li class="posts__item">
-                                {% include "components/molecules/card.twig" %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
+                {% include "components/organisms/other-categories.twig" %}
             {% endfor %}
         {% endif %}
     </main>

@@ -1,0 +1,82 @@
+.o-othercats {
+  background-color: var(--global--color-hot-yellow-900);
+}
+
+.o-othercats__container {
+  max-width: $breakpoint_xxl;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 0 20px;
+  @include media (laptop) {
+    flex-flow: row nowrap;
+  }
+  @include media (desktop) {
+    padding: 0 50px;
+  }
+}
+
+.o-othercats__cardblock {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.o-othercats__cards {
+flex: 0 1 70.8%;
+width: 100%;
+display: flex;
+flex-flow: row wrap;
+}
+
+
+
+
+.o-othercats__card {
+  width: 100%;
+  @include media(desktop) {
+    width: 33.3%;
+  }
+  .m-card {
+    height: 100%;
+  }
+}
+
+
+.o-othercats__adspace {
+  flex: 1 0 29.2%;
+  @include lock(padding-left, 20px, 50px, $breakpoint_xl, $breakpoint_xxl);
+  @include lock(padding-right, 20px, 50px, $breakpoint_xl, $breakpoint_xxl);
+  display: none;
+  @include media(laptop) {
+    display: block;
+  }
+}
+
+.o-othercats__adspace--mobile {
+  display: block;
+  margin: 20px auto;
+  @include media(laptop) {
+    display: none;
+  }
+}
+
+.o-othercats__button {
+  color: var(--global--color-hot-yellow-100);
+  font-size: rem(14px);
+  line-height: 1.4285;
+  font-family: monospace;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  border: 1px solid var(--global--color-hot-yellow-100);
+  border-radius: 50px;
+  padding: 10px;
+  transition: all .2s ease-in-out;
+  &:hover {
+    color: var(--global--color-hot-yellow-900);
+    background-color: var(--global--color-hot-yellow-100);
+  }
+}

@@ -1,0 +1,43 @@
+<article class="m-featurecard">
+  <div class="m-featurecard__container">
+    <div class="m-featurecard__text">
+      <div class="m-featurecard__terms">
+        {% if post.contentCategory %}
+          <span class="m-card__content-category">
+            <a href="{{ post.contentCategory.path }}">
+              {{ post.contentCategory.name }}
+            </a>
+          </span>
+        {% endif %}
+
+        {% if post.primaryCategory %}
+          <span class="m-card__category m-featurecard__category--primary">
+            <a class="has-hot-yellow-100-color" href="{{ post.primaryCategory.path }}">
+              {{ post.primaryCategory.name }}
+            </a>
+          </span>
+        {% endif %}
+
+        {% if post.isHot %}
+          <span class="m-featurecard__is-hot"><i class="fas fa-fire has-hot-yellow-100-color"></i></span>
+        {% endif %}
+      </div>
+
+      <h1 class="m-featurecard__title">
+        <a href="{{ post.link }}">{{ post.title }}</a>
+      </h1>
+    {% if post.excerpt %}
+        <p class="m-featurecard__excerpt">
+          {{ post.excerpt }}
+        </p>
+    {% endif %}
+    </div>
+
+    {% if post.thumbnail %}
+      <div class="m-featurecard__media">
+        <a class="m-featurecard__image-link" href="{{ post.link }}" style='background-image:url({{post.thumbnailurl}})'>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</article>

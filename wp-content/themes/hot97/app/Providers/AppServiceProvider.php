@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
             wp_enqueue_style('lumberjack/login.css', Theme::mix('/styles/login.css'), [], false);
         });
 
-        add_action('admin_enqueue_scripts', function () {
+        add_action('enqueue_block_editor_assets', function () {
             wp_enqueue_style('lumberjack/admin.css', Theme::mix('/styles/admin.css'), [], false);
         });
 

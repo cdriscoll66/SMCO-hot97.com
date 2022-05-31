@@ -42,13 +42,14 @@
     display: flex;
     flex-wrap: none;
   }
-  
+
 
   h1,
+  h2,
   span {
     font-family: var(--heading--font-family);
-    font-weight: var(--heading--font-weight);
-    font-size: 60px;
+    font-weight: var(--heading--font-weight-strong);
+    font-size: var(--global--font-size-xxl);
     line-height: 1;
     text-transform: uppercase;
     display: inline-block;
@@ -60,7 +61,7 @@
     animation: marquee 10s linear infinite;
 
     @include media (tablet) {
-      font-size: 120px;
+      font-size: var(--global--font-size-xxxl);
       padding: 0 30px;
     }
   }

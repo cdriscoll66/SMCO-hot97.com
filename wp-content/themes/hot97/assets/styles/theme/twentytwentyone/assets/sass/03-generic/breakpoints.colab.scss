@@ -85,6 +85,7 @@ $breakpoint_xxl: 1024px !default;
 	--responsive--spacing-horizontal: calc(2 * var(--global--spacing-horizontal) * 0.6);
 	--responsive--aligndefault-width: calc(100vw - var(--responsive--spacing-horizontal));
 	--responsive--alignwide-width: calc(100vw - var(--responsive--spacing-horizontal));
+	--responsive--alignwide-max-width: 1070px;
 	--responsive--alignfull-width: 100%;
 	--responsive--alignright-margin: var(--global--spacing-horizontal);
 	--responsive--alignleft-margin: var(--global--spacing-horizontal);
@@ -118,7 +119,8 @@ $breakpoint_xxl: 1024px !default;
 }
 
 %responsive-alignwide-width {
-	max-width: var(--responsive--alignwide-width);
+	width: var(--responsive--alignwide-width);
+  max-width: var(--responsive--alignwide-max-width);
 	margin-left: auto;
 	margin-right: auto;
 }

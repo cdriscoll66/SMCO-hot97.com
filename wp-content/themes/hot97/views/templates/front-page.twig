@@ -1,62 +1,62 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main id="main">
-        {# Hero #}
-        {% if hero %}
-            {% for post in hero %}
-                {% include "components/molecules/hero.twig" %}
-            {% endfor %}
+
+    {# Hero #}
+    {% if hero %}
+        {% for post in hero %}
+            {% include "components/molecules/hero.twig" %}
+        {% endfor %}
+    {% endif %}
+
+    {# Marquee #}
+    {% if marquee %}
+        {% include "components/molecules/marquee-divider.twig" %}
+    {% endif %}
+
+    {# Featured Categories #}
+    {% if featured %}
+        {% for group in featured %}
+            {% include "components/organisms/featured-carousel.twig" %}
+        {% endfor %}
+    {% endif %}
+
+    {# DJs #}
+    <section class="o-dj-carousel alignfull has-background-color has-hot-yellow-100-background-color">
+        {% if dj_bg_image %}
+        <div class="o-tiled">
+            <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+        </div>
         {% endif %}
 
-        {# Marquee #}
-        {% if marquee %}
-            {% include "components/molecules/marquee-divider.twig" %}
-        {% endif %}
-
-        {# Featured Categories #}
-        {% if featured %}
-            {% for group in featured %}
-                {% include "components/organisms/featured-carousel.twig" %}
-            {% endfor %}
-        {% endif %}
-
-        {# DJs #}
-        <section class="o-dj-carousel alignfull has-background-color has-hot-yellow-100-background-color">
-            {% if dj_bg_image %}
-            <div class="o-tiled">
-                <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
-                <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
-                <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+        <div class="o-dj-carousel__inner">
+            <div class="o-dj-carousel__header m-section-header">
+                <h2 class="o-dj-carousel__title a-section-heading">HOT DJS</h2>
+                <a class="o-dj-carousel__view-all a-arrow-link" href="/talent">View All DJs</a>
             </div>
+            {% if djs %}
+                <ul class="o-dj-carousel__list js-dj-carousel">
+                    {% for post in djs %}
+                        <li class="o-dj-carousel__item">
+                            {% include "components/molecules/dj-card.twig" %}
+                        </li>
+                    {% endfor %}
+                </ul>
             {% endif %}
+        </div>
+    </section>
 
-            <div class="o-dj-carousel__inner">
-                <div class="o-dj-carousel__header m-section-header">
-                    <h2 class="o-dj-carousel__title a-section-heading">HOT DJS</h2>
-                    <a class="o-dj-carousel__view-all a-arrow-link" href="/talent">View All DJs</a>
-                </div>
-                {% if djs %}
-                    <ul class="o-dj-carousel__list js-dj-carousel">
-                        {% for post in djs %}
-                            <li class="o-dj-carousel__item">
-                                {% include "components/molecules/dj-card.twig" %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-        </section>
+    {# CTAs #}
+    {% include "components/organisms/home-ctas.twig" %}
 
-        {# CTAs #}
-        {% include "components/organisms/home-ctas.twig" %}
+    {# Other Categories #}
+    {% if other %}
+        {% for group in other %}
+            {% include "components/organisms/other-categories.twig" %}
+        {% endfor %}
+    {% endif %}
 
-        {# Other Categories #}
-        {% if other %}
-            {% for group in other %}
-                {% include "components/organisms/other-categories.twig" %}
-            {% endfor %}
-        {% endif %}
-    </main>
     {% include "components/organisms/prefooter-home.twig" %}
 {% endblock %}

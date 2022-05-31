@@ -1,6 +1,6 @@
 {
     "key": "group_6221072c3be4a",
-    "title": "Post Fields",
+    "title": "Hot Content",
     "fields": [
         {
             "key": "field_6222357d6c327",
@@ -20,25 +20,6 @@
             "ui": 0,
             "ui_on_text": "",
             "ui_off_text": ""
-        },
-        {
-            "key": "field_6221074c1d700",
-            "label": "Byline",
-            "name": "byline",
-            "type": "text",
-            "instructions": "Author",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
         }
     ],
     "location": [
@@ -59,5 +40,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646409160
+    "modified": 1654014519
 }

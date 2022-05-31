@@ -53,28 +53,16 @@ class HeroViewModel extends ViewModel
 
     public function video()
     {
-        $videourl = get_post_meta( $this->post->ID, '_jwppp-video-url-1' );
-
-        if (array_key_exists(0, $videourl)) {
-            return $videourl[0];
-        }
+        return $this->post->video();
     }
 
     public function videoTitle()
     {
-        $videotitle = get_post_meta( $this->post->ID, '_jwppp-video-title-1' );
-
-        if (array_key_exists(0, $videotitle)) {
-            return $videotitle[0];
-        }
+        return $this->post->videoTitle();
     }
 
     public function videoDescription()
     {
-        $videodesc = get_post_meta( $this->post->ID, '_jwppp-video-description-1' );
-
-        if (array_key_exists(0, $videodesc)) {
-            return $videodesc[0];
-        }
+        return $this->post->videoDescription();
     }
 }

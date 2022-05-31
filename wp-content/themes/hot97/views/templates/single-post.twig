@@ -15,6 +15,8 @@
         {% if post.hasPrimaryTerm %}
             <p><a href="{{ post.getPrimaryTermLink }}">{{ post.getPrimaryTermName }}</a></p>
         {% endif %}
+        <section class="entry-content">
         {{ content|raw }}
+        </section>
     </main>
 {% endblock %}

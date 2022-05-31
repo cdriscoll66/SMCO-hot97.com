@@ -1,0 +1,13 @@
+{% extends "base.twig" %}
+
+{% block banner %}
+    {% include 'components/organisms/page-header.twig' %}
+{% endblock %}
+
+{% block content %}
+    <main id="main">
+        <section class="entry-content">
+            {{ content|raw }}
+        </section>
+    </main>
+{% endblock %}

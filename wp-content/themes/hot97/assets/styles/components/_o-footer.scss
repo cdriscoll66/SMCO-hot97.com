@@ -135,8 +135,9 @@
 .o-footer__tagline {
   text-transform: uppercase;
   text-align: center;
-  font-size: rem(120px);
+  font-size: var(--global--font-size-xxxl);
   line-height: 1;
+  font-weight: 600;
 }
 
 .o-footer__line {

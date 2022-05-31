@@ -1,5 +1,10 @@
 .wp-block-cover,
 .wp-block-cover-image {
+  padding: 4.5rem;
+  background-color: var(--cover--color-background);
+  min-height: auto;
+  margin-top: inherit;
+  margin-bottom: inherit;
 
 	&:not(.alignwide):not(.alignfull) {
 		clear: both;
@@ -10,17 +15,16 @@
 		margin-bottom: 0;
 	}
 
-	background-color: var(--cover--color-background);
-	min-height: var(--cover--height);
-	margin-top: inherit;
-	margin-bottom: inherit;
+  & + & {
+    margin-top: 100px;
+  }
 
 	.wp-block-cover__inner-container,
 	.wp-block-cover-image-text,
 	.wp-block-cover-text {
 		color: currentColor; // Uses text color specified with background-color options in 07-utilities\color-palette.scss
-		margin-top: var(--global--spacing-vertical);
-		margin-bottom: var(--global--spacing-vertical);
+		margin-top: 0;
+		margin-bottom: 0;
 
 		a:not(.wp-block-button__link):not(.wp-block-file__button) {
 			color: currentColor;
@@ -69,19 +73,15 @@
 
 		> * {
 			margin-top: calc(0.666 * var(--global--spacing-vertical));
-			margin-bottom: calc(0.666 * var(--global--spacing-vertical));
+			margin-bottom: 0;
 
 			@include media(mobile) {
 				margin-top: var(--global--spacing-vertical);
-				margin-bottom: var(--global--spacing-vertical);
+				margin-bottom: 0;
 			}
 
 			&:first-child {
-				margin-top: 0;
-			}
-
-			&:last-child {
-				margin-bottom: 0;
+				margin-top: 0!important;
 			}
 		}
 	}

@@ -1,0 +1,11 @@
+<div class="o-page-header">
+    {% if post.getFeaturedImage %}
+    <div class="o-tiled">
+        <div class="o-tiled__tile" style="background-image:url({{post.getFeaturedImage}})"></div>
+        <div class="o-tiled__tile" style="background-image:url({{post.getFeaturedImage}})"></div>
+        <div class="o-tiled__tile" style="background-image:url({{post.getFeaturedImage}})"></div>
+    </div>
+    {% endif %}
+
+    <h1 class="o-page-header__title">{{ title }}</h1>
+</div>

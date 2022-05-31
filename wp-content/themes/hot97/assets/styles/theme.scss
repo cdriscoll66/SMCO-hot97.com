@@ -14,6 +14,7 @@
 /** Config */
 @import 'config/colors';
 @import 'config/variables';
+@import 'config/typography';
 
 /** Import Twenty Twenty-One styles */
 @import 'theme/twentytwentyone/assets/sass/style.colab';
@@ -42,6 +43,7 @@
 @import 'components/o-global-nav';
 @import 'components/o-main';
 @import 'components/o-menu';
+@import 'components/o-page-header';
 @import 'components/o-post-feed';
 @import 'components/o-prefooter';
 @import 'components/o-search';

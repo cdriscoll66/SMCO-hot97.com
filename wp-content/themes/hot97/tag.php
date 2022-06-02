@@ -18,14 +18,14 @@ use App\ViewModels\CardViewModel;
 use App\ViewModels\FeatureCardViewModel;
 use Timber\Timber;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     public function handle()
     {
         $context = Timber::get_context();
-        $context['title'] = single_cat_title('', false);
+        $context['title'] = single_tag_title('', false);
 
-        // get the posts in this category (default query)
+        // get the posts in this tag (default query)
         $posts = collect($context['posts'])
             ->map(function($item) {
                 return new Post($item);

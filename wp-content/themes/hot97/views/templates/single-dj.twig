@@ -1,0 +1,79 @@
+{% extends "base.twig" %}
+
+
+
+{% block banner %}
+
+
+    <div class="o-dj-hero">
+        <div class="o-dj-hero__media o-hero__media" style='background-image:url({{post.thumbnail}})'></div>
+    <div class="o-dj-hero__text o-hero__text">
+        <a href="/talent" class="o-dj-hero__category">djs</a>
+        <h1 class="o-dj-hero__title">{{ title }}</h1>
+
+        {% if shows %}
+        <div class="o-dj-hero__showwrapper">
+
+        {% for show in shows %}
+
+        <p class="o-dj-hero__showname"> {{ show.show_name }} </p>
+        <p class="o-dj-hero__showtime"> {{show.show_time }}</p>
+        {% endfor %}
+
+        </div>
+        {% endif %}
+
+        <div class="o-dj-hero__socialwrapper">
+            {% if instagram %}
+            <a href="http://www.instagram.com/{{ instagram }}" class="o-dj-hero__social o-dj-hero__instagram">{{ instagram }}</a>
+            {% endif %}
+
+            {% if twitter %}
+            <a href="http://www.instagram.com/{{ twitter }}" class="o-dj-hero__social o-dj-hero__twitter">{{ twitter }}</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+        {# <main class="dj-content__main template-col__lg"> #}
+        <div class="dj-content__body">
+        <h2 class="dj-content__title">About {{ title }}</h2>
+            {{ content|raw }}
+        <div class="m-adspace m-adspace--djsingle"></div>
+
+            </div>
+      {# </main> #}
+
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+        {# <aside class="dj-content__sidebar template-col__sm"> #}
+            {% if cohosts %}
+                <h5 class="dj-content__title">{{ title }}'s co-hosts</h5>
+                {% for cohost in cohosts %}
+                    <div class="dj-content__cohost">
+                        <div class="dj-content__cohost-image">
+                        {{ cohost.thumbnail }}
+                        </div>
+                        <div class="dj-content__cohost-link">
+                            <a href="{{ cohost.link }}">{{ cohost.title }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {# </aside> #}
+
+{% endblock %}
+{% block related %}
+<h1> Hi </h1>
+
+{% endblock %}

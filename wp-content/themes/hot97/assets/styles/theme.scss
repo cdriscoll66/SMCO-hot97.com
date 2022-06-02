@@ -19,6 +19,9 @@
 /** Import Twenty Twenty-One styles */
 @import 'theme/twentytwentyone/assets/sass/style.colab';
 
+/** Templates */
+@import 'templates/single-dj';
+
 /** Components */
 
 @import 'components/a-app-button';
@@ -53,5 +56,6 @@
 @import 'components/o-dj-carousel';
 @import 'components/o-featured-carousel';
 @import 'components/o-hero';
+@import 'components/o-dj-hero';
 @import 'components/o-othercats';
 @import 'components/o-single-post';

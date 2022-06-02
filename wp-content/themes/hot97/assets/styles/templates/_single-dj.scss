@@ -1,0 +1,27 @@
+.dj-content {
+  max-width: $breakpoint_xxl;
+  margin: 100px var(--global--spacing-unit);
+  display: flex;
+  align-items: flex-start;
+  @media  (min-width:1490px) {
+    margin: 100px auto;
+  }
+}
+
+.dj-content__main {
+
+}
+
+.dj-content__body {
+  max-width: $default_width;
+  margin: 0 auto;
+}
+
+.dj-content__sidebar {
+
+}
+
+.dj-content__title {
+  font-weight: 500;
+  text-transform: uppercase;
+}

@@ -18,6 +18,12 @@ return [
             'crop' => true,
         ],
         [
+            'name' => 'dj-profile',
+            'width' => 75,
+            'height' => 75,
+            'crop' => array( 'center', 'top' ),
+        ],
+        [
             'name' => 'prefooter_image',
             'width' => 1044,
             'height' => 630,

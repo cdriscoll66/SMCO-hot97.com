@@ -21,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         add_action('wp_enqueue_scripts', function () {
             wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/aca2737e74.js', [], false);
+            wp_enqueue_script('triton', 'https://widgets.listenlive.co/1.0/tdwidgets.min.js', [], false, true);
 
             wp_enqueue_style('lumberjack/theme.css', Theme::mix('/styles/theme.css'), [], false);
             wp_enqueue_script('lumberjack/theme.js', Theme::mix('/scripts/theme.js'), ['jquery'], false, true);

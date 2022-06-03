@@ -1,37 +1,29 @@
 {% extends "base.twig" %}
+{% block banner %}
+    {% include "components/organisms/post-header.twig" %}
+{% endblock %}
 
 {% block content %}
-
-    {% if post.contentCategory %}
-        <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
-    {% endif %}
-
-    {% if post.primaryCategory %}
-        <span class="m-card__category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
-    {% endif %}
-
-    {% if post.isHot %}
-        <span class="m-card__is-hot">
-            <i class="fas fa-fire"></i>
-        </span>
-    {% endif %}
-
-    <h1>{{ title }}</h1>
-
-    {% if post.tags %}
-        {% for tag in post.tags %}
-            <a href="{{ tag.link }}">{{ tag.name }}</a>
-        {% endfor %}
-    {% endif %}
-
-    {% if post.video %}
-      <div class="o-hero__media">
-        {% include 'components/molecules/hero-video.twig' %}
-      </div>
-    {% endif %}
-
     <section class="entry-content">
         {{ content|raw }}
+        <div class="m-adspace m-adspace--post-single">
+            <span></span>
+        </div>
     </section>
+{% endblock %}
 
+{% block sidebar %}
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
+
+    {% include "components/molecules/post-sidebar.twig" %}
+
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
+{% endblock %}
+
+{% block related %}
+    {% include "components/organisms/post-related.twig" %}
 {% endblock %}

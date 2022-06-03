@@ -1,13 +1,13 @@
 {
-    "key": "group_62964259097d1",
-    "title": "More Content",
+    "key": "group_629a28959b7ed",
+    "title": "[Options] Post Options",
     "fields": [
         {
-            "key": "field_629642646873e",
-            "label": "More Content",
-            "name": "more_content",
+            "key": "field_629a28b6cde2a",
+            "label": "Global Post Sidebar",
+            "name": "post_sidebar",
             "type": "repeater",
-            "instructions": "",
+            "instructions": "This is the global posts sidebar. This is where you can edit the content in the sidebar of all articles. If no content provided this area will not show up.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -15,19 +15,19 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
+            "collapsed": "field_629a2903cde2b",
             "min": 0,
             "max": 3,
-            "layout": "block",
-            "button_label": "Add Content",
+            "layout": "row",
+            "button_label": "Add Sidebar CTA",
             "sub_fields": [
                 {
-                    "key": "field_629642f86873f",
-                    "label": "Heading",
-                    "name": "heading",
+                    "key": "field_629a2903cde2b",
+                    "label": "Title",
+                    "name": "title",
                     "type": "text",
-                    "instructions": "",
-                    "required": 0,
+                    "instructions": "<strong>Note:<\/strong> This field has an 20 character limit to preserve the sidebar spacing. This should be 1-2 words.",
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -38,14 +38,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": 20
                 },
                 {
-                    "key": "field_6296442468740",
-                    "label": "Description",
+                    "key": "field_629a2fcb60387",
+                    "label": "Description (Optional)",
                     "name": "description",
-                    "type": "text",
-                    "instructions": "",
+                    "type": "textarea",
+                    "instructions": "<strong>Note:<\/strong> This field has an 80 character limit to preserve the sidebar spacing. This should be roughly 1 sentence. Does not populate if left blank.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -55,17 +55,17 @@
                     },
                     "default_value": "",
                     "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "rows": 3,
+                    "new_lines": ""
                 },
                 {
-                    "key": "field_6296442c68741",
+                    "key": "field_629a2914cde2c",
                     "label": "Link",
                     "name": "link",
                     "type": "link",
-                    "instructions": "",
-                    "required": 0,
+                    "instructions": "<strong>Note:<\/strong> The title of this field is not used, link Array was chosen to preserve the ability to link to a new window\/tab.",
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -75,12 +75,12 @@
                     "return_format": "array"
                 },
                 {
-                    "key": "field_6296443a68742",
+                    "key": "field_629a298acde2d",
                     "label": "Image",
                     "name": "image",
                     "type": "image",
                     "instructions": "",
-                    "required": 0,
+                    "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -88,7 +88,7 @@
                         "id": ""
                     },
                     "return_format": "array",
-                    "preview_size": "medium",
+                    "preview_size": "thumbnail",
                     "library": "all",
                     "min_width": "",
                     "min_height": "",
@@ -104,9 +104,9 @@
     "location": [
         [
             {
-                "param": "post_type",
+                "param": "options_page",
                 "operator": "==",
-                "value": "post"
+                "value": "acf-options-posts"
             }
         ]
     ],
@@ -119,5 +119,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1654015065
+    "modified": 1654272220
 }

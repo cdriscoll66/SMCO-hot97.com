@@ -14,9 +14,8 @@ namespace App;
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
-use Rareloop\Lumberjack\QueryBuilder;
-use App\PostTypes\DJ;
-use App\PostTypes\Show;
+use App\ViewModels\CardViewModel;
+use App\ViewModels\FeatureCardViewModel;
 use Timber\Timber;
 
 class CategoryController extends Controller
@@ -24,56 +23,25 @@ class CategoryController extends Controller
     public function handle()
     {
         $context = Timber::get_context();
-        $context['title'] = 'Archive';
+        $context['title'] = single_cat_title('', false);
 
-        if (is_day()) {
-            $context['title'] = 'Archive: ' . get_the_date('D M Y');
-        } elseif (is_month()) {
-            $context['title'] = 'Archive: ' . get_the_date('M Y');
-        } elseif (is_year()) {
-            $context['title'] = 'Archive: ' . get_the_date('Y');
-        } elseif (is_tag()) {
-            $context['title'] = single_tag_title('', false);
-        } elseif (is_category()) {
-            $context['title'] = single_cat_title('', false);
-        } elseif (is_post_type_archive()) {
-            $context['post_type'] = get_queried_object();
-            $context['title'] = post_type_archive_title('', false);
-        } elseif (is_tax()) {
-            $context['taxonomy'] = get_queried_object();
-            $context['title'] = $context['taxonomy']->name;
-        }
+        // get the posts in this category (default query)
+        $posts = collect($context['posts'])
+            ->map(function($item) {
+                return new Post($item);
+            });
 
-        if (!empty($context['post_type'])) {
-            $context['posts'] = (new QueryBuilder)
-                ->wherePostType([
-                    $context['post_type']->name,
-                ])
-                ->limit($context['posts_per_page'])
-                ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
-                ->get();
-        } elseif (!empty($context['taxonomy'])) {
-            $context['posts'] = (new QueryBuilder)
-                ->wherePostType([
-                    DJ::class,
-                ])
-                ->limit($context['posts_per_page'])
-                ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
-                ->get();
-        } elseif (!empty($context['taxonomy'])) {
-            $context['posts'] = (new QueryBuilder)
-                ->wherePostType([
-                    Show::class,
-                ])
-                ->limit($context['posts_per_page'])
-                ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
-                ->get();
-        } else {
-            $context['posts'] = Post::builder()
-                ->limit($context['posts_per_page'])
-                ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
-                ->get();
-        }
+        // pull out the first one as the feature post as a FeaturedCard
+        $context['featured_post'] = $posts
+            ->shift()
+            ->map(function($item) {
+                return new FeatureCardViewModel($item);
+            });
+
+        // pass in the rest as the 'posts' context variable as Cards
+        $context['posts'] = $posts->map(function($item) {
+            return new CardViewModel($item);
+        });
 
         $context['paginate_links'] = paginate_links();
 

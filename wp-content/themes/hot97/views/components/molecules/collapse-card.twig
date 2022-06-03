@@ -1,0 +1,13 @@
+<article class="m-card m-card--collapse {% if not item.description %}m-card--title-only{% endif %}">
+    <div class="m-card__text">
+        <h1 class="m-card__title"><a href="{{ item.link.url }}" target="{{ item.link.target }}">{{ item.title }}</a></h1>
+        {% if item.description %}
+        <p class="m-card__desc">{{ item.description }}</p>
+        {% endif %}
+    </div>
+    <figure class="m-card__image-wrap">
+        <a class="m-card__image-link" href="{{ item.link.url }}" target="{{ item.link.target }}">
+            <img src="{{ item.image.sizes.thumbnail }}" alt="{{ item.image.alt }}">
+        </a>
+    </figure>
+</article>

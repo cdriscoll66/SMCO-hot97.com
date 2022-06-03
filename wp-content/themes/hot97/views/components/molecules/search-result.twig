@@ -1,7 +1,7 @@
-<article>
-    <h1><a href="{{ post.link }}">{{ post.title }}</a></h1>
+<article class="m-search-result">
+    <h1 class="m-search-result__heading"><a class="m-search-result__link" href="{{ post.link }}">{{ post.title }}</a></h1>
     {% if post.excerpt %}
-        <p>
+        <p class="m-search-result__excerpt">
             {{ post.excerpt }}
         </p>
     {% endif %}

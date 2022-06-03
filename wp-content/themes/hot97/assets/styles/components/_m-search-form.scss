@@ -21,3 +21,21 @@ input.m-search-form__input {
     outline-width: 0;
   }
 }
+
+.m-search-results-search-form {
+  display: flex;
+
+  .m-search-results-search-form__input {
+    background-color: #fff;
+    border: none;
+    border-radius: 9999px;
+    width: 100%;
+    font-size: 1rem;
+    padding: 18px 20px;
+    vertical-align: middle;
+
+    &::placeholder {
+      line-height: 1.2;
+    }
+  }
+}

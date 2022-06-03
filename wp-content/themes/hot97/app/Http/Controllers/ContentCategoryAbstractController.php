@@ -87,7 +87,9 @@ class ContentCategoryAbstractController extends Controller
             }
 
             // Featured posts (posts directly below the hero)
-            if ($post_ids = $page_config['featured_posts']) {
+            if (array_key_exists('featured_posts', $page_config)) {
+                $post_ids = $page_config['featured_posts'];
+
                 // Get featured posts, ordered by menu order
                 $collection = Post::builder()
                     ->whereIdIn($post_ids)
@@ -114,7 +116,7 @@ class ContentCategoryAbstractController extends Controller
             if ($page_config['featured_categories']) {
                 // Loop over each featured category
                 foreach ($page_config['featured_categories'] as $group) {
-                    $term = $group['category'];
+                    $term = $group['category'][0];
                     $post_count = $group['number_of_posts'];
                     $collection = [];
 
@@ -163,6 +165,7 @@ class ContentCategoryAbstractController extends Controller
                         array_push($featured, $array);
 
                     } else {
+                        dump($term);
                         // Get posts in this category
                         $collection = Post::builder()
                             ->whereIdNotIn($exclude)

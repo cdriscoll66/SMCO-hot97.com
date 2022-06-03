@@ -1,2 +1,31 @@
-<section class="o-post-related">
-</section>
+<div class="o-othercats m-related-posts">
+    <div class="m-marquee-title">
+        <div class="m-marquee-title__inner">
+            <h1>Read More</h1>
+            {% for i in 0..5 %}
+            <span>Read More</span>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="o-othercats__container">
+        <div class="o-othercats__cardblock">
+            <div class="o-othercats__cards posts">
+                {% for post in related_posts %}
+                <div class="posts__item o-othercats__card">
+                    {% include "components/molecules/card.twig" %}
+                </div>
+                {% endfor %}
+            </div>
+
+            {# LOAD MORE GOES HERE #}
+            <a class="o-othercats__button" href="/tag/{{ tags[0].slug }}">View All {{ title }}</a>
+        </div>
+
+        <div class="o-othercats__adspace">
+            <div class="m-adspace m-adspace--othercats">
+                <span></span>
+            </div>
+        </div>
+    </div>
+</div>

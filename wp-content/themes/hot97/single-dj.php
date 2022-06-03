@@ -19,7 +19,6 @@ use App\ViewModels\FeatureCardViewModel;
 use Timber\Timber;
 use Timber\Term;
 
-
 class SingleDJController extends Controller
 {
 
@@ -65,7 +64,6 @@ class SingleDJController extends Controller
         $context['content'] = $post->content;
         $context['main_class'] = 'o-main--split dj-content';
 
-
         $context['shows'] = get_field('shows');
         $context['instagram'] = get_field('instagram');
         $context['twitter'] = get_field('twitter');
@@ -90,7 +88,6 @@ class SingleDJController extends Controller
 
         $context['tags'] = get_tags($post->slug);
 
-
         $context['related_posts'] = $this->getRelatedPosts($context['tags'], [$post->ID]);
 
         // Format data
@@ -105,8 +102,6 @@ class SingleDJController extends Controller
         ];
 
         $context['other'] = $other;
-
-
 
         return new TimberResponse('templates/single-dj.twig', $context);
     }

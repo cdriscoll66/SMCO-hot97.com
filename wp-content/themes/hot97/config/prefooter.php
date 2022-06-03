@@ -10,6 +10,10 @@ add_filter('timber/context', function ($context) {
 
     $obj = get_queried_object();
 
+    if (! $obj) {
+        return;
+    }
+
     $show_prefooter = get_field('show_prefooter', $obj->taxonomy.'_'.$obj->term_id) ?: get_field('show_prefooter');
 
     if($show_prefooter) {

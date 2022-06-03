@@ -11,8 +11,8 @@ use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
 use Rareloop\Lumberjack\QueryBuilder;
 use App\PostTypes\DJ;
-use App\PostTypes\Show;
-use Timber\Timber;
+use App\PostTypes\Page;
+use App\ViewModels\SearchResultViewModel;
 
 class SearchController extends Controller
 {
@@ -24,23 +24,41 @@ class SearchController extends Controller
             return $this;
         });
 
-        $context = Timber::get_context();
-        $searchQuery = get_search_query();
+        global $wp_query;
 
-        $context['title'] = 'Search results for \'' . htmlspecialchars($searchQuery) . '\'';
-        $context['posts'] = (new QueryBuilder)
-            ->wherePostType([
-                Post::getPostType(),
-                DJ::getPostType(),
-                Show::getPostType(),
-            ])
-            ->search($searchQuery)
-            ->limit($context['posts_per_page'])
-            ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
-            ->get();
+        $context['title'] = 'Search';
+        $context['query'] = $wp_query->query['s'];
+        $context['found_posts'] = $wp_query->found_posts;
+        $context['results_text'] = $context['found_posts'] . ' results for "' . htmlspecialchars($context['query']) . '"';
+
+        $posts = collect($wp_query->posts)
+            ->map(function($item) {
+                switch ($item->post_type) {
+                    case 'page':
+                        return new Page($item);
+                        break;
+
+                    case 'post':
+                        return new Post($item);
+                        break;
+
+                    case 'dj':
+                        return new DJ($item);
+                        break;
+
+                    default:
+                        return new Post($item);
+                        break;
+                }
+            })
+            ->map(function($item) {
+                return new SearchResultViewModel($item);
+            });
+
+        $context['posts'] = $posts;
 
         $context['paginate_links'] = paginate_links();
 
-        return new TimberResponse('templates/posts.twig', $context);
+        return new TimberResponse('templates/search-results.twig', $context);
     }
 }

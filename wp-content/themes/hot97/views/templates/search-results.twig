@@ -1,0 +1,23 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <h1>{{ title }}</h1>
+
+    {% include "components/molecules/search-form.twig" %}
+
+    {% if posts|length > 0 %}
+        <ul class="posts">
+            <p>{{ results_text }}</p>
+            {% for post in posts %}
+                {% include "components/molecules/search-result.twig" %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    {# {{ paginate_links }} #}
+    <span class="load-more-observer">load</span>
+
+{% endblock %}

@@ -41,19 +41,18 @@ class SinglePostController extends Controller
             ->whereIdNotIn($exclude)
             ->tags($tags)
             ->orderBy('date', 'desc')
+            ->limit(6)
             ->get();
 
-        if(count($posts) < 6) {
-
-            $limit = 6 - count($posts);
-
-            $additional_posts = Post::builder()
-            ->whereIdNotIn($exclude)
-            ->orderBy('date', 'desc')
-            ->limit($limit)
-            ->get();
-
-        }
+        // Start of "if the client needs to always have 6 items in this listing work"
+        // if(count($posts) < 6) {
+        //     $limit = 6 - count($posts);
+        //     $additional_posts = Post::builder()
+        //     ->whereIdNotIn($exclude)
+        //     ->orderBy('date', 'desc')
+        //     ->limit($limit)
+        //     ->get();
+        // }
 
         $posts = $posts->map(function ($item) {
             return new CardViewModel($item);

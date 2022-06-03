@@ -19,6 +19,9 @@
 /** Import Twenty Twenty-One styles */
 @import 'theme/twentytwentyone/assets/sass/style.colab';
 
+/** Templates */
+@import 'templates/single-dj';
+
 /** Components */
 
 @import 'components/a-app-button';
@@ -30,6 +33,7 @@
 @import 'components/m-card';
 @import 'components/m-dj-card';
 @import 'components/m-marquee-divider';
+@import 'components/m-post-sidebar';
 @import 'components/m-section-header';
 @import 'components/m-social-icon';
 @import 'components/m-search-form';
@@ -45,6 +49,8 @@
 @import 'components/o-menu';
 @import 'components/o-page-header';
 @import 'components/o-post-feed';
+@import 'components/o-post-header';
+@import 'components/o-post-related';
 @import 'components/o-prefooter';
 @import 'components/o-search';
 @import 'components/o-sidebar';
@@ -53,5 +59,6 @@
 @import 'components/o-dj-carousel';
 @import 'components/o-featured-carousel';
 @import 'components/o-hero';
+@import 'components/o-dj-hero';
 @import 'components/o-othercats';
 @import 'components/o-single-post';

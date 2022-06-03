@@ -22,4 +22,5 @@ add_filter('timber/context', function ($context) {
     }
 
     return $context;
+
 });

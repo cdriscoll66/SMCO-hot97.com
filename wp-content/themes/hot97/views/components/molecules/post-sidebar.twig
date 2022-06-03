@@ -1,0 +1,13 @@
+{% if post_sidebar %}
+<nav class="m-post-sidebar">
+    <p>MORE FROM HOT97</p>
+
+    <ul class="m-post-sidebar__items">
+    {% for item in post_sidebar %}
+        <li>
+            {% include "components/molecules/collapse-card.twig" %}
+        </li>
+    {% endfor %}
+    </ul>
+</nav>
+{% endif %}

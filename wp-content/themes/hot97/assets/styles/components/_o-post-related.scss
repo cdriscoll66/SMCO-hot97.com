@@ -1,0 +1,5 @@
+.o-post-related {
+  @include paper-tear-top-outer;
+  background-color: var(--global--color-black);
+  min-height: 300px;
+}

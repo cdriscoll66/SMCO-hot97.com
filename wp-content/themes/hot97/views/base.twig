@@ -19,13 +19,16 @@
             {% endblock %}
         </div>
 
-        {% if sidebar %}
-        <div class="o-sidebar">
+    {% if sidebar %}
+        <aside class="o-sidebar">
             {% block sidebar %}
             {% endblock %}
-        </div>
-        {% endif %}
+        </aside>
+    {% endif %}
     </main>
+
+    {% block related %}
+    {% endblock %}
 
     {% include 'components/organisms/prefooter.twig' %}
 

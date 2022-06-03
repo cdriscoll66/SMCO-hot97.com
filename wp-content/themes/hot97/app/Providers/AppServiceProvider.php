@@ -36,9 +36,9 @@ class AppServiceProvider extends ServiceProvider
             wp_enqueue_style('lumberjack/login.css', Theme::mix('/styles/login.css'), [], false);
         });
 
-        add_action('enqueue_block_editor_assets', function () {
-            wp_enqueue_style('lumberjack/admin.css', Theme::mix('/styles/admin.css'), [], false);
-        });
+        // add_action('enqueue_block_editor_assets', function () {
+        //     wp_enqueue_style('lumberjack/admin.css', Theme::mix('/styles/admin.css'), [], false);
+        // });
 
         add_action('enqueue_block_editor_assets', function () {
             wp_enqueue_script('lumberjack/blocks.js', Theme::mix('/scripts/blocks.js'), ['wp-blocks', 'wp-dom'], false, true);

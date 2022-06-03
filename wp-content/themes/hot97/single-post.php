@@ -43,6 +43,10 @@ class SinglePostController extends Controller
             ->orderBy('date', 'desc')
             ->get();
 
+        $posts = $posts->map(function ($item) {
+            return new CardViewModel($item);
+        });
+
         return $posts;
     }
 
@@ -54,11 +58,12 @@ class SinglePostController extends Controller
         $context['post'] = $post;
         $context['title'] = $post->title;
         $context['content'] = $post->content;
-        $context['main_class'] = 'o-main--single-post';
+        $context['main_class'] = 'o-main--split o-main--single-post';
         $context['tags']= $post->getTags();
-        // more_content is the "more from hot97" in the post sidebar
-        $context['more_content'] = get_field('more_content', $post->id);
+        $context['post_sidebar'] = get_field('post_sidebar', 'options');
         $context['related_posts'] = $this->getRelatedPosts($context['tags'], [$post->ID]);
+
+        $context['sidebar'] = true;
 
         return new TimberResponse('templates/single-post.twig', $context);
     }

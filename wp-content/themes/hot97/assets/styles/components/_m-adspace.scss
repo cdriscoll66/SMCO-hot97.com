@@ -1,39 +1,52 @@
 .m-adspace {
-  background-color: var(--global--color-light-gray);
   color: var(--global--color-hot-yellow-500);
   margin-bottom: 1rem;
   position: relative;
+
+  > * {
+    display: block;
+  }
+
+  span {
+    background-color: var(--global--color-light-gray);
+  }
 }
 .m-adspace:after {
   content: "advertisement";
-  position: absolute;
+  position: relative;
   width: 100%;
   text-align: center;
   font-family: monospace;
   font-size: rem(10px);
   line-height: 1.6;
   text-transform: uppercase;
-  bottom: -1rem;
-
+  display: block;
 }
 
-.m-adspace--preheader {
+.m-adspace--preheader span {
   height: 60px;
   width: 468px;
 }
 
-.m-adspace--othercats {
-  height: 600px;
-  width: 300px;
+.m-adspace--othercats,
+.m-adspace--post-sidebar {
+  span {
+    height: 600px;
+    width: 300px;
+  }
 }
 
 .m-adspace--othercats--mobile {
-  height: 100px;
-  width: 320px;
+  span {
+    height: 100px;
+    width: 320px;
+  }
 }
 
-.m-adspace--djsingle {
-  height: 90px;
-  width: 728px;
+.m-adspace--djsingle,
+.m-adspace--post-single {
+  span {
+    height: 90px;
+    width: 728px;
+  }
 }
-

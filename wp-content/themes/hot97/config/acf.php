@@ -9,6 +9,15 @@ if( function_exists('acf_add_options_page') ) {
 		'capability'	=> 'edit_posts',
 		'redirect'		=> false
 	));
+
+    /** Posts > Options */
+    acf_add_options_sub_page([
+        'page_title' => 'Posts Options',
+        'menu_title' => 'Options',
+        'menu_slug'  => 'acf-options-posts',
+        'parent'     => 'edit.php', // Posts
+        'capability' => 'manage_options',
+    ]);
 }
 
 // Add support for shortcodes within ACF text, textarea fields

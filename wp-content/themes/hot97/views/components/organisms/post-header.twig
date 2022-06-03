@@ -1,0 +1,39 @@
+<header class="o-post-header">
+    <div class="o-post-header__inner">
+        {% if post.contentCategory or post.primaryCategory or post.isHot %}
+        <div class="o-post-header__categories">
+            {% if post.contentCategory %}
+            <span class="o-post-header__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
+            {% endif %}
+
+            {% if post.primaryCategory %}
+            <span class="o-post-header__primary-category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
+            {% endif %}
+
+            {% if post.isHot %}
+            <span class="o-post-header__is-hot">
+                <i class="fas fa-fire"></i>
+            </span>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <h1 class="o-post-header__title">
+            {{ title }}
+        </h1>
+
+        {% if post.tags %}
+        <div class="o-post-header__tags">
+            {% for tag in post.tags %}
+            <a href="{{ tag.link }}">{{ tag.name }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    {% if post.thumbnail %}
+    <figure class="o-post-header__image">
+        <img src="{{post.thumbnail}}">
+    </figure>
+    {% endif %}
+</header>

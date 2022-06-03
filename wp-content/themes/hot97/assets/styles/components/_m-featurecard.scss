@@ -1,7 +1,4 @@
-
 // m-featurecard is sharing some styles with o-hero - CD
-.m-featuredcard__media {
-}
 
 .m-featurecard__image-link {
   @include lock(min-height, 260px, 600px, $breakpoint_md, $breakpoint_xxl);
@@ -9,6 +6,25 @@
   display: block;
   background-repeat: no-repeat;
   background-size: cover;
-  @include paper-tear-bottom-inner;
 
+  &:not(.watch) {
+    @include paper-tear-bottom-inner;
+  }
+  &.watch {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:after {
+      content: "";
+      position: absolute;
+      height: 100px;
+      width: 100px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background: url(../images/playbutton.svg);
+
+    }
+  }
 }

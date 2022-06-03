@@ -1,0 +1,6 @@
+.o-sidebar {
+  display: none;
+  @include media(desktop) {
+    display: block;
+  }
+}

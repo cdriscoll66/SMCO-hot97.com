@@ -1,0 +1,49 @@
+            <div class="o-othercats m-related-posts">
+                  <div class="m-marquee-title">
+                    <div class="m-marquee-title__inner">
+                        <h1>{{ title }}'s Latest</h1>
+                                {% for i in 0..5 %}
+                        <span>{{ title }}'s Latest</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% if other %}
+                    {% for post in other.posts %}
+                        {% if loop.first %}
+                            {% include "components/molecules/feature-card.twig" %}
+                <div class="o-othercats__container">
+
+                <div class="o-othercats__cardblock">
+                <div class="o-othercats__cards posts">
+                        {% else %}
+                            <div class="posts__item o-othercats__card">
+                                {% include "components/molecules/card.twig" %}
+                            </div>
+
+                        {% endif %}
+
+                     {% if loop.index == 4 %}
+                        </div>
+                        <div class="o-othercats__adspace--mobile">
+                        <div class="m-adspace m-adspace--othercats--mobile"></div></div>
+                        <div class="o-othercats__cards posts">
+
+                     {% endif %}
+
+
+                        {% endfor %}
+                <a class="o-othercats__button" href="/tag/{{ tags[0].slug }}">View All {{ title }}</a>
+                </div>
+                </div>
+
+
+                <div class="o-othercats__adspace">
+                    <div class="m-adspace m-adspace--othercats">
+                    </div>
+                </div>
+
+
+                </div>
+                {% endif %}
+            </div>

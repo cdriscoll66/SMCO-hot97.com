@@ -35,7 +35,7 @@
 
     {% if post.thumbnail %}
       <div class="m-featurecard__media">
-        <a class="m-featurecard__image-link" href="{{ post.link }}" style='background-image:url({{post.thumbnailurl}})'>
+        <a class="m-featurecard__image-link {{ post.contentCategory.name|sanitize }}" href="{{ post.link }}" style='background-image:url({{post.thumbnailurl}})'>
         </a>
       </div>
     {% endif %}

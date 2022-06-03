@@ -1,12 +1,11 @@
 .o-main {
-  width: 100%;
 
   &.o-main--split {
       max-width: $breakpoint_xxl;
       margin: 100px var(--global--spacing-unit);
       display: flex;
       align-items: flex-start;
-
+      justify-content: center;
       @media  (min-width:1490px) {
         margin: 100px auto;
       }

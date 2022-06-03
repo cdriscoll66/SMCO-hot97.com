@@ -45,7 +45,7 @@
         <div class="dj-content__body">
         <h2 class="dj-content__title">About {{ title }}</h2>
             {{ content|raw }}
-        <div class="m-adspace m-adspace--djsingle"></div>
+        <div class="m-adspace m-adspace--djsingle dj-content__ad"></div>
 
             </div>
       {# </main> #}
@@ -73,7 +73,8 @@
         {# </aside> #}
 
 {% endblock %}
+
 {% block related %}
-<h1> Hi </h1>
+        {% include 'components/organisms/dj-related-posts.twig' %}
 
 {% endblock %}

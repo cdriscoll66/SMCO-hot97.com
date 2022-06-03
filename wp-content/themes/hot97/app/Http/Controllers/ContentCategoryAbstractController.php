@@ -116,7 +116,7 @@ class ContentCategoryAbstractController extends Controller
             if ($page_config['featured_categories']) {
                 // Loop over each featured category
                 foreach ($page_config['featured_categories'] as $group) {
-                    $term = $group['category'];
+                    $term = $group['category'][0];
                     $post_count = $group['number_of_posts'];
                     $collection = [];
 
@@ -165,6 +165,7 @@ class ContentCategoryAbstractController extends Controller
                         array_push($featured, $array);
 
                     } else {
+                        dump($term);
                         // Get posts in this category
                         $collection = Post::builder()
                             ->whereIdNotIn($exclude)

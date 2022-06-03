@@ -9,11 +9,52 @@ namespace App;
 use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\DJ;
+use App\PostTypes\Post;
 use App\ViewModels\CohostCardViewModel;
+use Rareloop\Lumberjack\QueryBuilder;
+
+use App\ViewModels\CardViewModel;
+use App\ViewModels\FeatureCardViewModel;
+
 use Timber\Timber;
+use Timber\Term;
+
 
 class SingleDJController extends Controller
 {
+
+    public function getRelatedPosts($tags, $exclude)
+    {
+        // Create macro for tags
+        QueryBuilder::macro('tags', function ($tags) {
+            $slugs = [];
+
+            foreach ($tags as $tag) {
+                $slugs[] = $tag->slug;
+            }
+
+            $this->params['tax_query'] = [
+                'relation' => 'OR',
+                [
+                    'taxonomy' => 'post_tag',
+                    'field' => 'slug',
+                    'terms' => $slugs,
+                ]
+            ];
+
+            return $this;
+        });
+
+        $posts = Post::builder()
+            ->whereIdNotIn($exclude)
+            ->tags($tags)
+            ->limit(7)
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return $posts;
+    }
+
     public function handle()
     {
         $context = Timber::get_context();
@@ -22,7 +63,8 @@ class SingleDJController extends Controller
         $context['post'] = $post;
         $context['title'] = $post->title;
         $context['content'] = $post->content;
-        $context['main_class'] = 'o-main--split';
+        $context['main_class'] = 'o-main--split dj-content';
+
 
         $context['shows'] = get_field('shows');
         $context['instagram'] = get_field('instagram');
@@ -41,9 +83,29 @@ class SingleDJController extends Controller
             $cohosts = $featured_djs->map(function ($item) {
                 return new CohostCardViewModel($item);
             });
+
         }
 
         $context['cohosts'] = $cohosts;
+
+        $context['tags'] = get_tags($post->slug);
+
+
+        $context['related_posts'] = $this->getRelatedPosts($context['tags'], [$post->ID]);
+
+        // Format data
+        $other = [
+            'posts' => $context['related_posts']->map(function ($item, $key) {
+                if ($key === 0) {
+                    return new FeatureCardViewModel($item);
+                } else {
+                    return new CardViewModel($item);
+                }
+            }),
+        ];
+
+        $context['other'] = $other;
+
 
 
         return new TimberResponse('templates/single-dj.twig', $context);

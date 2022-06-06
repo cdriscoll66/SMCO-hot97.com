@@ -45,6 +45,7 @@ class ArchiveDjController extends Controller
         });
 
 
+        $context['prefooter'] = get_field('prefooter', 'options');
 
         return new TimberResponse('templates/archive-dj.twig', $context);
     }

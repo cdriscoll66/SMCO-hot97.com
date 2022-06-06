@@ -1,8 +1,11 @@
 .dj-archive--featured {
   background-color: var(--global--color-black);
   color: var(--global--color-white);
-  a {
+  a.a-arrow-link {
     color: var(--global--color-hot-yellow-100);
+    &:after {
+      background-image: url(../images/arrow--yellow.svg);
+    }
   }
   @include paper-tear-bottom-outer;
   .m-dj-card__image-link {

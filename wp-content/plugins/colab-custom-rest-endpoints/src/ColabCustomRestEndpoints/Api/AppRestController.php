@@ -79,6 +79,7 @@ class AppRestController {
             // Sanitize and expand featured_categories assignment.
             if (is_array($home_page_fields['featured_categories'])) {
                 foreach ($home_page_fields['featured_categories'] as $key => $featured_category_row) {
+                    // Handle featured_posts
                     if (is_array($featured_category_row['featured_posts'])) {
                         $home_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
                             [$this, 'fetch_posts_array_map'],
@@ -86,6 +87,15 @@ class AppRestController {
                         );
                     } else {
                         $home_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                    }
+
+                    // Handle category flattening
+                    if (is_array($featured_category_row['category'])) {
+                        $home_page_fields['featured_categories'][$key]['category'] = NULL;
+                        if (count($featured_category_row['category']) == 1) {
+                            $home_page_fields['featured_categories'][$key]['category'] =
+                                reset($featured_category_row['category']);
+                        }
                     }
                 }
             } else {
@@ -121,6 +131,7 @@ class AppRestController {
             // Sanitize and expand featured_categories assignment.
             if (is_array($news_page_fields['featured_categories'])) {
                 foreach ($news_page_fields['featured_categories'] as $key => $featured_category_row) {
+                    // Handle featured_posts
                     if (is_array($featured_category_row['featured_posts'])) {
                         $news_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
                             [$this, 'fetch_posts_array_map'],
@@ -128,6 +139,15 @@ class AppRestController {
                         );
                     } else {
                         $news_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                    }
+
+                    // Handle category flattening
+                    if (is_array($featured_category_row['category'])) {
+                        $news_page_fields['featured_categories'][$key]['category'] = NULL;
+                        if (count($featured_category_row['category']) == 1) {
+                            $news_page_fields['featured_categories'][$key]['category'] =
+                                reset($featured_category_row['category']);
+                        }
                     }
                 }
             } else {
@@ -153,6 +173,7 @@ class AppRestController {
             // Sanitize and expand featured_categories assignment.
             if (is_array($video_page_fields['featured_categories'])) {
                 foreach ($video_page_fields['featured_categories'] as $key => $featured_category_row) {
+                    // Handle featured_posts
                     if (is_array($featured_category_row['featured_posts'])) {
                         $video_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
                             [$this, 'fetch_posts_array_map'],
@@ -160,6 +181,15 @@ class AppRestController {
                         );
                     } else {
                         $video_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                    }
+
+                    // Handle category flattening
+                    if (is_array($featured_category_row['category'])) {
+                        $video_page_fields['featured_categories'][$key]['category'] = NULL;
+                        if (count($featured_category_row['category']) == 1) {
+                            $video_page_fields['featured_categories'][$key]['category'] =
+                                reset($featured_category_row['category']);
+                        }
                     }
                 }
             } else {

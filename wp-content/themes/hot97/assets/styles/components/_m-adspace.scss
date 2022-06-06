@@ -50,3 +50,12 @@
     width: 728px;
   }
 }
+
+.m-adspace--in-content {
+  padding: 75px 16px 90px;
+  background-color: $color-black;
+
+  .m-adspace__inner {
+    margin: 0 auto;
+  }
+}

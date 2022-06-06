@@ -165,7 +165,6 @@ class ContentCategoryAbstractController extends Controller
                         array_push($featured, $array);
 
                     } else {
-                        dump($term);
                         // Get posts in this category
                         $collection = Post::builder()
                             ->whereIdNotIn($exclude)

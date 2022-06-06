@@ -10,7 +10,13 @@ add_filter('timber/context', function ($context) {
 
     $obj = get_queried_object();
 
+
+
     if (! $obj) {
+        return;
+    }
+
+    if (!isset($obj->taxonomy)) {
         return;
     }
 
@@ -22,5 +28,6 @@ add_filter('timber/context', function ($context) {
     }
 
     return $context;
+
 
 });

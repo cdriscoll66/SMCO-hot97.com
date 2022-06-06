@@ -26,18 +26,15 @@ class SingleDJController extends Controller
     {
         // Create macro for tags
         QueryBuilder::macro('tags', function ($tags) {
-            $slugs = [];
 
-            foreach ($tags as $tag) {
-                $slugs[] = $tag->slug;
-            }
+
 
             $this->params['tax_query'] = [
                 'relation' => 'OR',
                 [
                     'taxonomy' => 'post_tag',
                     'field' => 'slug',
-                    'terms' => $slugs,
+                    'terms' => $tags,
                 ]
             ];
 
@@ -45,7 +42,6 @@ class SingleDJController extends Controller
         });
 
         $posts = Post::builder()
-            ->whereIdNotIn($exclude)
             ->tags($tags)
             ->limit(7)
             ->orderBy('date', 'desc')
@@ -86,9 +82,9 @@ class SingleDJController extends Controller
 
         $context['cohosts'] = $cohosts;
 
-        $context['tags'] = get_tags($post->slug);
 
-        $context['related_posts'] = $this->getRelatedPosts($context['tags'], [$post->ID]);
+        $context['related_posts'] = $this->getRelatedPosts($post->slug, [$post->ID]);
+
 
         // Format data
         $other = [

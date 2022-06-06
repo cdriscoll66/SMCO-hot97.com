@@ -18,6 +18,15 @@ if( function_exists('acf_add_options_page') ) {
         'parent'     => 'edit.php', // Posts
         'capability' => 'manage_options',
     ]);
+
+    /** DJs > Options */
+    acf_add_options_sub_page([
+        'page_title' => 'DJ Options',
+        'menu_title' => 'Options',
+        'menu_slug'  => 'acf-options-djs',
+        'parent'     => '/edit.php?post_type=dj', // Posts
+        'capability' => 'manage_options',
+    ]);
 }
 
 // Add support for shortcodes within ACF text, textarea fields

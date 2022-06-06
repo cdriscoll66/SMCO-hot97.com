@@ -31,6 +31,13 @@ class AppServiceProvider extends ServiceProvider
             if (is_singular() && comments_open() && get_option('thread_comments')) {
                 wp_enqueue_script('comment-reply');
             }
+
+            // Go to www.addthis.com/dashboard to customize your tools
+            // <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629e54b01e9b389e"></script>
+            if (is_singular('post')) {
+                wp_enqueue_script('AddThis', '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629e54b01e9b389e', [], false, true);
+            }
+
         }, 100);
 
         add_action('login_enqueue_scripts', function () {

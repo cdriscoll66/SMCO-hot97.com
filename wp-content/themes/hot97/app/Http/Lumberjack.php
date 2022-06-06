@@ -32,6 +32,7 @@ class Lumberjack extends LumberjackCore
         $context['home_url'] = home_url();
         $context['site_title'] = get_bloginfo('name');
         $context['search_query'] = get_search_query();
+        $context['posts_per_page'] = get_option('posts_per_page');
         $context['flexible_cta'] = get_field('flexible_header_cta', 'options');
 
         return $context;

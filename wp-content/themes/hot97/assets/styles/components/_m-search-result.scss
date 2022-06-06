@@ -1,0 +1,28 @@
+.m-search-result {
+  border-top: 1px solid #CDC5BD;
+  padding: 25px 0 40px;
+}
+
+.m-search-result__heading {
+  font-size: rem(26px);
+  line-height: line-height(26px, 30px);
+  text-transform: none;
+  text-decoration: none;
+  font-family: $oskari;
+  font-weight: 600;
+}
+
+.m-search-result__link {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.m-search-result__excerpt {
+  font-family: $oskari;
+  font-weight: normal;
+  font-size: rem(22px);
+  line-height: line-height(22px, 30px);
+}

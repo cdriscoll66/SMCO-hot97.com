@@ -1,0 +1,41 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+    <div class="o-search-results-header">
+        <div class="o-search-results-header__inner">
+            <h1 class="o-search-results-header__title">{{ title }}</h1>
+
+            <div class="o-search-results-header__search-form">
+                <form role="search" class="m-search-results-search-form" method="get" action="{{ home_url }}">
+                    <label for="{{ id }}" class="m-search-results-search-form__label">
+                        <span class="m-search-results-search-form__label-text screen-reader-text">
+                            {{ _x('Search for:', 'label') }}
+                        </span>
+                    </label>
+                    <input type="search" class="m-search-results-search-form__input" id="{{ id }}" name="s" value="{{ search_query }}" placeholder="{{ placeholder }}">
+                    <input type="submit" class="m-search-results-search-form__submit" value="Search">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="o-search-results">
+        <div class="o-search-results__inner">
+            <p class="o-search-results__results-text">{{ results_text }}</p>
+            {% if posts|length > 0 %}
+                <ul class="o-search-results__posts">
+                    {% for post in posts %}
+                        {% include "components/molecules/search-result.twig" %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="o-search-results__no-results">No results found.</p>
+            {% endif %}
+
+            {# {{ paginate_links }} #}
+            <span class="load-more-observer">load</span>
+        </div>
+    </div>
+
+{% endblock %}

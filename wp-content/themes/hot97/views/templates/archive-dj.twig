@@ -1,0 +1,51 @@
+{% extends "base.twig" %}
+
+{% block content %}
+
+        <div class="m-marquee-title">
+            <div class="m-marquee-title__inner">
+                <h1>{{ title }}</h1>
+                        {% for i in 0..9 %}
+                <span>{{ title }}</span>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% if featured|length > 0 %}
+
+    <div class="dj-archive--featured">
+        <div class="dj-archive__list">
+        {% for post in featured %}
+            <div class="dj-archive__item">
+                {% include "components/molecules/dj-card.twig" %}
+            </div>
+
+        {% endfor %}
+        </div>
+    {% endif %}
+
+    </div>
+
+
+    {% if djs|length > 0 %}
+
+        <div class="dj-archive__list">
+            {% for post in djs %}
+            <div class="dj-archive__item">
+                {% include "components/molecules/dj-card.twig" %}
+            </div>
+            {% if loop.index == 8 %}
+                <div class="dj-archive__ad">
+                    <div class="m-adspace m-adspace--archive">
+                        <span></span>
+                    </div>
+                </div>            {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    {# {{ paginate_  links }} #}
+
+{% endblock %}

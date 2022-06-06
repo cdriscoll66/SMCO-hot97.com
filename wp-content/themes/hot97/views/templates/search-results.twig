@@ -20,20 +20,22 @@
         </div>
     </div>
 
-    <div>
-        <p>{{ results_text }}</p>
-        {% if posts|length > 0 %}
-            <ul class="posts">
-                {% for post in posts %}
-                    {% include "components/molecules/search-result.twig" %}
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
+    <div class="o-search-results">
+        <div class="o-search-results__inner">
+            <p class="o-search-results__results-text">{{ results_text }}</p>
+            {% if posts|length > 0 %}
+                <ul class="o-search-results__posts">
+                    {% for post in posts %}
+                        {% include "components/molecules/search-result.twig" %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="o-search-results__no-results">No results found.</p>
+            {% endif %}
 
-        {# {{ paginate_links }} #}
-        <span class="load-more-observer">load</span>
+            {# {{ paginate_links }} #}
+            <span class="load-more-observer">load</span>
+        </div>
     </div>
 
 {% endblock %}

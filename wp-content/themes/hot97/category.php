@@ -46,7 +46,16 @@ class CategoryController extends Controller
         $context['paginate_links'] = paginate_links();
 
         $context['sidebar'] = true;
-        $context['main_class'] = 'o-main--split';
+        $context['archive_sidebar']['title'] = "CATEGORIES";
+        $context['archive_sidebar']['terms'] = get_categories([
+            'orderby'    => 'menu_order',
+            'order'      => 'ASC',
+            'hide_empty' => 0,
+        ]);
+
+        $context['main_class'] = 'o-main--split o-main--archive';
+
+        $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 
         return new TimberResponse('templates/category.twig', $context);
     }

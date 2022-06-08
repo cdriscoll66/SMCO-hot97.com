@@ -15,7 +15,8 @@
       }
   }
 
-  &.o-main--single-post {
+  &.o-main--single-post,
+  &.o-main--archive {
     .o-sidebar {
       padding-top: 0;
       padding-bottom: 0;

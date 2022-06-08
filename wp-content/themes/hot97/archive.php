@@ -18,6 +18,8 @@ use Rareloop\Lumberjack\QueryBuilder;
 use App\PostTypes\DJ;
 use App\PostTypes\Show;
 use Timber\Timber;
+use App\ViewModels\FeatureCardViewModel;
+use App\ViewModels\CardViewModel;
 
 class ArchiveController extends Controller
 {
@@ -45,7 +47,7 @@ class ArchiveController extends Controller
         }
 
         if (!empty($context['post_type'])) {
-            $context['posts'] = (new QueryBuilder)
+            $posts = (new QueryBuilder)
                 ->wherePostType([
                     $context['post_type']->name,
                 ])
@@ -53,7 +55,7 @@ class ArchiveController extends Controller
                 ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
                 ->get();
         } elseif (!empty($context['taxonomy'])) {
-            $context['posts'] = (new QueryBuilder)
+            $posts = (new QueryBuilder)
                 ->wherePostType([
                     DJ::class,
                 ])
@@ -61,7 +63,7 @@ class ArchiveController extends Controller
                 ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
                 ->get();
         } elseif (!empty($context['taxonomy'])) {
-            $context['posts'] = (new QueryBuilder)
+            $posts = (new QueryBuilder)
                 ->wherePostType([
                     Show::class,
                 ])
@@ -69,11 +71,29 @@ class ArchiveController extends Controller
                 ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
                 ->get();
         } else {
-            $context['posts'] = Post::builder()
+            $posts = Post::builder()
                 ->limit($context['posts_per_page'])
                 ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
                 ->get();
         }
+
+        $featured_post = $posts->shift();
+        $context['featured_post'] = new FeatureCardViewModel($featured_post);
+
+        $context['posts'] = $posts->map(function ($item, $key) {
+            return new CardViewModel($item);
+        });
+        $context['sidebar'] = true;
+        $context['archive_sidebar']['title'] = "CATEGORIES";
+        $context['archive_sidebar']['terms'] = get_categories([
+            'orderby'    => 'menu_order',
+            'order'      => 'ASC',
+            'hide_empty' => 0,
+        ]);
+
+        $context['main_class'] = 'o-main--split o-main--archive';
+
+        $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 
         $context['paginate_links'] = paginate_links();
 

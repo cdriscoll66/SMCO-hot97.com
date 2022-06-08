@@ -32,6 +32,7 @@
   transform: rotate(-2deg);
   width: 102vw;
   z-index: 2;
+  overflow-x: hidden;
 
   & + .o-home-cta {
     margin-top: 2rem;

@@ -1,0 +1,12 @@
+{% if archive_sidebar %}
+<nav class="m-archive-sidebar">
+    <h3>{{archive_sidebar.title}}</h3>
+    <ul class="m-archive-sidebar__terms">
+    {% for term in archive_sidebar.terms %}
+        <li>
+            <a href="{{ term.link }}">{{ term.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</nav>
+{% endif %}

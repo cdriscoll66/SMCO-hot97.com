@@ -1,0 +1,30 @@
+{
+    "name": "teamcolab/environment-specific-overrides",
+    "description": "A base plugin to allow setting different DB options based on environment",
+    "type": "wordpress-plugin",
+    "license": "GPL2",
+    "authors": [
+        {
+            "name": "Dustin Ginther",
+            "email": "dustin.ginther@teamcolab.com"
+        }
+    ],
+    "require": {
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*"
+            ]
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "vendor/wpackagist-plugin/{$name}/": [
+                "type:wordpress-plugin"
+            ]
+        }
+    }
+}

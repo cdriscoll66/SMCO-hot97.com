@@ -21,17 +21,16 @@
   flex-flow: column nowrap;
 }
 
-.o-othercats__cards {
-flex: 0 1 70.8%;
-width: 100%;
-display: flex;
-flex-flow: row wrap;
+.o-othercats__cards,
+.o-post-feed {
+  flex: 0 1 70.8%;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
 }
 
-
-
-
-.o-othercats__card {
+.o-othercats__card,
+.o-post-feed__item {
   width: 100%;
   @include media(desktop) {
     width: 33.3%;
@@ -40,7 +39,6 @@ flex-flow: row wrap;
     height: 100%;
   }
 }
-
 
 .o-othercats__adspace {
   flex: 1 0 29.2%;

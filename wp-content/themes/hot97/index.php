@@ -22,6 +22,10 @@ class IndexController extends Controller
         $context = Timber::get_context();
         $context['posts'] = Post::all();
 
+        $context['main_class'] = 'o-main--split o-main--archive';
+
+        $context['body_class'] = $context['body_class'] . ' is-dark-theme';
+
         return new TimberResponse('templates/posts.twig', $context);
     }
 }

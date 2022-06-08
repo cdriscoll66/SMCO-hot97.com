@@ -21,6 +21,10 @@
   line-height: 1.6;
   text-transform: uppercase;
   display: block;
+
+  .is-dark-theme & {
+    color: white;
+  }
 }
 
 .m-adspace--preheader span {

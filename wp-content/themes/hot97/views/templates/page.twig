@@ -7,9 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <main {% if dark %} class="is-dark-theme" {% endif %} id="main ">
-        <section class="entry-content">
-            {{ content|raw }}
-        </section>
-    </main>
+    <section class="entry-content">
+        {{ content|raw }}
+    </section>
 {% endblock %}

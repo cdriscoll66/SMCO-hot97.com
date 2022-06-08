@@ -20,6 +20,7 @@ use App\PostTypes\DJ;
 use App\PostTypes\Page;
 use Timber\Term;
 use App\ViewModels\CardViewModel;
+use App\ViewModels\FeatureCardViewModel;
 use App\ViewModels\HeroViewModel;
 use App\ViewModels\DJCardViewModel;
 
@@ -59,72 +60,118 @@ class FrontPageController extends Controller
 
         if ($page_config) {
             if ($page_config['hero']) {
-                // Get hero post
-                $hero = Post::builder()
+                // Get hero post as a collection
+                $collection = Post::builder()
                     ->whereIdIn($page_config['hero'])
                     ->get();
 
-                // Instantiate hero post as HeroViewModel using the map method
-                $hero = $hero->map(function($item) {
+                $collection_IDs_as_array = $collection->map(function ($item) {
+                    return $item->id;
+                })->toArray();
+
+                // Add hero post to exclude array
+                $exclude = array_merge($exclude, $collection_IDs_as_array);
+
+                // Map over collection to instantiate as HeroViewModel
+                $hero = $collection->map(function ($item) {
                     return new HeroViewModel($item);
                 });
+            }
+
+            if ($page_config['marquee']) {
+                $context['marquee']['title'] = $page_config['marquee']['marquee_title'];
+                $context['marquee']['tile'] = $page_config['marquee']['marquee_image'];
             }
 
             if ($dj_ids = $page_config['featured_djs']) {
                 // Get DJs, ordered by menu order
                 $featured_djs = DJ::builder()
                     ->whereIdIn($dj_ids)
-                    ->orderBy('menu_order')
+                    ->orderBy('post__in')
                     ->get();
 
                 // Map over collection and instantiate as DJCardViewModel
-                $djs = $featured_djs->map(function($item) {
+                $djs = $featured_djs->map(function ($item) {
                     return new DJCardViewModel($item);
                 });
             }
 
+            // Featured categories
             if ($page_config['featured_categories']) {
                 // Loop over each featured category
                 foreach ($page_config['featured_categories'] as $group) {
                     $term = $group['category'];
                     $post_count = $group['number_of_posts'];
-                    $featured_posts_IDs = $group['featured_posts'];
+                    $collection = [];
 
-                    // Get the featured posts
-                    $featured_posts = Post::builder()
-                        ->whereIdIn($featured_posts_IDs)
-                        ->orderBy('menu_order')
-                        ->get();
+                    if ($featured_posts_IDs = $group['featured_posts']) {
+                        // Get the featured posts
+                        $featured_posts = Post::builder()
+                            ->whereIdIn($featured_posts_IDs)
+                            ->orderBy('post__in')
+                            ->get();
 
-                    // Get posts in the same category, excluding the featured posts
-                    $other_posts = Post::builder()
-                        ->whereIdNotIn($featured_posts_IDs)
-                        ->category($term->term_id)
-                        ->limit($post_count - count($featured_posts_IDs))
-                        ->orderBy('date', 'desc')
-                        ->get();
+                        // Get the IDs of this new collection, to add into the $exclude array
+                        $featured_posts_as_array = $featured_posts->map(function ($item) {
+                            return $item->id;
+                        })->toArray();
 
-                    // Add the other posts collection to the featured posts collection
-                    $collection = $featured_posts->concat($other_posts);
+                        // Add to exclude array
+                        $exclude = array_merge($exclude, $featured_posts_as_array);
 
-                    // Get the IDs of this new collection, to later add into the $exclude array
-                    $collection_IDs_as_array = $collection->map(function($item) {
-                        return $item->id;
-                    })->toArray();
+                        // Get posts in the same category, excluding the featured posts
+                        $other_posts = Post::builder()
+                            ->whereIdNotIn($exclude)
+                            ->category($term->term_id)
+                            ->limit($post_count - count($featured_posts_IDs))
+                            ->orderBy('date', 'desc')
+                            ->get();
 
-                    // Format data
-                    $array = [
-                        'term' => new Term($term),
-                        'posts' => $collection->map(function($item) {
-                            return new CardViewModel($item);
-                        }),
-                    ];
+                        // Add the other posts collection to the featured posts collection
+                        $collection = $featured_posts->concat($other_posts);
 
-                    // Add IDs into $exclude array
-                    $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        // Get the IDs of this new collection, to add into the $exclude array
+                        $collection_IDs_as_array = $collection->map(function ($item) {
+                            return $item->id;
+                        })->toArray();
 
-                    // Push data into $featured array
-                    array_push($featured, $array);
+                        // Add to exclude array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+
+                        $array = [
+                            'term' => new Term($term),
+                            'posts' => $collection->map(function ($item) {
+                                return new CardViewModel($item);
+                            }),
+                        ];
+
+                        // Add to featured array
+                        array_push($featured, $array);
+                    } else {
+                        // Get posts in this category
+                        $collection = Post::builder()
+                            ->whereIdNotIn($exclude)
+                            ->category($term->term_id)
+                            ->limit($post_count)
+                            ->orderBy('date', 'desc')
+                            ->get();
+
+                        // Get the IDs of this new collection, to later add into the $exclude array
+                        $collection_IDs_as_array = $collection->map(function ($item) {
+                            return $item->id;
+                        })->toArray();
+
+                        $array = [
+                            'term' => new Term($term),
+                            'posts' => $collection->map(function ($item) {
+                                return new CardViewModel($item);
+                            }),
+                        ];
+
+                        // Add to exclude array and featured array
+                        $exclude = array_merge($exclude, $collection_IDs_as_array);
+                        array_push($featured, $array);
+                    }
                 }
             }
 
@@ -137,15 +184,20 @@ class FrontPageController extends Controller
                     $posts = Post::builder()
                         ->whereIdNotIn($exclude)
                         ->category($term->term_id)
-                        ->limit(6)
+                        ->limit(7)
                         ->orderBy('date', 'desc')
                         ->get();
+
 
                     // Format data
                     $array = [
                         'term' => new Term($term),
-                        'posts' => $posts->map(function($item) {
-                            return new CardViewModel($item);
+                        'posts' => $posts->map(function ($item, $key) {
+                            if ($key === 0) {
+                                return new FeatureCardViewModel($item);
+                            } else {
+                                return new CardViewModel($item);
+                            }
                         }),
                     ];
 
@@ -155,11 +207,16 @@ class FrontPageController extends Controller
             }
         }
 
+        $context['dj_bg_image'] = $page_config['dj_background_image'] ? $page_config['dj_background_image']['url'] : NULL;
+
         // Pass arrays into context variables
         $context['hero'] = $hero;
         $context['featured'] = $featured;
         $context['djs'] = $djs;
+        $context['home_ctas'] = $page_config['home-ctas'];
         $context['other'] = $other;
+
+        $context['prefooter_cta'] = get_field('home_prefooter');
 
         return new TimberResponse('templates/front-page.twig', $context);
     }

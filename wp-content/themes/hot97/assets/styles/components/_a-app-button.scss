@@ -1,0 +1,25 @@
+.a-app-button {
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-indent: 1000%;
+  text-decoration: none;
+  height: 0;
+}
+
+.a-app-button__google {
+  background-image: url(../images/playstore.png);
+  width: 149px;
+  padding-bottom: 46px;
+
+}
+
+.a-app-button__apple {
+  background-image: url(../images/appstore.png);
+  width: 140px;
+  padding-bottom: 45px;
+}
+
+

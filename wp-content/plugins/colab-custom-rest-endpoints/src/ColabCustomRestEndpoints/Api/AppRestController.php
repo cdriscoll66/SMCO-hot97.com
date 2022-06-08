@@ -65,116 +65,139 @@ class AppRestController {
 
         // home_page_fields group
         $home_page_fields = get_field('home_page_fields', 'option');
-
-        // Sanitize and expand hero assignment.
-        if ( is_array( $home_page_fields['hero'] ) ) {
-            $home_page_fields['hero'] = array_map(
-                [$this, 'fetch_posts_array_map'],
-                $home_page_fields['hero']
-            );
-        }
-        else {
-            $home_page_fields['hero'] = [];
-        }
-
-        // Sanitize and expand featured_categories assignment.
-        if ( is_array( $home_page_fields['featured_categories'] ) ) {
-            foreach ($home_page_fields['featured_categories'] as $key => $featured_category_row) {
-                if ( is_array( $featured_category_row['featured_posts'] ) ) {
-                    $home_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
-                        [$this, 'fetch_posts_array_map'],
-                        $featured_category_row['featured_posts']
-                    );
-                }
-                else {
-                    $home_page_fields['featured_categories'][$key]['featured_posts'] = [];
-                }
+        if ( !empty( $home_page_fields ) ) {
+            // Sanitize and expand hero assignment.
+            if (is_array($home_page_fields['hero'])) {
+                $home_page_fields['hero'] = array_map(
+                    [$this, 'fetch_posts_array_map'],
+                    $home_page_fields['hero']
+                );
+            } else {
+                $home_page_fields['hero'] = [];
             }
-        }
-        else {
-            $home_page_fields['featured_categories'] = [];
-        }
 
-        // Sanitize and expand home featured_djs
-        if ( is_array( $home_page_fields['featured_djs'] ) ) {
-            $home_page_fields['featured_djs'] = array_map(
-                [$this, 'fetch_posts_array_map'],
-                $home_page_fields['featured_djs']
-            );
-        }
-        else {
-            $home_page_fields['featured_djs'] = [];
-        }
+            // Sanitize and expand featured_categories assignment.
+            if (is_array($home_page_fields['featured_categories'])) {
+                foreach ($home_page_fields['featured_categories'] as $key => $featured_category_row) {
+                    // Handle featured_posts
+                    if (is_array($featured_category_row['featured_posts'])) {
+                        $home_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                            [$this, 'fetch_posts_array_map'],
+                            $featured_category_row['featured_posts']
+                        );
+                    } else {
+                        $home_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                    }
 
-        $data['home'] = $home_page_fields;
+                    // Handle category flattening
+                    if (is_array($featured_category_row['category'])) {
+                        $home_page_fields['featured_categories'][$key]['category'] = NULL;
+                        if (count($featured_category_row['category']) == 1) {
+                            $home_page_fields['featured_categories'][$key]['category'] =
+                                reset($featured_category_row['category']);
+                        }
+                    }
+                }
+            } else {
+                $home_page_fields['featured_categories'] = [];
+            }
+
+            // Sanitize and expand home featured_djs
+            if (is_array($home_page_fields['featured_djs'])) {
+                $home_page_fields['featured_djs'] = array_map(
+                    [$this, 'fetch_posts_array_map'],
+                    $home_page_fields['featured_djs']
+                );
+            } else {
+                $home_page_fields['featured_djs'] = [];
+            }
+
+            $data['home'] = $home_page_fields;
+        }
 
         // new_page_fields group
         $news_page_fields = get_field( 'news_page_fields', 'option' );
-
-        // Sanitize and expand hero assignment.
-        if ( is_array( $news_page_fields['hero'] ) ) {
-            $news_page_fields['hero'] = array_map(
-                [$this, 'fetch_posts_array_map'],
-                $news_page_fields['hero']
-            );
-        }
-        else {
-            $news_page_fields['hero'] = [];
-        }
-
-        // Sanitize and expand featured_categories assignment.
-        if ( is_array( $news_page_fields['featured_categories'] ) ) {
-            foreach ($news_page_fields['featured_categories'] as $key => $featured_category_row) {
-                if ( is_array( $featured_category_row['featured_posts'] ) ) {
-                    $news_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
-                        [$this, 'fetch_posts_array_map'],
-                        $featured_category_row['featured_posts']
-                    );
-                }
-                else {
-                    $news_page_fields['featured_categories'][$key]['featured_posts'] = [];
-                }
+        if ( !empty( $news_page_fields ) ) {
+            // Sanitize and expand hero assignment.
+            if (is_array($news_page_fields['hero'])) {
+                $news_page_fields['hero'] = array_map(
+                    [$this, 'fetch_posts_array_map'],
+                    $news_page_fields['hero']
+                );
+            } else {
+                $news_page_fields['hero'] = [];
             }
-        }
-        else {
-            $news_page_fields['featured_categories'] = [];
-        }
 
-        $data['news'] = $news_page_fields;
+            // Sanitize and expand featured_categories assignment.
+            if (is_array($news_page_fields['featured_categories'])) {
+                foreach ($news_page_fields['featured_categories'] as $key => $featured_category_row) {
+                    // Handle featured_posts
+                    if (is_array($featured_category_row['featured_posts'])) {
+                        $news_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                            [$this, 'fetch_posts_array_map'],
+                            $featured_category_row['featured_posts']
+                        );
+                    } else {
+                        $news_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                    }
+
+                    // Handle category flattening
+                    if (is_array($featured_category_row['category'])) {
+                        $news_page_fields['featured_categories'][$key]['category'] = NULL;
+                        if (count($featured_category_row['category']) == 1) {
+                            $news_page_fields['featured_categories'][$key]['category'] =
+                                reset($featured_category_row['category']);
+                        }
+                    }
+                }
+            } else {
+                $news_page_fields['featured_categories'] = [];
+            }
+
+            $data['news'] = $news_page_fields;
+        }
 
         // video_page_fields group
         $video_page_fields = get_field( 'video_page_fields', 'option' );
-
-        // Sanitize and expand hero assignment.
-        if ( is_array( $video_page_fields['hero'] ) ) {
-            $video_page_fields['hero'] = array_map(
-                [$this, 'fetch_posts_array_map'],
-                $video_page_fields['hero']
-            );
-        }
-        else {
-            $video_page_fields['hero'] = [];
-        }
-
-        // Sanitize and expand featured_categories assignment.
-        if ( is_array( $video_page_fields['featured_categories'] ) ) {
-            foreach ($video_page_fields['featured_categories'] as $key => $featured_category_row) {
-                if ( is_array( $featured_category_row['featured_posts'] ) ) {
-                    $video_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
-                        [$this, 'fetch_posts_array_map'],
-                        $featured_category_row['featured_posts']
-                    );
-                }
-                else {
-                    $video_page_fields['featured_categories'][$key]['featured_posts'] = [];
-                }
+        if ( !empty( $video_page_fields ) ) {
+            // Sanitize and expand hero assignment.
+            if (is_array($video_page_fields['hero'])) {
+                $video_page_fields['hero'] = array_map(
+                    [$this, 'fetch_posts_array_map'],
+                    $video_page_fields['hero']
+                );
+            } else {
+                $video_page_fields['hero'] = [];
             }
-        }
-        else {
-            $video_page_fields['featured_categories'] = [];
-        }
 
-        $data['watch'] = $video_page_fields;
+            // Sanitize and expand featured_categories assignment.
+            if (is_array($video_page_fields['featured_categories'])) {
+                foreach ($video_page_fields['featured_categories'] as $key => $featured_category_row) {
+                    // Handle featured_posts
+                    if (is_array($featured_category_row['featured_posts'])) {
+                        $video_page_fields['featured_categories'][$key]['featured_posts'] = array_map(
+                            [$this, 'fetch_posts_array_map'],
+                            $featured_category_row['featured_posts']
+                        );
+                    } else {
+                        $video_page_fields['featured_categories'][$key]['featured_posts'] = [];
+                    }
+
+                    // Handle category flattening
+                    if (is_array($featured_category_row['category'])) {
+                        $video_page_fields['featured_categories'][$key]['category'] = NULL;
+                        if (count($featured_category_row['category']) == 1) {
+                            $video_page_fields['featured_categories'][$key]['category'] =
+                                reset($featured_category_row['category']);
+                        }
+                    }
+                }
+            } else {
+                $video_page_fields['featured_categories'] = [];
+            }
+
+            $data['watch'] = $video_page_fields;
+        }
 
         // navigation group
         $data['navigation'] = get_field( 'navigation', 'option' );

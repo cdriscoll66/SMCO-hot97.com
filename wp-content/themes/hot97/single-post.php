@@ -10,9 +10,57 @@ use App\Http\Controllers\Controller;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
 use Timber\Timber;
+use Rareloop\Lumberjack\QueryBuilder;
+use App\ViewModels\CardViewModel;
 
 class SinglePostController extends Controller
 {
+    public function getRelatedPosts($tags, $exclude)
+    {
+        // Create macro for tags
+        QueryBuilder::macro('tags', function (object $tags) {
+            $slugs = [];
+
+            foreach ($tags as $tag) {
+                $slugs[] = $tag->slug;
+            }
+
+            $this->params['tax_query'] = [
+                'relation' => 'OR',
+                [
+                    'taxonomy' => 'post_tag',
+                    'field' => 'slug',
+                    'terms' => $slugs,
+                ]
+            ];
+
+            return $this;
+        });
+
+        $posts = Post::builder()
+            ->whereIdNotIn($exclude)
+            ->tags($tags)
+            ->orderBy('date', 'desc')
+            ->limit(6)
+            ->get();
+
+        // Start of "if the client needs to always have 6 items in this listing work"
+        // if(count($posts) < 6) {
+        //     $limit = 6 - count($posts);
+        //     $additional_posts = Post::builder()
+        //     ->whereIdNotIn($exclude)
+        //     ->orderBy('date', 'desc')
+        //     ->limit($limit)
+        //     ->get();
+        // }
+
+        $posts = $posts->map(function ($item) {
+            return new CardViewModel($item);
+        });
+
+        return $posts;
+    }
+
     public function handle()
     {
         $context = Timber::get_context();
@@ -21,10 +69,12 @@ class SinglePostController extends Controller
         $context['post'] = $post;
         $context['title'] = $post->title;
         $context['content'] = $post->content;
-        // $context['content_category'] = $post->getPrimaryTerm('content-category')->name;
-        // $context['content_category_link'] = $post->getPrimaryTermLink('content-category');
-        // $context['category'] = $post->getPrimaryTerm()->name;
-        // $context['category_link'] = $post->getPrimaryTermLink();
+        $context['main_class'] = 'o-main--split o-main--single-post';
+        $context['tags']= $post->getTags();
+        $context['post_sidebar'] = get_field('post_sidebar', 'options');
+        $context['related_posts'] = $this->getRelatedPosts($context['tags'], [$post->ID]);
+
+        $context['sidebar'] = true;
 
         return new TimberResponse('templates/single-post.twig', $context);
     }

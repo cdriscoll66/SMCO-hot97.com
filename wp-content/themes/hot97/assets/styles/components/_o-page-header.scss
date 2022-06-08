@@ -1,0 +1,15 @@
+.o-page-header {
+  .o-tiled {
+    height: 230px;
+  }
+
+  & + * {
+    margin-top: 20px;
+  }
+}
+
+.o-page-header__title {
+  max-width: var(--responsive--aligndefault-width);
+  margin: 110px auto 0;
+  text-transform: uppercase;
+}

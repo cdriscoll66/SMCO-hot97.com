@@ -1,0 +1,54 @@
+<div class="o-othercats">
+                  <div class="m-marquee-title">
+                    <div class="m-marquee-title__inner">
+                        <h1>{{ group.term.name }}</h1>
+                                {% for i in 0..5 %}
+                        <span>{{ group.term.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {% if group.posts %}
+
+                    {% for post in group.posts %}
+                        {% if loop.first %}
+                            {% include "components/molecules/feature-card.twig" %}
+                <div class="o-othercats__container">
+
+                <div class="o-othercats__cardblock">
+                <div class="o-othercats__cards posts">
+                        {% else %}
+                            <div class="posts__item o-othercats__card">
+                                {% include "components/molecules/card.twig" %}
+                            </div>
+
+                        {% endif %}
+
+                     {% if loop.index == 4 %}
+                        </div>
+                        <div class="o-othercats__adspace--mobile">
+                            <div class="m-adspace m-adspace--othercats--mobile">
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="o-othercats__cards posts">
+
+                     {% endif %}
+
+
+                        {% endfor %}
+                <a class="o-othercats__button" href="{{ group.term.path }}">View All {{ group.term.name }}</a>
+                </div>
+                </div>
+
+
+                <div class="o-othercats__adspace">
+                    <div class="m-adspace m-adspace--othercats">
+                        <span></span>
+                    </div>
+                </div>
+
+
+                </div>
+                {% endif %}
+            </div>

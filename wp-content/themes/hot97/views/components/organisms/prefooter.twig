@@ -1,0 +1,17 @@
+{% if prefooter %}
+<article class="o-prefooter">
+    <div class="o-prefooter__inner wp-block-media-text alignwide is-stacked-on-mobile">
+        <figure class="o-prefooter__image wp-block-media-text__media">
+            <img src="{{prefooter.prefooter_image.sizes.prefooter_image}}" alt="{{prefooter.prefooter_image.alt}}" class="size-prefooter_image"/>
+        </figure>
+        <div class="o-prefooter__content wp-block-media-text__content">
+            <p class="o-prefooter__subhead">{{prefooter.prefooter_sub}}</p>
+            <h1 class="o-prefooter__headline"><a href="{{prefooter.prefooter_link.url}}" target="{{prefooter.prefooter_link.target}}">{{prefooter.prefooter_head}}</a></h1>
+            <p>{{prefooter.prefooter_content}}</p>
+            <div class="o-prefooter__link wp-block-button">
+                <a class="wp-block-button__link" href="{{prefooter.prefooter_link.url}}" target="{{prefooter.prefooter_link.target}}">{{prefooter.prefooter_link.title}}</a>
+            </div>
+        </div>
+    </div>
+</article>
+{% endif %}

@@ -41,6 +41,8 @@ class CardViewModel extends ViewModel
 
     public function thumbnail()
     {
-        return $this->post->thumbnail();
+        $image = get_the_post_thumbnail($this->post, 'thumbnail');
+
+        return $image;
     }
 }

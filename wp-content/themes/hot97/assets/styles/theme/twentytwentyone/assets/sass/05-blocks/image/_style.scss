@@ -1,13 +1,17 @@
 .wp-block-image {
 	text-align: center;
 
+  .entry-content & {
+    margin-top: 4.5rem;
+  }
+
 	figcaption {
-		color: var(--global--color-primary);
+		color: var(--global--color-medium-gray);
 		font-size: var(--global--font-size-xs);
 		line-height: var(--global--line-height-body);
-		margin-top: calc(0.5 * var(--global--spacing-unit));
-		margin-bottom: var(--global--spacing-unit);
 		text-align: center;
+    max-width: var(--responsive--aligndefault-width);
+    margin: calc(var(--global--spacing-unit)) auto 0;
 	}
 
 	.alignright {

@@ -14,7 +14,7 @@ add_filter('script_loader_tag', function ($tag, $handle, $src) {
     ];
     $async = [];
     $crossorigin = [
-        'font-awesome' => 'crossorigin="anonymous"',
+        // 'font-awesome' => 'crossorigin="anonymous"',
     ];
 
     // if ($handle === 'handlename') :

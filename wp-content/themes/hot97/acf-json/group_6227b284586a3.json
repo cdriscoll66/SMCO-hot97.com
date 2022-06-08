@@ -60,6 +60,66 @@
                     "return_format": "id"
                 },
                 {
+                    "key": "field_62868ca6388d2",
+                    "label": "Marquee Divider",
+                    "name": "marquee",
+                    "type": "group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "layout": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_62869ea6e7476",
+                            "label": "Title",
+                            "name": "marquee_title",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": 16
+                        },
+                        {
+                            "key": "field_6286a14ce7477",
+                            "label": "Tiled Image",
+                            "name": "marquee_image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        }
+                    ]
+                },
+                {
                     "key": "field_6227b3fbbd043",
                     "label": "Featured Categories",
                     "name": "featured_categories",
@@ -150,6 +210,30 @@
                     ]
                 },
                 {
+                    "key": "field_628fdc294386f",
+                    "label": "DJ Background Image",
+                    "name": "dj_background_image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
                     "key": "field_623cd70dc47e6",
                     "label": "Featured DJs",
                     "name": "featured_djs",
@@ -174,6 +258,123 @@
                     "min": "",
                     "max": "",
                     "return_format": "id"
+                },
+                {
+                    "key": "field_628d406fa7249",
+                    "label": "CTAs",
+                    "name": "home-ctas",
+                    "type": "repeater",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "field_628d49f5a985f",
+                    "min": 1,
+                    "max": 4,
+                    "layout": "row",
+                    "button_label": "Add CTA",
+                    "sub_fields": [
+                        {
+                            "key": "field_628d491fa6f8e",
+                            "label": "Image",
+                            "name": "cta_image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": ""
+                        },
+                        {
+                            "key": "field_628d49dda985e",
+                            "label": "Subhead",
+                            "name": "cta_sub",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_628d49f5a985f",
+                            "label": "Headline",
+                            "name": "cta_head",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_628d4a0aa9860",
+                            "label": "Content",
+                            "name": "cta_content",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_628d4a638f82a",
+                            "label": "Link",
+                            "name": "cta_link",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array"
+                        }
+                    ]
                 },
                 {
                     "key": "field_623b58afd1aea",
@@ -697,5 +898,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "modified": 1648675536
+    "modified": 1653595217
 }

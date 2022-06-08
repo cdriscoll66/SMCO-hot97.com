@@ -1,0 +1,92 @@
+/**
+ * Lock
+ *
+ * @description
+ * In canal and river navigation a lock is a device used for raising and
+ * lowering vessels between stretches of water that are at different levels.
+ *
+ * Use lock to linearly scale between two values based on the viewport size.
+ *
+ * @illustration
+ * $min-value                          $max-value
+ * |                 |                *|*****************|
+ * |                 |            *    |                 |
+ * |                 |        *        |                 |
+ * |                 |    *            |                 |
+ * |*****************|*                |                 |
+ *                   $min-viewport     $max-viewport
+ *
+ * @variables
+ * $property: The property of the element that you would like to lock
+ * $min-value: The minimum $property value in pixels
+ * $max-value: The maximum $property value in pixels
+ * $min-viewport: The screen width in pixels where you want to use the $min-value value
+ * $max-viewport: The screen width in pixels where you want to use the $max-value value
+ *
+ * @usage
+ * Using Default Values for $min-viewport and $max-viewport
+ * @include lock(font-size, 14px, 20px);
+ * @include lock(padding-left, 20px, 60px);
+ *
+ * Using Custom Values for $min-viewport and $max-viewport
+ * @include lock(font-size, 14px, 22px, 960px, 1280px);
+ * @include lock(padding-left, 20px, 100px, 960px, 1280px);
+ *
+ * @dependencies
+ * styles/functions/_strip-unit.scss
+ *
+ * @package Carbon-Lumberjack
+ * @subpackage Styles
+ * @since 2.0.0
+ *
+ * @link https://fvsch.com/css-locks
+ */
+ @mixin lock($property, $min-value, $max-value, $min-viewport: 320px, $max-viewport: 1440px, $important: null) {
+
+  @if $important != null {
+    $important: '!important';
+  }
+
+  @if $min-viewport == '!important' {
+    $min-viewport: 320px;
+    $important: '!important';
+  }
+
+  /**
+   * Legacy Lock
+   *
+   * Can NOT handle zero value.
+   *
+   * min-value + (max-value - min-value) * 100vw - min-viewport / (max-viewport - min-viewport)
+   */
+  // #{$property}: calc(#{$min-value} + (#{strip_unit($max-value - $min-value)}) * ((100vw - #{$min-viewport}) / (#{strip_unit($max-viewport - $min-viewport)}))) #{$important};
+
+  /**
+   * Refactored Lock
+   *
+   * Can handle zero value.
+   *
+   * @link https://github.com/kostyabushuev/css-lock-lib
+   *
+   * y = mx + b
+   *
+   * m = value-range / viewport-range
+   * m = (max-value - min-value) / (max-viewport - min-viewport)
+   * x = 100vw or 100vh
+   * b = min-value - m * min-viewport
+   */
+  $x: 100vw;
+  $m: ((strip-unit($max-value) - strip-unit($min-value)) / (strip-unit($max-viewport) - strip-unit($min-viewport)));
+  $b: (strip-unit($min-value) - $m * strip-unit($min-viewport));
+  $value: ($m * $x + ' + ' + $b + 'px');
+
+  /** (max-value - min-value) / (max-viewport - min-viewport) * 100vw + min-value - (max-value - min-value) / (max-viewport - min-viewport) */
+  #{$property}: calc(#{$value}) #{$important};
+
+  @media (max-width: $min-viewport) {
+    #{$property}: #{$min-value} #{$important};
+  }
+  @media (min-width: $max-viewport) {
+    #{$property}: #{$max-value} #{$important};
+  }
+}

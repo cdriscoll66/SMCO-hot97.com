@@ -39,13 +39,30 @@ class HeroViewModel extends ViewModel
         return $this->post->isHot();
     }
 
+    public function publishDate()
+    {
+        return $this->post->post_date();
+    }
+
     public function excerpt()
     {
-        return $this->post->getExcerpt() ?: wp_trim_words($this->post->content, 20);
+        $excerpt = $this->post->preview->read_more('') ?: wp_trim_words($this->post->content, 10);
+
+        return $excerpt;
     }
 
     public function video()
     {
-        return 'video embed goes here';
+        return $this->post->video();
+    }
+
+    public function videoTitle()
+    {
+        return $this->post->videoTitle();
+    }
+
+    public function videoDescription()
+    {
+        return $this->post->videoDescription();
     }
 }

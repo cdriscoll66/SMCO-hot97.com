@@ -1,0 +1,123 @@
+{
+    "key": "group_629a28959b7ed",
+    "title": "[Options] Post Options",
+    "fields": [
+        {
+            "key": "field_629a28b6cde2a",
+            "label": "Global Post Sidebar",
+            "name": "post_sidebar",
+            "type": "repeater",
+            "instructions": "This is the global posts sidebar. This is where you can edit the content in the sidebar of all articles. If no content provided this area will not show up.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_629a2903cde2b",
+            "min": 0,
+            "max": 3,
+            "layout": "row",
+            "button_label": "Add Sidebar CTA",
+            "sub_fields": [
+                {
+                    "key": "field_629a2903cde2b",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "instructions": "<strong>Note:<\/strong> This field has an 20 character limit to preserve the sidebar spacing. This should be 1-2 words.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": 20
+                },
+                {
+                    "key": "field_629a2fcb60387",
+                    "label": "Description (Optional)",
+                    "name": "description",
+                    "type": "textarea",
+                    "instructions": "<strong>Note:<\/strong> This field has an 80 character limit to preserve the sidebar spacing. This should be roughly 1 sentence. Does not populate if left blank.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 3,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_629a2914cde2c",
+                    "label": "Link",
+                    "name": "link",
+                    "type": "link",
+                    "instructions": "<strong>Note:<\/strong> The title of this field is not used, link Array was chosen to preserve the ability to link to a new window\/tab.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_629a298acde2d",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "thumbnail",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-posts"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1654272220
+}

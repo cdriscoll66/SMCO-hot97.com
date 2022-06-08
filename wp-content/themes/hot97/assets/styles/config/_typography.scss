@@ -1,0 +1,16 @@
+$font-sizes: (
+  'xs': var(--global--font-size-xs),
+  'sm': var(--global--font-size-sm),
+  'md': var(--global--font-size-md),
+  'lg': var(--global--font-size-lg),
+  'lede': var(--global--font-size-lede),
+  'xl': var(--global--font-size-xl),
+  'xxl': var(--global--font-size-xxl),
+  'xxxl': var(--global--font-size-xxxl)
+);
+
+@each $key, $value in $font-sizes {
+  .has-#{$key}-font-size {
+    font-size: $value!important;
+  }
+}

@@ -36,14 +36,10 @@
  */
 .site-main > * {
 	margin-top: calc(3 * var(--global--spacing-vertical));
-	margin-bottom: calc(3 * var(--global--spacing-vertical));
+	margin-bottom: 0;
 
 	&:first-child {
 		margin-top: 0;
-	}
-
-	&:last-child {
-		margin-bottom: 0;
 	}
 }
 
@@ -84,6 +80,15 @@
 // 	margin-left: auto;
 // }
 
+.entry-content > {
+  padding-bottom: 110px;
+
+  .wp-block-cover:last-child,
+  .has-background:last-child {
+    margin-bottom: -110px!important;
+  }
+}
+
 /*
  * Block & non-gutenberg content wrapper children
  * - Sets spacing-vertical margin logic
@@ -95,19 +100,13 @@
 .wp-block-template-part > *,
 .wp-block-post-template :where(li > *) { // using :where keeps specificity low.
 	margin-top: calc(0.666 * var(--global--spacing-vertical));
-	margin-bottom: calc(0.666 * var(--global--spacing-vertical));
 
 	@include media(mobile) {
 		margin-top: var(--global--spacing-vertical);
-		margin-bottom: var(--global--spacing-vertical);
 	}
 
 	&:first-child {
 		margin-top: 0;
-	}
-
-	&:last-child {
-		margin-bottom: 0;
 	}
 }
 

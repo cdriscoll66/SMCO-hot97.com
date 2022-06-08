@@ -1,20 +1,29 @@
 {% extends "base.twig" %}
+{% block banner %}
+    {% include "components/organisms/post-header.twig" %}
+{% endblock %}
 
 {% block content %}
-    <main id="main">
-        <h1>{{ title }}</h1>
-        {% if post.is_hot %}
-            <p>hot</p>
-        {% endif %}
-        {% if post.byline %}
-            <p>{{ post.byline }}</p>
-        {% endif %}
-        {% if post.hasPrimaryTerm('content-category') %}
-            <p><a href="{{ post.getPrimaryTermLink('content-category') }}">{{ post.getPrimaryTermName('content-category') }}</a></p>
-        {% endif %}
-        {% if post.hasPrimaryTerm %}
-            <p><a href="{{ post.getPrimaryTermLink }}">{{ post.getPrimaryTermName }}</a></p>
-        {% endif %}
+    <section class="entry-content">
         {{ content|raw }}
-    </main>
+        <div class="m-adspace m-adspace--post-single">
+            <span></span>
+        </div>
+    </section>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
+
+    {% include "components/molecules/post-sidebar.twig" %}
+
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
+{% endblock %}
+
+{% block related %}
+    {% include "components/organisms/post-related.twig" %}
 {% endblock %}

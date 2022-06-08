@@ -1,64 +1,74 @@
 {% extends "base.twig" %}
 
 {% block content %}
-    <main id="main">
-        <h1>{{ title }}</h1>
 
-        {# Hero #}
-        {% if hero %}
-            {% for post in hero %}
-                {% include "components/molecules/hero.twig" %}
-            {% endfor %}
+    {# Hero #}
+    {% if hero %}
+        {% for post in hero %}
+            {% include "components/molecules/hero.twig" %}
+        {% endfor %}
+    {% endif %}
+
+    {# Marquee #}
+    {% if marquee %}
+        {% include "components/molecules/marquee-divider.twig" %}
+    {% endif %}
+
+    {# Featured Categories #}
+    {% if featured %}
+        {% for group in featured %}
+            {% include "components/organisms/featured-carousel.twig" %}
+        {% endfor %}
+    {% endif %}
+
+    {# DJs #}
+    <section class="o-dj-carousel alignfull has-background-color has-hot-yellow-100-background-color">
+        {% if dj_bg_image %}
+        <div class="o-tiled">
+            <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+            <div class="o-tiled__tile" style="background-image:url({{ dj_bg_image }})"></div>
+        </div>
         {% endif %}
 
-        {# Featured Categories #}
-        {% if featured %}
-            {% for group in featured %}
-                <h2>{{ group.term.name }}</h2>
+        <div class="o-dj-carousel__inner">
+            <div class="o-dj-carousel__header m-section-header">
+                <h2 class="o-dj-carousel__title a-section-heading">HOT DJS</h2>
+                <a class="o-dj-carousel__view-all a-arrow-link" href="/talent">View All DJs</a>
+            </div>
+            {% if djs %}
+                <ul class="o-dj-carousel__list js-dj-carousel">
+                    {% for post in djs %}
+                        <li class="o-dj-carousel__item">
+                            {% include "components/molecules/dj-card.twig" %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </section>
 
-                {% if group.posts %}
-                    <ul class="posts">
-                        {% for post in group.posts %}
-                            <li class="posts__item">
-                                {% include "components/molecules/card.twig" %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+    <div class="m-adspace--in-content">
+        <div class="m-adspace__inner">
+            <div class="ione-ad" data-pg="home" data-pos="incontent1"></div>
+        </div>
+    </div>
 
-        {# DJs #}
-        {% if djs %}
-            <ul class="posts">
-                {% for post in djs %}
-                    <li class="posts__item">
-                        {% include "components/molecules/card.twig" %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    {# CTAs #}
+    {% include "components/organisms/home-ctas.twig" %}
 
-        {# Marketing Content #}
-        {{ content|raw }}
+    <div class="m-adspace--in-content">
+        <div class="m-adspace__inner">
+            <div class="ione-ad" data-pg="home" data-pos="incontent2"></div>
+        </div>
+    </div>
 
-        {# Other Categories #}
-        {% if other %}
-            {% for group in other %}
-                <h2>{{ group.term.name }}</h2>
-                <a href="{{ group.term.path }}">View All {{ group.term.name }}</a>
+    {# Other Categories #}
+    {% if other %}
+        {% for group in other %}
+            {% include "components/organisms/other-categories.twig" %}
+        {% endfor %}
+    {% endif %}
 
-                {% if group.posts %}
-                    <ul class="posts">
-                        {% for post in group.posts %}
-                            <li class="posts__item">
-                                {% include "components/molecules/card.twig" %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
-    </main>
+    {% include "components/organisms/prefooter-home.twig" %}
 {% endblock %}

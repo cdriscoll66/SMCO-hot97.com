@@ -1,0 +1,31 @@
+a.m-social-icon {
+  font-size: rem(16px);
+  height: rem(20px);
+  padding: 0 5px;
+  color: var(--global--color-hot-yellow-100) !important;
+  &:hover {
+    color: var(--global--color-white) !important;
+  }
+}
+
+.m-social-icon__wrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-right: 30px;
+  display: none;
+  @include media(desktop) {
+    display: flex;
+  }
+
+  .o-drawer & {
+    justify-content: space-around;
+    margin: 30px 0 45px;
+    display: flex;
+  }
+
+  .o-footer & {
+    justify-content: space-between;
+    margin: 10px 0;
+    display: flex;
+  }
+}

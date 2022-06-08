@@ -1,0 +1,134 @@
+.m-card {
+  background-color: $color-black;
+  color: #fff;
+  padding: 20px 30px 30px;
+  border: 1px solid darken($color-hot-yellow-100, 30%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.m-card--collapse {
+    background: none;
+    color: var(--global--color-black);
+    border: none;
+    border-top: 1px solid var(--global--color-black);
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 20px;
+    flex-direction: row-reverse;
+  }
+
+  &.m-card--title-only {
+    align-items: center;
+  }
+
+  a {
+    color: inherit;
+  }
+}
+
+.m-card__text {
+  .m-card--collapse & {
+    width: calc(100% - (75px + 15px));
+  }
+}
+
+.m-card__content-category,
+.o-post-header__content-category {
+  text-transform: uppercase;
+  margin-right: 18px;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-size: rem(16px);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.m-card__category,
+.o-post-header__primary-category {
+  font-family: $mono;
+  text-transform: uppercase;
+
+  a {
+    color: $color-hot-yellow-100;
+    font-size: rem(14px);
+    text-decoration: none;
+
+    .m-card--collapse & {
+      color: var(--global--color-black);
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.m-card__is-hot,
+.o-post-header__is-hot {
+  margin-left: 8px;
+
+  i {
+    color: $color-hot-yellow-100;
+    font-size: rem(12px);
+
+    .m-card--collapse & {
+      color: var(--global--color-black);
+    }
+  }
+}
+
+.m-card__title {
+  font-family: $judgetrial;
+  font-weight: 500;
+  color: #fff;
+  font-size: rem(24px);
+  line-height: 1.1666;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+
+  .m-card--collapse & {
+    color: var(--global--color-black);
+    margin-bottom: 0;
+    font-size: rem(14px);
+    font-family: monospace;
+    line-height: 1.5;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.m-card__desc {
+  color: var(--global--color-black);
+  margin: 0;
+  font-size: rem(12px)!important;
+  font-family: monospace;
+  line-height: 1.5;
+}
+
+.m-card__image-link {
+  display: block;
+  width: 100%; //CD changed to make responsive
+  height: auto;
+  clip-path: circle(50%);
+
+  .m-card--collapse & {
+    max-width: 75px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}

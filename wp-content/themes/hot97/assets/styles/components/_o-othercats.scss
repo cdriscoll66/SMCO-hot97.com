@@ -32,11 +32,13 @@
 .o-othercats__card,
 .o-post-feed__item {
   width: 100%;
+  display: flex;
+
   @include media(desktop) {
     width: 33.3%;
   }
   .m-card {
-    height: 100%;
+    width: 100%;
   }
 }
 

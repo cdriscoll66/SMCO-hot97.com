@@ -30,11 +30,12 @@ class ComposerStaticInit34fa6c9fc297a938129eaace6560e320
         '751a5a3f463e4be759be31748b61737c' => __DIR__ . '/..' . '/laminas/laminas-diactoros/src/functions/parse_cookie_header.legacy.php',
         'ce30818c35dfce0b74f3d34a4027ae2a' => __DIR__ . '/..' . '/http-interop/http-server-middleware/src/alias.php',
         'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
-        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         '6f2c5977e422114bbaec553e7c77ee8b' => __DIR__ . '/..' . '/http-interop/response-sender/src/functions.php',
-        '3d52f551daf8fb18ca65f91322628905' => __DIR__ . '/..' . '/statamic/stringy/src/Create.php',
+        '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         'fe62ba7e10580d903cc46d808b5961a4' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/helpers.php',
         'caf31cc6ec7cf2241cb6f12c226c3846' => __DIR__ . '/..' . '/tightenco/collect/src/Collect/Support/alias.php',
+        '3d52f551daf8fb18ca65f91322628905' => __DIR__ . '/..' . '/statamic/stringy/src/Create.php',
+        '32a4c26a4fcb93d787a6a7cafb8c7c9d' => __DIR__ . '/..' . '/palmiak/timber-acf-wp-blocks/timber-acf-wp-blocks.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -234,7 +235,7 @@ class ComposerStaticInit34fa6c9fc297a938129eaace6560e320
     );
 
     public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/asm89/twig-cache-extension/lib',
+        0 => __DIR__ . '/..' . '/twig/cache-extension/lib',
     );
 
     public static $prefixesPsr0 = array (

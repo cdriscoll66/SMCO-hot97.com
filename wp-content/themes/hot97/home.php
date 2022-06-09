@@ -76,7 +76,8 @@ class HomeController extends Controller
 
         $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 
-        $context['archive_sidebar'] = get_categories([
+        $context['archive_sidebar']['title'] = "CATEGORIES";
+        $context['archive_sidebar']['terms'] = get_categories([
             'orderby'    => 'menu_order',
             'order'      => 'ASC',
             'hide_empty' => 0,

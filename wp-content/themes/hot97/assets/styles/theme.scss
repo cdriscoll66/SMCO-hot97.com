@@ -19,11 +19,6 @@
 /** Import Twenty Twenty-One styles */
 @import 'theme/twentytwentyone/assets/sass/style.colab';
 
-/** Templates */
-@import 'templates/single-dj';
-@import 'templates/archive-dj';
-
-
 /** Components */
 
 @import 'components/a-app-button';
@@ -71,5 +66,9 @@
 @import 'components/o-search-results-header';
 @import 'components/o-search-results';
 
-
 @import 'blocks/listen-live';
+
+/** Templates */
+@import 'templates/single-dj';
+@import 'templates/archive-dj';
+@import 'templates/error-404';

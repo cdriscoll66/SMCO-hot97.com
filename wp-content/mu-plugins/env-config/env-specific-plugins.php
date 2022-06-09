@@ -13,8 +13,7 @@ $plugins = [
 
 
 // Live-specific configs.
-require_once ABSPATH . 'wp-admin/includes/plugin.php';
-if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], [ 'develop', 'test', 'live' ] ) ) {
+if ( in_array( $_ENV['PANTHEON_ENVIRONMENT'], [ 'develop', 'test', 'live', 'lando' ] ) ) {
     // Activate Live Plugins.
     foreach ( $plugins['conditional-plugins'] as $plugin ) {
         if ( is_plugin_inactive( $plugin ) ) {

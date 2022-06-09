@@ -53,7 +53,6 @@ else {
 }
 
 // Includes.
-use EnvironmentSpecificOverrides\Overrides;
 
 /***********************************
  * Initialize plugin.
@@ -77,11 +76,15 @@ add_action('acf/init', [ Settings::class, 'acf_init' ], 20);
  * Override Hooks.
  ***********************************/
 
-// Override blogname
-add_filter( "pre_option_blogname", [ Overrides::class, 'sampleReplacement' ] );
+// Saves mini-orange configuration data to ACF groups on option pre-save.
+add_action('update_option', [ Overrides::class, 'update_option' ], 10, 3);
 
-// miniOrange SSO Overrides
-// add_filter( "pre_option_saml_x509_certificate", [ Overrides::class, 'miniOrangeReplacement' ] );
-// add_filter( "pre_option_saml_issuer", [ Overrides::class, 'miniOrangeReplacement' ] );
-// add_filter( "pre_option_saml_login", [ Overrides::class, 'miniOrangeReplacement' ] );
-// add_filter( "pre_option_saml_logout", [ Overrides::class, 'miniOrangeReplacement' ] );
+// This references the configured application (1 per site/Premium license)
+add_filter( "pre_option_mo_oauth_apps_list", [ Overrides::class, 'mo_oauth_apps_list' ] );
+add_filter( "pre_option_mo_oauth_client_config", [ Overrides::class, 'mo_oauth_client_config' ] );
+add_filter( "pre_option_mo_oauth_client_auto_register", [ Overrides::class, 'mo_oauth_client_auto_register' ] );
+
+// Each environment will have its own option that changes based on application name/env
+add_filter( "pre_option_mo_oauth_attr_name_listhot97dev", [ Overrides::class, 'mo_oauth_attr_name_listhot97dev' ] );
+add_filter( "pre_option_mo_oauth_attr_name_listhot97test", [ Overrides::class, 'mo_oauth_attr_name_listhot97test' ] );
+add_filter( "pre_option_mo_oauth_attr_name_listhot97", [ Overrides::class, 'mo_oauth_attr_name_listhot97' ] );

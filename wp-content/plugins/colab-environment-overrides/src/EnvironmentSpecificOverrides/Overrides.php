@@ -1,6 +1,4 @@
 <?php
-
-
 namespace EnvironmentSpecificOverrides;
 
 /**
@@ -12,48 +10,121 @@ namespace EnvironmentSpecificOverrides;
 class Overrides {
 
     /**
-     * Sample override
+     * This function syncs any values saved into MiniOrange fields into the respective
+     * override ACF group BEFORE update to make sure that any calls to get_option are not being
+     * overwritten by the pre_option hooks.
+     *
+     * @param $option_name
+     * @param $old_value
+     * @param $value
+     * @return void
      */
-    public static function sampleReplacement( $option ) {
-        $environment = self::determineEnvironment();
+    public static function update_option( $option_name, $old_value, $value ) {
+        $overrides = [
+            'mo_oauth_apps_list',
+            'mo_oauth_client_config',
+            'mo_oauth_client_auto_register',
+            'mo_oauth_attr_name_listhot97dev',
+            'mo_oauth_attr_name_listhot97test',
+            'mo_oauth_attr_name_listhot97',
+        ];
 
-        // Replace whatever $option is with the environment as a test
-        $override =  $environment;
-
-        if ($override) {
-            return $override;
-        } else {
-            return $option;
+        if ( in_array( $option_name, $overrides ) ) {
+            $environment = self::determineEnvironment();
+            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option' );
+            update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );
         }
     }
 
     /**
-     * miniOrange overrides
-     *
+     * @param $option_value
+     * @return false|mixed
      */
-    public static function miniOrangeReplacement( $option ) {
+    public static function mo_oauth_apps_list( $option_value ) {
         $environment = self::determineEnvironment();
-
-        // Replace the $option with the ACF environment specific value
-        $override = get_option("options_{$environment}_environment_miniorange_sso_idp_settings_{$option}");
-
-        // Certificate is stored as an array for some reason
-        if($option == 'saml_x509_certificate') {
-            $override = serialize([$override]);
+        if ( $environment !== FALSE ) {
+            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option' );
+            return $override ?? $option_value;
         }
 
-        if ($override) {
-            return $override;
-        } else {
-            return $option;
+        return $option_value;
+    }
+
+    /**
+     * @param $option_value
+     * @return false|mixed
+     */
+    public static function mo_oauth_client_config( $option_value ) {
+        $environment = self::determineEnvironment();
+        if ( $environment !== FALSE ) {
+            $override = get_field( "{$environment}_mo_oauth_client_config", 'option' );
+            return $override ?? $option_value;
         }
+
+        return $option_value;
+    }
+
+    /**
+     * @param $option_value
+     * @return false|mixed
+     */
+    public static function mo_oauth_client_auto_register( $option_value ) {
+        $environment = self::determineEnvironment();
+        if ( $environment !== FALSE ) {
+            $override = get_field( "{$environment}_mo_oauth_client_auto_register", 'option' );
+            return $override ?? $option_value;
+        }
+
+        return $option_value;
+    }
+
+    /**
+     * @param $option_value
+     * @return false|mixed
+     */
+    public static function mo_oauth_attr_name_listhot97dev( $option_value ) {
+        $environment = self::determineEnvironment();
+        if ( $environment !== FALSE ) {
+            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97dev", 'option' );
+            return $override ?? $option_value;
+        }
+
+        return $option_value;
+    }
+
+    /**
+     * @param $option_value
+     * @return false|mixed
+     */
+    public static function mo_oauth_attr_name_listhot97test( $option_value ) {
+        $environment = self::determineEnvironment();
+        if ( $environment !== FALSE ) {
+            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97test", 'option' );
+            return $override ?? $option_value;
+        }
+
+        return $option_value;
+    }
+
+    /**
+     * @param $option_value
+     * @return false|mixed
+     */
+    public static function mo_oauth_attr_name_listhot97( $option_value ) {
+        $environment = self::determineEnvironment();
+        if ( $environment !== FALSE ) {
+            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97", 'option' );
+            return $override ?? $option_value;
+        }
+
+        return $option_value;
     }
 
     /**
      * Environment checker
      */
     public static function determineEnvironment() {
-        $environment = 'local_multidev';
+        $environment = FALSE;
         if (defined('PANTHEON_ENVIRONMENT')) {
             switch(getenv('PANTHEON_ENVIRONMENT')) {
                 case 'live':
@@ -62,8 +133,9 @@ class Overrides {
                 case 'test':
                     $environment = 'test';
                 break;
-                case 'dev':
-                    $environment = 'dev';
+                case 'develop':
+                case 'lando':
+                    $environment = 'develop';
                 break;
             }
         }

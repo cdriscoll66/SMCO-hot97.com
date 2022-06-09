@@ -38,7 +38,7 @@ class Settings {
     public static function load_json( $paths ) {
         // prepend path
         $path = PLUGIN_DIR . 'acf-json';
-        array_unshift($paths, $path);
+        array_unshift( $paths, $path );
 
         // return
         return $paths;

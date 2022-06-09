@@ -11,9 +11,9 @@ use Rareloop\Router\Exceptions\RouteNameRedefinedException;
 use Rareloop\Router\Invoker;
 use Rareloop\Router\ProvidesMiddleware;
 use Spatie\Macroable\Macroable;
-use Zend\Diactoros\Response\EmptyResponse;
-use Zend\Diactoros\Response\HtmlResponse;
-use Zend\Diactoros\ServerRequest;
+use Laminas\Diactoros\Response\EmptyResponse;
+use Laminas\Diactoros\Response\HtmlResponse;
+use Laminas\Diactoros\ServerRequest;
 use mindplay\middleman\Dispatcher;
 
 class Route
@@ -56,7 +56,7 @@ class Route
         $this->routeAction = new RouteAction($action, $this->invoker);
     }
 
-    public function handle(ServerRequest $request, RouteParams $params) : ResponseInterface
+    public function handle(ServerRequest $request, RouteParams $params): ResponseInterface
     {
         // Get all the middleware registered for this route
         $middlewares = $this->gatherMiddleware();
@@ -65,7 +65,7 @@ class Route
         $middlewares[] = function ($request) use ($params) {
             $output = $this->routeAction->invoke($request, $params);
 
-            return ResponseFactory::create($output, $request);
+            return ResponseFactory::create($request, $output);
         };
 
         // Create and process the dispatcher
@@ -80,7 +80,7 @@ class Route
         return $dispatcher->dispatch($request);
     }
 
-    private function gatherMiddleware() : array
+    private function gatherMiddleware(): array
     {
         return array_merge([], $this->middleware, $this->routeAction->getMiddleware());
     }

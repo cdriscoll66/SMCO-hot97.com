@@ -1,0 +1,117 @@
+.o-listen-live {
+
+
+  .wp-block-columns {
+
+    .wp-block-column {
+      flex-basis: auto;
+      flex-grow: unset;
+    }
+
+    > .wp-block-column:first-child {
+      width: calc(100% - 340px);
+    }
+
+    > .wp-block-column:not(:first-child) {
+      width: 300px;
+      margin-left: 40px;
+    }
+
+  }
+
+  .m-adspace {
+    margin-top: 0;
+
+    &.m-adspace--listen-live {
+      margin-top: 75px;
+      margin-bottom: 75px;
+    }
+  }
+
+  #td-player {
+    border: 1px solid var(--global--color-hot-yellow-200);
+    display: block;
+    max-width: none;
+  }
+
+  .td-player-bar {
+    height: 300px;
+  }
+
+  .td-song-history__header {
+    height: auto
+  }
+
+  .td-song-history__header__title {
+    float: none;
+    margin-top: 0!important;
+  }
+
+  .td-player-bar__nowplaying__cover-art {
+    width: 300px;
+    max-height: 300px;
+  }
+
+  .td-player-bar__nowplaying__cover-art__media-controls {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .td-player-bar__nowplaying__cover-art__media-controls--play,
+  .td-player-bar__nowplaying__cover-art__media-controls--pause,
+  .td-player-bar__nowplaying__cover-art__media-controls--loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent!important;
+    border: 6px solid var(--global--color-hot-yellow-100);
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    font-size: 40px;
+    padding: 0;
+
+    &:hover {
+      background: white!important;
+    }
+  }
+
+  .td-player-bar__nowplaying__trackinfo {
+    line-height: normal;
+  }
+
+  .td-player-bar__nowplaying__trackinfo__artist-name {
+    font-size: var(--global--font-size-lg);
+    max-width: 400px;
+    width: 100%;
+
+    span {
+      color: white!important;
+    }
+  }
+
+  .td-player-bar__nowplaying__trackinfo__cue-title {
+    font-size: var(--global--font-size-md);
+
+    span {
+      color: white!important;
+    }
+  }
+
+
+  .acf-block-preview & {
+    background-color: lightgray;
+    border: 1px solid black;
+  }
+}
+
+.m-adspace {
+  margin-top: 0;
+
+  &.m-adspace--listen-live {
+    margin-top: 50px;
+  }
+}

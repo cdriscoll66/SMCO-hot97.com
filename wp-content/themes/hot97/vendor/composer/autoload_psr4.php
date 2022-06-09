@@ -37,5 +37,5 @@ return array(
     'DI\\' => array($vendorDir . '/php-di/php-di/src'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
     'Blast\\Facades\\' => array($vendorDir . '/blast/facades/src'),
-    '' => array($vendorDir . '/asm89/twig-cache-extension/lib'),
+    '' => array($vendorDir . '/twig/cache-extension/lib'),
 );

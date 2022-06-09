@@ -50,6 +50,10 @@ class TagController extends Controller
             'hide_empty' => 0,
         ]);
 
+        foreach ($context['archive_sidebar']['terms'] as $term) {
+            $term->link = get_tag_link($term->term_id);
+        }
+
         $context['main_class'] = 'o-main--split o-main--archive';
 
         $context['body_class'] = $context['body_class'] . ' is-dark-theme';

@@ -83,8 +83,8 @@ class HomeController extends Controller
             'hide_empty' => 0,
         ]);
 
-        foreach ($context['archive_sidebar'] as $cat) {
-            $cat->link = get_category_link($cat->term_id);
+        foreach ($context['archive_sidebar']['terms'] as $term) {
+            $term->link = get_category_link($term->term_id);
         }
 
         return new TimberResponse('templates/posts.twig', $context);

@@ -12,32 +12,33 @@
 namespace App;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Traits\LoadMore;
+// use App\Http\Controllers\Traits\LoadMore;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
 use Timber\Timber;
 use Rareloop\Lumberjack\Http\ServerRequest;
-
+use App\ViewModels\FeatureCardViewModel;
+use App\ViewModels\CardViewModel;
 
 class HomeController extends Controller
 {
-    use LoadMore;
+    // use LoadMore;
 
-    public function __construct()
-    {
-        // Load More setup
-        $this->set_load_more_additional_context([
-            'key' => 'value',
-        ]);
-        $this->set_load_more_num_per_page(10);
-        $this->set_load_more_partial('templates/partials/post-feed.twig');
-        $this->set_load_more_post_type_class(Post::class);
-    }
+    // public function __construct()
+    // {
+    //     // Load More setup
+    //     $this->set_load_more_additional_context([
+    //         'key' => 'value',
+    //     ]);
+    //     $this->set_load_more_num_per_page(10);
+    //     $this->set_load_more_partial('templates/partials/post-feed.twig');
+    //     $this->set_load_more_post_type_class(Post::class);
+    // }
 
     public function handle(ServerRequest $request)
     {
         $context = Timber::get_context();
-        $context['title'] = 'Archive';
+        $context['title'] = 'Blog';
         $context['params'] = $request->query();
 
         if (is_day()) {
@@ -54,9 +55,37 @@ class HomeController extends Controller
             $context['title'] = post_type_archive_title('', false);
         }
 
-        $context['posts'] = Post::builder()->limit($context['posts_per_page'])->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))->get();
+        $context['posts_per_page'] = 17;
+
+        $posts = Post::builder()
+            ->limit($context['posts_per_page'])
+            ->offset($context['posts_per_page'] * ($context['paged'] > 1 ? $context['paged'] - 1 : 0))
+            ->get();
+
+        $featured_post = $posts->shift();
+        $context['featured_post'] = new FeatureCardViewModel($featured_post);
+
+        $context['posts'] = $posts->map(function ($item, $key) {
+            return new CardViewModel($item);
+        });
 
         $context['paginate_links'] = paginate_links();
+
+        $context['sidebar'] = true;
+        $context['main_class'] = 'o-main--split o-main--archive';
+
+        $context['body_class'] = $context['body_class'] . ' is-dark-theme';
+
+        $context['archive_sidebar']['title'] = "CATEGORIES";
+        $context['archive_sidebar']['terms'] = get_categories([
+            'orderby'    => 'menu_order',
+            'order'      => 'ASC',
+            'hide_empty' => 0,
+        ]);
+
+        foreach ($context['archive_sidebar']['terms'] as $term) {
+            $term->link = get_category_link($term->term_id);
+        }
 
         return new TimberResponse('templates/posts.twig', $context);
     }

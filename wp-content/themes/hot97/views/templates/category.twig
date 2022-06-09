@@ -4,18 +4,27 @@
 <div class="m-marquee-title">
     <div class="m-marquee-title__inner">
         <h1>{{ title }}</h1>
-            {% for i in 0..5 %}
+            {% for i in 0..8 %}
                 <span>{{ title }}</span>
             {% endfor %}
     </div>
 </div>
+
+{% if featured_post %}
+    {% include "components/molecules/feature-card.twig" with {
+        'post': featured_post
+    } %}
+{% endif %}
+
 {% endblock %}
 
 {% block content %}
 
-    <div class="typography">
+    {% if content %}
+    <div class="entry-content">
         {{ content|raw }}
     </div>
+    {% endif %}
 
     {% if posts|length > 0 %}
         <ul class="posts o-post-feed">
@@ -30,9 +39,9 @@
 {% endblock %}
 
 {% block sidebar %}
-    TEST sidebar
+    {% include "components/molecules/archive-sidebar.twig" %}
+
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
 {% endblock %}
-
-
-
-

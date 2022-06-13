@@ -10,7 +10,7 @@
 
     <div class="o-othercats__container">
         <div class="o-othercats__cardblock">
-            <div class="o-othercats__cards posts">
+            <div class="o-othercats__cards js-post-collect posts">
                 {% for post in related_posts %}
                 <div class="posts__item o-othercats__card">
                     {% include "components/molecules/card.twig" %}
@@ -18,7 +18,7 @@
                 {% endfor %}
             </div>
 
-           <span class="load-more-observer" data-id={{id }}></span>
+           <span class="load-more-observer" data-id={{id }} data-style="singlepost"></span>
         </div>
 
         <div class="o-othercats__adspace">

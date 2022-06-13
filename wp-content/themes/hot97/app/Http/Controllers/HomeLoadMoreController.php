@@ -16,15 +16,14 @@ class HomeLoadMoreController extends Controller
     public function loadMore()
     {
 
-
         $request = Helpers::request();
         $paged = $request->query('paged');
 
-        $offset = 10 * $paged;
+        $offset = 12 * $paged;
         $context = Timber::get_context();
         $context['posts'] = Post::builder()
             ->offset($offset)
-            ->limit(10)
+            ->limit(12)
             ->get();
 
 

@@ -19,14 +19,14 @@
 {% block content %}
 
     {% if posts|length > 0 %}
-        <ul class="o-post-feed">
+        <ul class="o-post-feed js-post-collect">
             {% include "templates/partials/post-feed.twig" %}
         </ul>
     {% else %}
         <p>No results found.</p>
     {% endif %}
 
-    <span class="load-more-observer"></span>
+    <span class="load-more-observer" data-style="archive"></span>
 
 {% endblock %}
 

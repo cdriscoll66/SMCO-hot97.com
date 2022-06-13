@@ -1,22 +1,25 @@
 function init() {
   /* this is the observer at the bottom of the scroll */
   const loadMoreObs = document.getElementsByClassName("load-more-observer");
+
+
+  /* only load on page with observer */
+  if (!loadMoreObs.length) {
+    return;
+  }
+  const poststyle = loadMoreObs[0].getAttribute('data-style');
   const postid = loadMoreObs[0].getAttribute('data-id');
-  const postContainer = document.querySelector(".posts");
+  const postContainer = document.querySelector(".js-post-collect");
   let pagednumber = 0;
 
   /* Intersection Observer options */
 
   const obsOptions = {
     root: null,
-    rootMargin: "500px",
-    threshold: 1.0
+    rootMargin: "100px",
+    threshold: 0
   };
 
-  /* only load on page with observer */
-  if (!loadMoreObs.length) {
-    return;
-  }
 
 
   /* call Intersection api - to listen - and fire callback */
@@ -29,7 +32,7 @@ function init() {
   /* callback checks if on screen - if so -> handles posts */
   const intersectionObserverCallback = entries => {
     if (entries[0].isIntersecting) {
-      handleLoadMorePosts('singlepost');
+      handleLoadMorePosts(poststyle);
     }
   };
 
@@ -56,6 +59,7 @@ function init() {
   };
 
   const addPosts = posts => {
+    console.log(postContainer );
     postContainer.insertAdjacentHTML( 'beforeend', posts );
   };
 }

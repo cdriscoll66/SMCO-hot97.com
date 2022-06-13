@@ -21,6 +21,10 @@
   line-height: 1.6;
   text-transform: uppercase;
   display: block;
+
+  .is-dark-theme & {
+    color: white;
+  }
 }
 
 .m-adspace--preheader span {
@@ -44,7 +48,8 @@
 }
 
 .m-adspace--djsingle,
-.m-adspace--post-single {
+.m-adspace--post-single,
+.m-adspace--listen-live {
   span {
     height: 90px;
     width: 728px;

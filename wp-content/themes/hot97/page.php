@@ -27,6 +27,13 @@ class PageController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
+        $dark = get_field('dark_page');
+        if($dark) {
+            $context['body_class'] = $context['body_class'] . ' is-dark-theme';
+        }
+
+        $context['hide_banner'] = get_field('hide_page_header');
+
         return new TimberResponse('templates/page.twig', $context);
     }
 }

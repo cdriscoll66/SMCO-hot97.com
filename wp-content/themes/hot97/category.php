@@ -32,11 +32,8 @@ class CategoryController extends Controller
             });
 
         // pull out the first one as the feature post as a FeaturedCard
-        $context['featured_post'] = $posts
-            ->shift()
-            ->map(function($item) {
-                return new FeatureCardViewModel($item);
-            });
+        $featured_post = $posts->shift();
+        $context['featured_post'] = new FeatureCardViewModel($featured_post);
 
         // pass in the rest as the 'posts' context variable as Cards
         $context['posts'] = $posts->map(function($item) {
@@ -46,7 +43,20 @@ class CategoryController extends Controller
         $context['paginate_links'] = paginate_links();
 
         $context['sidebar'] = true;
-        $context['main_class'] = 'o-main--split';
+        $context['archive_sidebar']['title'] = "CATEGORIES";
+        $context['archive_sidebar']['terms'] = get_categories([
+            'orderby'    => 'menu_order',
+            'order'      => 'ASC',
+            'hide_empty' => 0,
+        ]);
+
+        foreach ($context['archive_sidebar']['terms'] as $term) {
+            $term->link = get_category_link($term->term_id);
+        }
+
+        $context['main_class'] = 'o-main--split o-main--archive';
+
+        $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 
         return new TimberResponse('templates/category.twig', $context);
     }

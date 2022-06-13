@@ -1,15 +1,25 @@
 {% extends "base.twig" %}
 
+{% block banner %}
+    <div class="m-marquee-title">
+        <div class="m-marquee-title__inner">
+            <h1>{{ title }}</h1>
+                    {% for i in 0..9 %}
+            <span>{{ title }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% if featured_post %}
+        {% include "components/molecules/feature-card.twig" with {
+            'post': featured_post
+        } %}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 
-    <h1>{{ title }}</h1>
-
-    <div class="typography">
-        {{ content|raw }}
-    </div>
-
     {% if posts|length > 0 %}
-        <ul class="posts">
+        <ul class="o-post-feed">
             {% include "templates/partials/post-feed.twig" %}
         </ul>
     {% else %}
@@ -18,4 +28,13 @@
 
     <span class="load-more-observer"></span>
 
+{% endblock %}
+
+{% block sidebar %}
+
+    {% include "components/molecules/archive-sidebar.twig" %}
+
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
 {% endblock %}

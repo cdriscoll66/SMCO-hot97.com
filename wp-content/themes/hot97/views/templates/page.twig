@@ -1,13 +1,13 @@
 {% extends "base.twig" %}
 
 {% block banner %}
-    {% include 'components/organisms/page-header.twig' %}
+    {% if not hide_banner %}
+        {% include 'components/organisms/page-header.twig' %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
-    <main id="main">
-        <section class="entry-content">
-            {{ content|raw }}
-        </section>
-    </main>
+    <section class="entry-content">
+        {{ content|raw }}
+    </section>
 {% endblock %}

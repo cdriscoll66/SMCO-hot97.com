@@ -1,5 +1,13 @@
 {% for post in posts %}
-    <li class="posts__item">
-        {% include "components/molecules/card.twig" %}
-    </li>
+    {% if paged < 1 %}
+        {% if not loop.first %}
+            <li class="o-post-feed__item">
+                {% include "components/molecules/card.twig" %}
+            </li>
+        {% endif %}
+    {% else %}
+       <li class="o-post-feed__item">
+            {% include "components/molecules/card.twig" %}
+        </li>
+    {% endif %}
 {% endfor %}

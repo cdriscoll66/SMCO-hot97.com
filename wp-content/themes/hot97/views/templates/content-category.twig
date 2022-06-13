@@ -15,10 +15,13 @@
             {% include "components/molecules/hero.twig" %}
         {% endfor %}
     {% endif %}
+
+    <div class="m-adspace m-adspace--archive">
+        <span></span>
+    </div>
 {% endblock %}
 
-{% block content %}
-
+{% block precontent %}
     {# Featured Posts #}
     {% if featured_posts %}
         <section class="o-featured-carousel">
@@ -36,12 +39,6 @@
         </section>
     {% endif %}
 
-    <div class="m-adspace--in-content">
-        <div class="m-adspace__inner">
-            <div class="ione-ad" data-pos="incontent1"></div>
-        </div>
-    </div>
-
     {# Featured Categories #}
     {% if featured %}
         {% for group in featured %}
@@ -50,7 +47,35 @@
     {% endif %}
 
     {# Latest Posts #}
+    <div class="m-marquee-title">
+        <div class="m-marquee-title__inner">
+            <h2>Latest {{ single_name }}</h2>
+                {% for i in 0..8 %}
+                    <span>Latest {{ single_name }}</span>
+                {% endfor %}
+        </div>
+    </div>
 
-    {# Pre-footer CTA #}
+{% endblock %}
 
+{% block content %}
+    {% if latest_posts|length > 0 %}
+        <ul class="posts o-post-feed">
+            {% include "templates/partials/post-feed.twig" with {
+                'posts': latest_posts
+            }  %}
+        </ul>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    {# <span class="load-more-observer">load</span> #}
+{% endblock %}
+
+{% block sidebar %}
+    {% include "components/molecules/archive-sidebar.twig" %}
+
+    <div class="m-adspace m-adspace--post-sidebar">
+        <span></span>
+    </div>
 {% endblock %}

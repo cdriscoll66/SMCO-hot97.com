@@ -12,6 +12,7 @@
 namespace App;
 
 use App\Http\Controllers\ContentCategoryAbstractController;
+use Timber\Timber;
 
 class PageWatchController extends ContentCategoryAbstractController
 {
@@ -19,5 +20,6 @@ class PageWatchController extends ContentCategoryAbstractController
     {
         $this->term_id = 8;
         $this->page_config_field_name = 'video_page_fields';
+
     }
 }

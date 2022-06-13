@@ -44,15 +44,6 @@ class SinglePostController extends Controller
             ->limit(6)
             ->get();
 
-        // Start of "if the client needs to always have 6 items in this listing work"
-        // if(count($posts) < 6) {
-        //     $limit = 6 - count($posts);
-        //     $additional_posts = Post::builder()
-        //     ->whereIdNotIn($exclude)
-        //     ->orderBy('date', 'desc')
-        //     ->limit($limit)
-        //     ->get();
-        // }
 
         $posts = $posts->map(function ($item) {
             return new CardViewModel($item);
@@ -67,6 +58,8 @@ class SinglePostController extends Controller
         $post = new Post();
 
         $context['post'] = $post;
+        $context['id'] = $post->ID;
+
         $context['title'] = $post->title;
         $context['content'] = $post->content;
         $context['main_class'] = 'o-main--split o-main--single-post';

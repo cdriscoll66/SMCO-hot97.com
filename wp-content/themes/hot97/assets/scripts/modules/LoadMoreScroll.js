@@ -1,16 +1,15 @@
-import { debounce } from "lodash/debounce";
-
 function init() {
   /* this is the observer at the bottom of the scroll */
   const loadMoreObs = document.getElementsByClassName("load-more-observer");
-  const postContainer = document.querySelector("ul.posts");
+  const postid = loadMoreObs[0].getAttribute('data-id');
+  const postContainer = document.querySelector(".posts");
   let pagednumber = 0;
 
   /* Intersection Observer options */
 
   const obsOptions = {
     root: null,
-    rootMargin: "0px",
+    rootMargin: "500px",
     threshold: 1.0
   };
 
@@ -30,15 +29,27 @@ function init() {
   /* callback checks if on screen - if so -> handles posts */
   const intersectionObserverCallback = entries => {
     if (entries[0].isIntersecting) {
-      handleLoadMorePosts();
+      handleLoadMorePosts('singlepost');
     }
   };
 
 
-  const handleLoadMorePosts = () => {
+  const handleLoadMorePosts = (context) => {
     pagednumber += 1;
 
-    let query = "/home-load-more?paged=" + pagednumber;
+    let query = '';
+
+    switch(context) {
+      case 'archive':
+      query = "/home-load-more/?paged=" + pagednumber;
+      break;
+      case 'singlepost':
+      query = "single-post-load-more/" + postid + "/?paged=" + pagednumber;
+      break;
+      default:
+      query = "/home-load-more/?paged=" + pagednumber;
+    }
+
     fetch(query)
       .then(response => response.text())
       .then(data => addPosts(data));

@@ -1,6 +1,4 @@
 .o-listen-live {
-
-
   .wp-block-columns {
 
     .wp-block-column {
@@ -16,7 +14,6 @@
       width: 300px;
       margin-left: 40px;
     }
-
   }
 
   .m-adspace {
@@ -29,7 +26,7 @@
   }
 
   #td-player {
-    border: 1px solid var(--global--color-hot-yellow-200);
+    border: none;
     display: block;
     max-width: none;
   }
@@ -45,6 +42,7 @@
   .td-song-history__header__title {
     float: none;
     margin-top: 0!important;
+    font-size: var(--global--font-size-lede)!important;
   }
 
   .td-player-bar__nowplaying__cover-art {
@@ -81,6 +79,7 @@
 
   .td-player-bar__nowplaying__trackinfo {
     line-height: normal;
+    padding-left: 30px;
   }
 
   .td-player-bar__nowplaying__trackinfo__artist-name {
@@ -101,17 +100,87 @@
     }
   }
 
+  .td-song-history__song__infos {
+    padding-left: 16px;
+  }
+
   .td-player-bar__volume-controls__volume {
     margin-top: 36px;
   }
 
   .td-player-bar__buy {
-    margin-top: 34px;
+    margin-top: 24px;
+
+    a {
+      text-decoration: none!important;
+    }
+
+    #TD-buyButton {
+      background-color: transparent!important;
+      color: var(--global--color-hot-yellow-100);
+      font-size: rem(14px);
+      line-height: 1.4285;
+      font-family: monospace;
+      text-transform: uppercase;
+      text-decoration: none!important;
+      display: block;
+      width: 100%;
+      height: fit-content;
+      text-align: center;
+      border: 1px solid var(--global--color-hot-yellow-100);
+      border-radius: 50px;
+      padding: 10px 30px;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        color: var(--global--color-hot-yellow-900);
+        background-color: var(--global--color-hot-yellow-100)!important;
+      }
+    }
   }
 
   .acf-block-preview & {
     background-color: lightgray;
     border: 1px solid black;
+  }
+
+  .td-player-bar__volume-controls__volume-slider,
+  .noUi-handle.noUi-handle-lower {
+    background-color: var(--global--color-hot-yellow-200)!important;
+  }
+
+  .noUi-origin.noUi-background {
+    background-color: rgb(153, 153, 153)!important;
+  }
+
+  .td-song-history__song__buy {
+    margin-top: 6px;
+
+    a {
+      text-decoration: none!important;
+    }
+
+    .buy {
+      background-color: transparent!important;
+      color: var(--global--color-hot-yellow-900);
+      font-size: rem(14px);
+      line-height: 1.4285;
+      font-family: monospace;
+      text-transform: uppercase;
+      text-decoration: none!important;
+      display: block;
+      width: 100%;
+      height: fit-content;
+      text-align: center;
+      border: 1px solid var(--global--color-hot-yellow-900);
+      border-radius: 50px;
+      padding: 6px 16px;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        background-color: var(--global--color-hot-yellow-100)!important;
+      }
+    }
   }
 }
 

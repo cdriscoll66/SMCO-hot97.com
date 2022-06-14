@@ -26,7 +26,6 @@ class HomeLoadMoreController extends Controller
             ->limit(12)
             ->get();
 
-
         return new TimberResponse('templates/partials/post-feed.twig', $context);
     }
 }

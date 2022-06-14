@@ -69,9 +69,6 @@ class SinglePostLoadMoreController extends Controller
             ->limit($limit)
             ->get();
 
-var_dump($context['posts']);
-
-
         return new TimberResponse('templates/partials/post-feed.twig', $context);
     }
 }

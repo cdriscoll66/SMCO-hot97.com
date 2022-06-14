@@ -51,6 +51,12 @@ class HeroViewModel extends ViewModel
         return $excerpt;
     }
 
+    public function thumbnailurl()
+    {
+        $image = get_the_post_thumbnail_url($this->post, 'full');
+        return $image;
+    }
+
     public function video()
     {
         return $this->post->video();

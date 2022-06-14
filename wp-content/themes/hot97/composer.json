@@ -20,6 +20,7 @@
     ],
     "require": {
         "composer/installers": "^1.0",
-        "rareloop/lumberjack-core": "^5.0"
+        "rareloop/lumberjack-core": "^5.0",
+        "palmiak/timber-acf-wp-blocks": "^1.14"
     }
 }

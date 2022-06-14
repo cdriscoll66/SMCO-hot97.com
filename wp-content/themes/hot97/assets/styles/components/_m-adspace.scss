@@ -9,6 +9,9 @@
 
   span {
     background-color: var(--global--color-light-gray);
+    position: relative;
+    margin: 0 auto;
+    max-width: 100%;
   }
 }
 .m-adspace:after {
@@ -48,7 +51,9 @@
 }
 
 .m-adspace--djsingle,
-.m-adspace--post-single {
+.m-adspace--post-single,
+.m-adspace--listen-live,
+.m-adspace--in-content {
   span {
     height: 90px;
     width: 728px;
@@ -56,6 +61,9 @@
 }
 
 .m-adspace--archive {
+  margin-top: 75px;
+  margin-bottom: 90px;
+
   span {
     height: 249px;
     width: 970px;

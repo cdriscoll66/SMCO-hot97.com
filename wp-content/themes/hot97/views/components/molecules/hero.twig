@@ -36,6 +36,11 @@
       <div class="o-hero__media">
         {% include 'components/molecules/hero-video.twig' %}
       </div>
+    {% else %}
+      <div class="o-hero__media">
+        <a class="o-hero__image-link {{ post.contentCategory.name|sanitize }}" href="{{ post.link }}" style='background-image:url({{post.thumbnailurl}})'>
+        </a>
+      </div>
     {% endif %}
   </div>
 </article>

@@ -58,6 +58,8 @@ class ContentCategoryAbstractController extends Controller
         $context['title'] = $page->title;
         $context['content'] = $page->content;
 
+        $context['single_name'] = $context['title'] == 'Watch' ? "Videos" : "Articles";
+
         $page_config = get_field($this->page_config_field_name, 'options');
 
         $exclude = [];
@@ -116,7 +118,7 @@ class ContentCategoryAbstractController extends Controller
             if ($page_config['featured_categories']) {
                 // Loop over each featured category
                 foreach ($page_config['featured_categories'] as $group) {
-                    $term = $group['category'][0];
+                    $term = $group['category'];
                     $post_count = $group['number_of_posts'];
                     $collection = [];
 
@@ -202,12 +204,30 @@ class ContentCategoryAbstractController extends Controller
             // pagination needs to go here for load more functionality
             ->get();
 
-        // TODO: Pre-footer CTA
+        $latest_posts = $latest_posts->map(function($item) {
+            return new CardViewModel($item);
+        });
 
         $context['hero'] = $hero;
         $context['featured_posts'] = $page_featured_posts;
         $context['featured'] = $featured;
         $context['latest_posts'] = $latest_posts;
+
+        $context['sidebar'] = true;
+        $context['archive_sidebar']['title'] = "CATEGORIES";
+        $context['archive_sidebar']['terms'] = get_categories([
+            'orderby'    => 'menu_order',
+            'order'      => 'ASC',
+            'hide_empty' => 0,
+        ]);
+
+        foreach ($context['archive_sidebar']['terms'] as $term) {
+            $term->link = get_category_link($term->term_id);
+        }
+
+        $context['main_class'] = 'o-main--split o-main--archive';
+
+        $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 
         return new TimberResponse('templates/content-category.twig', $context);
     }

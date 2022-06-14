@@ -90,3 +90,32 @@
     margin-right: 10px !important;
   }
 }
+
+.o-hero__image-link {
+  @include lock(min-height, 260px, 600px, $breakpoint_md, $breakpoint_xxl);
+  width: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &:not(.watch) {
+    @include paper-tear-bottom-inner;
+  }
+  &.watch {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:after {
+      content: "";
+      position: absolute;
+      height: 100px;
+      width: 100px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      background: url(../images/playbutton.svg);
+
+    }
+  }
+}

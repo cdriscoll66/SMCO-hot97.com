@@ -1,0 +1,69 @@
+{#
+Title: Listen Live
+Description: Displays the scripts to generate the Listen Live page - not customizable.
+Icon: playlist-audio
+Category: custom
+Keywords: custom, listen, live
+PostTypes: page
+Mode: preview
+SupportsAlign: false
+SupportsMode: false
+SupportsMultiple: false
+SupportsAnchor: false
+#}
+
+<style>
+.acf-block-preview .o-listen-live {
+    border: 1px solid black;
+    background-color: lightgray;
+    padding: 30px;
+    text-align: center;
+}
+
+.acf-block-preview .o-listen-live .wp-block-group__inner-container {
+    display: none;
+}
+
+.acf-block-preview .o-listen-live::before {
+    content: "Listen Live Block - This block is only viewable on the front-end."
+}
+</style>
+
+<div class="o-listen-live wp-block-group alignwide">
+    <div class="wp-block-group__inner-container">
+        <td-player id="td-player" type="bar" defaultcoverart="https://hot97.lndo.site/wp-content/themes/hot97/dist/images/hot97-listen-icon-500.png" highlightcolor="#999999" primarycolor="#FDB927" secondarycolor="#000000" station="WQHTFM" autostart="false" leaderboard="companionLeaderBoard" mediumrectangle="companionBigBox"></td-player>
+
+        {# <div class="m-adspace m-adspace--listen-live">
+            <span></span>
+        </div> #}
+
+        <div class="wp-block-columns alignwide">
+            <div class="wp-block-column">
+                <td-songhistory id="td-songhistory" station="WQHTFM" songsdisplayed="10" itunesaffiliateid="1234" title="Recently played" buybtntext="Buy" highlightcolor="#FDB927" primarycolor="#000000" headerbgcolor="#ffffff" secondarycolor="#ffffff" onappready="appReady"></td-songhistory>
+            </div>
+            <div class="wp-block-column">
+                <td-adplayer id="td-adplayer" client="tap" host="cmod.live.streamtheworld.com" stationid="91863" type="preroll"></td-adplayer>
+                <script>
+                    var widgetAdPlayer;
+
+                    //onappready callback function
+                    function appReady( widgetObjectInstance ){
+                        widgetAdPlayer = widgetObjectInstance;
+                    }
+
+                    //receive onadcomplete  callback
+                    function adComplete(){
+                    }
+                </script>
+
+                <div class="m-adspace m-adspace--post-sidebar">
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="m-adspace m-adspace--listen-live">
+    <span></span>
+</div>

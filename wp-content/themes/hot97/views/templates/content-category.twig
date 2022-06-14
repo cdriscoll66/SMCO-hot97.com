@@ -60,7 +60,7 @@
 
 {% block content %}
     {% if latest_posts|length > 0 %}
-        <ul class="posts o-post-feed">
+        <ul class="posts o-post-feed js-post-collect">
             {% include "templates/partials/post-feed.twig" with {
                 'posts': latest_posts
             }  %}
@@ -69,7 +69,7 @@
         <p>No results found.</p>
     {% endif %}
 
-    {# <span class="load-more-observer">load</span> #}
+    <a id="load-more-button" class="js-load-more post-feed__button" data-style="contentcat" data-cat={{ content_cat }}> load more </a>
 {% endblock %}
 
 {% block sidebar %}

@@ -24,7 +24,7 @@
         <div class="o-search-results__inner">
             <p class="o-search-results__results-text">{{ results_text }}</p>
             {% if posts|length > 0 %}
-                <ul class="o-search-results__posts">
+                <ul class="o-search-results__posts js-post-collect">
                     {% for post in posts %}
                         {% include "components/molecules/search-result.twig" %}
                     {% endfor %}
@@ -34,7 +34,7 @@
             {% endif %}
 
             {# {{ paginate_links }} #}
-            <span class="load-more-observer">load</span>
+            <a id="load-more-button" class="js-load-more post-feed__button" data-query={{ query|url_encode }} data-style="searchresults"> load more </a>
         </div>
     </div>
 

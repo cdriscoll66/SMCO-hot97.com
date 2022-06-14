@@ -14,9 +14,15 @@
   height: inherit;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: 50% 50%;
+
+  @include media (tablet) {
+    background-position: 0 0;
+  }
+
   @include media(laptop) {
     display: block;
-    background-size:110% auto;
+    background-size: 110% auto;
     background-repeat: repeat-y;
     width: 33.3%;
   }
@@ -26,6 +32,7 @@
   background-position: center;
   background-size:100% auto;
   display:none;
+
   @include media(laptop) {
     display: block;
   }
@@ -34,8 +41,6 @@
 .o-tiled__tile:last-child {
   background-position: bottom;
 }
-
-
 
 .o-tiled__tile::before, .o-tiled__tile::after {
   content: '';

@@ -16,6 +16,7 @@ use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
 use App\ViewModels\CardViewModel;
 use App\ViewModels\FeatureCardViewModel;
+use Timber\Term;
 use Timber\Timber;
 
 class CategoryController extends Controller
@@ -24,6 +25,9 @@ class CategoryController extends Controller
     {
         $context = Timber::get_context();
         $context['title'] = single_cat_title('', false);
+
+        $context['term'] = new Term();
+        $context['term_id'] = $context['term']->id;
 
         // get the posts in this category (default query)
         $posts = collect($context['posts'])

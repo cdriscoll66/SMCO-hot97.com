@@ -40,9 +40,9 @@ class SearchResultsLoadMoreController extends Controller
             ->limit($limit)
             ->get();
 
-        // $context['posts'] = $posts->map(function ($item) {
-        //     return new SearchResultViewModel($item);
-        // });
+        $context['posts'] = $posts->map(function ($item) {
+            return new SearchResultViewModel($item);
+        });
 
         return new TimberResponse('templates/partials/search-results-feed.twig', $context);
     }

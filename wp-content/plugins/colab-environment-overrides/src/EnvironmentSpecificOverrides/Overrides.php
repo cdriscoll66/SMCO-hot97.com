@@ -30,6 +30,9 @@ class Overrides {
         ];
 
         if ( in_array( $option_name, $overrides ) ) {
+            echo "<!-- ".var_export($option_name, TRUE) ." -->" . PHP_EOL;
+            echo "<!-- ".var_export($old_value, TRUE) ." -->" . PHP_EOL;
+            echo "<!-- ".var_export($value, TRUE) ." -->" . PHP_EOL;
             $environment = self::determineEnvironment();
             $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
             update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );

@@ -35,7 +35,7 @@ class ContentCategoryLoadMoreController extends Controller
         $context = Timber::get_context();
         $request = Helpers::request();
         $paged = $request->query('paged');
-        $limit = 6;
+        $limit = 9;
         $offset = $limit * $paged;
 
 

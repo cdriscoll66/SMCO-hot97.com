@@ -9,6 +9,7 @@ use Rareloop\Lumberjack\Helpers;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
 use Rareloop\Lumberjack\QueryBuilder;
+use App\ViewModels\SearchResultViewModel;
 
 
 class SearchResultsLoadMoreController extends Controller
@@ -33,11 +34,15 @@ class SearchResultsLoadMoreController extends Controller
 
 
 
-        $context['posts'] = Post::builder()
+        $posts = Post::builder()
             ->search($queryterm)
             ->offset($offset)
             ->limit($limit)
             ->get();
+
+        $context['posts'] = $posts->map(function ($item) {
+            return new SearchResultViewModel($item);
+        });
 
         return new TimberResponse('templates/partials/search-results-feed.twig', $context);
     }

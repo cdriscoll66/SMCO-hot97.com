@@ -8,22 +8,35 @@ use Timber\Timber;
 use Rareloop\Lumberjack\Helpers;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
+use Rareloop\Lumberjack\QueryBuilder;
 
 
 class SearchResultsLoadMoreController extends Controller
 {
 
-    public function loadMore()
+    public function loadMore($queryterm)
     {
+
+
+        QueryBuilder::macro('search', function ($term) {
+            $this->params['s'] = $term;
+
+            return $this;
+        });
+
 
         $request = Helpers::request();
         $paged = $request->query('paged');
-
-        $offset = 6 * $paged;
+        $limit = 10;
+        $offset = $limit * $paged;
         $context = Timber::get_context();
+
+
+
         $context['posts'] = Post::builder()
+            ->search($queryterm)
             ->offset($offset)
-            ->limit(6)
+            ->limit($limit)
             ->get();
 
         return new TimberResponse('templates/partials/search-results-feed.twig', $context);

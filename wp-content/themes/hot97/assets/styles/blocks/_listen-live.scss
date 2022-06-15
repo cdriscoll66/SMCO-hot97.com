@@ -32,7 +32,17 @@
   }
 
   .td-player-bar {
-    height: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 20px;
+
+    @include media(tablet) {
+      flex-direction: row;
+      padding: 0;
+    }
   }
 
   .td-song-history__header {
@@ -45,9 +55,21 @@
     font-size: var(--global--font-size-lede)!important;
   }
 
+  .td-player-bar__nowplaying {
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
   .td-player-bar__nowplaying__cover-art {
-    width: 300px;
-    max-height: 300px;
+    max-height: none;
+    width: calc(100% + 40px);
+    margin: -20px -20px 0;
+
+    @include media(tablet) {
+      width: 300px;
+      margin: 0;
+    }
   }
 
   .td-player-bar__nowplaying__cover-art__media-controls {
@@ -61,9 +83,8 @@
   .td-player-bar__nowplaying__cover-art__media-controls--pause,
   .td-player-bar__nowplaying__cover-art__media-controls--loading {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
     background: transparent!important;
     border: 6px solid var(--global--color-hot-yellow-100);
     width: 100px;
@@ -75,11 +96,36 @@
     &:hover {
       background: white!important;
     }
+
+    &::before {
+      position: relative;
+      top: 2px;
+    }
+  }
+
+  .td-player-bar__nowplaying__cover-art__media-controls--play {
+    &::before {
+      left: 5px;
+    }
+  }
+
+  .td-player-bar__nowplaying__cover-art__media-controls--pause {
+    &::before {
+      left: 2px;
+    }
   }
 
   .td-player-bar__nowplaying__trackinfo {
     line-height: normal;
-    padding-left: 30px;
+    padding-left: 0;
+
+    @include media(tablet) {
+      padding-left: 10px;
+    }
+
+    @include media(desktop) {
+      padding-left: 30px;
+    }
   }
 
   .td-player-bar__nowplaying__trackinfo__artist-name {
@@ -104,15 +150,26 @@
     padding-left: 16px;
   }
 
+  .td-player-bar__volume-controls {
+    min-width: 140px;
+  }
+
   .td-player-bar__volume-controls__volume {
     margin-top: 36px;
   }
 
   .td-player-bar__buy {
     margin-top: 24px;
+    padding-right: 0;
+
+    @include media(tablet) {
+      padding-right: 20px;
+    }
 
     a {
       text-decoration: none!important;
+      display: block;
+      max-width: 100px;
     }
 
     #TD-buyButton {

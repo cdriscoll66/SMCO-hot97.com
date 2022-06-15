@@ -1,11 +1,15 @@
 .o-dj-carousel {
+  @include paper-tear-bottom-inner;
   position: relative;
+  overflow-y: hidden;
   // CD - I built in the hopes of using in lots of places but they all have different rules so this is the rules for this area. Can probably clean up and make more translatable.
   .o-tiled {
     height: 300px;
+
     @include media(laptop){
       height: 885px;
     }
+
     .o-tiled__tile {
       background-repeat: repeat-x;
       background-size: contain;
@@ -15,8 +19,11 @@
       }
     }
   }
-  @include media (laptop) {
-    @include paper-tear-bottom-inner;
+
+  &::after {
+    @include media(laptop){
+      bottom: -50px;
+    }
   }
 }
 // CD - just adding this as an example - I've add a height because of lack of content. should be adjusted once everything is set.

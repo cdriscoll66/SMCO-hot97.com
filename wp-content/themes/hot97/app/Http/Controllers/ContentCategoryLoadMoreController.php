@@ -7,7 +7,7 @@ use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Timber\Timber;
 use Rareloop\Lumberjack\QueryBuilder;
 use App\PostTypes\Post;
-
+use App\ViewModels\CardViewModel;
 class ContentCategoryLoadMoreController extends Controller
 {
 
@@ -39,11 +39,15 @@ class ContentCategoryLoadMoreController extends Controller
         $offset = $limit * $paged;
 
 
-        $context['posts'] = Post::builder()
+        $posts = Post::builder()
             ->offset($offset)
             ->limit($limit)
             ->contentCategory($termid)
             ->get();
+
+        $context['posts'] = $posts->map(function ($item) {
+            return new CardViewModel($item);
+        });
 
         return new TimberResponse('templates/partials/post-feed.twig', $context);
     }

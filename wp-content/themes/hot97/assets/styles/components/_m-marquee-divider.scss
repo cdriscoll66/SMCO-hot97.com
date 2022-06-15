@@ -1,14 +1,15 @@
 .m-marquee-divider {
   position: relative;
   background-color: var(--global--color-hot-yellow-900);
-
-  @include media (laptop) {
-    @include paper-tear-bottom-inner;
-  }
+  @include paper-tear-bottom-inner;
 
   .o-tiled {
-    height: 500px;
+    height: 300px;
     overflow: hidden;
+
+    @include media (tablet) {
+      height: 500px;
+    }
 
     .o-tiled__tile {
       background-repeat: repeat-x;
@@ -74,6 +75,7 @@
   width: 100vw;
 
   h1,
+  h2,
   span {
     will-change: none;
     animation: none;

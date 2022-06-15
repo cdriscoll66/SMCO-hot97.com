@@ -13,6 +13,7 @@ class Lumberjack extends LumberjackCore
         $context['is_front_page'] = is_front_page();
         $context['is_logged_in'] = is_user_logged_in();
         $context['posts_per_page'] = get_option('posts_per_page');
+        $context['is_admin'] = is_admin();
 
         global $paged;
         $context['paged'] = $paged;

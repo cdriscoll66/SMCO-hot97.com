@@ -32,11 +32,8 @@ class CategoryController extends Controller
             });
 
         // pull out the first one as the feature post as a FeaturedCard
-        $context['featured_post'] = $posts
-            ->shift()
-            ->map(function($item) {
-                return new FeatureCardViewModel($item);
-            });
+        $featured_post = $posts->shift();
+        $context['featured_post'] = new FeatureCardViewModel($featured_post);
 
         // pass in the rest as the 'posts' context variable as Cards
         $context['posts'] = $posts->map(function($item) {

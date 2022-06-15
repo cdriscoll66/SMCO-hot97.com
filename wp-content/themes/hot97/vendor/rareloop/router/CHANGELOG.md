@@ -1,5 +1,16 @@
 # Changelog
 
+v6.0.1
+- Increase minimum version of AltoRouter to `v2.0.1` to fix `Uninitialized string offset: -1` issue
+
+v6.0.0
+- Replace `Zend` namespace with `Laminas`
+- Upgrade to v2 of AltoRouter
+
+v5.0.0
+- Add support for PHP 8
+- Change function signature on `ResponseFactory::create()` so that optional parameters come after non-optional
+
 v4.4.0
 - Switch from the deprecated `zendframework/zend-diactoros` to `laminas/laminas-diactoros`
 - Increase minimum PHP version to 7.1

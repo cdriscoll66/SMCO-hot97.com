@@ -24,9 +24,7 @@ class ArchiveDjController extends Controller
         $context = Timber::get_context();
         $context['title'] = 'Hot DJs';
 
-
         $featured_djs = get_field('featured_djs', 'options') ?: [];
-
 
         $djs = Dj::builder()
         ->whereIdNotIn($featured_djs)

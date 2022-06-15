@@ -7,6 +7,7 @@
 namespace App;
 
 use App\Http\Controllers\Controller;
+use Timber\Timber;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use App\PostTypes\Post;
 use Rareloop\Lumberjack\QueryBuilder;
@@ -18,6 +19,9 @@ class SearchController extends Controller
 {
     public function handle()
     {
+        $context = Timber::get_context();
+
+
         QueryBuilder::macro('search', function ($term) {
             $this->params['s'] = $term;
 

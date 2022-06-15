@@ -11,39 +11,13 @@ use App\PostTypes\Post;
 class ContentCategoryLoadMoreController extends Controller
 {
 
-
-
-    // public function getRelatedPosts()
-    // {
-
-
-    //     QueryBuilder::macro('contentCategory', function (int $term_id) {
-    //         $this->params['tax_query'] = [
-    //             [
-    //                 'taxonomy' => 'content-category',
-    //                 'field' => 'term_id',
-    //                 'terms' => $term_id,
-    //             ]
-    //         ];
-
-    //         return $this;
-    //     });
-
-    //     $posts = Post::builder()
-    //         // ->contentCategory($this->term_id)
-    //         ->orderBy('date', 'desc');
-
-
-    //     return $posts;
-    // }
-
     /**
      * @param ServerRequest $request
      * @return TimberResponse
      * @throws \Rareloop\Lumberjack\Exceptions\TwigTemplateNotFoundException
      */
 
-    public function loadMore($postcat = NULL)
+    public function loadMore($termid = NULL)
     {
 
         QueryBuilder::macro('contentCategory', function (int $term_id) {
@@ -68,7 +42,7 @@ class ContentCategoryLoadMoreController extends Controller
         $context['posts'] = Post::builder()
             ->offset($offset)
             ->limit($limit)
-            ->contentCategory($postcat)
+            ->contentCategory($termid)
             ->get();
 
         return new TimberResponse('templates/partials/post-feed.twig', $context);

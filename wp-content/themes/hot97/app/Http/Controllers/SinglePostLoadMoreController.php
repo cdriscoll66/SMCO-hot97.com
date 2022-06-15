@@ -7,6 +7,7 @@ use Rareloop\Lumberjack\Http\Responses\TimberResponse;
 use Timber\Timber;
 use Rareloop\Lumberjack\QueryBuilder;
 use App\PostTypes\Post;
+use App\ViewModels\CardViewModel;
 
 class SinglePostLoadMoreController extends Controller
 {
@@ -42,6 +43,9 @@ class SinglePostLoadMoreController extends Controller
             ->tags($tags)
             ->orderBy('date', 'desc');
 
+        $posts = $posts->map(function ($item) {
+            return new CardViewModel($item);
+        });
 
         return $posts;
     }

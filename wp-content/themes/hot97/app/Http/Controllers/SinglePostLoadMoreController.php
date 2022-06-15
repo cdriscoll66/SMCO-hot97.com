@@ -63,9 +63,6 @@ class SinglePostLoadMoreController extends Controller
         $offset = $limit * $paged;
         $context['tags']= $post->getTags();
 
-
-
-
        $posts = $this->getRelatedPosts($context['tags'], [$post->id])
             ->offset($offset)
             ->limit($limit)

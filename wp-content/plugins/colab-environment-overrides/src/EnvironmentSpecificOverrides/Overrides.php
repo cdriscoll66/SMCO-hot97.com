@@ -29,10 +29,10 @@ class Overrides {
             'mo_oauth_attr_name_listhot97',
         ];
 
+        echo "<h2> TEST: ".var_export($option_name, TRUE) ." </h2>" . PHP_EOL;
+        echo "<h2> TEST: ".var_export($old_value, TRUE) ." </h2>" . PHP_EOL;
+        echo "<h2> TEST: ".var_export($value, TRUE) ." </h2>" . PHP_EOL;
         if ( in_array( $option_name, $overrides ) ) {
-            echo "<!-- TEST: ".var_export($option_name, TRUE) ." -->" . PHP_EOL;
-            echo "<!-- TEST: ".var_export($old_value, TRUE) ." -->" . PHP_EOL;
-            echo "<!-- TEST: ".var_export($value, TRUE) ." -->" . PHP_EOL;
             $environment = self::determineEnvironment();
             $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
             update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );

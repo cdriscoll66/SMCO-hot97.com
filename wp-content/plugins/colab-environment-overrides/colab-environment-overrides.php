@@ -77,7 +77,7 @@ add_action('acf/init', [ Settings::class, 'acf_init' ], 20);
  ***********************************/
 
 // Saves mini-orange configuration data to ACF groups on option pre-save.
-add_action('update_option', [ Overrides::class, 'update_option' ], 100, 3);
+//add_action('update_option', [ Overrides::class, 'update_option' ], 100, 3);
 
 // This references the configured application (1 per site/Premium license)
 //add_filter( "pre_option_mo_oauth_apps_list", [ Overrides::class, 'mo_oauth_apps_list' ] );

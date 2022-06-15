@@ -14,30 +14,29 @@ class Overrides {
      * override ACF group BEFORE update to make sure that any calls to get_option are not being
      * overwritten by the pre_option hooks.
      *
+     * REMOVE THIS, miniorange is not using wordpress functions to write its options.
+     *
      * @param $option_name
      * @param $old_value
      * @param $value
      * @return void
      */
-    public static function update_option( $option_name, $old_value, $value ) {
-        $overrides = [
-            'mo_oauth_apps_list',
-            'mo_oauth_client_config',
-            'mo_oauth_client_auto_register',
-            'mo_oauth_attr_name_listhot97dev',
-            'mo_oauth_attr_name_listhot97test',
-            'mo_oauth_attr_name_listhot97',
-        ];
-
-        echo "<h2> TEST: ".var_export($option_name, TRUE) ." </h2>" . PHP_EOL;
-        echo "<h2> TEST: ".var_export($old_value, TRUE) ." </h2>" . PHP_EOL;
-        echo "<h2> TEST: ".var_export($value, TRUE) ." </h2>" . PHP_EOL;
-        if ( in_array( $option_name, $overrides ) ) {
-            $environment = self::determineEnvironment();
-            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
-            update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );
-        }
-    }
+//    public static function update_option( $option_name, $old_value, $value ) {
+//        $overrides = [
+//            'mo_oauth_apps_list',
+//            'mo_oauth_client_config',
+//            'mo_oauth_client_auto_register',
+//            'mo_oauth_attr_name_listhot97dev',
+//            'mo_oauth_attr_name_listhot97test',
+//            'mo_oauth_attr_name_listhot97',
+//        ];
+//
+//        if ( in_array( $option_name, $overrides ) ) {
+//            $environment = self::determineEnvironment();
+//            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
+//            update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );
+//        }
+//    }
 
     /**
      * @param $option_value

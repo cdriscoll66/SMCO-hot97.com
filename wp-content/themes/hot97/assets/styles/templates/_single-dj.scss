@@ -30,6 +30,9 @@
 .dj-content__cohost-image {
   img {
     border-radius: 50%;
+    height: 50px;
+    object-fit: cover;
+    object-position: 50% 0;
   }
 }
 

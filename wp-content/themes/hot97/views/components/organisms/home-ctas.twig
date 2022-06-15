@@ -10,9 +10,9 @@
     </div>
     {% for home_cta in home_ctas %}
     {% if loop.index is odd %}
-        <div class="o-home-cta wp-block-media-text alignwide is-stacked-on-mobile has-media-on-the-right">
+        <div class="o-home-cta wp-block-media-text alignwide is-stacked-on-mobile has-media-on-the-right has-background">
     {% else %}
-        <div class="o-home-cta wp-block-media-text alignwide is-stacked-on-mobile">
+        <div class="o-home-cta wp-block-media-text alignwide is-stacked-on-mobile has-background">
     {% endif %}
             <figure class="o-home-cta__image wp-block-media-text__media">
                 <img src="{{home_cta.cta_image.sizes.prefooter_image}}" alt="{{home_cta.cta_image.alt}}" class="size-prefooter_image"/>
@@ -21,7 +21,7 @@
                 {% if home_cta.cta_sub %}
                     <p class="o-home-cta__subhead">{{home_cta.cta_sub}}</p>
                 {% endif %}
-                <h1 class="o-home-cta__headline"><a href="{{home_cta.cta_link.url}}" target="{{home_cta.cta_link.target}}">{{home_cta.cta_head}}</a></h1>
+                <h2 class="o-home-cta__headline"><a href="{{home_cta.cta_link.url}}" target="{{home_cta.cta_link.target}}">{{home_cta.cta_head}}</a></h2>
                 {% if home_cta.cta_content %}
                     <p>{{home_cta.cta_content}}</p>
                 {% endif %}

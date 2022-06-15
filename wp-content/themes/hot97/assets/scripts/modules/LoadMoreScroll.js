@@ -20,7 +20,7 @@ function init() {
   const handleLoadMorePosts = () => {
     pagednumber += 1;
 
-    let query = "/" + posturl + "/?paged" + pagednumber;
+    let query = "/" + posturl + "/?paged=" + pagednumber;
 
     fetch(query)
       .then(response => response.text())
@@ -51,7 +51,7 @@ function init() {
     /* callback checks if on screen - if so -> handles posts */
     const intersectionObserverCallback = entries => {
       if (entries[0].isIntersecting) {
-        handleLoadMorePosts(poststyle);
+        handleLoadMorePosts();
       }
     };
   }
@@ -59,7 +59,7 @@ function init() {
   /* Button handle options */
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", () => {
-      handleLoadMorePosts(poststyle);
+      handleLoadMorePosts();
     });
   }
 }

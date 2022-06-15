@@ -67,24 +67,16 @@ register_deactivation_hook( __FILE__, [ Plugin::class, 'register_deactivation_ho
  ***********************************/
 
 // Enable our ACF json configuration directory
-add_filter('acf/settings/load_json', [ Settings::class, 'load_json' ], 1 );
+add_filter( 'acf/settings/load_json', [ Settings::class, 'load_json' ], 1 );
 
 // Initialize the Settings Page once ACF is loaded.
-add_action('acf/init', [ Settings::class, 'acf_init' ], 20);
+add_action( 'acf/init', [ Settings::class, 'acf_init' ], 20 );
 
 /***********************************
  * Override Hooks.
  ***********************************/
 
-// Saves mini-orange configuration data to ACF groups on option pre-save.
-//add_action('update_option', [ Overrides::class, 'update_option' ], 100, 3);
-
-// This references the configured application (1 per site/Premium license)
-//add_filter( "pre_option_mo_oauth_apps_list", [ Overrides::class, 'mo_oauth_apps_list' ] );
-//add_filter( "pre_option_mo_oauth_client_config", [ Overrides::class, 'mo_oauth_client_config' ] );
-//add_filter( "pre_option_mo_oauth_client_auto_register", [ Overrides::class, 'mo_oauth_client_auto_register' ] );
-
-// Each environment will have its own option that changes based on application name/env
-//add_filter( "pre_option_mo_oauth_attr_name_listhot97dev", [ Overrides::class, 'mo_oauth_attr_name_listhot97dev' ] );
-//add_filter( "pre_option_mo_oauth_attr_name_listhot97test", [ Overrides::class, 'mo_oauth_attr_name_listhot97test' ] );
-//add_filter( "pre_option_mo_oauth_attr_name_listhot97", [ Overrides::class, 'mo_oauth_attr_name_listhot97' ] );
+// Allow JSON files to be uploaded in the admin
+add_filter( "upload_mimes", function( $types ) {
+    return array_merge( $types, [ "json" => "text/plain" ] );
+} );

@@ -21,22 +21,22 @@ class Overrides {
      * @param $value
      * @return void
      */
-//    public static function update_option( $option_name, $old_value, $value ) {
-//        $overrides = [
-//            'mo_oauth_apps_list',
-//            'mo_oauth_client_config',
-//            'mo_oauth_client_auto_register',
-//            'mo_oauth_attr_name_listhot97dev',
-//            'mo_oauth_attr_name_listhot97test',
-//            'mo_oauth_attr_name_listhot97',
-//        ];
-//
-//        if ( in_array( $option_name, $overrides ) ) {
-//            $environment = self::determineEnvironment();
-//            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
-//            update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );
-//        }
-//    }
+    public static function update_option( $option_name, $old_value, $value ) {
+        $overrides = [
+            'mo_oauth_apps_list',
+            'mo_oauth_client_config',
+            'mo_oauth_client_auto_register',
+            'mo_oauth_attr_name_listhot97dev',
+            'mo_oauth_attr_name_listhot97test',
+            'mo_oauth_attr_name_listhot97',
+        ];
+
+        if ( in_array( $option_name, $overrides ) ) {
+            $environment = self::determineEnvironment();
+            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
+            update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );
+        }
+    }
 
     /**
      * @param $option_value

@@ -20,10 +20,10 @@
         },
         {
             "key": "field_62a0efdc261c3",
-            "label": "Develop Fields",
+            "label": "Develop Override",
             "name": "develop",
-            "type": "group",
-            "instructions": "",
+            "type": "file",
+            "instructions": "This is the override file to restore SSO settings post environment database swap.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -31,66 +31,11 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_62a1065ff710a",
-                    "label": "OAUTH Apps List",
-                    "name": "mo_oauth_apps_list",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_62a10692f710b",
-                    "label": "OAUTH Client Config",
-                    "name": "mo_oauth_client_config",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_62a106abf710c",
-                    "label": "OAUTH Attributes",
-                    "name": "mo_oauth_attr_name_listhot97dev",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                }
-            ]
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "json"
         },
         {
             "key": "field_62a0efb3261c1",
@@ -110,9 +55,9 @@
         },
         {
             "key": "field_62a0f001261c4",
-            "label": "Test Fields",
+            "label": "Test Override",
             "name": "test",
-            "type": "group",
+            "type": "file",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -121,66 +66,11 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_62a106fbf710d",
-                    "label": "OAUTH Apps List",
-                    "name": "mo_oauth_apps_list",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_62a1070ef710e",
-                    "label": "OAUTH Client Config",
-                    "name": "mo_oauth_client_config",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_62a1072af710f",
-                    "label": "OAUTH Attributes",
-                    "name": "mo_oauth_attr_name_listhot97test",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                }
-            ]
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "json"
         },
         {
             "key": "field_62a0efc1261c2",
@@ -200,9 +90,9 @@
         },
         {
             "key": "field_62a0f013261c5",
-            "label": "Live Fields",
+            "label": "Live Override",
             "name": "live",
-            "type": "group",
+            "type": "file",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -211,66 +101,11 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_62a10759f7110",
-                    "label": "OAUTH Apps List",
-                    "name": "mo_oauth_apps_list",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "maxlength": "",
-                    "rows": "",
-                    "new_lines": ""
-                },
-                {
-                    "key": "field_62a10aaef7111",
-                    "label": "OAUTH Client Config",
-                    "name": "mo_oauth_client_config",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "new_lines": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "rows": ""
-                },
-                {
-                    "key": "field_62a10ac3f7112",
-                    "label": "OAUTH Attributes",
-                    "name": "mo_oauth_attr_name_listhot97",
-                    "type": "textarea",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "new_lines": "",
-                    "maxlength": "",
-                    "placeholder": "",
-                    "rows": ""
-                }
-            ]
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "json"
         }
     ],
     "location": [
@@ -291,5 +126,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1654721311
+    "modified": 1655307439
 }

@@ -14,6 +14,8 @@ class Overrides {
      * override ACF group BEFORE update to make sure that any calls to get_option are not being
      * overwritten by the pre_option hooks.
      *
+     * REMOVE THIS, miniorange is not using wordpress functions to write its options.
+     *
      * @param $option_name
      * @param $old_value
      * @param $value
@@ -31,7 +33,7 @@ class Overrides {
 
         if ( in_array( $option_name, $overrides ) ) {
             $environment = self::determineEnvironment();
-            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option' );
+            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
             update_field( "{$environment}_mo_oauth_apps_list", $value, 'option' );
         }
     }
@@ -43,7 +45,7 @@ class Overrides {
     public static function mo_oauth_apps_list( $option_value ) {
         $environment = self::determineEnvironment();
         if ( $environment !== FALSE ) {
-            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option' );
+            $override = get_field( "{$environment}_mo_oauth_apps_list", 'option', TRUE );
             return $override ?? $option_value;
         }
 
@@ -57,7 +59,7 @@ class Overrides {
     public static function mo_oauth_client_config( $option_value ) {
         $environment = self::determineEnvironment();
         if ( $environment !== FALSE ) {
-            $override = get_field( "{$environment}_mo_oauth_client_config", 'option' );
+            $override = get_field( "{$environment}_mo_oauth_client_config", 'option', TRUE );
             return $override ?? $option_value;
         }
 
@@ -69,13 +71,7 @@ class Overrides {
      * @return false|mixed
      */
     public static function mo_oauth_client_auto_register( $option_value ) {
-        $environment = self::determineEnvironment();
-        if ( $environment !== FALSE ) {
-            $override = get_field( "{$environment}_mo_oauth_client_auto_register", 'option' );
-            return $override ?? $option_value;
-        }
-
-        return $option_value;
+        return 1;
     }
 
     /**
@@ -85,7 +81,7 @@ class Overrides {
     public static function mo_oauth_attr_name_listhot97dev( $option_value ) {
         $environment = self::determineEnvironment();
         if ( $environment !== FALSE ) {
-            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97dev", 'option' );
+            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97dev", 'option', TRUE );
             return $override ?? $option_value;
         }
 
@@ -99,7 +95,7 @@ class Overrides {
     public static function mo_oauth_attr_name_listhot97test( $option_value ) {
         $environment = self::determineEnvironment();
         if ( $environment !== FALSE ) {
-            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97test", 'option' );
+            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97test", 'option', TRUE );
             return $override ?? $option_value;
         }
 
@@ -113,7 +109,7 @@ class Overrides {
     public static function mo_oauth_attr_name_listhot97( $option_value ) {
         $environment = self::determineEnvironment();
         if ( $environment !== FALSE ) {
-            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97", 'option' );
+            $override = get_field( "{$environment}_mo_oauth_attr_name_listhot97", 'option', TRUE );
             return $override ?? $option_value;
         }
 

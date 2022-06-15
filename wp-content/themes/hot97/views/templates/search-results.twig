@@ -34,7 +34,7 @@
             {% endif %}
 
             {# {{ paginate_links }} #}
-            <a id="load-more-button" class="js-load-more post-feed__button" data-query={{ query|url_encode }} data-style="searchresults"> load more </a>
+            <a id="load-more-button" class="js-load-more post-feed__button" data-url="search-results-load-more/{{ query|url_encode }}"> load more </a>
         </div>
     </div>
 

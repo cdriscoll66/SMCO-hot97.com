@@ -7,41 +7,20 @@ function init() {
     return;
   }
 
-  const loadMoreObs = document.getElementsByClassName("load-more-observer");
+  const loadMoreObs = document.getElementById("load-more-observer");
   const loadMoreBtn = document.getElementById("load-more-button");
 
-  const poststyle = loadMoreWatch[0].getAttribute("data-style");
-  const postcat = loadMoreWatch[0].getAttribute("data-cat");
-  const postid = loadMoreWatch[0].getAttribute("data-id");
-  const postquery = loadMoreWatch[0].getAttribute("data-query");
+  const posturl = loadMoreWatch[0].getAttribute("data-url");
+
 
   const postContainer = document.querySelector(".js-post-collect");
+
   let pagednumber = 0;
 
-  const handleLoadMorePosts = context => {
+  const handleLoadMorePosts = () => {
     pagednumber += 1;
 
-    let query = "";
-
-    switch (context) {
-      case "archive":
-        query = "/home-load-more/?paged=" + pagednumber;
-        break;
-      case "singlepost":
-        query = "/single-post-load-more/" + postid + "/?paged=" + pagednumber;
-        break;
-        case "contentcat":
-          query = "/content-category-load-more/" + postcat + "/?paged=" + pagednumber;
-          break;
-          case "category":
-          query = "/category-feed-load-more/" + postcat + "/?paged=" + pagednumber;
-          break;
-        case "searchresults":
-        query = "/search-results-load-more/" + postquery + "/?paged=" + pagednumber;
-        break;
-      default:
-        query = "/home-load-more/?paged=" + pagednumber;
-    }
+    let query = "/" + posturl + "/?paged" + pagednumber;
 
     fetch(query)
       .then(response => response.text())
@@ -52,7 +31,10 @@ function init() {
     postContainer.insertAdjacentHTML("beforeend", posts);
   };
 
-  if (loadMoreObs.length >= 1) {
+
+
+  if (loadMoreObs) {
+    console.log("obs");
     /* Intersection Observer options */
     const obsOptions = {
       root: null,
@@ -64,8 +46,7 @@ function init() {
     const observer = new IntersectionObserver(entries => {
       intersectionObserverCallback(entries);
     }, obsOptions);
-    observer.observe(loadMoreObs[0]);
-    //working with loadMoreObs[0] becasue there should only be one on the template. if there's more we'll have to foreach the observe, etc.
+    observer.observe(loadMoreObs);
 
     /* callback checks if on screen - if so -> handles posts */
     const intersectionObserverCallback = entries => {
@@ -76,9 +57,11 @@ function init() {
   }
 
   /* Button handle options */
-
-loadMoreBtn.addEventListener("click", () => { handleLoadMorePosts(poststyle) });
-
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", () => {
+      handleLoadMorePosts(poststyle);
+    });
+  }
 }
 
 export { init as default };

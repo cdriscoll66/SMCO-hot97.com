@@ -43,9 +43,7 @@ class SinglePostLoadMoreController extends Controller
             ->tags($tags)
             ->orderBy('date', 'desc');
 
-        $posts = $posts->map(function ($item) {
-            return new CardViewModel($item);
-        });
+
 
         return $posts;
     }
@@ -68,10 +66,14 @@ class SinglePostLoadMoreController extends Controller
 
 
 
-        $context['posts'] = $this->getRelatedPosts($context['tags'], [$post->id])
+       $posts = $this->getRelatedPosts($context['tags'], [$post->id])
             ->offset($offset)
             ->limit($limit)
             ->get();
+
+        $context['posts'] = $posts->map(function ($item) {
+            return new CardViewModel($item);
+        });
 
         return new TimberResponse('templates/partials/post-feed.twig', $context);
     }

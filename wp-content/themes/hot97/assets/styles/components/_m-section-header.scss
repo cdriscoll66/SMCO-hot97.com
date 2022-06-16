@@ -3,6 +3,12 @@
   align-items: center;
 }
 
+.m-section-header__view-all {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 // .m-section-header__heading {
 //   font-family: $judgetrial;
 //   font-weight: 500;

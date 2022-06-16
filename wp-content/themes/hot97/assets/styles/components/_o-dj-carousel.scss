@@ -51,6 +51,12 @@
   color: $color-black;
 }
 
+.o-dj-carousel__view-all {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .o-dj-carousel__list {
   list-style: none;
   margin-top: 10px;

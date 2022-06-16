@@ -21,7 +21,13 @@ class SearchResultViewModel extends ViewModel
 
     public function excerpt()
     {
+        try {
         return get_the_excerpt($this->post);
+
+        }
+        catch (\Exception $e) {
+            return '';  // This is to block the error from the JW player from happening - need to revisit to make sure this is working as it should.
+        } ;
     }
 
     public function link()

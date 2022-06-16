@@ -200,8 +200,7 @@ class ContentCategoryAbstractController extends Controller
             ->whereIdNotIn($exclude)
             ->contentCategory($this->term_id)
             ->orderBy('date', 'desc')
-            ->limit(15)
-            // pagination needs to go here for load more functionality
+            ->limit(6)
             ->get();
 
         $latest_posts = $latest_posts->map(function($item) {
@@ -212,7 +211,7 @@ class ContentCategoryAbstractController extends Controller
         $context['featured_posts'] = $page_featured_posts;
         $context['featured'] = $featured;
         $context['latest_posts'] = $latest_posts;
-
+        $context['content_cat'] = $this->term_id;
         $context['sidebar'] = true;
         $context['archive_sidebar']['title'] = "CATEGORIES";
         $context['archive_sidebar']['terms'] = get_categories([

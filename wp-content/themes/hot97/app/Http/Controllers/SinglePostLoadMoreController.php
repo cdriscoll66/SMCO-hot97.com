@@ -1,22 +1,23 @@
 <?php
 
-/**
- * The Template for displaying all single posts
- */
+namespace App\Http\Controllers;
 
-namespace App;
-
-use App\Http\Controllers\Controller;
+use Rareloop\Lumberjack\Helpers;
 use Rareloop\Lumberjack\Http\Responses\TimberResponse;
-use App\PostTypes\Post;
 use Timber\Timber;
 use Rareloop\Lumberjack\QueryBuilder;
+use App\PostTypes\Post;
 use App\ViewModels\CardViewModel;
 
-class SinglePostController extends Controller
+class SinglePostLoadMoreController extends Controller
 {
+
+
+
     public function getRelatedPosts($tags, $exclude)
     {
+
+
         // Create macro for tags
         QueryBuilder::macro('tags', function (object $tags) {
             $slugs = [];
@@ -40,35 +41,38 @@ class SinglePostController extends Controller
         $posts = Post::builder()
             ->whereIdNotIn($exclude)
             ->tags($tags)
-            ->orderBy('date', 'desc')
-            ->limit(6)
-            ->get();
+            ->orderBy('date', 'desc');
 
 
-        $posts = $posts->map(function ($item) {
-            return new CardViewModel($item);
-        });
 
         return $posts;
     }
 
-    public function handle()
+    /**
+     * @param ServerRequest $request
+     * @return TimberResponse
+     * @throws \Rareloop\Lumberjack\Exceptions\TwigTemplateNotFoundException
+     */
+    public function loadMore($postid = NULL)
     {
         $context = Timber::get_context();
-        $post = new Post();
-
-        $context['post'] = $post;
-        $context['id'] = $post->ID;
-
-        $context['title'] = $post->title;
-        $context['content'] = $post->content;
-        $context['main_class'] = 'o-main--split o-main--single-post';
+        $request = Helpers::request();
+        $paged = $request->query('paged');
+        $post = new Post($postid);
+        $limit = 6;
+        $offset = $limit * $paged;
         $context['tags']= $post->getTags();
-        $context['post_sidebar'] = get_field('post_sidebar', 'options');
-        $context['related_posts'] = $this->getRelatedPosts($context['tags'], [$post->ID]);
 
-        $context['sidebar'] = true;
+       $posts = $this->getRelatedPosts($context['tags'], [$post->id])
+            ->offset($offset)
+            ->limit($limit)
+            ->get();
 
-        return new TimberResponse('templates/single-post.twig', $context);
+        $context['posts'] = $posts->map(function ($item) {
+            return new CardViewModel($item);
+        });
+
+        return new TimberResponse('templates/partials/post-feed.twig', $context);
     }
 }
+

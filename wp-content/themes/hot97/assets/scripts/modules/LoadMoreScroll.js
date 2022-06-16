@@ -1,55 +1,67 @@
-import { debounce } from "lodash/debounce";
-
 function init() {
   /* this is the observer at the bottom of the scroll */
-  const loadMoreObs = document.getElementsByClassName("load-more-observer");
-  const postContainer = document.querySelector("ul.posts");
-  let pagednumber = 0;
-
-  /* Intersection Observer options */
-
-  const obsOptions = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 1.0
-  };
+  const loadMoreWatch = document.getElementsByClassName("js-load-more");
 
   /* only load on page with observer */
-  if (!loadMoreObs.length) {
-    console.log("noload");
+  if (!loadMoreWatch.length) {
     return;
   }
 
-  console.log("load");
+  const loadMoreObs = document.getElementById("load-more-observer");
+  const loadMoreBtn = document.getElementById("load-more-button");
 
-  /* call Intersection api - to listen - and fire callback */
-  const observer = new IntersectionObserver(entries => {
-    intersectionObserverCallback(entries);
-  }, obsOptions);
-  observer.observe(loadMoreObs[0]);
-  //working with loadMoreObs[0] becasue there should only be one on the template. if there's more we'll have to foreach the observe, etc.
+  const posturl = loadMoreWatch[0].getAttribute("data-url");
 
-  /* callback checks if on screen - if so -> handles posts */
-  const intersectionObserverCallback = entries => {
-    if (entries[0].isIntersecting) {
-      handleLoadMorePosts();
-    }
-  };
 
+  const postContainer = document.querySelector(".js-post-collect");
+
+  let pagednumber = 0;
 
   const handleLoadMorePosts = () => {
     pagednumber += 1;
-    let query = "/post-feed/" + pagednumber;
+
+    let query = "/" + posturl + "/?paged=" + pagednumber;
+
     fetch(query)
       .then(response => response.text())
       .then(data => addPosts(data));
   };
 
   const addPosts = posts => {
-    postContainer.append(posts);
-    console.log(postContainer);
-    console.log(posts);
+    postContainer.insertAdjacentHTML("beforeend", posts);
   };
+
+
+
+  if (loadMoreObs) {
+    console.log("obs");
+    /* Intersection Observer options */
+    const obsOptions = {
+      root: null,
+      rootMargin: "100px",
+      threshold: 0
+    };
+
+    /* call Intersection api - to listen - and fire callback */
+    const observer = new IntersectionObserver(entries => {
+      intersectionObserverCallback(entries);
+    }, obsOptions);
+    observer.observe(loadMoreObs);
+
+    /* callback checks if on screen - if so -> handles posts */
+    const intersectionObserverCallback = entries => {
+      if (entries[0].isIntersecting) {
+        handleLoadMorePosts();
+      }
+    };
+  }
+
+  /* Button handle options */
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener("click", () => {
+      handleLoadMorePosts();
+    });
+  }
 }
 
 export { init as default };

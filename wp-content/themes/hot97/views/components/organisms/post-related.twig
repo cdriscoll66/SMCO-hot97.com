@@ -10,7 +10,7 @@
 
     <div class="o-othercats__container">
         <div class="o-othercats__cardblock">
-            <div class="o-othercats__cards posts">
+            <div class="o-othercats__cards js-post-collect posts">
                 {% for post in related_posts %}
                 <div class="posts__item o-othercats__card">
                     {% include "components/molecules/card.twig" %}
@@ -18,8 +18,7 @@
                 {% endfor %}
             </div>
 
-            {# LOAD MORE GOES HERE #}
-            <a class="o-othercats__button" href="/tag/{{ tags[0].slug }}">View All {{ title }}</a>
+           <span id="load-more-observer" class="js-load-more" data-url="single-post-load-more/{{ id }}"></span>
         </div>
 
         <div class="o-othercats__adspace">

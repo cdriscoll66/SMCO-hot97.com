@@ -1,11 +1,9 @@
 <?php
 
 use Rareloop\Lumberjack\Facades\Router;
-// use Zend\Diactoros\Response\HtmlResponse;
 
-// Router::get('hello-world', function () {
-//     return new HtmlResponse('<h1>Hello World!</h1>');
-// });
-// include( __DIR__ . '/home.php' );
-
-// Router::get('home-load-more', '\App\HomeController@loadMore');
+Router::get('home-load-more', 'HomeLoadMoreController@loadMore');
+Router::get('single-post-load-more/{postid}', 'SinglePostLoadMoreController@loadMore');
+Router::get('content-category-load-more/{termid}', 'ContentCategoryLoadMoreController@loadMore');
+Router::get('category-feed-load-more/{termid}', 'CategoryLoadMoreController@loadMore');
+Router::get('search-results-load-more/{queryterm}', 'SearchResultsLoadMoreController@loadMore');

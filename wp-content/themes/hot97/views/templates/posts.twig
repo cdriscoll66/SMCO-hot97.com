@@ -19,15 +19,14 @@
 {% block content %}
 
     {% if posts|length > 0 %}
-        <ul class="o-post-feed">
+        <ul class="o-post-feed js-post-collect">
             {% include "templates/partials/post-feed.twig" %}
         </ul>
     {% else %}
         <p>No results found.</p>
     {% endif %}
 
-    {# {{ paginate_links }} #}
-    <span class="load-more-observer">load</span>
+    <span id="load-more-observer" class="js-load-more load-more-observer" data-url="home-load-more"></span>
 
 {% endblock %}
 

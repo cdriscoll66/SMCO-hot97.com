@@ -216,9 +216,9 @@ class ContentCategoryAbstractController extends Controller
         $context['sidebar'] = true;
         $context['archive_sidebar']['title'] = "CATEGORIES";
         $context['archive_sidebar']['terms'] = get_categories([
-            'orderby'    => 'menu_order',
-            'order'      => 'ASC',
-            'hide_empty' => 0,
+            'orderby'    => 'count',
+            'order'      => 'DESC',
+            'number'     => 20
         ]);
 
         foreach ($context['archive_sidebar']['terms'] as $term) {

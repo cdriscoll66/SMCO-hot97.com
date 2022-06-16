@@ -117,8 +117,9 @@
 .m-adspace--in-content {
   padding: 75px 16px 90px;
   background-color: $color-black;
+  margin-bottom: 0;
 
-  .m-adspace__inner {
-    margin: 0 auto;
+  &::after {
+    color: white;
   }
 }

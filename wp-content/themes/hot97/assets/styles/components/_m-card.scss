@@ -93,11 +93,14 @@
   margin-bottom: 30px;
 
   .m-card--collapse & {
-    color: var(--global--color-black);
     margin-bottom: 0;
     font-size: rem(14px);
     font-family: monospace;
     line-height: 1.5;
+
+    a {
+      color: var(--global--color-black);
+    }
   }
 
   a {

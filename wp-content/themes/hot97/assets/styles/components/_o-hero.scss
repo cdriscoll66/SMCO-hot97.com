@@ -41,6 +41,14 @@
   width: 100%;
 }
 
+.o-hero__media,
+.m-featurecard__media {
+  .jwppp-video-box {
+    margin-top: 0!important;
+  }
+}
+
+
 .o-hero__terms,
 .m-featurecard__terms {
   display: flex;

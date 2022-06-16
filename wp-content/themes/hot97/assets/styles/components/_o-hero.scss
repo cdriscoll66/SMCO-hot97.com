@@ -73,6 +73,12 @@
   text-transform: uppercase;
 }
 
+.o-hero__title {
+  a:hover {
+    color: white;
+  }
+}
+
 .o-hero__excerpt,
 .m-featurecard__excerpt {
   font-size: rem(20px);

@@ -7,6 +7,10 @@
   display: inline-block;
   border: 1px solid $color-hot-yellow-900;
 
+  .m-dj-card:hover & {
+    background-color: white;
+  }
+
   img {
     display: inline-block;
     margin: 4px;
@@ -25,6 +29,10 @@
 .m-dj-card__title {
   margin-top: 25px;
   font-size: rem(18px);
+
+  .m-dj-card:hover & a {
+    text-decoration: underline;
+  }
 }
 
 .m-dj-card__shows {

@@ -27,6 +27,8 @@ class Error404Controller extends Controller
 
         $context['title'] = 'Aw, Snap! Something went wrong here. Maybe we can still help you.';
 
+        $context['placeholder'] = 'Search Site';
+
         return new TimberResponse('templates/errors/404.twig', $context, 404);
     }
 }

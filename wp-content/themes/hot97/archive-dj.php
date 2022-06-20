@@ -22,12 +22,13 @@ class ArchiveDjController extends Controller
     public function handle()
     {
         $context = Timber::get_context();
-        $context['title'] = 'Hot DJs';
+        $context['title'] = 'Hot Talent';
 
         $featured_djs = get_field('featured_djs', 'options') ?: [];
 
         $djs = Dj::builder()
         ->whereIdNotIn($featured_djs)
+        ->limit(-1)
         ->get();
 
         $featured = Dj::builder()

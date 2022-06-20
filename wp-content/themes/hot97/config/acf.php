@@ -21,7 +21,7 @@ if( function_exists('acf_add_options_page') ) {
 
     /** DJs > Options */
     acf_add_options_sub_page([
-        'page_title' => 'DJ Options',
+        'page_title' => 'Talent Options',
         'menu_title' => 'Options',
         'menu_slug'  => 'acf-options-djs',
         'parent'     => '/edit.php?post_type=dj', // Posts

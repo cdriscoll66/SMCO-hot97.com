@@ -1,10 +1,16 @@
 .o-subfooter__home {
   background-color: var(--global--color-hot-yellow-100);
-  @include paper-tear-bottom-inner;
   color: var(--global--color-hot-yellow-900);
   padding-bottom: 10%;
-  @include media(laptop) {
-    @include paper-tear-top-inner;
+
+  .o-tiled {
+    height: 300px;
+
+    .o-tiled__tile {
+      @include media(laptop) {
+        min-height: 800px;
+      }
+    }
   }
 }
 
@@ -14,6 +20,7 @@
   padding-top: 75px;
   flex-flow: column nowrap;
   text-align: center;
+
   @include media(laptop) {
     flex-flow: row nowrap;
     text-align: left;

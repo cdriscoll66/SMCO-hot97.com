@@ -28,6 +28,7 @@ class ArchiveDjController extends Controller
 
         $djs = Dj::builder()
         ->whereIdNotIn($featured_djs)
+        ->limit(-1)
         ->get();
 
         $featured = Dj::builder()

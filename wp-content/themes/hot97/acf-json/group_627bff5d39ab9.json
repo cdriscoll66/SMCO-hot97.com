@@ -19,7 +19,7 @@
             "sub_fields": [
                 {
                     "key": "field_627bff7ae4e98",
-                    "label": "DJ tiled image",
+                    "label": "Talent tiled image",
                     "name": "dj_tiled_image",
                     "type": "image",
                     "instructions": "",
@@ -62,5 +62,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1652293796
+    "modified": 1655756100
 }

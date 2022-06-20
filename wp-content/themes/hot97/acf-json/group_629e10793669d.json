@@ -1,10 +1,10 @@
 {
     "key": "group_629e10793669d",
-    "title": "Featured DJs",
+    "title": "Featured Talent",
     "fields": [
         {
             "key": "field_629e10808307d",
-            "label": "Featured DJs",
+            "label": "Featured Talent",
             "name": "featured_djs",
             "type": "relationship",
             "instructions": "",
@@ -49,5 +49,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1654527316
+    "modified": 1655755716
 }

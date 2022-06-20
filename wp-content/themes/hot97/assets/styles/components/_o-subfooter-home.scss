@@ -37,8 +37,11 @@
 .o-subfooter__content {
   flex-basis: 46%;
   padding: 50px;
+
+
   @include media(laptop) {
     margin-left: 34px;
+    max-width: 600px;
   }
 }
 

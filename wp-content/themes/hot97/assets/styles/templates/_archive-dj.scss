@@ -18,7 +18,7 @@
   padding: 30px 0;
   display: flex;
   flex-flow: row wrap;
-  max-width: $max_content_width;
+  max-width: var(--responsive--alignwide-max-width);
   margin: 0 auto;
 
     div.dj-archive__item {

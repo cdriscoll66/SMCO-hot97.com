@@ -4,6 +4,10 @@
   padding: 4rem 0 8rem;
 }
 
+.o-prefooter {
+  @include paper-tear-top-outer;
+}
+
 .o-home-ctas {
   padding-bottom: 12rem;
 

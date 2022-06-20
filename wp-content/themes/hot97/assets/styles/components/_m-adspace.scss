@@ -115,9 +115,14 @@
 }
 
 .m-adspace--in-content {
-  padding: 75px 16px 90px;
+  padding: 75px 16px 0;
   background-color: $color-black;
   margin-bottom: 0;
+
+  &.m-adspace--after {
+    padding-top: 0;
+    padding-bottom: 90px;
+  }
 
   &::after {
     color: white;

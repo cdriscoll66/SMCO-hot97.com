@@ -224,7 +224,7 @@ class ContentCategoryAbstractController extends Controller
             $term->link = get_category_link($term->term_id);
         }
 
-        $context['main_class'] = 'o-main--split o-main--archive';
+        $context['main_class'] = 'o-main--split o-main--archive o-main--reduce-top';
 
         $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 

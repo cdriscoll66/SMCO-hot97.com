@@ -7,16 +7,13 @@
     height: 300px;
     overflow: hidden;
 
-    @include media (tablet) {
-      height: 500px;
-    }
-
     .o-tiled__tile {
       background-repeat: repeat-x;
 
       @include media (laptop) {
         background-repeat: repeat-y;
         background-size: 110% auto;
+        min-height: 460px;
       }
     }
   }

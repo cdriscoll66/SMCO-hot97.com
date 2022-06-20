@@ -1,4 +1,9 @@
 <article class="m-card">
+    {% if post.thumbnail %}
+        <a class="m-card__image-link" href="{{ post.link }}">
+            {{ post.thumbnail }}
+        </a>
+    {% endif %}
     <div class="m-card__text">
         {% if post.contentCategory %}
             <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
@@ -14,12 +19,6 @@
             </span>
         {% endif %}
 
-        <h1 class="m-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h1>
+        <h2 class="m-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
     </div>
-
-    {% if post.thumbnail %}
-        <a class="m-card__image-link" href="{{ post.link }}">
-            {{ post.thumbnail }}
-        </a>
-    {% endif %}
 </article>

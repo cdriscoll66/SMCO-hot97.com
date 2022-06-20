@@ -200,7 +200,7 @@ class ContentCategoryAbstractController extends Controller
             ->whereIdNotIn($exclude)
             ->contentCategory($this->term_id)
             ->orderBy('date', 'desc')
-            ->limit(6)
+            ->limit(15)
             ->get();
 
         $latest_posts = $latest_posts->map(function($item) {

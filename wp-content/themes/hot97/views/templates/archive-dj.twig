@@ -34,12 +34,10 @@
             <div class="dj-archive__item">
                 {% include "components/molecules/dj-card.twig" %}
             </div>
-            {% if loop.index == 8 %}
-            <div class="dj-archive__ad">
-                <div class="m-adspace m-adspace--archive">
+            {% if loop.index is divisible by(8) %}
+                <div class="dj-archive__ad m-adspace m-adspace--archive">
                     <div class="ione-ad" data-pos="incontent1"></div>
                 </div>
-            </div>
             {% endif %}
             {% endfor %}
         </div>

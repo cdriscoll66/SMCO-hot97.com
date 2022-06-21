@@ -1,40 +1,82 @@
 .m-adspace {
-  background-color: var(--global--color-hot-yellow-900);
-
+  background-color: var(--global--color-transparent);
+  position: relative;
+  padding-bottom: 10px;
   div.ione-ad {
     margin: 0 auto;
   }
-}
+  &::after {
+    content: "advertisement";
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-family: $monospace;
+    font-size: rem(10px);
+    line-height: 1.6;
+    text-transform: uppercase;
+    display: block;
 
-.m-adspace__horizontal__interlude {
-  padding: 1rem 0 0;
-  div.ione-ad {
-    div.ad-interlude-horizontal{
-      margin-bottom: 0;
+    .is-dark-theme & {
+      color: white;
     }
   }
 }
 
-.m-adspace__preheader, .m-adspace--othercats {
+.m-adspace__horizontal__interlude {
   div.ione-ad {
-    outline: 1px solid var(--global--color-hot-yellow-100);
+    div.ad-interlude-horizontal {
+      max-width:900px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.m-adspace__preheader,
+.m-adspace--othercats,
+.is-dark-theme.m-adspace {
+  div.ione-ad {
+    outline: 1px solid #996E00;
     outline-offset: 3px;
     margin: 6px auto;
   }
 }
 
 .m-adspace__preheader {
+  div.ione-ad {
+    position: relative;
+    &::before {
+      content: "AD";
+      position: absolute;
+      left: -18px;
+      top: 50%;
+      text-align: center;
+      font-family: "IMBPlex-mono", monospace;
+      font-size: 0.625rem;
+      text-transform: uppercase;
+      width: 0;
+      -webkit-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      background: var(--global--color-hot-yellow-900);
+      color: white;
+      z-index: 2;
+
+      @include media(tablet) {
+        display: block;
+      }
+    }
+  }
   &::after {
     content: "";
     height: 20px;
-    background: repeating-linear-gradient(135deg, var(--global--color-black), 5px, var(--global--color-hot-yellow-500) 5px, var(--global--color-hot-yellow-500) 6px);
+    background: repeating-linear-gradient(
+      135deg,
+      var(--global--color-black),
+      5px,
+      var(--global--color-hot-yellow-500) 5px,
+      var(--global--color-hot-yellow-500) 6px
+    );
     width: 100%;
     display: block;
     margin-top: 5px;
   }
-}
-
-.m-adspace .ad-video-container {
-  outline: 1px solid var(--global--color-hot-yellow-100);
-  outline-offset: 3px;
 }

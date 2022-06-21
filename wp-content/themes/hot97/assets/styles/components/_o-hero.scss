@@ -37,8 +37,11 @@
 .template-col__lg,
 .o-main--split .o-content,
 .m-featurecard__media {
-  flex: 0 1 70.8%;
   width: 100%;
+
+  @include media(desktop) {
+    flex: 0 1 70.8%;
+  }
 }
 
 .o-hero__media,

@@ -176,7 +176,7 @@ class IOne_Ad_Configurator {
 	}
 
 	private static function get_categories() {
-		if ( is_home() || is_front_page() ) {
+		if ( is_home() || is_front_page() || is_post_type_archive() ) {
 			return array( 'home' );
 
 		} elseif ( is_category() ) {
@@ -189,8 +189,6 @@ class IOne_Ad_Configurator {
 
 		} else {
 			$queried_object  = get_queried_object();
-			var_dump($queried_object);
-			die();
 			if ( $queried_object ) {
 
 				$post_categories = get_the_terms( $queried_object->ID, 'category' );

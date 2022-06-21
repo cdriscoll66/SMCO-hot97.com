@@ -1,11 +1,10 @@
 <?php
 /*
- * Plugin Name: IOne Digital Ads
- * Description: Minimalistic approach to ads. For more information read our documentation <a href="https://ionedigital.com/ione-ad-plugin-documentation/">here</a>.
+ * Plugin Name: IOne Digital Ads - v1.3 - COLAB Modified
+ * Description: Copy of IOne plug in with modified function - accepting custom post type archives. 
  * Version: 1.3
- * Author: iOne Digital
- * Author URI: https://ionedigital.com/ione-ad-plugin-documentation/
- * Update URI: https://ione-adstxt.s3.amazonaws.com/ione-min-ads.zip
+ * Author: COLAB
+ * Author URI: https://www.teamcolab.com/
  */
 
 require_once __DIR__ . '/php/class-ione-ad-plugin.php';

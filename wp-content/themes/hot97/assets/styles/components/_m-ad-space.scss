@@ -1,5 +1,9 @@
 .m-adspace {
   background-color: var(--global--color-hot-yellow-900);
+
+  div.ione-ad {
+    margin: 0 auto;
+  }
 }
 
 .m-adspace__horizontal__interlude {
@@ -15,6 +19,18 @@
   div.ione-ad {
     outline: 1px solid var(--global--color-hot-yellow-100);
     outline-offset: 3px;
+    margin: 6px auto;
+  }
+}
+
+.m-adspace__preheader {
+  &::after {
+    content: "";
+    height: 20px;
+    background: repeating-linear-gradient(135deg, var(--global--color-black), 5px, var(--global--color-hot-yellow-500) 5px, var(--global--color-hot-yellow-500) 6px);
+    width: 100%;
+    display: block;
+    margin-top: 5px;
   }
 }
 

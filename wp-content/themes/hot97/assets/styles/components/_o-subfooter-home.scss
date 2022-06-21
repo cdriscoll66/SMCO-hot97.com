@@ -3,6 +3,8 @@
   color: var(--global--color-hot-yellow-900);
   padding-bottom: 10%;
 
+  @include paper-tear-bottom-inner;
+
   .o-tiled {
     height: 300px;
 

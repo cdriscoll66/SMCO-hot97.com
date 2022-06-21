@@ -2,6 +2,7 @@
   background-color: var(--global--color-black);
   position: relative;
   color: var(--footer--color-text);
+
   a {
     color: var(--footer--color-link);
     &:hover {
@@ -29,13 +30,13 @@
 
 .o-footer__col {
   @include media(laptop) {
-  margin-bottom: 54px;
+  margin-bottom: 10px;
   }
 }
 
-.o-footer__col-8 {
-  margin-bottom: 54px;
-}
+// .o-footer__col-8 {
+//   margin-bottom: 54px;
+// }
 
 .o-footer__menu-col {
   display: flex;

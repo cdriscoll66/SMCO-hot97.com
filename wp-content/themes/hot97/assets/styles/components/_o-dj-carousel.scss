@@ -12,7 +12,8 @@
 
     .o-tiled__tile {
       background-repeat: repeat-x;
-      background-size: contain;
+      background-size: cover;
+
       @include media (laptop) {
         background-repeat: repeat-y;
         background-size: 110% auto;

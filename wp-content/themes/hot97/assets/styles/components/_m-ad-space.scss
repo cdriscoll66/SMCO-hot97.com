@@ -1,0 +1,24 @@
+.m-adspace {
+  background-color: var(--global--color-hot-yellow-900);
+}
+
+.m-adspace__horizontal__interlude {
+  padding: 1rem 0 0;
+  div.ione-ad {
+    div.ad-interlude-horizontal{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.m-adspace__preheader, .m-adspace--othercats {
+  div.ione-ad {
+    outline: 1px solid var(--global--color-hot-yellow-100);
+    outline-offset: 3px;
+  }
+}
+
+.m-adspace .ad-video-container {
+  outline: 1px solid var(--global--color-hot-yellow-100);
+  outline-offset: 3px;
+}

@@ -27,13 +27,15 @@
     div.ad-interlude-horizontal {
       max-width:900px;
       margin: 0 auto;
+      outline: 1px solid #996E00;
+      outline-offset: 3px;
+      margin: 6px auto;
     }
   }
 }
 
 .m-adspace__preheader,
-.m-adspace--othercats,
-.is-dark-theme.m-adspace {
+.m-adspace--othercats {
   div.ione-ad {
     outline: 1px solid #996E00;
     outline-offset: 3px;

@@ -53,6 +53,18 @@ $breakpoint_xxl: 1024px !default;
 		}
 	}
 
+  @if nav-only == $res {
+		@media only screen and (max-width: #{$breakpoint_nav - 1}) {
+			@content;
+		}
+	}
+
+	@if nav == $res {
+		@media only screen and (min-width: #{$breakpoint_nav}) {
+			@content;
+		}
+	}
+
 	@if desktop-only == $res {
 		@media only screen and (max-width: #{$breakpoint_xl - 1}) {
 			@content;

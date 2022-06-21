@@ -1,9 +1,9 @@
 <article class="m-card">
-    {% if post.thumbnail %}
-        <a class="m-card__image-link" href="{{ post.link }}">
+    {# {% if post.thumbnail %} #}
+        <a class="m-card__image-link {{ ( post.contentCategory.ID == 8) ? 'watch' : '' }}" href="{{ post.link }}">
             {{ post.thumbnail }}
         </a>
-    {% endif %}
+    {# {% endif %} #}
     <div class="m-card__text">
         {% if post.contentCategory %}
             <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>

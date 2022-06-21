@@ -117,16 +117,17 @@
 .m-card__desc {
   color: var(--global--color-black);
   margin: 0;
-  font-size: rem(12px)!important;
+  font-size: rem(12px) !important;
   font-family: $monospace;
   line-height: 1.5;
 }
 
 .m-card__image-link {
   display: block;
-  width: 100%; //CD changed to make responsive
+  width: 100%;
   height: auto;
   clip-path: circle(50%);
+  position: relative;
 
   &:hover + .m-card__text .m-card__title a {
     text-decoration: underline;
@@ -140,5 +141,22 @@
     width: 100%;
     height: auto;
     object-fit: cover;
+  }
+
+  &.watch {
+    &:before {
+      content: "";
+      position: absolute;
+      height: 100px;
+      width: 100px;
+      top: calc(50% - 50px);
+      left: calc(50% - 50px);
+      z-index: 1000;
+      background-image: url(../images/playbutton.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      pointer-events: none;
+    }
   }
 }

@@ -53,6 +53,7 @@
     padding: 10px 24px;
     background-color: var(--global--color-hot-yellow-100);
     color: var(--global--color-black);
+    white-space: nowrap;
 
     &:hover {
       background-color: var(--global--color-transparent);

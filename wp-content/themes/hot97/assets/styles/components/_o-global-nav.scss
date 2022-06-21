@@ -31,6 +31,8 @@
     background-color: var(--global--color-transparent);
     white-space: nowrap;
     padding: unset;
+    border: none;
+
     &:hover {
       color: var(--global--color-white);
     }
@@ -51,9 +53,10 @@
     padding: 10px 24px;
     background-color: var(--global--color-hot-yellow-100);
     color: var(--global--color-black);
+
     &:hover {
       background-color: var(--global--color-transparent);
-      color: var(--global--color-white);
+      color: var(--global--color-hot-yellow-100);
     }
   }
 

@@ -29,13 +29,28 @@
 
   ul {
     flex-flow: row nowrap;
-    & li > a {
-      font-family: var(--primary-nav--font-family);
-      font-size: rem(18px);
-      line-height: 1.3333;
-      text-transform: uppercase;
-      margin-right: 30px;
-      white-space: nowrap;
+
+    li {
+      margin-left: 0;
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      a {
+        font-family: var(--primary-nav--font-family);
+        font-size: rem(18px);
+        line-height: 1.3333;
+        text-transform: uppercase;
+        white-space: nowrap;
+        padding: 10px 10px 8px;
+        border-radius: 3px;
+
+        &:hover {
+          color: var(--global--color-black);
+          background-color: var(--global--color-hot-yellow-100);
+        }
+      }
     }
   }
 }
@@ -54,7 +69,13 @@
       font-family: $monospace;
       font-size: rem(14px);
       line-height: 1.142857;
-      margin-right: 15px;
+      padding: 3px 7px;
+      border-radius: 3px;
+
+      &:hover {
+        color: var(--global--color-black);
+        background-color: var(--global--color-hot-yellow-100);
+      }
     }
   }
 }

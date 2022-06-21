@@ -5199,6 +5199,7 @@ body.show-menu {
   background-color: var(--global--color-transparent);
   white-space: nowrap;
   padding: unset;
+  border: none;
 }
 .o-header button.o-global-nav__search:hover {
   color: var(--global--color-white);
@@ -5221,7 +5222,7 @@ body.show-menu {
 }
 .o-header .o-global-nav__button:hover {
   background-color: var(--global--color-transparent);
-  color: var(--global--color-white);
+  color: var(--global--color-hot-yellow-100);
 }
 .o-header .o-global-nav__divider {
   display: -webkit-box;
@@ -5310,13 +5311,24 @@ body.show-menu {
       -ms-flex-flow: row nowrap;
           flex-flow: row nowrap;
 }
-.o-menu--main ul li > a {
+.o-menu--main ul li {
+  margin-left: 0;
+}
+.o-menu--main ul li:first-child {
+  margin-left: 0;
+}
+.o-menu--main ul li a {
   font-family: var(--primary-nav--font-family);
   font-size: 1.125rem;
   line-height: 1.3333;
   text-transform: uppercase;
-  margin-right: 30px;
   white-space: nowrap;
+  padding: 10px 10px 8px;
+  border-radius: 3px;
+}
+.o-menu--main ul li a:hover {
+  color: var(--global--color-black);
+  background-color: var(--global--color-hot-yellow-100);
 }
 
 .o-menu--utility {
@@ -5340,7 +5352,12 @@ body.show-menu {
   font-family: "IMBPlex-mono", monospace;
   font-size: 0.875rem;
   line-height: 1.142857;
-  margin-right: 15px;
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+.o-menu--utility ul li > a:hover {
+  color: var(--global--color-black);
+  background-color: var(--global--color-hot-yellow-100);
 }
 
 .o-menu--mobile ul {

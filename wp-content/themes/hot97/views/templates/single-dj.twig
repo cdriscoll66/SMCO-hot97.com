@@ -21,11 +21,11 @@
 
             <div class="o-dj-hero__socialwrapper">
                 {% if instagram %}
-                <a href="http://www.instagram.com/{{ instagram }}" aria-label="Instagram link for {{ title }}" class="o-dj-hero__social o-dj-hero__instagram">{{ instagram }}</a>
+                <a href="http://www.instagram.com/{{ instagram }}" target="_blank" aria-label="Instagram link for {{ title }}" class="o-dj-hero__social o-dj-hero__instagram">{{ instagram }}</a>
                 {% endif %}
 
                 {% if twitter %}
-                <a href="http://www.instagram.com/{{ twitter }}" aria-label="Twitter link for {{ title }}" class="o-dj-hero__social o-dj-hero__twitter">{{ twitter }}</a>
+                <a href="http://www.twitter.com/{{ twitter }}" target="_blank" aria-label="Twitter link for {{ title }}" class="o-dj-hero__social o-dj-hero__twitter">{{ twitter }}</a>
                 {% endif %}
             </div>
         </div>
@@ -41,7 +41,6 @@
         </div>
     </div>
 {% endblock %}
-
 
 {% block sidebar %}
     {% if cohosts %}

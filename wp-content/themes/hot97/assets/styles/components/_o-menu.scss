@@ -3,9 +3,11 @@
     .o-global-nav & {
       display: flex;
     }
+
     list-style: none;
-    padding: none;
+    padding: 0;
     align-items: center;
+
     li > a {
       color: var(--primary-nav--color-link);
       text-decoration: none;
@@ -19,9 +21,12 @@
 .o-menu--main {
   display: none;
   flex-grow: 1;
-  @include media(laptop) {
+  padding-left: 20px;
+
+  @include media(nav) {
     display: flex;
   }
+
   ul {
     flex-flow: row nowrap;
     & li > a {
@@ -38,9 +43,11 @@
 .o-menu--utility {
   display: none;
   margin-right: 30px;
-  @media (min-width: $max_content_width) {
+
+  @include media(nav) {
     display: flex;
   }
+
   ul {
     flex-flow: row nowrap;
     & li > a {

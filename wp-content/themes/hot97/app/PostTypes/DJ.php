@@ -28,8 +28,8 @@ class DJ extends Post
     protected static function getPostTypeConfig()
     {
         $args = [
-            'singular' => __('DJ'),
-            'plural' => __('DJs'),
+            'singular' => __('Talent'),
+            'plural' => __('Talent'),
             'has_archive' => true,
             'rewrite' => [
                 'slug' => 'talent',

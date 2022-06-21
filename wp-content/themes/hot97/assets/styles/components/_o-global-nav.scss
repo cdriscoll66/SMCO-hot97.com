@@ -8,14 +8,14 @@
 .o-global-nav__secondary {
   width: unset;
   display: none;
-  @include media(laptop) {
+  @include media(nav) {
     display: flex;
   }
 }
 
 .o-global-nav__mobile-button {
   display: flex;
-  @include media(laptop) {
+  @include media(nav) {
     display: none;
   }
 }

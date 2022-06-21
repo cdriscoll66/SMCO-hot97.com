@@ -44,11 +44,11 @@ a.o-dj-hero__category {
 
 .o-dj-hero__social {
   font-family: $monospace;
-  text-transform: lowercase;
   display: flex;
   margin-bottom: 10px;
   font-size: rem(12px);
   align-items: center;
+
   &:before {
     content: '';
     background-repeat: no-repeat;

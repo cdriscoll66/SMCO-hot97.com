@@ -65,7 +65,7 @@
 .o-hero__category--primary a,
 .m-featurecard__category--primary a {
   color: var(--global--color-hot-yellow-100);
-  font-family: monospace;
+  font-family: $monospace;
   font-size: rem(14px);
   &:hover {
     color: var(--global--color-white);

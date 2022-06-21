@@ -36,7 +36,7 @@
 		font-size: var(--global--font-size-xs);
 		font-style: var(--pullquote--font-style);
 		text-transform: none;
-    font-family: monospace;
+    font-family: $monospace;
     margin-top: 1rem;
 
     &::before {

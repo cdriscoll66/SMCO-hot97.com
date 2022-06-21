@@ -21,7 +21,7 @@
 }
 
 a.o-dj-hero__category {
-  font-family: monospace;
+  font-family: $monospace;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
@@ -36,14 +36,14 @@ a.o-dj-hero__category {
 }
 
 .o-dj-hero__showtime {
-  font-family: monospace;
+  font-family: $monospace;
   text-transform: uppercase;
   margin-bottom: 25px;
 }
 
 
 .o-dj-hero__social {
-  font-family: monospace;
+  font-family: $monospace;
   text-transform: lowercase;
   display: flex;
   margin-bottom: 10px;

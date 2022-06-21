@@ -95,7 +95,7 @@
   .m-card--collapse & {
     margin-bottom: 0;
     font-size: rem(14px);
-    font-family: monospace;
+    font-family: $monospace;
     line-height: 1.5;
 
     a {
@@ -116,7 +116,7 @@
   color: var(--global--color-black);
   margin: 0;
   font-size: rem(12px)!important;
-  font-family: monospace;
+  font-family: $monospace;
   line-height: 1.5;
 }
 

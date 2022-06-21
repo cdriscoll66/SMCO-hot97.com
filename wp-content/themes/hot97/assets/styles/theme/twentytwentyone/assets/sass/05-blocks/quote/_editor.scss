@@ -18,7 +18,7 @@
   }
 
 	.wp-block-quote__citation {
-    font-family: monospace;
+    font-family: $monospace;
     font-style: var(--quote--font-style-cite);
     font-size: var(--global--font-size-xs);
     margin-top: 1rem;

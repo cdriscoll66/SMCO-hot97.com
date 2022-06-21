@@ -25,7 +25,7 @@
 
 .o-header {
   button.o-global-nav__search {
-    font-family: monospace;
+    font-family: $monospace;
     font-size: rem(16px);
     color: var(--global--color-hot-yellow-100);
     background-color: var(--global--color-transparent);
@@ -40,7 +40,7 @@
   }
 
   .o-global-nav__button {
-    font-family: monospace;
+    font-family: $monospace;
     font-size: rem(14px);
     line-height: 1.43;
     letter-spacing: 0.1px;

@@ -177,7 +177,7 @@
       color: var(--global--color-hot-yellow-100);
       font-size: rem(14px);
       line-height: 1.4285;
-      font-family: monospace;
+      font-family: $monospace;
       text-transform: uppercase;
       text-decoration: none!important;
       display: block;
@@ -222,7 +222,7 @@
       color: var(--global--color-hot-yellow-900);
       font-size: rem(14px);
       line-height: 1.4285;
-      font-family: monospace;
+      font-family: $monospace;
       text-transform: uppercase;
       text-decoration: none!important;
       display: block;

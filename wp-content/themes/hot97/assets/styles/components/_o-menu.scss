@@ -51,7 +51,7 @@
   ul {
     flex-flow: row nowrap;
     & li > a {
-      font-family: monospace;
+      font-family: $monospace;
       font-size: rem(14px);
       line-height: 1.142857;
       margin-right: 15px;

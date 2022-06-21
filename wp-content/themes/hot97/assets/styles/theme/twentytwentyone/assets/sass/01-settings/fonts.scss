@@ -14,7 +14,7 @@
 }
 
 @font-face {
-  font-family: "monospace";
+  font-family: "IMBPlex-mono";
   src: url("../fonts/IBMPlexMono-Regular.ttf") format("truetype");
   font-weight: normal;
   font-display: swap;
@@ -36,5 +36,5 @@
 
 $judgetrial: 'JudgeTrial', sans-serif;
 $oskari: 'Oskari', sans-serif;
-$monospace: 'monospace', serif;
+$monospace: 'IMBPlex-mono', monospace;
 $mono: $monospace;

@@ -39,7 +39,7 @@
 }
 
 .dj-content__cohost-link {
-  font-family: monospace;
+  font-family: $monospace;
   :after {
     content: "";
     background-image: url(../images/linkarrow.svg);

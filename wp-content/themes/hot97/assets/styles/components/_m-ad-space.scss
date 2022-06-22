@@ -5,20 +5,24 @@
   div.ione-ad {
     margin: 0 auto;
     text-align: center;
-  }
-  &::after {
-    content: "advertisement";
-    position: relative;
-    width: 100%;
-    text-align: center;
-    font-family: $monospace;
-    font-size: rem(10px);
-    line-height: 1.6;
-    text-transform: uppercase;
-    display: block;
+    & > div {
+      &::after {
+        content: "advertisement";
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: -20px;
+        font-family: $monospace;
+        font-size: rem(10px);
+        line-height: 1.6;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 3px;
 
-    .is-dark-theme & {
-      color: white;
+        .is-dark-theme & {
+          color: white;
+        }
+      }
     }
   }
 }
@@ -35,8 +39,10 @@
 }
 
 .m-adspace__preheader,
-.m-adspace--othercats {
+.m-adspace--othercats,
+.is-dark-theme {
   div.ione-ad {
+    position: relative;
     margin: 0 auto;
     outline: 1px solid #996e00;
     outline-offset: 3px;
@@ -52,7 +58,7 @@
       left: -18px;
       top: 50%;
       text-align: center;
-      font-family: "IMBPlex-mono", monospace;
+      font-family: $monospace;
       font-size: 0.625rem;
       text-transform: uppercase;
       width: 0;

@@ -1,9 +1,9 @@
             <div class="o-othercats m-related-posts">
                   <div class="m-marquee-title">
                     <div class="m-marquee-title__inner">
-                        <h1>{{ title }}'s Latest</h1>
-                                {% for i in 0..5 %}
-                        <span>{{ title }}'s Latest</span>
+                        <h1>{{ related_term.name }}</h1>
+                                {% for i in 0..10 %}
+                        <span>{{ related_term.name }}</span>
                         {% endfor %}
                     </div>
                 </div>
@@ -34,8 +34,7 @@
 
 
                         {% endfor %}
-
-                <a class="o-othercats__button" href="/tag/{{ post.slug }}">View All {{ title }}</a>
+                <a class="o-othercats__button" href="/tag/{{ related_term.slug }}">View All {{ related_term.name }}</a>
                 </div>
                 </div>
 

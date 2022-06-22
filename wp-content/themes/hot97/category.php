@@ -58,7 +58,11 @@ class CategoryController extends Controller
             $term->link = get_category_link($term->term_id);
         }
 
+
+
+
         $context['main_class'] = 'o-main--split o-main--archive';
+        $context['feedurl'] = 'category-feed-load-more/'.$term->term_id;
 
         $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 

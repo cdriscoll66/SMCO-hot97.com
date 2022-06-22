@@ -53,6 +53,7 @@ class TagController extends Controller
         foreach ($context['archive_sidebar']['terms'] as $term) {
             $term->link = get_tag_link($term->term_id);
         }
+        $context['feedurl'] = 'tag-feed-load-more/'.$term->term_id;
 
         $context['main_class'] = 'o-main--split o-main--archive';
 

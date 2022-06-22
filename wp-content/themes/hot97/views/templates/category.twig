@@ -33,8 +33,7 @@
     {% else %}
         <p>No results found.</p>
     {% endif %}
-
-    <a id="load-more-button" class="js-load-more post-feed__button" data-url="category-feed-load-more/{{ term_id }}"> load more </a>
+    <a id="load-more-button" class="js-load-more post-feed__button" data-url={{ feedurl }}> load more </a>
 {% endblock %}
 
 {% block sidebar %}

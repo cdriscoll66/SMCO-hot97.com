@@ -44,32 +44,36 @@
   div.ione-ad {
     position: relative;
     margin: 0 auto;
-    outline: 1px solid #996e00;
-    outline-offset: 3px;
+    & > div {
+      outline: 1px solid #996e00;
+      outline-offset: 3px;
+    }
   }
 }
 
 .m-adspace__preheader {
   div.ione-ad {
     position: relative;
-    &::before {
-      content: "AD";
-      position: absolute;
-      left: -18px;
-      top: 50%;
-      text-align: center;
-      font-family: $monospace;
-      font-size: 0.625rem;
-      text-transform: uppercase;
-      width: 0;
-      -webkit-transform: rotate(-90deg);
-      transform: rotate(-90deg);
-      background: var(--global--color-hot-yellow-900);
-      color: white;
-      z-index: 2;
+    & > div {
+      &::before {
+        content: "AD";
+        position: absolute;
+        left: -18px;
+        top: 50%;
+        text-align: center;
+        font-family: $monospace;
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        width: 0;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        background: var(--global--color-hot-yellow-900);
+        color: white;
+        z-index: 2;
 
-      @include media(tablet) {
-        display: block;
+        @include media(tablet) {
+          display: block;
+        }
       }
     }
   }

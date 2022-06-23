@@ -25,7 +25,7 @@ return [
         Rareloop\Lumberjack\Providers\LogServiceProvider::class,
         Rareloop\Lumberjack\Providers\ThemeSupportServiceProvider::class,
         Rareloop\Lumberjack\Providers\QueryBuilderServiceProvider::class,
-        Rareloop\Lumberjack\Providers\SessionServiceProvider::class,
+//        Rareloop\Lumberjack\Providers\SessionServiceProvider::class,
         Rareloop\Lumberjack\Providers\EncryptionServiceProvider::class,
 
         // Application Providers
@@ -39,7 +39,7 @@ return [
         'Config' => Rareloop\Lumberjack\Facades\Config::class,
         'Log' => Rareloop\Lumberjack\Facades\Log::class,
         'Router' => Rareloop\Lumberjack\Facades\Router::class,
-        'Session' => Rareloop\Lumberjack\Facades\Session::class,
+//        'Session' => Rareloop\Lumberjack\Facades\Session::class,
     ],
 
     /**

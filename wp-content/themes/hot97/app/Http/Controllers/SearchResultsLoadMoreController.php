@@ -17,8 +17,6 @@ class SearchResultsLoadMoreController extends Controller
 
     public function loadMore($queryterm)
     {
-
-
         QueryBuilder::macro('search', function ($term) {
             $this->params['s'] = $term;
 
@@ -35,7 +33,7 @@ class SearchResultsLoadMoreController extends Controller
 
 
         $posts = Post::builder()
-            ->search($queryterm)
+            ->search(urldecode($queryterm))
             ->offset($offset)
             ->limit($limit)
             ->get();

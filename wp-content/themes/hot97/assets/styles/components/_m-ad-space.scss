@@ -4,66 +4,76 @@
   padding-bottom: 10px;
   div.ione-ad {
     margin: 0 auto;
-  }
-  &::after {
-    content: "advertisement";
-    position: relative;
-    width: 100%;
     text-align: center;
-    font-family: $monospace;
-    font-size: rem(10px);
-    line-height: 1.6;
-    text-transform: uppercase;
-    display: block;
+    & > div {
+      &::after {
+        content: "advertisement";
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        bottom: -20px;
+        font-family: $monospace;
+        font-size: rem(10px);
+        line-height: 1.6;
+        text-transform: uppercase;
+        display: block;
+        margin-top: 3px;
 
-    .is-dark-theme & {
-      color: white;
+        .is-dark-theme & {
+          color: white;
+        }
+      }
     }
   }
 }
 
 .m-adspace__horizontal__interlude {
   div.ione-ad {
-    div.ad-interlude-horizontal {
-      max-width:900px;
+    max-width: 728px;
+    & > div {
       margin: 0 auto;
-      outline: 1px solid #996E00;
+      outline: 1px solid #996e00;
       outline-offset: 3px;
-      margin: 6px auto;
     }
   }
 }
 
 .m-adspace__preheader,
-.m-adspace--othercats {
+.m-adspace--othercats,
+.is-dark-theme {
   div.ione-ad {
-    outline: 1px solid #996E00;
-    outline-offset: 3px;
-    margin: 6px auto;
+    position: relative;
+    margin: 0 auto;
+    & > div {
+      outline: 1px solid #996e00;
+      outline-offset: 3px;
+    }
   }
 }
 
 .m-adspace__preheader {
   div.ione-ad {
     position: relative;
-    &::before {
-      content: "AD";
-      position: absolute;
-      left: -18px;
-      top: 50%;
-      text-align: center;
-      font-family: "IMBPlex-mono", monospace;
-      font-size: 0.625rem;
-      text-transform: uppercase;
-      width: 0;
-      -webkit-transform: rotate(-90deg);
-      transform: rotate(-90deg);
-      background: var(--global--color-hot-yellow-900);
-      color: white;
-      z-index: 2;
+    & > div {
+      &::before {
+        content: "AD";
+        position: absolute;
+        left: -18px;
+        top: 50%;
+        text-align: center;
+        font-family: $monospace;
+        font-size: 0.625rem;
+        text-transform: uppercase;
+        width: 0;
+        -webkit-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        background: var(--global--color-hot-yellow-900);
+        color: white;
+        z-index: 2;
 
-      @include media(tablet) {
-        display: block;
+        @include media(tablet) {
+          display: block;
+        }
       }
     }
   }

@@ -6,4 +6,5 @@ Router::get('home-load-more', 'HomeLoadMoreController@loadMore');
 Router::get('single-post-load-more/{postid}', 'SinglePostLoadMoreController@loadMore');
 Router::get('content-category-load-more/{termid}', 'ContentCategoryLoadMoreController@loadMore');
 Router::get('category-feed-load-more/{termid}', 'CategoryLoadMoreController@loadMore');
+Router::get('tag-feed-load-more/{termid}', 'TagLoadMoreController@loadMore');
 Router::get('search-results-load-more/{queryterm}', 'SearchResultsLoadMoreController@loadMore');

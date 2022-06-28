@@ -12,7 +12,9 @@
 
     > .wp-block-column:not(:first-child) {
       width: 300px;
+      @include media (tablet){
       margin-left: 40px;
+      }
     }
   }
 

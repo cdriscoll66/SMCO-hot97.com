@@ -33,7 +33,7 @@ class SingleDJController extends Controller
                 'relation' => 'OR',
                 [
                     'taxonomy' => 'post_tag',
-                    'field' => 'slug',
+                    'field' => 'term_id',
                     'terms' => $tags,
                 ]
             ];
@@ -64,6 +64,9 @@ class SingleDJController extends Controller
         $context['instagram'] = get_field('instagram');
         $context['twitter'] = get_field('twitter');
         $context['sidebar'] = true;
+        $context['related_tag'] = get_field('feed_tag') ?: 989; //if none set - setting to 'HOT News' tag.
+        $context['related_term'] = new Term($context['related_tag']);
+
 
         $cohosts = [];
         if ($dj_ids = get_field('cohosts')) {
@@ -83,7 +86,7 @@ class SingleDJController extends Controller
         $context['cohosts'] = $cohosts;
 
 
-        $context['related_posts'] = $this->getRelatedPosts($post->slug, [$post->ID]);
+        $context['related_posts'] = $this->getRelatedPosts($context['related_tag'], [$post->ID]);
 
 
         // Format data

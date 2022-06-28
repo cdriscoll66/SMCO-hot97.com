@@ -18,10 +18,10 @@ function init() {
   let pagednumber = 0;
 
   const handleLoadMorePosts = () => {
+
     pagednumber += 1;
 
     let query = "/" + posturl + "/?paged=" + pagednumber;
-
     fetch(query)
       .then(response => response.text())
       .then(data => addPosts(data));
@@ -34,7 +34,6 @@ function init() {
 
 
   if (loadMoreObs) {
-    console.log("obs");
     /* Intersection Observer options */
     const obsOptions = {
       root: null,

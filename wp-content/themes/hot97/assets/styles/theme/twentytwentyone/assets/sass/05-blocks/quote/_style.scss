@@ -1,6 +1,9 @@
 .wp-block-quote {
 	border-left: none;
-  max-width: calc(var(--responsive--aligndefault-width) + 100px)!important;
+
+  @include media(laptop) {
+    max-width: calc(var(--responsive--aligndefault-width) + 100px)!important;
+  }
 
   p {
     font-size: var(--quote--font-size);

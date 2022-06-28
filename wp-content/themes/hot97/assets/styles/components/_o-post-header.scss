@@ -1,4 +1,11 @@
 .o-post-header {
+  display: flex;
+  flex-flow: column-reverse;
+
+  @include media(tablet) {
+    flex-flow: column;
+  }
+
   .o-post-header__inner {
     background: var(--global--color-black);
     color: white;

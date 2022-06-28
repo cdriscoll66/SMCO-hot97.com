@@ -7,6 +7,11 @@
     font-weight: var(--heading--font-weight);
     text-transform: uppercase;
 
+    &.alignfull {
+      padding-left: var(--global--spacing-unit);
+      padding-right: var(--global--spacing-unit);
+    }
+
     strong {
       font-weight: var(--heading--font-weight-strong);
     }
@@ -23,6 +28,11 @@
     clear: both;
     font-family: var(--global--font-secondary);
     font-weight: var(--heading--font-weight-strong);
+
+    &.alignfull {
+      padding-left: var(--global--spacing-unit);
+      padding-right: var(--global--spacing-unit);
+    }
 
     strong {
       font-weight: var(--heading--font-weight-strong);

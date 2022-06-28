@@ -25,8 +25,8 @@ return [
         ],
         [
             'name' => 'prefooter_image',
-            'width' => 1044,
-            'height' => 630,
+            'width' => 846,
+            'height' => 511,
             'crop' => true,
         ],
     ],

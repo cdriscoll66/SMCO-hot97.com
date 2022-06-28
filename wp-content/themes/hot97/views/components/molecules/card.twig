@@ -3,6 +3,7 @@
             {{ post.thumbnail ?: '<img src="/wp-content/themes/hot97/dist/images/logo-small.svg" class="m-card__image" alt="Hot 97" />' }}
         </a>
     <div class="m-card__text">
+    <div class="m-card__meta">
         {% if post.contentCategory %}
             <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
         {% endif %}
@@ -16,6 +17,7 @@
                 <i aria-label="Hot Content" class="fas fa-fire"></i>
             </span>
         {% endif %}
+    </div>
 
         <h2 class="m-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h2>
     </div>

@@ -35,6 +35,10 @@
   }
 }
 
+.m-card__meta {
+  display: flex;
+}
+
 .m-card__content-category,
 .o-post-header__content-category {
   text-transform: uppercase;

@@ -16,7 +16,7 @@
 			}
 
 			&:first-child {
-				margin-top: 0;
+				margin-top: 0!important;
 			}
 
 			&:last-child {
@@ -42,10 +42,13 @@
 	}
 
 	&.alignfull {
-    max-width: calc(100vw - 110px);
+    max-width: 100%;
+
+    @include media(desktop) {
+      max-width: calc(100vw - 110px);
+		}
 
 		.wp-block-column {
-
 			p:not(.has-background),
 			h1:not(.has-background),
 			h2:not(.has-background),

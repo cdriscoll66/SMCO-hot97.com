@@ -10,6 +10,11 @@
 
 .o-page-header__title {
   max-width: var(--responsive--aligndefault-width);
-  margin: 110px auto 0;
+  margin: var(--global--spacing-vertical) auto 0;
   text-transform: uppercase;
+  transition: margin-top 1s;
+
+  @include media(laptop) {
+    margin-top: 110px;
+  }
 }

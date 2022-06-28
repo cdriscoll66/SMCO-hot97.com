@@ -35,6 +35,11 @@
   }
 }
 
+.m-card__meta {
+  display: flex;
+  min-height: 29px;
+}
+
 .m-card__content-category,
 .o-post-header__content-category {
   text-transform: uppercase;

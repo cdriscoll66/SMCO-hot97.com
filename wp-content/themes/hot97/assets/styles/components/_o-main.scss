@@ -2,7 +2,7 @@
 
   &.o-main--split {
       max-width: $breakpoint_xxl;
-      margin: 100px var(--global--spacing-unit);
+      margin: var(--global--spacing-vertical) var(--global--spacing-unit);
       display: flex;
       align-items: flex-start;
       justify-content: center;

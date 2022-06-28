@@ -35,25 +35,25 @@
 
 		// Text colors
 		&:not(.has-text-color) {
-			color: var(--global--color-background);
+			color: var(--button--color-text);
 
 			// Nested
 			.has-background & {
-				color: var(--local--color-background, var(--global--color-primary));
+				color: var(--local--color-background, var(--button--color-text));
 
 				&.has-background {
-					color: var(--global--color-primary);
+					color: var(--button--color-text);
 				}
 			}
 		}
 
 		// Background-colors
 		&:not(.has-background) {
-			background-color: var(--global--color-primary);
+			background-color: var(--button--color-background);
 
 			// Nested
 			.has-background & {
-				background-color: var(--local--color-primary, var(--global--color-primary));
+				background-color: var(--local--color-primary, var(--button--color-background));
 			}
 		}
 	}

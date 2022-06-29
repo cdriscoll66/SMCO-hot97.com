@@ -30,12 +30,13 @@
   justify-content: center;
 
   a {
+    font-family: $monospace;
     display: inline-block;
     border: 1px solid white;
     text-transform: uppercase;
     color: white;
     text-decoration: none;
-    padding: 10px 15px 5px;
+    padding: 10px 15px;
     border-radius: 60px;
     font-size: rem(14px);
     line-height: rem(14px);

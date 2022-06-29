@@ -27,6 +27,10 @@ SupportsAnchor: false
 .acf-block-preview .o-listen-live::before {
     content: "Listen Live Block - This block is only viewable on the front-end."
 }
+
+.td-song-history__song__buy {
+    display: none;
+}
 </style>
 
 <div class="o-listen-live wp-block-group alignwide">
@@ -39,7 +43,7 @@ SupportsAnchor: false
 
         <div class="wp-block-columns alignwide">
             <div class="wp-block-column">
-                <td-songhistory id="td-songhistory" station="WQHTFM" songsdisplayed="10" itunesaffiliateid="1234" title="Recently played" buybtntext="Buy" highlightcolor="#FDB927" primarycolor="#000000" headerbgcolor="#ffffff" secondarycolor="#ffffff" onappready="appReady"></td-songhistory>
+                <td-songhistory id="td-songhistory" station="WQHTFM" songsdisplayed="10" title="Recently played" highlightcolor="#FDB927" primarycolor="#ffffff" headerbgcolor="#0e0900" secondarycolor="#0e0900" onappready="appReady"></td-songhistory>
             </div>
             <div class="wp-block-column">
                 <td-adplayer id="td-adplayer" client="tap" host="cmod.live.streamtheworld.com" stationid="91863" type="preroll"></td-adplayer>

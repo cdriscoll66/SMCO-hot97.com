@@ -30,7 +30,8 @@
 .m-adspace__horizontal__interlude {
   div.ione-ad {
     max-width: 728px;
-    & > div {
+    padding-top: 10px;
+    & > div > iframe {
       margin: 0 auto;
       outline: 1px solid #996e00;
       outline-offset: 3px;
@@ -40,16 +41,19 @@
 
 .m-adspace__preheader,
 .m-adspace--othercats,
-.is-dark-theme {
+.is-dark-theme,
+#anchor-ad-container {
   div.ione-ad {
     position: relative;
     margin: 0 auto;
-    & > div {
+    & > div > iframe{
       outline: 1px solid #996e00;
       outline-offset: 3px;
     }
   }
 }
+
+
 
 .m-adspace__preheader {
   div.ione-ad {

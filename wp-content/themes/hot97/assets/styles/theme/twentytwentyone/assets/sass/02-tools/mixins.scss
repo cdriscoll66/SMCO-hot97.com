@@ -74,6 +74,10 @@
 		outline: 2px dotted currentColor;
 	}
 
+  &.o-global-nav__search:focus {
+    outline-offset: 2px;
+  }
+
 	// Disabled Button colors
 	&:disabled {
 		background-color: var(--global--color-white-50);

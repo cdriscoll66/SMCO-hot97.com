@@ -1,15 +1,15 @@
 .o-prefooter,
 .o-home-ctas {
   background-color: var(--global--color-black);
-  padding: 4rem 0 8rem;
 }
 
 .o-prefooter {
   @include paper-tear-top-outer;
+  padding: 4rem 0 8rem;
 }
 
 .o-home-ctas {
-  padding-bottom: 12rem;
+  padding: 2rem 0 12rem;
 }
 
 .o-prefooter__inner,

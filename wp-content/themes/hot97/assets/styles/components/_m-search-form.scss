@@ -27,6 +27,7 @@ input.m-search-form__input {
   line-height: 1.2;
   padding-bottom: 0;
   vertical-align: bottom;
+  border-radius: 0;
 
   @include media(laptop) {
     font-size: var(--global--font-size-xxl);

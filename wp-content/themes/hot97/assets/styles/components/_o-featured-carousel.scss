@@ -23,9 +23,9 @@
   }
 
   .flickity-button:hover:not(.o-global-nav__search):not(.o-header__mobile-button):not(.has-background) {
-    background-color: transparent;
+    background-color: transparent!important;
+    color: inherit;
   }
-
 }
 
 .o-featured-carousel__list {

@@ -61,9 +61,11 @@
 	// Hover Button color should match parent element foreground color
 	&:hover,
 	&:active {
-		background-color: transparent;
-		border-color: currentColor;
-		color: inherit;
+    @media(hover: hover) and (pointer: fine) {
+      background-color: transparent;
+      border-color: currentColor;
+      color: inherit;
+    }
 	}
 
 	// Focus Button outline color should always match the current text color

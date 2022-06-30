@@ -10,10 +10,6 @@
 
 .o-home-ctas {
   padding-bottom: 12rem;
-
-  @include media(laptop) {
-    padding-bottom: 16rem;
-  }
 }
 
 .o-prefooter__inner,

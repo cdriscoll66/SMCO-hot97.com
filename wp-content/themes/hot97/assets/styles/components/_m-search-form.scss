@@ -85,11 +85,7 @@ input.m-search-form__input {
     letter-spacing: 0.1px;
     padding: 10px 24px;
     display: inline-block;
-    margin-top: 20px;
-
-    @include media(laptop) {
-      margin-top: 0;
-    }
+    margin-top: 0;
 
     &:hover {
       background-color: $color-black !important;

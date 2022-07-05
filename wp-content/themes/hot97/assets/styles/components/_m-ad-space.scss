@@ -1,7 +1,7 @@
 .m-adspace {
   background-color: var(--global--color-transparent);
   position: relative;
-  padding-bottom: 10px;
+  padding-bottom: 16px;
   div.ione-ad {
     margin: 0 auto;
     text-align: center;
@@ -30,11 +30,10 @@
 .m-adspace__horizontal__interlude {
   div.ione-ad {
     max-width: 728px;
-    padding-top: 10px;
+    padding-top: 100px 0;
     & > div > iframe {
       margin: 0 auto;
       outline: 1px solid #996e00;
-      outline-offset: 3px;
     }
   }
 }
@@ -48,7 +47,6 @@
     margin: 0 auto;
     & > div > iframe{
       outline: 1px solid #996e00;
-      outline-offset: 3px;
     }
   }
 }

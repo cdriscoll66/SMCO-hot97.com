@@ -77,6 +77,10 @@ if ( ! defined( 'WP_DEBUG' ) ) {
 	define('WP_DEBUG', false);
 }
 
+if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
+	define('FS_METHOD', 'direct');
+}
+
 /* That's all, stop editing! Happy Pressing. */
 
 

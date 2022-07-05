@@ -27,7 +27,7 @@ class AppRestController {
      * Register REST routes
      */
     public function register_routes() {
-        // GET /wp-json/colab-custom-rest-endpoints/v1/data/recent
+        // GET /wp-json/colab/v1/data/recent
         register_rest_route( $this->namespace, '/' . $this->resource_name . '/config', [
             [
                 'methods'   => 'GET',

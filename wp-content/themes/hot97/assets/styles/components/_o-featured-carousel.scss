@@ -24,7 +24,7 @@
 
   .flickity-button:hover:not(.o-global-nav__search):not(.o-header__mobile-button):not(.has-background) {
     background-color: transparent!important;
-    color: inherit;
+    color: white;
 
     @media(hover: hover) and (pointer: fine) {
       background-color: var(--global--color-hot-yellow-900)!important;

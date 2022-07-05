@@ -76,7 +76,11 @@
   span {
     will-change: none;
     animation: none;
-    transform: translateX(-3rem);
+    transform: translateX(-1.25rem);
+
+    @include media (tablet) {
+      transform: translateX(-3rem);
+    }
   }
 
   span {

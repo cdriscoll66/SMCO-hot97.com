@@ -29,6 +29,7 @@ class FV_Player_Db_Video {
     $rtmp_path, // if RTMP is set, this will have the path on the server to the RTMP stream
     $splash, // URL to the splash screen picture
     $splash_text, // an optional splash screen text
+    $splash_attachment_id, // splash attachment id
     $src, // the main video source
     $src1, // alternative source path #1 for the video
     $src2, // alternative source path #2 for the video
@@ -40,9 +41,8 @@ class FV_Player_Db_Video {
 
   private static
     $db_table_name,
-    $DB_Instance = null,
-    $stopwords;  // used in self::get_search_stopwords()
-  
+    $DB_Instance = null;
+
   /**
    * @return int
    */
@@ -125,6 +125,13 @@ class FV_Player_Db_Video {
   }
 
   /**
+   * @return int
+   */
+  public function getSplashAttachmentId() {
+    return $this->splash_attachment_id;
+  }
+
+  /**
    * @return string
    */
   public function getSrc() {
@@ -186,22 +193,23 @@ class FV_Player_Db_Video {
   }
 
   /**
-   * Checks for DB tables existence and creates it as necessary. It can add new table fields but remove them, which can result in the 'Unknown property for new DB video:' error
+   * Checks for DB tables existence and creates it as necessary.
    *
-   * @param $wpdb The global WordPress database object.
+   * @param $force Forces to run dbDelta.
    */
-  private function initDB($wpdb) {
-    global $fv_fp, $fv_wp_flowplayer_ver;
+  public static function initDB($force = false) {
+    global $wpdb, $fv_fp, $fv_wp_flowplayer_ver;
 
     self::init_db_name();
 
-    if( defined('PHPUnitTestMode') || !$fv_fp->_get_option('video_model_db_checked') || $fv_fp->_get_option('video_model_db_checked') != $fv_wp_flowplayer_ver ) {
+    if( defined('PHPUnitTestMode') || !$fv_fp->_get_option('video_model_db_checked') || $fv_fp->_get_option('video_model_db_checked') != $fv_wp_flowplayer_ver || $force ) {
       $sql = "
 CREATE TABLE " . self::$db_table_name . " (
   id bigint(20) unsigned NOT NULL auto_increment,
   src varchar(1024) NOT NULL,
   src1 varchar(1024) NOT NULL,
   src2 varchar(1024) NOT NULL,
+  splash_attachment_id bigint(20) unsigned,
   splash varchar(1024) NOT NULL,
   splash_text varchar(1024) NOT NULL,
   caption varchar(1024) NOT NULL,
@@ -240,7 +248,7 @@ CREATE TABLE " . self::$db_table_name . " (
       self::$DB_Instance = $DB_Cache = $FV_Player_Db;
     }
 
-    $this->initDB($wpdb);
+    self::initDB();
 
     // TODO: This should not be here at all
     $multiID = is_array($id);
@@ -463,6 +471,8 @@ CREATE TABLE " . self::$db_table_name . " (
    * @return bool Returns true if any data were loaded, false otherwise.
    */
   public function searchBySrc($like = false, $fields = null) {
+    _deprecated_function( __FUNCTION__, '7.5.22', 'FV_Player_Db::query_videos' );
+
     global $wpdb;
 
     $row = $wpdb->get_row("SELECT ". ($fields ? esc_sql($fields) : '*') ." FROM `" . self::$db_table_name . "` WHERE `src` ". ($like ? 'LIKE "%'.esc_sql($this->src).'%"' : '="'.esc_sql($this->src).'"') ." ORDER BY id DESC");
@@ -479,195 +489,6 @@ CREATE TABLE " . self::$db_table_name . " (
 
       return true;
     }
-  }
-
-  /**
-   * Searches for a player video via custom query.
-   *
-   * @param array $fields_to_search Array with fields in which to perform this search.
-   * @param string $search_string   The actual text to search for.
-   * @param bool $like              The LIKE part for the database query. If false, exact match is used.
-   * @param string $and_or          The condition to use when multiple fields are being searched.
-   * @param null $fields            Fields to return for this search. If null, all fields are returned.
-   *
-   * @return bool Returns true if any data were loaded, false otherwise.
-   */
-  public static function search($fields_to_search, $search_string, $like = false, $and_or = 'OR', $fields = null) {
-    global $wpdb;
-
-    // assemble where part
-    $where = array();
-
-    /*
-     * Inspired by core WP WP_Query::parse_search() but adjusted to make it fit our SQL query
-     */
-    if ( $like ) {
-      $search_terms_count = 1;
-      $search_terms = '';
-
-      $search_string = stripslashes( $search_string );
-
-      if( (substr($search_string, 0,1) == "'" && substr( $search_string,-1) == "'") || (substr($search_string, 0,1) == '"' && substr( $search_string,-1) == '"') ) { // Dont break term if in '' or ""
-        $search_string = substr($search_string, 1, -1);
-        $search_terms = array( $search_string );
-      } else {
-        if ( preg_match_all( '/".*?("|$)|((?<=[\t ",+])|^)[^\t ",+]+/', $search_string, $matches ) ) {
-          $search_terms_count = count( $matches[0] );
-          $search_terms = self::parse_search_terms( $matches[0] );
-          // If the search string has only short terms or stopwords, or is 10+ terms long, match it as sentence.
-          if ( empty( $search_terms ) || count( $search_terms ) > 9 ) {
-            $search_terms = array( $search_string );
-          }
-        } else {
-          $search_terms = array( $search_string );
-        }
-      }
-      
-      $search_terms_encoded = array();
-
-      foreach( $search_terms as $term ) {
-        $search_terms_encoded[] = $term; 
-        $search_terms_encoded[] = urlencode($term);
-        $search_terms_encoded[] = rawurlencode($term);
-      }
-
-      $search_terms = $search_terms_encoded;
-
-      unset($search_terms_encoded);
-
-      $exclusion_prefix = apply_filters( 'wp_query_search_exclusion_prefix', '-' );
-      
-      foreach ($fields_to_search as $field_name) {
-        $searchlike = '';
-        $first = true;
-        foreach ( $search_terms as $term ) {
-          // If there is an $exclusion_prefix, terms prefixed with it should be excluded.
-          $exclude = $exclusion_prefix && ( substr( $term, 0, 1 ) === $exclusion_prefix );
-         
-          if ( $exclude ) {
-            $like_op  = 'NOT LIKE';
-            $andor_op = 'AND';
-            $term     = substr( $term, 1 );
-          } else {
-            $like_op  = 'LIKE';
-            $andor_op = 'OR';
-          }
-          
-          if( $first ) $andor_op = '';
-
-          $like_term = '%' . $wpdb->esc_like( $term ) . '%';
-          $searchlike .= $wpdb->prepare( "{$andor_op}({$field_name} $like_op %s)", $like_term);
-
-          $first = false;
-        }
-        $where[] = "(". $searchlike .")";
-      }
-
-    } else { // TODO same as like
-      foreach ($fields_to_search as $field_name) {
-        $where[] = "`$field_name` ='" . esc_sql($search_string) . "'";
-      }
-    }
-
-    $where = implode(' '.esc_sql($and_or).' ', $where);
-
-    self::init_db_name();
-    $data = $wpdb->get_results("SELECT ". ($fields ? esc_sql($fields) : '*') ." FROM `" . self::$db_table_name . "` WHERE $where ORDER BY id DESC");
-
-    if (!$data) {
-      return false;
-    } else {
-      return $data;
-    }
-  }
-
-  /**
-   * Copy of core WordPress WP_Query::parse_search_terms() for our purposes without any changes, but made static
-   * 
-   * Check if the terms are suitable for searching.
-   *
-   * Uses an array of stopwords (terms) that are excluded from the separate
-   * term matching when searching for posts. The list of English stopwords is
-   * the approximate search engines list, and is translatable. ( from class-wp-query.php )
-   *
-   * @since 3.7.0
-   * 
-   * @param string[] $terms Array of terms to check.
-   * @return string[] Terms that are not stopwords.
-   */
-  public static function parse_search_terms( $terms ) {
-    $strtolower = function_exists( 'mb_strtolower' ) ? 'mb_strtolower' : 'strtolower';
-    $checked    = array();
-
-    $stopwords = self::get_search_stopwords();
-
-    foreach ( $terms as $term ) {
-      // Keep before/after spaces when term is for exact match.
-      if ( preg_match( '/^".+"$/', $term ) ) {
-        $term = trim( $term, "\"'" );
-      } else {
-        $term = trim( $term, "\"' " );
-      }
-
-      // Avoid single A-Z and single dashes.
-      if ( ! $term || ( 1 === strlen( $term ) && preg_match( '/^[a-z\-]$/i', $term ) ) ) {
-        continue;
-      }
-
-      if ( in_array( call_user_func( $strtolower, $term ), $stopwords, true ) ) {
-        continue;
-      }
-
-      $checked[] = $term;
-    }
-
-    return $checked;
-  }
-
-  /**
-   * Copy of core WordPress WP_Query::get_search_stopwords() for our purposes without any changes, but made static
-   * 
-   * Retrieve stopwords used when parsing search terms. ( from class-wp-query.php )
-   *
-   * @since 3.7.0
-   *
-   * @return string[] Stopwords.
-   */
-  public static function get_search_stopwords() {
-    if ( isset( self::$stopwords ) ) {
-      return self::$stopwords;
-    }
-
-    /*
-    * translators: This is a comma-separated list of very common words that should be excluded from a search,
-    * like a, an, and the. These are usually called "stopwords". You should not simply translate these individual
-    * words into your language. Instead, look for and provide commonly accepted stopwords in your language.
-    */
-    $words = explode(
-      ',',
-      _x(
-        'about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www',
-        'Comma-separated list of search stopwords in your language'
-      )
-    );
-
-    $stopwords = array();
-    foreach ( $words as $word ) {
-      $word = trim( $word, "\r\n\t " );
-      if ( $word ) {
-        $stopwords[] = $word;
-      }
-    }
-
-    /**
-     * Filters stopwords used when parsing search terms.
-     *
-     * @since 3.7.0
-     *
-     * @param string[] $stopwords Array of stopwords.
-     */
-    self::$stopwords = apply_filters( 'wp_search_stopwords', $stopwords );
-    return self::$stopwords;
   }
 
   /**
@@ -833,6 +654,25 @@ CREATE TABLE " . self::$db_table_name . " (
     $data_keys   = array();
     $data_values = array();
 
+    $splash_attachment_id = $this->getSplashAttachmentId();
+
+    if( $is_update ) {
+      // check if splash url changed
+      if( !empty( $splash_attachment_id ) ) {
+        $saved_splash = wp_get_attachment_image_url($splash_attachment_id, 'full', false);
+        if( !empty( $saved_splash ) ) {
+          $saved_parse = wp_parse_url( $saved_splash );
+          $current_parse = $this->getSplash() ? wp_parse_url( $this->getSplash() ) : false;
+
+          // if splash removed or changed, delete splash attachment
+          if( !$current_parse || (strcmp( $saved_parse['path'], $current_parse['path'] ) !== 0) ) {
+            delete_post_meta( $splash_attachment_id, 'fv_player_video_id', $this->getId() );
+            $this->splash_attachment_id = '';
+          }
+        }
+      }
+    }
+
     foreach (get_object_vars($this) as $property => $value) {
       if ($property != 'id' && $property != 'is_valid' && $property != 'db_table_name' && $property != 'DB_Instance' && $property != 'meta_data' && $property != 'ignored_video_fields') {
         $data_keys[] = $property . ' = %s';
@@ -842,7 +682,7 @@ CREATE TABLE " . self::$db_table_name . " (
 
     $sql .= implode(',', $data_keys);
 
-    if ($is_update) {
+    if ( $is_update ) {
       $sql .= ' WHERE id = ' . $this->id;
     }
 
@@ -877,7 +717,7 @@ CREATE TABLE " . self::$db_table_name . " (
         foreach ($meta_data as $meta_record) {
           // it's possible that we switched the checkbox off and then on, by that time its id won't exist anymore! Todo: remove data-id instead?
           if( !empty($meta_record['id']) && empty($existing_meta_ids[$meta_record['id']]) ) {
-            unset($meta_record['id']);          
+            unset($meta_record['id']);
           }
           
           // if the meta value has no ID associated, we replace the first one which exists, effectively preventing multiple values under the same meta key, which is something to improve, perhaps
@@ -912,6 +752,25 @@ CREATE TABLE " . self::$db_table_name . " (
       $cache = self::$DB_Instance->getVideosCache();
       $cache[$this->id] = $this;
       self::$DB_Instance->setVideosCache($cache);
+
+      $saved_attachments = $wpdb->get_col( 
+        $wpdb->prepare( "SELECT post_id FROM `{$wpdb->postmeta}` WHERE meta_key = 'fv_player_video_id' AND meta_value = %d", $this->getId() )
+      );
+
+      // check for unused attachments
+      if( !empty( $saved_attachments ) ) {
+        foreach( $saved_attachments as $post_id ) {
+          // remove if not used
+          if( $splash_attachment_id != $post_id ) {
+            delete_post_meta( $post_id, 'fv_player_video_id' );
+          }
+        }
+      }
+
+      // store video id for splash attachment
+      if( $splash_attachment_id ) {
+        update_post_meta( $splash_attachment_id, 'fv_player_video_id', $this->getId() );
+      }
 
       return $this->id;
     } else {

@@ -29,6 +29,13 @@ function S3MultiUpload(file) {
  */
 S3MultiUpload.prototype.createMultipartUpload = function() {
     var self = this;
+
+    if( fv_player_media_browser.get_current_folder() === 'Home/' ) { // root folder
+      self.fileInfo.name =  fv_player_media_browser.get_current_folder() + self.fileInfo.name
+    } else { // nested folder
+      self.fileInfo.name =  fv_player_media_browser.get_current_folder() + '/' + self.fileInfo.name
+    }
+
     jQuery.post(self.SERVER_LOC, {
         action: 'create_multiupload',
         fileInfo: self.fileInfo,
@@ -56,7 +63,7 @@ S3MultiUpload.prototype.uploadParts = function() {
 
     while(start < this.file.size) {
         end = Math.min(start + this.PART_SIZE, this.file.size);
-		    filePart = this.file.slice(start, end);
+        var filePart = this.file.slice(start, end);
         // this is to prevent push blob with 0Kb
         if (filePart.size > 0)
             blobs.push(filePart);
@@ -226,7 +233,7 @@ S3MultiUpload.prototype.updateProgress = function() {
         }
     }
     if (complete)
-    	this.completeMultipartUpload();
+    this.completeMultipartUpload();
     total=this.fileInfo.size;
     this.onProgressChanged(loaded, total, byterate);
 };

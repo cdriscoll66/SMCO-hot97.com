@@ -5,14 +5,15 @@
 <meta itemprop='thumbnailUrl' content='https://cdn.jwplayer.com/thumbs/{{ post.video }}-720.jpg'/>
 <meta itemprop='uploadDate' content='{{ post.publishDate }}'/>
 <meta itemprop='contentUrl' content='https://cdn.jwplayer.com/v2/media/{{ post.video }}'/>
-<span class="jwppp-instant" style="display: none;" data-video="https://hot97.lndo.site/?jwp-instant-articles=1&#038;player=MJzy0VWe&#038;autostart=true&#38;mute=true&#38;mediaID={{ post.video }}" data-width="480" data-height="270"></span><div id='jwppp-video-hero' class='jwplayer'>Loading the player...</div>
-<script type="text/javascript" src="https://content.jwplatform.com/libraries/MJzy0VWe.js"></script><script type='text/javascript'>
+<span class="jwppp-instant" style="display: none;" data-video="{{ site.link }}/?jwp-instant-articles=1&#038;player=mniPLjSs&#038;autostart=true&#38;mute=true&#38;mediaID={{ post.video }}" data-width="480" data-height="270"></span><div id='jwppp-video-hero' class='jwplayer'>Loading the player...</div>
+<script type="text/javascript" src="https://content.jwplatform.com/libraries/mniPLjSs.js"></script><script type='text/javascript'>
 var playerInstance_hero = jwplayer( "jwppp-video-hero" );
 playerInstance_hero.setup({
 playlist: "https://cdn.jwplayer.com/v2/media/{{ post.video }}",
 autostart: true,
 mute: true,
-advertising: {
+advertisingclient: 'googima',
+tag: '',
 },
 })
 </script></div>

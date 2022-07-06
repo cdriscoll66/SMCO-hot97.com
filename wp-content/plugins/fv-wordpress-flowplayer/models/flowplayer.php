@@ -174,7 +174,8 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
       $key            = (!empty($options['key']) ? $options['key'] : '');
       $name           = (!empty($options['name']) ? $options['name'] : '');
       $help           = (!empty($options['help']) ? $options['help'] : '');
-      $more           = (!empty($options['more']) ? $options['more'] : '');      
+      $more           = (!empty($options['more']) ? $options['more'] : '');
+      $disabled       = !empty($options['disabled']);
 
       if (!$key || !$name) {
         throw new Exception('Both, "name" and "key" options need to be set for _get_checkbox()!');
@@ -185,7 +186,10 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
       $name = func_get_arg(0);
       $key = func_get_arg(1);
       $help = ($args_num >= 3 ? func_get_arg(2) : false);
-      $more = ($args_num >= 4 ? func_get_arg(3) : false);      
+      $more = ($args_num >= 4 ? func_get_arg(3) : false);
+
+      $disabled = false;
+
     } else {
         throw new Exception('Invalid number of arguments passed to the _get_checkbox() method!');
     }
@@ -206,6 +210,7 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
                   <input type="hidden" name="<?php echo $key; ?>" value="false"/>
                   <input type="checkbox" name="<?php echo $key; ?>" id="<?php echo $key; ?>" value="true"<?php
                     if ( $checked ) { echo ' checked="checked"'; }
+                    if ( $disabled ) { echo ' disabled'; }
 
                     if (isset($options) && isset($options['data']) && is_array($options['data'])) {
                         foreach ($options['data'] as $data_item => $data_value) {
@@ -345,6 +350,20 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
     }
   }
 
+  public function _get_censored_val($val) {
+    $censored_val = '';
+
+    for ($i = 0; $i < strlen($val); $i++) {
+      // Reveal first and last 2 chars
+      if( $i < 2 || $i >= strlen($val) - 2 ) {
+        $censored_val .= $val[$i];
+      } else {
+        $censored_val .= '*';
+      }
+    }
+
+    return $censored_val;
+  }
 
   public function _get_input_text($options = array()) {
     // options must be an array
@@ -353,12 +372,23 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
     }
 
     $first_td_class = (!empty($options['first_td_class']) ? ' class="'.esc_attr($options['first_td_class']).'"' : '');
-    $class_name     = (!empty($options['class']) ? ' class="'.esc_attr($options['class']).'"' : '');
+    $class_name     = (!empty($options['class']) ? esc_attr($options['class']) : '');
     $key            = (!empty($options['key']) ? $options['key'] : '');
     $name           = (!empty($options['name']) ? $options['name'] : '');
     $title          = (!empty($options['title']) ? ' title="'.esc_attr($options['title']).'" ' : '');
     $default        = (!empty($options['default']) ? $options['default'] : '');
-    $help           = (!empty($options['help']) ? $options['help'] : '');     
+    $help           = (!empty($options['help']) ? $options['help'] : '');
+
+    // Only use fields with secret values obfuscated if FV Player Pro is not there or is ready for it
+    if(
+      !function_exists('FV_Player_Pro') ||
+      ( function_exists('FV_Player_Pro') && version_compare( str_replace( '.beta','',FV_Player_Pro()->version ),'7.5.25.728', '>=') )
+    ) {
+      $secret         = (!empty($options['secret']) ? $options['secret'] : false);
+
+    } else {
+      $secret = false;
+    }
 
     if (!$key || !$name) {
       throw new Exception('Both, "name" and "key" options need to be set for _get_input_text()!');
@@ -366,6 +396,9 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
 
     $saved_value = esc_attr( $this->_get_option($key) );
     if ( is_array( $key ) && count( $key ) > 1 ) {
+      if( $secret ) {
+        $secret_key  = $key[0] . '[_is_secret_' . $key[1] . ']'; // add _is_secret_ prefix to key
+      }
       $key = $key[0] . '[' . $key[1] . ']';
     }
     
@@ -373,20 +406,38 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
     // however in case of marginBottom you might wish to enter 0 and we need to accept that
     // so we just check if the default if a number and if it is, we allow even 0 value
     $val = is_numeric($default) || !empty($saved_value) ? $saved_value : $default;
+
+    // censor original value
+    if( $secret ) {
+      $censored_val = $this->_get_censored_val($val);
+      $val = '';
+      $class_name = ' class="code ' . $class_name . '"';
+    } else {
+      $class_name = ' class="' . $class_name . '"';
+    }
+
     ?>
       <tr>
         <td<?php echo $first_td_class; ?>><label for="<?php echo $key; ?>"><?php echo $name; ?><?php if( $help ) echo ' <a href="#" class="show-info"><span class="dashicons dashicons-info"></span></a>'; ?>:</label></td>
         <td>
-          <input <?php echo $class_name; ?> id="<?php echo esc_attr($key); ?>" name="<?php echo esc_attr($key); ?>" <?php if ($title) { echo $title; } ?>type="text"  value="<?php echo esc_attr($val); ?>"<?php
+          <input <?php echo $class_name; ?> <?php if($secret && !empty($censored_val)) echo 'style="display: none;"'; ?> id="<?php echo esc_attr($key); ?>" name="<?php echo esc_attr($key); ?>" <?php if ($title) { echo $title; } ?>type="text" value="<?php echo esc_attr($val); ?>"<?php
             if (isset($options['data']) && is_array($options['data'])) {
               foreach ($options['data'] as $data_item => $data_value) {
                 echo ' data-'.$data_item.'="'.$data_value.'"';
               }
             }
-          ?> />          
+          ?> />
           <?php if ( $help ) { ?>
             <p class="description fv-player-admin-tooltip"><span class="info"><?php echo $help; ?></span></p>
           <?php } ?>
+
+          <?php if ( $secret ): ?>
+            <input name="<?php echo esc_attr($secret_key); ?>" value="<?php if(empty($censored_val)) {echo '0';} else {echo '1';} ?>" type="hidden" />
+            <?php if(!empty($censored_val)): ?>
+              <code class="secret-preview"><?php echo $censored_val; ?></code>
+              <a href="#" data-is-empty="0" data-setting-change="<?php echo esc_attr($secret_key); ?>" >Change</a>
+            <?php endif; ?>
+          <?php endif; ?>
         </td>
       </tr>
 
@@ -671,8 +722,7 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
   }
 
   
-  public function _set_conf( $aNewOptions = false ) {
-    if( !$aNewOptions ) $aNewOptions = $_POST;
+  public function _set_conf( $aNewOptions ) {
     $sKey = !empty($aNewOptions['key']) ? trim($aNewOptions['key']) : false;
     
     //  make sure the preset Skin properties are not over-written
@@ -853,9 +903,13 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
     
     $aItem = isset($aPlayer['sources']) && isset($aPlayer['sources'][0]) ? $aPlayer['sources'][0] :  false;
     $sListStyle = !empty($aArgs['liststyle']) ? $aArgs['liststyle'] : false;
+
+    $sItemCaption = flowplayer::filter_possible_html($sItemCaption);
     
     if( !$sItemCaption && $sListStyle == 'text' ) $sItemCaption = 'Video '.($index+1);
     
+    $sItemCaptionOriginal = $sItemCaption;
+
     if( !empty($aArgs['members_only']) ) {
       $sHTML = "\t\t<a href='".esc_attr($aArgs['members_only'])."' data-fancybox>";
     } else {
@@ -897,9 +951,9 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
       $sHTML .= "<div class='fvp-playlist-thumb-img'>";
       if( $sSplashImage ) {
         if( !(  defined( 'DONOTROCKETOPTIMIZE' ) && DONOTROCKETOPTIMIZE ) && function_exists( 'get_rocket_option' ) && get_rocket_option( 'lazyload' ) ) {
-          $sHTML .= "<img src='data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=' data-lazy-src='$sSplashImage' />";
+          $sHTML .= "<img src='data:image/gif;base64,R0lGODdhAQABAPAAAP///wAAACwAAAAAAQABAEACAkQBADs=' data-lazy-src='".esc_attr($sSplashImage)."' />";
         } else {
-          $sHTML .= "<img ".(get_query_var('fv_player_embed') ? "data-no-lazy='1'":"")." src='$sSplashImage' />";
+          $sHTML .= "<img ".(get_query_var('fv_player_embed') ? "data-no-lazy='1'":"")." src='".esc_attr($sSplashImage)."' />";
         }
         
       } else {
@@ -977,7 +1031,7 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
     
     $sHTML .= "</a>\n";
     
-    $sHTML = apply_filters( 'fv_player_item_html', $sHTML, $aArgs, $sSplashImage, $sItemCaption, $aPlayer, $index );
+    $sHTML = apply_filters( 'fv_player_item_html', $sHTML, $aArgs, $sSplashImage, $sItemCaptionOriginal, $aPlayer, $index );
     
     return $sHTML;
   }
@@ -1252,6 +1306,7 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
         $css .= $sel." a.fp-play, ".$sel." a.fp-volumebtn, ".$sel." .fp-controls, ".$sel." .fv-ab-loop, .fv-player-buttons a:active, .fv-player-buttons a { color: ".$sDuration." !important; }\n";
         $css .= $sel." .fp-controls > .fv-fp-prevbtn:before, ".$sel." .fp-controls > .fv-fp-nextbtn:before { border-color: ".$sDuration." !important; }\n";
         $css .= $sel." .fvfp_admin_error, ".$sel." .fvfp_admin_error a, #content ".$sel." .fvfp_admin_error a { color: ".$sDuration."; }\n";
+        $css .= $sel." svg.fvp-icon { fill: ".$sDuration." !important; }\n";
       }
 
       if( $sBuffer ) {
@@ -1358,11 +1413,8 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
     
     if( !$force && !$this->should_force_load_js() && isset($posts) && count($posts) > 0 ) {
       $bFound = false;
-      
-      if( $this->_get_option('parse_comments') ) { //  if video link parsing is enabled, we need to check if there might be a video somewhere
-        $bFound = true;
-      }         
-      
+
+
       foreach( $posts AS $objPost ) {
         if( !empty($objPost->post_content) && (
             stripos($objPost->post_content,'[fvplayer') !== false ||
@@ -1582,6 +1634,20 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
   
   public static function esc_caption( $caption ) {
     return str_replace( array(';','[',']'), array('\;','(',')'), $caption );
+  }
+
+  /*
+   * Use the heavy-duty WordPress HTML filtering if the value looks like it might be HTML
+   * 
+   * @param string $content
+   *
+   * @return string Filtered string
+   */
+  public static function filter_possible_html( $content ) {
+    if( stripos($content, '<') !== false || stripos($content, '>') !== false ) {
+      $content = wp_kses( $content, 'post' );
+    }
+    return $content;
   }
   
   
@@ -2203,7 +2269,7 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
       
       if( $list_style == 'text' ) {
         $sClass .= ' fp-playlist-only-captions';
-      } else if( sizeof($aCaptions) > 0 && strlen(implode($aCaptions)) > 0 ) {
+      } else if( sizeof($aCaptions) > 0 && strlen(implode("",$aCaptions)) > 0 ) {
         $sClass .= ' fp-playlist-has-captions';
       }
     }
@@ -2489,7 +2555,7 @@ class flowplayer extends FV_Wordpress_Flowplayer_Plugin_Private {
   
   // Also used by FV Player extensions
   function should_force_load_js() {
-    return $this->_get_option('js-everywhere') || isset($_GET['brizy-edit-iframe']) || isset($_GET['elementor-preview']);
+    return $this->_get_option('js-everywhere') || isset($_GET['brizy-edit-iframe']) || isset($_GET['elementor-preview']) || did_action('fv_player_force_load_assets');
   }
 
   function template_preview() {

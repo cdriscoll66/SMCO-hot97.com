@@ -118,7 +118,17 @@ function fv_flowplayer_admin_amazon_options() {
 					</tr>
           
           <?php $fv_fp->_get_checkbox(__('Force the default expiration time', 'fv-wordpress-flowplayer'), 'amazon_expire_force'); ?>
-          <?php $fv_fp->_get_checkbox(__('Amazon S3 Browser', 'fv-wordpress-flowplayer').' (beta)', 's3_browser', __('Show Amazon S3 Browser in the "Add Video" dialog.' , 'fv-wordpress-flowplayer') ); ?>
+          <?php
+          $can_use_aws_sdk = version_compare(phpversion(),'7.2.5') != -1;
+          
+          $fv_fp->_get_checkbox( array(
+            'name' => __('Amazon S3 Browser', 'fv-wordpress-flowplayer').' (beta)',
+            'key' => 's3_browser',
+            'help' =>  !$can_use_aws_sdk ?
+              __('This function requires PHP >= 7.2.5, please contact your web host support.' , 'fv-wordpress-flowplayer')
+              : __('Show Amazon S3 Browser in the "Add Video" dialog.' , 'fv-wordpress-flowplayer'),
+            'disabled' => !$can_use_aws_sdk
+          ) ); ?>
           
           <?php do_action('fv_player_admin_amazon_options'); ?>
 <?php
@@ -153,8 +163,29 @@ function fv_flowplayer_admin_amazon_options() {
             <td><input id="amazon_key[]" name="amazon_key[]" type="text" value="<?php echo esc_attr( $fv_fp->_get_option( array( 'amazon_key', $key ) ) ); ?>" /></td>
         </tr>
         <tr<?php echo $amazon_tr_class; ?>>
+        <?php 
+          $secret = !function_exists('FV_Player_Pro') ||
+          ( function_exists('FV_Player_Pro') && version_compare( str_replace( '.beta','',FV_Player_Pro()->version ),'7.5.25.728', '>=') );
+          
+          $secret_key = "_is_secret_amazon_secret[]";
+          $val = $fv_fp->_get_option( array( 'amazon_secret', $key ) ) ; 
+
+          if( $secret ) {
+            $censored_val = $fv_fp->_get_censored_val( $val );
+            $val = '';
+          }
+  
+        ?>
             <td><label for="amazon_secret[]"><?php _e('Secret Access Key', 'fv-wordpress-flowplayer'); ?>:</label></td>
-            <td><input id="amazon_secret[]" name="amazon_secret[]" type="text" value="<?php echo esc_attr( $fv_fp->_get_option( array( 'amazon_secret', $key ) ) ); ?>" /></td>
+            <td><input  <?php if($secret && !empty($censored_val)) echo 'style="display: none;"' ?> id="amazon_secret[]" name="amazon_secret[]" type="text" value="<?php echo esc_attr( $val ); ?>" />
+          <?php if( $secret ): ?>
+            <input name="<?php echo esc_attr($secret_key); ?>" value="<?php if(empty($censored_val)) {echo '0';} else {echo '1';} ?>" type="hidden" />
+            <?php if(!empty($censored_val)): ?>
+              <code class="secret-preview"><?php echo $censored_val; ?></code>
+              <a href="#" data-is-empty="0" data-setting-change="<?php echo esc_attr($secret_key.'-index-'.$key); ?>" >Change</a>
+            <?php endif; ?>
+          <?php endif; ?>
+          </td>
         </tr>
         <tr<?php echo $amazon_tr_class; ?>>
             <td colspan="2">
@@ -549,7 +580,6 @@ function fv_flowplayer_admin_integrations() {
         <p><?php _e('Following options are suitable for web developers and programmers.', 'fv-wordpress-flowplayer'); ?></p>
 				<table class="form-table2">
 
-          <?php $fv_fp->_get_checkbox(__('Add featured image automatically', 'fv-wordpress-flowplayer'), array('integrations','featured_img'), __('If the featured image is not set, splash image of the first player will be used.', 'fv-wordpress-flowplayer') ); ?>
           <?php $fv_fp->_get_checkbox(__('Always use fixed size player', 'fv-wordpress-flowplayer'), 'fixed_size', __('Enable to force video size at cost of loosing the video responsiveness.', 'fv-wordpress-flowplayer') ); ?>
           <?php $fv_fp->_get_checkbox(__('Disable saving skin CSS to a static file', 'fv-wordpress-flowplayer'), 'css_disable', __('Normally the player CSS configuration is stored in wp-content/fv-player-custom/style-{blog_id}.css.', 'fv-wordpress-flowplayer'), __('We do this to avoid a big style tag in your site &lt;head&gt;. Don\'t edit this file though, as it will be overwritten by plugin update or saving its options!','fv-wordpress-flowplayer' )); ?>
 
@@ -653,7 +683,6 @@ function fv_flowplayer_admin_mobile() {
           <?php $fv_fp->_get_checkbox(__('Use native fullscreen on mobile', 'fv-wordpress-flowplayer'), 'mobile_native_fullscreen', __('Stops popups, ads or subtitles from working, but provides faster interface. We set this for Android < 4.4 and iOS < 7 automatically.', 'fv-wordpress-flowplayer') ); ?>
           <?php $fv_fp->_get_checkbox(__('Force fullscreen on mobile', 'fv-wordpress-flowplayer'), 'mobile_force_fullscreen', __('Video playback will start in fullscreen. iPhone with iOS < 10 always forces fullscreen for video playback.', 'fv-wordpress-flowplayer')  ); ?>
           <?php $fv_fp->_get_checkbox(__('Alternative iOS fullscreen mode', 'fv-wordpress-flowplayer'), 'mobile_alternative_fullscreen', __("Works for iOS < 12 which doesn't support HTML5 fullscreen. Only use if you see site elements such as header bar ovelaying the player in fullscreen on iOS.", 'fv-wordpress-flowplayer')  ); ?>
-          <?php $fv_fp->_get_checkbox(__('Force landscape orientation in fullscreen', 'fv-wordpress-flowplayer'), 'mobile_landscape_fullscreen', __("Works on the Android mobile, not supported on iOS unfortunately.", 'fv-wordpress-flowplayer')  ); ?>
           <tr>
             <td colspan="4">
               <input type="submit" name="fv-wp-flowplayer-submit" class="button-primary" value="<?php _e('Save All Changes', 'fv-wordpress-flowplayer'); ?>" />
@@ -1117,7 +1146,8 @@ function fv_flowplayer_admin_skin() {
       'subtitles' => plugins_url('images/test-subtitles.vtt',dirname(__FILE__)),
       'caption' => "Foliovision Video;Lapinthrope Extras - Roy Thompson Hall Dance;Romeo and Juliet Ballet Schloss Kittsee",
       'playlist' => 'https://player.vimeo.com/external/224781088.sd.mp4?s=face4dbb990b462826c8e1e43a9c66c6a9bb5585&profile_id=165&oauth2_token_id=3501005,https://i.vimeocdn.com/video/643908843-984e68e66846a7a4b42bf5e854b65937217ed1b71759afa16afd4f81963900a6-d?mw=230&mh=130;https://player.vimeo.com/external/45864857.hd.mp4?s=94fddee594da3258c9e10355f5bad8173c4aee7b&profile_id=113&oauth2_token_id=3501005,https://i.vimeocdn.com/video/319116053-4745c7d678ba90ebabeadf58a65439b780c2ef26176176acc03eabbe87c8afda-d?mw=230&mh=130',
-			'liststyle' => 'horizontal'
+			'liststyle' => 'horizontal',
+      'vast' => 'skip'
       ) );
     $fv_fp->admin_preview_player = explode( '<div class="fp-playlist-external', $fv_fp->admin_preview_player );
     echo $fv_fp->admin_preview_player[0];
@@ -1171,7 +1201,8 @@ function fv_flowplayer_admin_skin() {
     'timeColor' => '.flowplayer .fp-elapsed, .flowplayer .fp-duration { color: #%val% !important; } 
                   .fv-player-video-checker { color: #%val% !important; }',
     'durationColor' => '.flowplayer .fp-controls, .flowplayer .fv-ab-loop, .fv-player-buttons a:active, .fv-player-buttons a { color:#%val% !important; }
-                  .flowplayer .fp-controls > .fv-fp-prevbtn:before, .flowplayer .fp-controls > .fv-fp-nextbtn:before { border-color:#%val% !important; }',
+                  .flowplayer .fp-controls > .fv-fp-prevbtn:before, .flowplayer .fp-controls > .fv-fp-nextbtn:before { border-color:#%val% !important; }
+                  .flowplayer svg.fvp-icon { fill: #%val% !important; }',
     'design-timeline' => '',
     'design-icons' => '',
   );
@@ -1389,6 +1420,7 @@ function fv_flowplayer_admin_skin() {
   ?>
   <div style="clear: both"></div>
 <?php
+  do_action('fv_player_extensions_admin_load_assets');
 }
 
 
@@ -1922,16 +1954,21 @@ add_meta_box( 'fv_flowplayer_usage', __('Usage', 'fv-wordpress-flowplayer'), 'fv
 
   var fv_flowplayer_amazon_s3_count = 0;
   jQuery('#amazon-s3-add').on('click', function() {
-  	var new_inputs = jQuery('tr.amazon-s3-first').clone(); 	
-  	new_inputs.find('input').attr('value','');  	
-		new_inputs.attr('class', new_inputs.attr('class') + '-' + fv_flowplayer_amazon_s3_count );
-  	new_inputs.insertBefore('.amazon-s3-last');
-  	fv_flowplayer_amazon_s3_count++;
-  	return false;
-  } );
+    var new_inputs = jQuery('tr.amazon-s3-first').clone();
+    new_inputs.find("[name='amazon_key[]']").val('');
+    new_inputs.find("[name='amazon_secret[]']").val('').show();
+    new_inputs.find("[name='_is_secret_amazon_secret[]']").val(0); // set val to 0 - save new
+    new_inputs.attr('class', new_inputs.attr('class') + '-' + fv_flowplayer_amazon_s3_count );
+    new_inputs.find(':selected').prop('selected',false); // unselect
+    new_inputs.find('.secret-preview').remove(); // remove secret preview
+    new_inputs.find("[data-setting-change]").remove(); // remove change link
+    new_inputs.insertBefore('.amazon-s3-last');
+    fv_flowplayer_amazon_s3_count++;
+    return false;
+  });
   
   function fv_fp_amazon_s3_remove(a) {
-  	jQuery( '.'+jQuery(a).parents('tr').attr('class') ).remove();
+    jQuery( '.'+jQuery(a).parents('tr').attr('class') ).remove();
   }
 </script>
 

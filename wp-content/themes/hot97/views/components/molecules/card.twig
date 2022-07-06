@@ -8,7 +8,7 @@
             <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
         {% endif %}
 
-        {% if post.primaryCategory %}
+        {% if post.primaryCategory and post.primaryCategory.name %}
             <span class="m-card__category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
         {% endif %}
 

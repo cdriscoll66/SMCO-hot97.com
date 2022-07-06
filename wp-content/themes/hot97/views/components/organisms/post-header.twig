@@ -6,7 +6,7 @@
             <span class="o-post-header__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
             {% endif %}
 
-            {% if post.primaryCategory %}
+            {% if post.primaryCategory and post.primaryCategory.name %}
             <span class="o-post-header__primary-category"><a href="{{ post.primaryCategory.path }}">{{ post.primaryCategory.name }}</a></span>
             {% endif %}
 

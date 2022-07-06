@@ -17,6 +17,12 @@ video {
 	max-width: 100%;
 }
 
+.entry-content {
+  iframe {
+    width: 100%;
+  }
+}
+
 /* Media captions */
 figcaption,
 .wp-caption,

@@ -4,7 +4,7 @@ Tags: GraphQL, API, Gatsby, Headless, Decoupled, React, Nextjs, Vue, Apollo, RES
 Requires at least: 5.0
 Tested up to: 5.9.1
 Requires PHP: 7.1
-Stable tag: 1.7.2
+Stable tag: 1.8.6
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -130,6 +130,105 @@ The `uri` field was non-null on some Types in the Schema but has been changed to
 Composer dependencies are no longer versioned in Github. Recommended install source is WordPress.org or using Composer to get the code from Packagist.org or WPackagist.org.
 
 == Changelog ==
+
+= 1.8.6 =
+
+**Chores / Bugfixes**
+
+- ([#2427](https://github.com/wp-graphql/wp-graphql/pull/2427)): Fixes a regression of the 1.8.3 release where there could be fatal errors when GraphQL Tracing is enabled and a queryId is used as a query param.
+
+
+= 1.8.5 =
+
+**Chores / Bugfixes**
+
+- ([#2422](https://github.com/wp-graphql/wp-graphql/pull/2422)): Fixes a regression of the 1.8.3 release where there could be fatal errors when GraphQL Tracing is enabled.
+
+
+= 1.8.4 =
+
+**Chores / Bugfixes**
+
+- ([#2416](https://github.com/wp-graphql/wp-graphql/pull/2416)): Fixes schema artifact workflow in Github.
+
+= 1.8.3 =
+
+**New Features**
+
+- ([#2388](https://github.com/wp-graphql/wp-graphql/pull/2388)): Adds ability to query menus by SLUG and LOCATION. Thanks @justlevine!
+
+**Chores / Bugfixes**
+
+- ([#2412](https://github.com/wp-graphql/wp-graphql/pull/2412)): Update tests to run in PHP 8, 8.1 and with WordPress 6.0. Updates Docker Deploy workflow as well.
+- ([#2411](https://github.com/wp-graphql/wp-graphql/pull/2411)): Fixes bug where menuItems "location" arg was conflicting if a taxonomy is also registered with "location" as its name.
+- ([#2410](https://github.com/wp-graphql/wp-graphql/pull/2410)): Fixes a regression with Taxonomy Connection pagination.
+- ([#2406](https://github.com/wp-graphql/wp-graphql/pull/2406)): Updates PHPUnit, WPBrowser and WPGraphQL Test Case for use in workflows. Thanks @justlevine!
+- ([#2387](https://github.com/wp-graphql/wp-graphql/pull/2387)): Fixes a bug with asset versions when querying for Enqueued Scripts and Styles. Thanks @justlevine!
+
+
+
+= 1.8.2 =
+
+**New Features**
+
+- ([#2363](https://github.com/wp-graphql/wp-graphql/pull/2363)): Adds "uri" field to MenuItem type which resolves the path of the node which can then be used in a `nodeByUri` query to get the linked node. The path is relative and does not contain subdirectory path in a subdirectory multisite. the `path` field does include the multisite subdirectory path, still. Thanks @josephfusco and @justlevine!
+- ([#2337](https://github.com/wp-graphql/wp-graphql/pull/2337)): Allows for either global ID or databaseId to be supplied in the ID field for user mutations. Thanks @justlevine!
+- ([#2338](https://github.com/wp-graphql/wp-graphql/pull/2338)): Allows either global "relay" ID or databaseId for post object mutations. Thanks @justlevine!
+- ([#2336](https://github.com/wp-graphql/wp-graphql/pull/2336)): Allows either global "relay" ID or databaseId for term object mutations. Thanks @justlevine!
+- ([#2331](https://github.com/wp-graphql/wp-graphql/pull/2331)): Allows either global "relay" ID or databaseId for MediaItem object mutations. Thanks @justlevine!
+- ([#2328](https://github.com/wp-graphql/wp-graphql/pull/2328)): Allows either global "relay" ID or databaseId for Comment object mutations. Thanks @justlevine!
+
+
+**Chores/Bugfixes**
+
+- ([#2368](https://github.com/wp-graphql/wp-graphql/pull/2368)): Updates dependencies for Schema Linter workflow.
+- ([#2369](https://github.com/wp-graphql/wp-graphql/pull/2369)): Replaces the Codecov badge in the README with Coveralls badge. Thanks @justlevine!
+- ([#2374](https://github.com/wp-graphql/wp-graphql/pull/2374)): Updates descriptions for PostObjectFieldFormatEnum. Thanks @justlevine!
+- ([#2375](https://github.com/wp-graphql/wp-graphql/pull/2375)): Sets up the testing integration workflow to be able to run in multisite. Adds one workflow that runs in multisite. Fixes tests related to multisite.
+- ([#2376](https://github.com/wp-graphql/wp-graphql/pull/2276)): Adds support for `['auth']['callback']` and `isPrivate` for the `register_graphql_mutation()` API.
+- ([#2379](https://github.com/wp-graphql/wp-graphql/pull/2379)): Fixes a bug where term mutations were adding slashes when being stored in the database.
+- ([#2380](https://github.com/wp-graphql/wp-graphql/pull/2380)): Fixes a bug where WPGraphQL wasn't sending the Wp class to the `parse_request` filter as a reference.
+- ([#2382](https://github.com/wp-graphql/wp-graphql/pull/2382)): Fixes a bug where `register_graphql_field()` was not being respected by GraphQL Types added to the schema to represent Setting Groups of the core WordPress `register_setting()` API.
+
+
+= 1.8.1 =
+
+**New Features**
+
+- ([#2349](https://github.com/wp-graphql/wp-graphql/pull/2349)): Adds tags to wpkses_post for WPGraphQL settings pages to be extended further. Thanks @eavonius!
+
+**Chores/Bugfixes**
+
+- ([#2358](https://github.com/wp-graphql/wp-graphql/pull/2358)): Updates NPM dependencies. Thanks @dependabot!
+- ([#2357](https://github.com/wp-graphql/wp-graphql/pull/2357)): Updates NPM dependencies. Thanks @dependabot!
+- ([#2356](https://github.com/wp-graphql/wp-graphql/pull/2356)): Refactors codebase to take advantage of the work done in #2353. Thanks @justlevine!
+- ([#2354](https://github.com/wp-graphql/wp-graphql/pull/2354)): Fixes console warnings in GraphiQL related to missing React keys.
+- ([#2353](https://github.com/wp-graphql/wp-graphql/pull/2353)): Refactors the WPGraphQL::get_allowed_post_types() and WPGraphQL::get_allowed_taxonomies() functions. Thanks @justlevine!
+- ([#2350](https://github.com/wp-graphql/wp-graphql/pull/2350)): Fixes bug where Comment Authors were not always properly returning
+
+= 1.8.0 =
+
+**New Features**
+
+- ([#2286](https://github.com/wp-graphql/wp-graphql/pull/2286)): Introduce new `Utils::get_database_id_from_id()` function to help DRY up some code around inputs that can accept Global IDs or Database IDs. Thanks @justlevine!
+- ([#2327](https://github.com/wp-graphql/wp-graphql/pull/2327)): Update capability for plugin queries. Changes from `update_plugins` to `activate_plugins`. Thanks @justlevine!
+- ([#2298](https://github.com/wp-graphql/wp-graphql/pull/2298)): Adds `$where` arguments to Plugin Connections. Thanks @justlevine!
+- ([#2332](https://github.com/wp-graphql/wp-graphql/pull/2332)): Adds new Github workflow to build the GraphiQL App on pushes to `develop` and `master`. This should allow users that install WPGraphQL to install/update with Composer and have the GraphiQL app running, instead of having to run `npm install && npm run build` in addition to `composer install`.
+
+**Chores / Bugfixes**
+
+- ([#2286](https://github.com/wp-graphql/wp-graphql/pull/2286)): Remove old, no-longer used JS files. Remnant from 1.7.0 release.
+- ([#2296](https://github.com/wp-graphql/wp-graphql/pull/2296)): Fixes bug with how post/page templates are added to the Schema. Thanks @justlevine!
+- ([#2295](https://github.com/wp-graphql/wp-graphql/pull/2295)): Fixes bug where menus were returning when they shouldn't be. Thanks @justlevine!
+- ([#2299](https://github.com/wp-graphql/wp-graphql/pull/2299)): Fixes bug with author ID not being cast to an integer properly in the MediaItemUpdate mutation. Thanks @abaicus!
+- ([#2310](https://github.com/wp-graphql/wp-graphql/pull/2310)): Bumps node-forge npm dependency
+- ([#2317](https://github.com/wp-graphql/wp-graphql/pull/2317)): Bumps composer dependencies
+- ([#2291](https://github.com/wp-graphql/wp-graphql/pull/2291)): Add "allow-plugins" to composer.json to reduce warning output when running composer install. Thanks @justlevine!
+- ([#2294](https://github.com/wp-graphql/wp-graphql/pull/2294)): Refactors AbstractConnectionResolver::get_nodes() to prevent double slicing. Thanks @justlevine!
+- ([#2293](https://github.com/wp-graphql/wp-graphql/pull/2293)): Fixes connections that can be missing nodes when before/after arguments are empty. Thanks @justlevine!
+- ([#2323](https://github.com/wp-graphql/wp-graphql/pull/2323)): Fixes bug in Comment mutations. Thanks @justlevine!
+- ([#2320](https://github.com/wp-graphql/wp-graphql/pull/2320)): Fixes bug with filtering comments by commentType. Thanks @justlevine!
+- ([#2319](https://github.com/wp-graphql/wp-graphql/pull/2319)): Fixes bug with the comment_text filter in Comment queries. Thanks @justlevine!
 
 = 1.7.2 =
 

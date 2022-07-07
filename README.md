@@ -56,16 +56,13 @@ These commands should be configured to run an `npm install` before it tries to c
 ## Functionality
 
 ### Business Critical
-**What will stop business if this feature is not working**
 
- - [Example](https://www.example.com/): visitors must be able to perform X
- - [Example](https://www.example.com/): visitors must be able to submit this form
- - Links to offsite client login (https://www.example.com/)
+ - [App Config](https://live-hot97.pantheonsite.io/wp-admin/admin.php?page=app-config): This field data feeds into both the hompage and the mobile app. The custom plugin Colab Custom REST Endpoints is what sets up the data for the client.
 
 ### Other Functionality
-**What were the custom things that are likely to break on modification/updates**
 
-- [Example](https://live-hot97.pantheonsite.io/wp-admin/admin.php?page=app-config): This field data feeds into both the hompage and the mobile app.
+ - [JW Player](https://live-hot97.pantheonsite.io/wp-admin/admin.php?page=jw-player-for-wp): We are using a custom, modified version of the JW Player plugin.
+ - [Instagram Plugin](https://live-hot97.pantheonsite.io/wp-admin/admin.php?page=sbi-feed-builder): This allows Instagram embeds to work.
 
 ### Key Layouts
 **What are the key layouts**

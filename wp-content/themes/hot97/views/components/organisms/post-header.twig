@@ -3,7 +3,7 @@
         {% if post.contentCategory or post.primaryCategory or post.isHot %}
         <div class="o-post-header__categories">
             {% if post.contentCategory %}
-            <span class="o-post-header__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
+            <span class="o-post-header__content-category"><a href="{{ ( post.contentCategory.ID == 8) ? '/watch' : '/read' }}">{{ post.contentCategory.name }}</a></span>
             {% endif %}
 
             {% if post.primaryCategory and post.primaryCategory.name %}

@@ -5,7 +5,7 @@
     <div class="m-card__text">
     <div class="m-card__meta">
         {% if post.contentCategory %}
-            <span class="m-card__content-category"><a href="{{ post.contentCategory.path }}">{{ post.contentCategory.name }}</a></span>
+            <span class="m-card__content-category"><a href="{{ ( post.contentCategory.ID == 8) ? '/watch' : '/read' }}">{{ post.contentCategory.name }}</a></span>
         {% endif %}
 
         {% if post.primaryCategory and post.primaryCategory.name %}

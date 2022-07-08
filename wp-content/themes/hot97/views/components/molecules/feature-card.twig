@@ -4,7 +4,7 @@
       <div class="m-featurecard__terms">
         {% if post.contentCategory %}
           <span class="m-card__content-category">
-            <a href="{{ post.contentCategory.path }}">
+            <a href="{{ ( post.contentCategory.ID == 8) ? '/watch' : '/read' }}">
               {{ post.contentCategory.name }}
             </a>
           </span>

@@ -21,13 +21,19 @@
                 {% if home_cta.cta_sub %}
                     <p class="o-home-cta__subhead">{{home_cta.cta_sub}}</p>
                 {% endif %}
-                <h2 class="o-home-cta__headline"><a href="{{home_cta.cta_link.url}}" target="{{home_cta.cta_link.target}}">{{home_cta.cta_head}}</a></h2>
+                {% if home_cta.cta_link %}
+                    <h2 class="o-home-cta__headline"><a href="{{home_cta.cta_link.url}}" target="{{home_cta.cta_link.target}}">{{home_cta.cta_head}}</a></h2>
+                {% else %}
+                    <h2 class="o-home-cta__headline">{{home_cta.cta_head}}</h2>
+                {% endif %}
                 {% if home_cta.cta_content %}
                     <p>{{home_cta.cta_content}}</p>
                 {% endif %}
-                <div class="o-home-cta__link wp-block-button">
-                    <a class="wp-block-button__link a-arrow-link" href="{{home_cta.cta_link.url}}" target="{{home_cta.cta_link.target}}">{{home_cta.cta_link.title}}</a>
-                </div>
+                {% if home_cta.cta_link %}
+                    <div class="o-home-cta__link wp-block-button">
+                        <a class="wp-block-button__link a-arrow-link" href="{{home_cta.cta_link.url}}" target="{{home_cta.cta_link.target}}">{{home_cta.cta_link.title}}</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

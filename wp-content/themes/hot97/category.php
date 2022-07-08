@@ -51,7 +51,7 @@ class CategoryController extends Controller
         $context['archive_sidebar']['terms'] = get_categories([
             'orderby'    => 'count',
             'order'      => 'DESC',
-            'number'     => 20
+            'number'     => 15
         ]);
 
         foreach ($context['archive_sidebar']['terms'] as $term) {

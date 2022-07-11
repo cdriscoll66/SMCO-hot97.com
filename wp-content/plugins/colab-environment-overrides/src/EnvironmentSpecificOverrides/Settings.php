@@ -16,8 +16,8 @@ class Settings {
      * Note: all fields for the options page will be configured via ACF interface.
      */
     public static function acf_init() {
-        // Check function exists.
-        if ( function_exists('acf_add_options_page') ) {
+        // Check function exists and user is an administrator.
+        if ( function_exists('acf_add_options_page') && current_user_can('administrator') ) {
             // Register options page.
             acf_add_options_page( [
                 'page_title'    => __( 'Environment Specific Option Overrides' ),

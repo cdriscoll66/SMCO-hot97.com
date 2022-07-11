@@ -22,20 +22,14 @@ class CategoryLoadMoreController extends Controller
     {
 
        QueryBuilder::macro('category', function (int $term_id) {
-            $this->params['tax_query'] = [
-                [
-                    'taxonomy' => 'category',
-                    'field' => 'term_id',
-                    'terms' => $term_id,
-                ]
-            ];
-
+            $this->params['cat'] = $term_id;
             return $this;
         });
 
         $context = Timber::get_context();
         $request = Helpers::request();
         $paged = $request->query('paged');
+
         $limit = 9;
         $offset = $limit * $paged;
 

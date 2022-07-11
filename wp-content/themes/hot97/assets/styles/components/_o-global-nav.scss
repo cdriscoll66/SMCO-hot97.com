@@ -63,14 +63,15 @@
 
   .o-global-nav__divider {
     display: flex;
-    margin: 15px auto;
+    margin: 30px auto;
     height: 1px;
-    // width: 24px;
+    width: 80%;
     background: var(--global--color-hot-yellow-500);
-    @include media(laptop) {
+
+    @include media(desktop) {
       margin: 0 15px;
       height: 24px;
       width: 1px;
-      }
+    }
   }
 }

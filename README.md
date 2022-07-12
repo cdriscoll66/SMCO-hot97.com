@@ -63,6 +63,8 @@ These commands should be configured to run an `npm install` before it tries to c
 
  - [JW Player](https://live-hot97.pantheonsite.io/wp-admin/admin.php?page=jw-player-for-wp): We are using a custom, modified version of the JW Player plugin.
  - [Instagram Plugin](https://live-hot97.pantheonsite.io/wp-admin/admin.php?page=sbi-feed-builder): This allows Instagram embeds to work.
+  - [Listen Live Feature](https://live-hot97.pantheonsite.io/listen-live): This is a custom block that plays a streaming Triton player.
+   - [Digital Ads by iOne](https://live-hot97.pantheonsite.io/listen-live): This is a custom block that plays a streaming Triton player.
 
 ### Key Layouts
 **What are the key layouts**

@@ -17,6 +17,7 @@ use App\PostTypes\Post;
 use App\ViewModels\CardViewModel;
 use App\ViewModels\FeatureCardViewModel;
 use Timber\Timber;
+use Timber\Term;
 
 class TagController extends Controller
 {
@@ -53,7 +54,15 @@ class TagController extends Controller
         foreach ($context['archive_sidebar']['terms'] as $term) {
             $term->link = get_tag_link($term->term_id);
         }
-        $context['feedurl'] = 'tag-feed-load-more/'.$term->term_id;
+
+        $context['term'] = new Term();
+
+
+        $context['feedurl'] = 'tag-feed-load-more/'.$context['term']->term_id;
+
+
+        $context['content_postRemaining'] = $context['term']->count - 1;
+
 
         $context['main_class'] = 'o-main--split o-main--archive';
 

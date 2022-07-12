@@ -211,7 +211,20 @@ class ContentCategoryAbstractController extends Controller
         $context['featured_posts'] = $page_featured_posts;
         $context['featured'] = $featured;
         $context['latest_posts'] = $latest_posts;
-        $context['content_cat'] = $this->term_id;
+
+
+        // set the load more feature to show category and hide button on total reached.
+        $context['content_cat'] = new Term($this->term_id);
+
+        $total_posts_shown = sizeof($context['featured_posts']['posts']);
+
+        foreach ($context['featured'] as $term) {
+            $total_posts_shown += sizeof($term['posts']);
+        }
+
+        $context['content_postRemaining'] = $context['content_cat']->count - $total_posts_shown - 1;
+
+
         $context['sidebar'] = true;
         $context['archive_sidebar']['title'] = "CATEGORIES";
         $context['archive_sidebar']['terms'] = get_categories([

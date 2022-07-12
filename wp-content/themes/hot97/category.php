@@ -64,6 +64,8 @@ class CategoryController extends Controller
         $context['main_class'] = 'o-main--split o-main--archive';
         $context['feedurl'] = 'category-feed-load-more/'.$context['term_id'];
 
+        $context['content_postRemaining'] = $context['term']->count - 1;
+
         $context['body_class'] = $context['body_class'] . ' is-dark-theme';
 
         return new TimberResponse('templates/category.twig', $context);

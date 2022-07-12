@@ -11,9 +11,12 @@ function init() {
   const loadMoreBtn = document.getElementById("load-more-button");
 
   const posturl = loadMoreWatch[0].getAttribute("data-url");
-
-
+  const totalPosts = loadMoreBtn.getAttribute("data-totalremaining");
   const postContainer = document.querySelector(".js-post-collect");
+
+  if (postContainer.childElementCount > (totalPosts - 8)) {
+    loadMoreBtn.style.display = "none";
+}
 
   let pagednumber = 0;
 
@@ -59,7 +62,10 @@ function init() {
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", () => {
       handleLoadMorePosts();
-    });
+      if (postContainer.childElementCount > (totalPosts - 8)) {
+        loadMoreBtn.style.display = "none";
+    }
+  });
   }
 }
 

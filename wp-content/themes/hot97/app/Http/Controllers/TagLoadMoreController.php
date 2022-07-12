@@ -22,7 +22,6 @@ class TagLoadMoreController extends Controller
     public function loadMore($termid = NULL)
     {
 
-
        QueryBuilder::macro('tag', function (int $term_id) {
             $this->params['tax_query'] = [
                 [

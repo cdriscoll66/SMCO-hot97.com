@@ -1,0 +1,11 @@
+#at-expanding-share-button {
+    display: block;
+
+    @include media(nav) {
+      display: none;
+    }
+}
+
+#at-share-dock {
+  display: none!important;
+}

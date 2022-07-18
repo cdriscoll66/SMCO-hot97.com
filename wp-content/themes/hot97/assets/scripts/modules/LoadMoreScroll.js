@@ -13,20 +13,19 @@ function init() {
   const posturl = loadMoreWatch[0].getAttribute("data-url");
 
   const totalPosts = 0;
-  if (loadMoreBtn) {
-  totalPosts = loadMoreBtn.getAttribute("data-totalremaining");
-  }
 
   const postContainer = document.querySelector(".js-post-collect");
 
-  if (postContainer.childElementCount > (totalPosts - 8)) {
-    loadMoreBtn.style.display = "none";
-}
+  if (loadMoreBtn) {
+    totalPosts = loadMoreBtn.getAttribute("data-totalremaining");
+    if (postContainer.childElementCount > totalPosts - 8) {
+      loadMoreBtn.style.display = "none";
+    }
+  }
 
   let pagednumber = 0;
 
   const handleLoadMorePosts = () => {
-
     pagednumber += 1;
 
     let query = "/" + posturl + "/?paged=" + pagednumber;
@@ -38,8 +37,6 @@ function init() {
   const addPosts = posts => {
     postContainer.insertAdjacentHTML("beforeend", posts);
   };
-
-
 
   if (loadMoreObs) {
     /* Intersection Observer options */
@@ -67,10 +64,10 @@ function init() {
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener("click", () => {
       handleLoadMorePosts();
-      if (postContainer.childElementCount > (totalPosts - 8)) {
+      if (postContainer.childElementCount > totalPosts - 8) {
         loadMoreBtn.style.display = "none";
-    }
-  });
+      }
+    });
   }
 }
 

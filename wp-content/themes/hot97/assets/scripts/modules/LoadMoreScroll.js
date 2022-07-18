@@ -11,7 +11,7 @@ function init() {
   const loadMoreBtn = document.getElementById("load-more-button");
 
   const posturl = loadMoreWatch[0].getAttribute("data-url");
-  const totalPosts = loadMoreBtn.getAttribute("data-totalremaining");
+  const totalPosts = (loadMoreBtn.getAttribute("data-totalremaining") !== null) ? parseInt(loadMoreBtn.getAttribute("data-totalremaining")) : 0;
   const postContainer = document.querySelector(".js-post-collect");
 
   if (postContainer.childElementCount > (totalPosts - 8)) {

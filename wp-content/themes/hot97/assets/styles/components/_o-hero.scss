@@ -98,11 +98,16 @@
 
 // styles override for JW player mobile view
 
+.jw-flag-floating .jw-wrapper {
+  left: 1rem !important;
+  right: auto !important;
+  bottom: 85px !important;
+}
+
 @media screen and (max-width: 480px) {
   .jw-flag-floating .jw-wrapper {
     width: 75% !important;
     top: auto !important;
-    bottom: 10px !important;
     margin-right: 10px !important;
   }
 }

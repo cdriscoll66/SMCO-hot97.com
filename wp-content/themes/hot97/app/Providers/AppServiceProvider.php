@@ -21,7 +21,6 @@ class AppServiceProvider extends ServiceProvider
     {
         add_action('wp_enqueue_scripts', function () {
             wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/aca2737e74.js', [], false);
-            wp_enqueue_script('triton', 'https://widgets.listenlive.co/1.0/tdwidgets.min.js', [], false, true);
 
             wp_enqueue_style('lumberjack/theme.css', Theme::mix('/styles/theme.css'), [], false);
             wp_enqueue_script('lumberjack/theme.js', Theme::mix('/scripts/theme.js'), ['jquery'], false, true);
@@ -36,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
             // <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629e54b01e9b389e"></script>
             if (is_singular('post')) {
                 wp_enqueue_script('AddThis', '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629e54b01e9b389e', [], false, true);
+            }
+
+            if (is_page('listen-live')){
+                wp_enqueue_script('triton', 'https://widgets.listenlive.co/1.0/tdwidgets.min.js', [], false, true);
             }
 
         }, 100);

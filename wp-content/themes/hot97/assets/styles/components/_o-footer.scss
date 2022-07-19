@@ -135,6 +135,10 @@
         font-size: rem(12px);
         line-height: 1.3333;
         margin-bottom: 7px;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

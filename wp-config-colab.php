@@ -28,3 +28,9 @@ else :
     define('WP_DEBUG_LOG',     true);
     define('WP_DEBUG_DISPLAY', true);
 endif;
+
+/**
+ * Added for WF WAF to write out log files
+ */
+if (isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] != 'lando') {
+    define("WFWAF_LOG_PATH", '/files/private/wflogs');

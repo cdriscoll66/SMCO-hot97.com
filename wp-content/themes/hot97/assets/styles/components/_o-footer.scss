@@ -130,6 +130,12 @@
         line-height: 1.3333;
         margin-bottom: 7px;
       }
+      &.ot-sdk-show-settings {
+        font-family: $monospace;
+        font-size: rem(12px);
+        line-height: 1.3333;
+        margin-bottom: 7px;
+      }
     }
   }
 }

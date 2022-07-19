@@ -34,3 +34,4 @@ endif;
  */
 if (isset($_ENV['PANTHEON_ENVIRONMENT']) && $_ENV['PANTHEON_ENVIRONMENT'] != 'lando') {
     define("WFWAF_LOG_PATH", '/files/private/wflogs');
+}

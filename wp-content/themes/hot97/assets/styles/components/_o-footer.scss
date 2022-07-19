@@ -87,7 +87,7 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: flex-start;
-    li > a {
+    li > a, li.ot-sdk-show-settings {
       font-family: $monospace;
       font-size: rem(14px);
       line-height: 1.148;
@@ -125,6 +125,12 @@
       }
 
       & > a {
+        font-family: $monospace;
+        font-size: rem(12px);
+        line-height: 1.3333;
+        margin-bottom: 7px;
+      }
+      &.ot-sdk-show-settings {
         font-family: $monospace;
         font-size: rem(12px);
         line-height: 1.3333;

@@ -32,7 +32,8 @@
       {% endif %}
     </div>
 
-    {% if post.video %}
+    {% if post.contentCategory == 'watch' %}
+    {# {% if post.video %} #}
       <div class="o-hero__media">
         {% include 'components/molecules/hero-video.twig' %}
       </div>

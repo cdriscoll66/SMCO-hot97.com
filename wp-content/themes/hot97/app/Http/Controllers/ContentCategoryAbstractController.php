@@ -89,7 +89,7 @@ class ContentCategoryAbstractController extends Controller
             }
 
             // Featured posts (posts directly below the hero)
-            if (array_key_exists('featured_posts', $page_config)) {
+            if ($page_config['featured_posts']) {
                 $post_ids = $page_config['featured_posts'];
 
                 // Get featured posts, ordered by menu order

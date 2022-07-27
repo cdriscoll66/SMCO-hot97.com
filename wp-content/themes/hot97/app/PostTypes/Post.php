@@ -24,11 +24,13 @@ class Post extends LumberjackPost
     {
         $primary_category_id = get_post_meta($this->id, '_yoast_wpseo_primary_' . $taxonomy, true);
 
-        $term = new Term(get_term($primary_category_id, $taxonomy));
-
         if ($primary_category_id) {
-            return $term;
+            $term = new Term(get_term($primary_category_id, $taxonomy));
         }
+        else {
+            $term = new Term(get_term(29, $taxonomy));
+        }
+            return $term;
     }
 
     public function primaryCategory()

@@ -11,11 +11,11 @@
           </p>
         {% endif %}
 
-        {% if post.primaryCategory %}
+        {% if post.primaryCategory and post.primaryCategory.name %}
           <p class="o-hero__category--primary">
-            {# <a href="{{ post.primaryCategory.path }}">
+            <a href="{{ post.primaryCategory.path }}">
               {{ post.primaryCategory.name }}
-            </a> #}
+            </a>
           </p>
         {% endif %}
         {% if post.isHot %}

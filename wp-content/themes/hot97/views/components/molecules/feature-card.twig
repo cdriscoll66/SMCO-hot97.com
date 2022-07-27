@@ -10,11 +10,11 @@
           </span>
         {% endif %}
 
-        {% if post.primaryCategory %}
+        {% if post.primaryCategory and post.primaryCategory.name %}
           <span class="m-card__category m-featurecard__category--primary">
-            {# <a class="has-hot-yellow-100-color" href="{{ post.primaryCategory.path }}">
+            <a class="has-hot-yellow-100-color" href="{{ post.primaryCategory.path }}">
               {{ post.primaryCategory.name }}
-            </a> #}
+            </a>
           </span>
         {% endif %}
 

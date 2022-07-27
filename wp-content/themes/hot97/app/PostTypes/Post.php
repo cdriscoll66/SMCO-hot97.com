@@ -28,7 +28,7 @@ class Post extends LumberjackPost
             $term = new Term(get_term($primary_category_id, $taxonomy));
         }
         else {
-            $term = new Term(get_term_by(29, $taxonomy));
+            $term = new Term(get_term(29, $taxonomy));
         }
 
 

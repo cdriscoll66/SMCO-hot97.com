@@ -22,6 +22,11 @@
   margin: 10px auto 0;
 }
 
+.o-post-header__meta {
+  font-family: $monospace;
+  font-size: rem(14px);
+  line-height: rem(14px);
+}
 .o-post-header__tags {
   margin-top: 30px;
   display: flex;

@@ -18,6 +18,15 @@
         </div>
         {% endif %}
 
+        <div class="o-post-header__meta">
+            {{ post.date }}
+            {% if post.publicAuthor %}
+            <span class="o-post-header__author">by {{ post.publicAuthor }}</span>
+            {% endif %}
+        </div>
+
+
+
         <h1 class="o-post-header__title">
             {{ title }}
         </h1>

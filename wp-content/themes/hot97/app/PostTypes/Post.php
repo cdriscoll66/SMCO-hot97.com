@@ -57,6 +57,11 @@ class Post extends LumberjackPost
         return get_field('is_hot', $this->id);
     }
 
+    public function publicAuthor()
+    {
+        return get_field('public_author_name', $this->id);
+    }
+
     public function video()
     {
         $videourl = get_post_meta( $this->ID, '_jwppp-video-url-1' );

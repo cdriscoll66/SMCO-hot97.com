@@ -1,0 +1,54 @@
+{
+    "key": "group_62f109f7279a7",
+    "title": "[Global] Masthead Branding",
+    "fields": [
+        {
+            "key": "field_62f10a67fe797",
+            "label": "Site Logo",
+            "name": "site_logo",
+            "type": "image",
+            "instructions": "If available use the .svg version of the image you want in this area as it typically has a lower file size and higher effective resolution than a .png file. Both .png and .svg are both acceptable file types. \r\n\r\nIf no image is provided the <a href=\"\/wp-content\/themes\/hot97\/dist\/images\/logo.svg\" target=\"_blank\">default logo in the theme<\/a> will be used.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "full",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ".png, .svg"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "global-settings"
+            },
+            {
+                "param": "current_user_role",
+                "operator": "==",
+                "value": "administrator"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1659970860
+}

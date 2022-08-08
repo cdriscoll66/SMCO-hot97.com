@@ -1,6 +1,6 @@
 {
     "key": "group_628bd1f5bb610",
-    "title": "[Options] Global Prefooter",
+    "title": "[Global] Global Prefooter",
     "fields": [
         {
             "key": "field_628bd20c06437",
@@ -134,5 +134,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1653332519
+    "modified": 1659963968
 }

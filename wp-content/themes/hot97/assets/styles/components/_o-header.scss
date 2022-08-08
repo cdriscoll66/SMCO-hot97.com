@@ -20,15 +20,10 @@
 }
 
 .o-header__logo-link {
-  background-image: url(../images/logo.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
   display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-indent: 1000%;
-  text-decoration: none;
-  width: 95px;
-  padding-bottom: 80.5px;
-  height: 0;
+
+  img {
+    width: 95px;
+    height: auto;
+  }
 }

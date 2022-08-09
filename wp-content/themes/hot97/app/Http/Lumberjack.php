@@ -35,6 +35,7 @@ class Lumberjack extends LumberjackCore
         $context['search_query'] = get_search_query();
         $context['posts_per_page'] = get_option('posts_per_page');
         $context['flexible_cta'] = get_field('flexible_header_cta', 'options');
+        $context['logo'] = get_field('site_logo', 'options') ?: '/wp-content/themes/hot97/dist/images/logo.svg';
 
         return $context;
     }

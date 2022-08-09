@@ -1,6 +1,6 @@
 {
     "key": "group_6273eaaa0be85",
-    "title": "Header Flexible CTA",
+    "title": "[Global] Header Flexible CTA",
     "fields": [
         {
             "key": "field_6273eab2eda62",
@@ -36,5 +36,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1651765224
+    "modified": 1659963956
 }
